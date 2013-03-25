@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon id="plugin.video.newmyvideolinks" version="0.1.0" name="Streams 4 U" provider-name="TheYid">
+    <requires>
+        <import addon="xbmc.python" version="1.0"/>
+        <import addon="script.module.t0mm0.common" version="0.0.1"/>
+        <import addon="script.module.urlresolver" version="0.0.1"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Stream Films from Streams 4 U great for 1080p</summary>
+        <description>Stream a wide selection of movies from Streams 4 U aka newmyvideolinks great 1080p mp4 and 3D movies links supported are Netload Turobit 180upload real-debrid or alldebrid account NEEDED for help on this addon please goto xbmc hub</description>
+        <platform>all</platform>
+    </extension>
+</addon>
