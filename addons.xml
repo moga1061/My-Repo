@@ -18,6 +18,23 @@
   </extension>
 </addon>
 
+<addon id="plugin.video.singlelinkmoviez" version="0.0.1" name="Moviez Moviez Moviez" provider-name="TheYid">
+    <requires>
+        <import addon="xbmc.python" version="1.0"/>
+        <import addon="script.module.t0mm0.common" version="0.0.1"/>
+        <import addon="script.module.urlresolver" version="0.0.1"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Stream movies from singlelinkmoviez</summary>
+        <description>stream a wide selection of Hollywood, Asian and Indian films from Moviez Moviez Moviez IT HAS THE LOT links supported are EXTABIT, PUTLOCKER, LETITBIT, TURBOBIT, CYBERLOCKER, BAYFILES</description>
+        <platform>all</platform>
+        <disclaimer lang="en">UNCATEGORIZED dose not work it throws up a script error for more info on this addon and TheYid repo goto XBMCHUB</disclaimer>
+    </extension>
+</addon>
+
 <addon id="plugin.video.releaseBB" version="0.0.3" name="releaseBB" provider-name="TheYid">
   <requires>
     <import addon="xbmc.python" version="1.0"/>
