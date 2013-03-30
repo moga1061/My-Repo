@@ -1,14 +1,19 @@
 [B]Version 0.0.1[/B]
-- Initial version of Streams 4 U The tv shows plugin
+- Initial version of Streams 4 U plugin
 
 [B]Version 0.0.2[/B]
-- release beta version of Streams 4 U The tv shows plugin
+- new icon, cleaned out some unused code 
+
 
 [B]Version 0.0.3[/B]
-- site changed url .... this is a quick fix
+- change to site category 
+
 
 [B]Version 0.0.5[/B]
 - fixed more changes to the site
 
 [B]Version 0.1.0[/B]
+- fixed more changes to the site
+
+[B]Version 0.1.1[/B]
 - fixed more changes to the site

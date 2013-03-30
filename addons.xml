@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-<addon id="plugin.video.tv.newmyvideolinks" version="0.1.0" name="Streams 4 U The tv shows" provider-name="TheYid">
+<addon id="plugin.video.tv.newmyvideolinks" version="0.1.1" name="Streams 4 U The tv shows" provider-name="TheYid">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.t0mm0.common" version="0.0.1"/>
@@ -16,7 +16,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.newmyvideolinks" version="0.1.0" name="Streams 4 U" provider-name="TheYid">
+<addon id="plugin.video.newmyvideolinks" version="0.1.1" name="Streams 4 U" provider-name="TheYid">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.t0mm0.common" version="0.0.1"/>
