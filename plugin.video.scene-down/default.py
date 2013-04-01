@@ -14,13 +14,13 @@ except:
 	from pysqlite2 import dbapi2 as sqlite
 	print "Loading pysqlite2 as DB engine"
 
-addon_id = 'plugin.video.naked-sluts'
+addon_id = 'plugin.video.scene-down'
 plugin = xbmcaddon.Addon(id=addon_id)
 
-DB = os.path.join(xbmc.translatePath("special://database"), 'naked-sluts.db')
-BASE_URL = 'http://naked-sluts.us/'
+DB = os.path.join(xbmc.translatePath("special://database"), 'scene-down.db')
+BASE_URL = 'http://scenedown.me/'
 net = Net()
-addon = Addon('plugin.video.naked-sluts', sys.argv)
+addon = Addon('plugin.video.scene-down', sys.argv)
 showAllParts = True
 showPlayAll = True
 
@@ -40,11 +40,11 @@ numOfPages = addon.queries.get('numOfPages', None)
 listitem = addon.queries.get('listitem', None)
 urlList = addon.queries.get('urlList', None)
 section = addon.queries.get('section', None)
-########################
+######################
 
 
 def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
-        print 'naked-sluts get Movie Titles Menu %s' % url
+        print 'scene-down get Movie Titles Menu %s' % url
 
         # handle paging
         pageUrl = url
@@ -63,11 +63,11 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('art-PostHeaderIcon-wrapper.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
+                match = re.compile('<h2>.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
-                        runstring = 'XBMC.Container.Update(plugin://plugin.video.naked-sluts/?mode=Search&query=%s)' %(name.strip())
-        		cm.append(('Search on naked-sluts', runstring))
+                        runstring = 'XBMC.Container.Update(plugin://plugin.video.scene-down/?mode=Search&query=%s)' %(name.strip())
+        		cm.append(('Search on scene-down', runstring))
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
                 
 
@@ -87,6 +87,8 @@ def GetLinks(section, url): # Get Links
         content = html
         print'CONTENT: '+str(listitem)
         r = re.search('<strong>Links.*</strong>', html)
+        if r:
+                content = html[r.end():]
                 
         r = re.search('commentblock', content)
         if r:
@@ -100,6 +102,8 @@ def GetLinks(section, url): # Get Links
                 if 'Unknown' in host:
                                 continue
 
+                # ignore .rar files
+                r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
                 if r:
                         continue
                 print '*****************************' + host + ' : ' + url
@@ -129,7 +133,7 @@ def GetLinks(section, url): # Get Links
                                 continue
 
                         # ignore .rar files
-                        r = re.search('\.rar[(?:\.html|\.htm|\.php)]*', url, re.IGNORECASE)
+                        r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
                         if r:
                                 continue
                         try:
@@ -150,7 +154,7 @@ def GetLinks(section, url): # Get Links
         if source: stream_url = source.resolve()
         else: stream_url = ''
         xbmc.Player().play(stream_url)
-                       
+
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def CLEAN(string):
@@ -194,7 +198,7 @@ def Categories(section):  #categories
         url = BASE_URL + '/category/' + section
         html = net.http_GET(BASE_URL).content
         CLEAN(html)
-        match = re.compile('<li class=.+?/category/' + '(.+?)".+?>(.+?)<').findall(html)
+        match = re.compile('<li class=.+?/category/' + section + '(.+?)".+?>(.+?)<').findall(html)
         for cat, title in match:
                 url = url + cat
                 addon.add_directory({'mode': 'GetTitles', 'section': section, 'url': url,
@@ -202,9 +206,10 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '<<...OVER 18s ONLY>> <<XXX Movies>> <<OVER 18s ONLY...>>'})
-       #addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  'XXX Search'})
-       #addon.add_directory({'mode': 'ResolverSettings'}, {'title':  'Resolver Settings'})
+        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  'Scene Movies >>'})
+        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  'Scene TV Shows >'})
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  'scene-down Search'})
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  'Resolver Settings'})
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -212,7 +217,7 @@ def GetSearchQuery():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('Search naked-sluts')
+        keyboard.setHeading('Search scene-down')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):
@@ -224,7 +229,7 @@ def GetSearchQuery():
 
         
 def Search(query):
-        url = 'http://www.google.com/search?q=site:naked-sluts.us ' + query
+        url = 'http://www.google.com/search?q=site:scenedown.me ' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content

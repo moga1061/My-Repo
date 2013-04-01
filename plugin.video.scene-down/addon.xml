@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.video.naked-sluts" version="0.0.1" name="Naked xxx" provider-name="TheYid">
+<addon id="plugin.video.scene-down" version="0.0.2" name="scene-down" provider-name="TheYid">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.t0mm0.common" version="0.0.1"/>
@@ -9,8 +9,8 @@
         <provides>video</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
-        <summary>Stream adult movies</summary>
-        <description>OVER 18's ONLY........ Stream a wide selection of adult movies from Naked xxx ........... OVER 18's ONLY........ Real-Debrid ONLY</description>
+        <summary>Browse scene-down</summary>
+        <description>stream a wide selection of movies Tv shows from scene-down real-debrid only</description>
         <platform>all</platform>
     </extension>
 </addon>
