@@ -177,7 +177,7 @@
    </extension>
 </addon>
 
-<addon id="plugin.video.oneclickwatch" version="0.1.0" name="One Click Watch" provider-name="TheYid">
+<addon id="plugin.video.oneclickwatch" version="0.1.1" name="One Click Watch" provider-name="TheYid">
   <requires>
     <import addon="xbmc.python" version="1.0"/>
     <import addon="script.module.t0mm0.common" version="0.0.1"/>
