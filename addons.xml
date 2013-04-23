@@ -145,7 +145,7 @@
    </extension>
 </addon>
 
-<addon id="plugin.video.ddlvalley" version="0.0.2" name="ddlvalley" provider-name="TheYid">
+<addon id="plugin.video.ddlvalley" version="0.0.3" name="ddlvalley" provider-name="TheYid">
    <requires>
      <import addon="xbmc.python" version="1.0"/>
      <import addon="script.module.t0mm0.common" version="0.0.1"/>

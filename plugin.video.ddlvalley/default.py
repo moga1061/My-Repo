@@ -154,7 +154,7 @@ def GetLinks(section, url): # Get Links
         if source: stream_url = source.resolve()
         else: stream_url = ''
         xbmc.Player().play(stream_url)
-        addDir('','','','')
+        
 
 
 
