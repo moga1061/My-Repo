@@ -63,7 +63,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('pagetitle.+?href="(.+?)".+?>(.+?)<.+?(.+?)', re.DOTALL).findall(html)
+                match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.oneclickwatch/?mode=Search&query=%s)' %(name.strip())
@@ -197,10 +197,11 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  'OCW Films >>>'})
-        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  'OCW TV Shows >>>'})
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  'One click Search'})
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  'Resolver Settings'})
+        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]OCW Films >>>[/COLOR]'})
+        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]OCW Tv Shows >>>[/COLOR]'})
+        #addon.add_directory({'mode': 'Categories', 'section': 'download'},  {'title':  '[COLOR green]OCW extra tv shows & movies >>>[/COLOR]'})
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]One click Search[/COLOR]'})
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'})
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -208,7 +209,7 @@ def GetSearchQuery():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('One click Search')
+        keyboard.setHeading('[COLOR green]One click Search[/COLOR]')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):

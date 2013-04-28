@@ -200,10 +200,10 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  'BB Movies> >'})
-        addon.add_directory({'mode': 'Categories', 'section': 'tv'},  {'title':  'BB Tv Shows> >'})
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  'BB Search> >'})
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  'Resolver Settings'})
+        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]BB Movies> >[/COLOR]'})
+        addon.add_directory({'mode': 'Categories', 'section': 'tv'},  {'title':  '[COLOR blue]BB Tv Shows> >[/COLOR]'})
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]BB Search> >[/COLOR]'})
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'})
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -211,7 +211,7 @@ def GetSearchQuery():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('Search releaseBB')
+        keyboard.setHeading('[COLOR green]Search releaseBB[/COLOR]')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):

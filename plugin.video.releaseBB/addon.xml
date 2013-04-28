@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.video.releaseBB" version="0.0.3" name="releaseBB" provider-name="TheYid">
+<addon id="plugin.video.releaseBB" version="0.1.0" name="releaseBB" provider-name="TheYid">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.t0mm0.common" version="0.0.1"/>
