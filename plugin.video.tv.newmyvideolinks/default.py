@@ -2,8 +2,8 @@ import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 import urllib, urllib2
 import re, string, sys, os
 import urlresolver
-from t0mm0.common.addon import Addon
-from t0mm0.common.net import Net
+from TheYid.common.addon import Addon
+from TheYid.common.net import Net
 from htmlentitydefs import name2codepoint as n2cp
 import HTMLParser
 
@@ -122,7 +122,6 @@ def GetLinks(section, url): # Get Links
                 print 'in comments if'
                 html = html[find.end():]
                 CLEAN(html)###
-                #match = re.compile('<a href="(http://.+?)" rel="nofollow"', re.DOTALL).findall(html)
                 match1 = re.compile(r'comment-page-numbers(.+?)<!--comments form -->', re.DOTALL).findall(html)
                 match = re.compile('<a href="(htt.+?)" rel="nofollow"', re.DOTALL).findall(str(match1))
                 print 'MATCH IS: '+str(match)
@@ -205,10 +204,9 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  ' TV Shows 4 U >>>'})
-        #addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  'TV Shows>>'})
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  'Search 4 U >>>'})
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  'Resolver Settings'})
+        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]Tv Shows 4U >>[/COLOR]'})
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search 4U >>[/COLOR]'})
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'})
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -216,7 +214,7 @@ def GetSearchQuery():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('Search 4 U')
+        keyboard.setHeading('[COLOR green]Search Streams 4U[/COLOR]')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):
