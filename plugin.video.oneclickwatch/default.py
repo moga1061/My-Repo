@@ -199,7 +199,7 @@ def Categories(section):  #categories
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]OCW Films >>>[/COLOR]'})
         addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]OCW Tv Shows >>>[/COLOR]'})
-        addon.add_directory({'mode': 'Categories', 'section': 'download'},  {'title':  '[COLOR green]OCW extra tv shows & movies >>>[/COLOR]'})
+        #addon.add_directory({'mode': 'Categories', 'section': 'download'},  {'title':  '[COLOR green]OCW extra tv shows & movies >>>[/COLOR]'})
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]One click Search[/COLOR]'})
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'})
         xbmcplugin.endOfDirectory(int(sys.argv[1]))

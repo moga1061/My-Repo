@@ -2,8 +2,8 @@ import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 import urllib, urllib2
 import re, string, sys, os
 import urlresolver
-from t0mm0.common.addon import Addon
-from t0mm0.common.net import Net
+from TheYid.common.addon import Addon
+from TheYid.common.net import Net
 from htmlentitydefs import name2codepoint as n2cp
 import HTMLParser
 
@@ -206,10 +206,10 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  'Scene Movies >>'})
-        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  'Scene TV Shows >'})
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  'scene-down Search'})
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  'Resolver Settings'})
+        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]Scene Movies >>[/COLOR]'})
+        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]Scene TV Shows >>[/COLOR]'})
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]scene-down Search[/COLOR]'})
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'})
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -217,7 +217,7 @@ def GetSearchQuery():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('Search scene-down')
+        keyboard.setHeading('[COLOR green]Search scene-down[/COLOR]')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):

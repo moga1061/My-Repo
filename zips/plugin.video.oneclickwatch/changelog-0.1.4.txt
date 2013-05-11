@@ -1,0 +1,10 @@
+[B]Version 0.0.1[/B]
+- Initial version of oneclickwatch plugin
+[B]Version 0.1.0[/B]
+- fixed changes to site and added cover art for tv shows and films 
+[B]Version 0.1.1[/B]
+- fixed changes to site and added cover art for tv shows and films 
+[B]Version 0.1.2[/B]
+- fixed changes to site and added cover art for tv shows and films 
+[B]Version 0.1.3[/B]
+- fixed 

@@ -32,10 +32,10 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.scene-down" version="0.0.2" name="scene-down" provider-name="TheYid">
+<addon id="plugin.video.scene-down" version="0.0.3" name="scene-down" provider-name="TheYid">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
-        <import addon="script.module.t0mm0.common" version="0.0.1"/>
+        <import addon="script.module.TheYid.common" version="0.1.0"/>
         <import addon="script.module.urlresolver" version="0.0.1"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="default.py">
@@ -48,10 +48,10 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.singlelinkmoviez" version="0.1.0" name="Moviez Moviez Moviez" provider-name="TheYid">
+<addon id="plugin.video.singlelinkmoviez" version="0.1.1" name="Moviez Moviez Moviez" provider-name="TheYid">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
-        <import addon="script.module.t0mm0.common" version="0.0.1"/>
+        <import addon="script.module.TheYid.common" version="0.1.0"/>
         <import addon="script.module.urlresolver" version="0.0.1"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="default.py">
@@ -129,10 +129,10 @@
    </extension>
 </addon>
 
-<addon id="plugin.video.adult-bay" version="0.0.1" name="The Adult Bay" provider-name="TheYid">
+<addon id="plugin.video.adult-bay" version="0.0.2" name="The Adult Bay" provider-name="TheYid">
    <requires>
      <import addon="xbmc.python" version="1.0"/>
-     <import addon="script.module.t0mm0.common" version="0.0.1"/>
+     <import addon="script.module.TheYid.common" version="0.1.0"/>
      <import addon="script.module.urlresolver" version="0.0.1"/>
    </requires>
    <extension point="xbmc.python.pluginsource" library="default.py">
@@ -161,9 +161,9 @@
      </extension>
 </addon>
 
-<addon id="plugin.video.oneclickwatch" version="0.1.3" name="One Click Watch" provider-name="TheYid">
+<addon id="plugin.video.oneclickwatch" version="0.1.4" name="One Click Watch" provider-name="TheYid">
   <requires>
-    <import addon="xbmc.python" version="1.0"/>
+    <import addon="xbmc.python" version="2.0"/>
     <import addon="script.module.TheYid.common" version="0.1.0"/>
     <import addon="script.module.urlresolver" version="0.0.1"/>
   </requires>
