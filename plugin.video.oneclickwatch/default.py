@@ -2,8 +2,8 @@ import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 import urllib, urllib2
 import re, string, sys, os
 import urlresolver
-from t0mm0.common.addon import Addon
-from t0mm0.common.net import Net
+from TheYid.common.addon import Addon
+from TheYid.common.net import Net
 from htmlentitydefs import name2codepoint as n2cp
 import HTMLParser
 
@@ -199,7 +199,7 @@ def Categories(section):  #categories
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]OCW Films >>>[/COLOR]'})
         addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]OCW Tv Shows >>>[/COLOR]'})
-        #addon.add_directory({'mode': 'Categories', 'section': 'download'},  {'title':  '[COLOR green]OCW extra tv shows & movies >>>[/COLOR]'})
+        addon.add_directory({'mode': 'Categories', 'section': 'download'},  {'title':  '[COLOR green]OCW extra tv shows & movies >>>[/COLOR]'})
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]One click Search[/COLOR]'})
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'})
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
