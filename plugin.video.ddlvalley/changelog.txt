@@ -2,3 +2,5 @@
 - Initial version of ddlvalley.eu plugin
 [B]Version 0.0.3[/B]
 - Initial version of ddlvalley.eu plugin
+[B]Version 0.0.4[/B]
+- fixed

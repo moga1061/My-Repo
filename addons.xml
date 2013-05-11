@@ -81,10 +81,10 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.isceners" version="0.0.1" name="isceners" provider-name="TheYid">
+<addon id="plugin.video.isceners" version="0.0.2" name="isceners" provider-name="TheYid">
    <requires>
      <import addon="xbmc.python" version="1.0"/>
-     <import addon="script.module.t0mm0.common" version="0.0.1"/>
+     <import addon="script.module.TheYid.common" version="0.1.0"/>
      <import addon="script.module.urlresolver" version="0.0.1"/>
    </requires>
    <extension point="xbmc.python.pluginsource" library="default.py">
@@ -97,10 +97,10 @@
    </extension>
 </addon>
 
-<addon id="plugin.video.sceper" version="0.2" name="Sceper" provider-name="anilkuj fixed by theyid aka tcz009 using jasonpc rlslog fix">
+<addon id="plugin.video.sceper" version="0.21" name="Sceper" provider-name="anilkuj fixed by theyid aka tcz009 using jasonpc rlslog fix">
    <requires>
      <import addon="xbmc.python" version="1.0"/>
-     <import addon="script.module.t0mm0.common" version="0.0.1"/>
+     <import addon="script.module.TheYid.common" version="0.1.0"/>
      <import addon="script.module.urlresolver" version="0.0.1"/>
    </requires>
    <extension point="xbmc.python.pluginsource" library="default.py">
@@ -145,10 +145,10 @@
    </extension>
 </addon>
 
-<addon id="plugin.video.ddlvalley" version="0.0.3" name="ddlvalley" provider-name="TheYid">
+<addon id="plugin.video.ddlvalley" version="0.0.4" name="ddlvalley" provider-name="TheYid">
    <requires>
      <import addon="xbmc.python" version="1.0"/>
-     <import addon="script.module.t0mm0.common" version="0.0.1"/>
+     <import addon="script.module.TheYid.common" version="0.1.0"/>
      <import addon="script.module.urlresolver" version="0.0.1"/>
    </requires>
    <extension point="xbmc.python.pluginsource" library="default.py">
@@ -159,22 +159,6 @@
        <description>Play a wide selection of movies Tv shows from ddlvalley</description>
        <platform>all</platform>
      </extension>
-</addon>
-
-<addon id="plugin.video.megafun" version="0.0.3" name="MegaFun" provider-name="TheYid">
-   <requires>
-     <import addon="xbmc.python" version="1.0"/>
-     <import addon="script.module.t0mm0.common" version="0.0.1"/>
-     <import addon="script.module.urlresolver" version="0.0.1"/>
-   </requires>
-   <extension point="xbmc.python.pluginsource" library="default.py">
-         <provides>video</provides>
-   </extension>
-   <extension point="xbmc.addon.metadata">
-     <summary>Stream scene releases movies</summary>
-     <description>Stream a wide selection of movies from MegaFun...... Real-Debrid ONLY</description>
-     <platform>all</platform>
-   </extension>
 </addon>
 
 <addon id="plugin.video.oneclickwatch" version="0.1.3" name="One Click Watch" provider-name="TheYid">

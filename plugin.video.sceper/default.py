@@ -2,8 +2,8 @@ import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 import urllib, urllib2
 import re, string, sys, os
 import urlresolver
-from t0mm0.common.addon import Addon
-from t0mm0.common.net import Net
+from TheYid.common.addon import Addon
+from TheYid.common.net import Net
 import HTMLParser
 
 
@@ -174,7 +174,7 @@ def Categories(section):  #categories
         addon.add_directory({'mode': 'GetTitles', 'section': section, 'url': BASE_URL + '/category/' + section,
                              'startPage': '1', 'numOfPages': '2'}, {'title':  'All'})
 
-        match = re.compile('class="cat-item.+?/category/' + section + '/(.+?)".+?>(.+?)<').findall(html)
+        match = re.compile('<li class="cat-item.+?/category/' + section + '/(.+?)".+?>(.+?)<').findall(html)
         for cat, title in match:
                 url = BASE_URL + '/category/' + section + '/' + cat
                 addon.add_directory({'mode': 'GetTitles', 'section': section, 'url': url,
@@ -184,11 +184,11 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  'Movies'})
-        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  'TV Shows'})
+        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]Movies>>[/COLOR]'})
+        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]TV Shows>>[/COLOR]'})
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/staff-recommended',
-                             'startPage': '1', 'numOfPages': '2'}, {'title':  'Staff Recommended'})
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  'Resolver Settings'})
+                             'startPage': '1', 'numOfPages': '2'}, {'title':  '[COLOR blue]Staff Recommended>>[/COLOR]'})
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'})
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -204,7 +204,7 @@ def GetSearchQuery(section):
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('Search TV Shows')
+        keyboard.setHeading('[COLOR green]Search[/COLOR]')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):

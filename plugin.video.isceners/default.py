@@ -2,8 +2,8 @@ import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 import urllib, urllib2
 import re, string, sys, os
 import urlresolver
-from t0mm0.common.addon import Addon
-from t0mm0.common.net import Net
+from TheYid.common.addon import Addon
+from TheYid.common.net import Net
 from htmlentitydefs import name2codepoint as n2cp
 import HTMLParser
 
@@ -40,7 +40,7 @@ numOfPages = addon.queries.get('numOfPages', None)
 listitem = addon.queries.get('listitem', None)
 urlList = addon.queries.get('urlList', None)
 section = addon.queries.get('section', None)
-
+##### Queries ##########
 
 
 def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
@@ -63,7 +63,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
+                match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.isceners/?mode=Search&query=%s)' %(name.strip())
@@ -122,7 +122,6 @@ def GetLinks(section, url): # Get Links
                 print 'in comments if'
                 html = html[find.end():]
                 CLEAN(html)###
-                #match = re.compile('<a href="(http://.+?)" rel="nofollow"', re.DOTALL).findall(html)
                 match1 = re.compile(r'comment-page-numbers(.+?)<!--comments form -->', re.DOTALL).findall(html)
                 match = re.compile('<a href="(htt.+?)" rel="nofollow"', re.DOTALL).findall(str(match1))
                 print 'MATCH IS: '+str(match)
@@ -154,16 +153,7 @@ def GetLinks(section, url): # Get Links
         if source: stream_url = source.resolve()
         else: stream_url = ''
         xbmc.Player().play(stream_url)
-        #GetLinks(section, url)                        
-
-
-
-
-
-
-
-
-
+                       
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def CLEAN(string):
@@ -215,10 +205,10 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  ' Movies>>>'})
-        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  'TV Shows>>'})
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  'Search'})
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  'Resolver Settings'})
+        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]Movies>>>[/COLOR]'})
+        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]TV Shows>>[/COLOR]'})
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search[/COLOR]'})
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'})
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -226,7 +216,7 @@ def GetSearchQuery():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('Search isceners')
+        keyboard.setHeading('[COLOR green]Search isceners[/COLOR]')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):
