@@ -14,13 +14,13 @@ except:
 	from pysqlite2 import dbapi2 as sqlite
 	print "Loading pysqlite2 as DB engine"
 
-addon_id = 'plugin.video.tv.newmyvideolinks'
+addon_id = 'plugin.video.newmyvideolinks'
 plugin = xbmcaddon.Addon(id=addon_id)
 
-DB = os.path.join(xbmc.translatePath("special://database"), 'tv.newmyvideolinks.db')
-BASE_URL = 'http://newmyvideolinks.com/category/tv-shows/'
+DB = os.path.join(xbmc.translatePath("special://database"), 'newmyvideolinks.db')
+BASE_URL = 'http://newmyvideolinks.com/'
 net = Net()
-addon = Addon('plugin.video.tv.newmyvideolinks', sys.argv)
+addon = Addon('plugin.video.newmyvideolinks', sys.argv)
 showAllParts = True
 showPlayAll = True
 
@@ -44,7 +44,7 @@ section = addon.queries.get('section', None)
 
 
 def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
-        print 'tv.newmyvideolinks get Movie Titles Menu %s' % url
+        print 'newmyvideolinks get Movie Titles Menu %s' % url
 
         # handle paging
         pageUrl = url
@@ -63,16 +63,15 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('alignleft.+?href="(.+?)".+?>(.+?)<.+?src=(.+?).+?', re.DOTALL).findall(html)
+                match = re.compile('alignleft.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
-                        runstring = 'XBMC.Container.Update(plugin://plugin.video.tv.newmyvideolinks/?mode=Search&query=%s)' %(name.strip())
-        		cm.append(('Search on tv.newmyvideolinks', runstring))
+                        runstring = 'XBMC.Container.Update(plugin://plugin.video.newmyvideolinks/?mode=Search&query=%s)' %(name.strip())
+        		cm.append(('Search on newmyvideolinks', runstring))
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
-
-
-
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': 'Next...'})
+               
+      
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'})
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -89,10 +88,7 @@ def GetLinks(section, url): # Get Links
         r = re.search('<strong>Links.*</strong>', html)
         if r:
                 content = html[r.end():]
-                
-        r = re.search('commentblock', content)
-        if r:
-                content = content[:r.start()]
+               
 
         match = re.compile('href="(.+?)"').findall(content)
         listitem = GetMediaInfo(content)
@@ -100,11 +96,8 @@ def GetLinks(section, url): # Get Links
                 host = GetDomain(url)
 
                 if 'Unknown' in host:
-                                continue
+                        # ignore .rar files
 
-                # ignore .rar files
-                r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
-                if r:
                         continue
                 print '*****************************' + host + ' : ' + url
                 title = url.rpartition('/')
@@ -122,18 +115,12 @@ def GetLinks(section, url): # Get Links
                 print 'in comments if'
                 html = html[find.end():]
                 CLEAN(html)###
-                match1 = re.compile(r'comment-page-numbers(.+?)<!--comments form -->', re.DOTALL).findall(html)
-                match = re.compile('<a href="(htt.+?)" rel="nofollow"', re.DOTALL).findall(str(match1))
                 print 'MATCH IS: '+str(match)
                 print len(match)
                 for url in match:
                         host = GetDomain(url)
                         if 'Unknown' in host:
-                                continue
 
-                        # ignore .rar files
-                        r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
-                        if r:
                                 continue
                         try:
                                 print 'in GetLinks if loop'
@@ -204,7 +191,8 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]Tv Shows 4U >>[/COLOR]'})
+        #addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue][B]Movies 4U >>[/B][/COLOR]'})
+        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue][B]Tv Shows 4U >>[/B][/COLOR]'})
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search 4U >>[/COLOR]'})
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'})
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -226,7 +214,7 @@ def GetSearchQuery():
 
         
 def Search(query):
-        url = 'http://www.google.com/search?q=site:ezdownloadsite.com/ ' + query
+        url = 'http://www.google.com/search?q=site:newmyvideolinks.com  ' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content

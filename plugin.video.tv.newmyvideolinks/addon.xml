@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.video.tv.newmyvideolinks" version="0.1.2" name="Streams 4 U The tv shows" provider-name="TheYid">
+<addon id="plugin.video.tv.newmyvideolinks" version="0.1.3" name="Streams 4 U The tv shows" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.0"/>
         <import addon="script.module.urlresolver" version="0.0.1"/>
+        <import addon="script.module.metahandler" version="1.0.0"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary>Browse Streams 4 U Tv Shows </summary>
-        <description>Stream a wide selection of mp4 mkv tv shows from Streams 4 U The tv shows aka tv.newmyvideolinks couple of issues 1- script fail if no more pages 2- tv shows link shows up at the bottem of episodes NO big problems to report links supported are Netload Turobit 180upload real-debrid or alldebrid account NEEDED for help on this addon please goto xbmc hub</description>
+        <description>Stream a wide selection of mp4 mkv tv shows from Streams 4 U The tv shows free links supported are 180upload, movreel, billionuploads, vidbull, HugeFiles.. and Netload, Turobit real-debrid or alldebrid account for help with this addon or TheYid repo please goto xbmc hub</description>
         <platform>all</platform>
     </extension>
 </addon>
