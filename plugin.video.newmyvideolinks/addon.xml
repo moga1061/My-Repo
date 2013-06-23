@@ -9,8 +9,8 @@
         <provides>video</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
-        <summary>Stream Films and tv shows from Streams 4 U great for 1080p mp4 mkv 3D</summary>
-        <description>Stream a wide selection of movies and tv shows from Streams 4 U aka newmyvideolinks great 3D 1080p old and new films 720p, mp4 & mkv tv shows.. Free NO real-debrid or alldebrid accounts NEEDED links supported are 180upload movreel billionuploads vidbull HugeFiles and  Netload Turobit and Ultramegabit with real-debrid or alldebrid</description>
+        <summary>Stream Films from Streams 4 U great for 1080p</summary>
+        <description>Stream a wide selection of movies from Streams 4 U aka newmyvideolinks great 1080p mp4 and 3D movies links supported are Netload Turobit 180upload real-debrid or alldebrid account NEEDED for help on this addon please goto xbmc hub</description>
         <platform>all</platform>
     </extension>
 </addon>

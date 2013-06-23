@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
+<addon id="plugin.video.newmyvideolinks" version="0.2.0" name="Streams 4 U" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+    <requires>
+        <import addon="xbmc.python" version="1.0"/>
+        <import addon="script.module.TheYid.common" version="0.1.0"/>
+        <import addon="script.module.urlresolver" version="0.0.1"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Stream Films from Streams 4 U great for 1080p</summary>
+        <description>Stream a wide selection of movies from Streams 4 U aka newmyvideolinks great 1080p mp4 and 3D movies links supported are Netload Turobit 180upload real-debrid or alldebrid account NEEDED for help on this addon please goto xbmc hub</description>
+        <platform>all</platform>
+    </extension>
+</addon>
+
+
 <addon id="plugin.video.releasethread" version="0.0.2" name="Release Thread" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
@@ -14,22 +31,6 @@
         <description>Stream a wide selection of movies and tv shows from Release Thread YOU will need a real-debrid or a alldebrid account for more info on this addon and TheYid repo please goto XBMCHUB</description>
         <platform>all</platform>
         <disclaimer lang="en">[COLOR red][B][I]This is a pre Release.....[/B][/I][/COLOR]YOU will need a real-debrid or a alldebrid account for more info on this addon and TheYid repo please goto XBMCHUB</disclaimer>
-    </extension>
-</addon>
-
-<addon id="plugin.video.newmyvideolinks" version="0.2.0" name="Streams 4 U" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
-    <requires>
-        <import addon="xbmc.python" version="1.0"/>
-        <import addon="script.module.TheYid.common" version="0.1.0"/>
-        <import addon="script.module.urlresolver" version="0.0.1"/>
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>Stream Films and tv shows from Streams 4 U great for 1080p mp4 mkv 3D</summary>
-        <description>Stream a wide selection of movies and tv shows from Streams 4 U aka newmyvideolinks great 3D 1080p old and new films 720p, mp4 & mkv tv shows.. Free NO real-debrid or alldebrid accounts NEEDED links supported are 180upload movreel billionuploads vidbull HugeFiles and  Netload Turobit and Ultramegabit with real-debrid or alldebrid</description>
-        <platform>all</platform>
     </extension>
 </addon>
 
