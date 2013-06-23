@@ -24,6 +24,3 @@
 [B]Version 0.1.3[/B]
 - fixed 
 
-[B]Version 0.2.0[/B]
-- added icons 
-

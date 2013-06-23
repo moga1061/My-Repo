@@ -24,10 +24,6 @@ addon = Addon('plugin.video.newmyvideolinks', sys.argv)
 showAllParts = True
 showPlayAll = True
 
-######PATHS########
-AddonPath = addon.get_path()
-IconPath = AddonPath + "/icons/"
-
 if plugin.getSetting('showAllParts') == 'false':
         showAllParts = False
 
@@ -75,7 +71,8 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
                
       
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png')        
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': 'Next...'})
+        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -194,10 +191,10 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]Movies 4U >>[/COLOR]'}, img=IconPath + 'movie.png')
-        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]Tv Shows 4U >>[/COLOR]'}, img=IconPath + 'tv.png')
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search 4U >>[/COLOR]'}, img=IconPath + 'search.png')
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]Movies 4U >>[/COLOR]'})
+        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]Tv Shows 4U >>[/COLOR]'})
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search 4U >>[/COLOR]'})
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'})
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
