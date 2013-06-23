@@ -24,6 +24,10 @@ addon = Addon('plugin.video.releaseBB', sys.argv)
 showAllParts = True
 showPlayAll = True
 
+######PATHS########
+AddonPath = addon.get_path()
+IconPath = AddonPath + "/icons/"
+
 if plugin.getSetting('showAllParts') == 'false':
         showAllParts = False
 
@@ -71,7 +75,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
 
                         
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': 'Next...'})
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR orange]Next...[/COLOR]'}, img=IconPath + 'BB.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -200,10 +204,10 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]BB Movies> >[/COLOR]'})
-        addon.add_directory({'mode': 'Categories', 'section': 'tv'},  {'title':  '[COLOR blue]BB Tv Shows> >[/COLOR]'})
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]BB Search> >[/COLOR]'})
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'})
+        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR orange][B]BB.. [/B][/COLOR][COLOR blue]Movies> >[/COLOR]'}, img=IconPath + 'BB.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'tv'},  {'title':  '[COLOR orange][B]BB.. [/B][/COLOR][COLOR blue]Tv Shows> >[/COLOR]'}, img=IconPath + 'BB.png')
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR orange][B]BB.. [/B][/COLOR][COLOR green]Search> >[/COLOR]'}, img=IconPath + 'search.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -211,7 +215,7 @@ def GetSearchQuery():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]Search releaseBB[/COLOR]')
+        keyboard.setHeading('[COLOR green]Search release[/COLOR][COLOR orange][B]BB[/B][/COLOR]')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):
