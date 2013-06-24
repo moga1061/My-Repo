@@ -108,13 +108,8 @@ def GetLinks(section, url): # Get Links
 
                 if r:
                         continue
-                print '*****************************' + host + ' : ' + url
-                title = url.rpartition('/')
-                title = title[2].replace('.html', '')
-                title = title.replace('.htm', '')
-                title = title.replace ('-',' ')
-                title = title.replace('_',' ')
-                name = host+'-'+title
+                print '*****************************' + host
+                name = host
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
 
@@ -131,20 +126,6 @@ def GetLinks(section, url): # Get Links
                         if 'Unknown' in host:
                                 continue
 
-                        try:
-                                print 'in GetLinks if loop'
-                                title = url.rpartition('/')
-                                title = title[2].replace('.html', '')
-                                title = title.replace('.htm', '')
-                                title = title.replace ('-',' ')
-                                title = title.replace('_',' ')
-                                name = host+'-'+title
-                                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
-                                sources.append(hosted_media)
-                                print sources
-                                print 'URL IS::: '+url
-                        except:
-                                continue
         source = urlresolver.choose_source(sources)
         if source: stream_url = source.resolve()
         else: stream_url = ''
