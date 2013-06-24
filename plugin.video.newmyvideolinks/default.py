@@ -2,10 +2,11 @@ import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 import urllib, urllib2
 import re, string, sys, os
 import urlresolver
+import HTMLParser
 from TheYid.common.addon import Addon
 from TheYid.common.net import Net
 from htmlentitydefs import name2codepoint as n2cp
-import HTMLParser
+
 
 try:
 	from sqlite3 import dbapi2 as sqlite
@@ -40,6 +41,8 @@ numOfPages = addon.queries.get('numOfPages', None)
 listitem = addon.queries.get('listitem', None)
 urlList = addon.queries.get('urlList', None)
 section = addon.queries.get('section', None)
+AddonPath = addon.get_path()
+IconPath = AddonPath + "/icons/"
 ##### Queries ##########
 
 
@@ -63,7 +66,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('alignleft.+?href="(.+?)".+?>(.+?)<.+?src=(.+?).+?', re.DOTALL).findall(html)
+                match = re.compile('<h4>.+?href="(.+?)".+?>(.+?)<.+?src=(.+?).+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.newmyvideolinks/?mode=Search&query=%s)' %(name.strip())
@@ -71,8 +74,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
                
       
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': 'Next...'})
-        
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -89,7 +91,6 @@ def GetLinks(section, url): # Get Links
         if r:
                 content = html[r.end():]
                
-
         match = re.compile('href="(.+?)"').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
@@ -99,13 +100,9 @@ def GetLinks(section, url): # Get Links
                         # ignore .rar files
 
                         continue
-                print '*****************************' + host + ' : ' + url
+                print '*****************************' + host
                 title = url.rpartition('/')
-                title = title[2].replace('.html', '')
-                title = title.replace('.htm', '')
-                title = title.replace ('-',' ')
-                title = title.replace('_',' ')
-                name = host+'-'+title
+                name = host
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
 
@@ -121,20 +118,6 @@ def GetLinks(section, url): # Get Links
                         host = GetDomain(url)
                         if 'Unknown' in host:
 
-                                continue
-                        try:
-                                print 'in GetLinks if loop'
-                                title = url.rpartition('/')
-                                title = title[2].replace('.html', '')
-                                title = title.replace('.htm', '')
-                                title = title.replace ('-',' ')
-                                title = title.replace('_',' ')
-                                name = host+'-'+title
-                                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
-                                sources.append(hosted_media)
-                                print sources
-                                print 'URL IS::: '+url
-                        except:
                                 continue
         source = urlresolver.choose_source(sources)
         if source: stream_url = source.resolve()
@@ -191,10 +174,10 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]Movies 4U >>[/COLOR]'})
-        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]Tv Shows 4U >>[/COLOR]'})
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search 4U >>[/COLOR]'})
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'})
+        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]Movies 4U >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]Tv Shows 4U >>[/COLOR]'}, img=IconPath + 'tv.png')
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search 4U >>[/COLOR]'}, img=IconPath + 'search.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
