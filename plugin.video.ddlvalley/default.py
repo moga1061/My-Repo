@@ -24,6 +24,10 @@ addon = Addon('plugin.video.ddlvalley', sys.argv)
 showAllParts = True
 showPlayAll = True
 
+######PATHS########
+AddonPath = addon.get_path()
+IconPath = AddonPath + "/icons/"
+
 if plugin.getSetting('showAllParts') == 'false':
         showAllParts = False
 
@@ -72,7 +76,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                 
 
       
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': 'Next...'})
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -208,10 +212,10 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]DDL Movies >[/COLOR]'})
-        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]DDL TV Shows >[/COLOR]'})
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search DDL[/COLOR]'})
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'})
+        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]DDL Movies >[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]DDL TV Shows >[/COLOR]'}, img=IconPath + 'tv.png')
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search DDL[/COLOR]'}, img=IconPath + 'search.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 

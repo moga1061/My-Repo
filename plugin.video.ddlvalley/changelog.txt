@@ -4,3 +4,5 @@
 - Initial version of ddlvalley.eu plugin
 [B]Version 0.0.4[/B]
 - fixed
+[B]Version 0.0.5[/B]
+- added icons
