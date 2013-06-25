@@ -1,3 +1,10 @@
+#Begin parental controls hook
+try:
+    import parentalcontrols.wrap
+    parentalcontrols.wrap.check()
+except (KeyboardInterrupt, SystemExit):raise
+except:pass
+#End parental controls hook
 import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 import urllib, urllib2
 import re, string, sys, os
@@ -23,6 +30,10 @@ net = Net()
 addon = Addon('plugin.video.adult-bay', sys.argv)
 showAllParts = True
 showPlayAll = True
+
+######PATHS########
+AddonPath = addon.get_path()
+IconPath = AddonPath + "/icons/"
 
 if plugin.getSetting('showAllParts') == 'false':
         showAllParts = False
@@ -72,7 +83,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                 
 
       
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': 'Next...'})
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -201,14 +212,14 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR red]<<...OVER 18s ONLY>>[/COLOR] [COLOR blue]<<XXX Movies>>[/COLOR] [COLOR red]<<OVER 18s ONLY...>>[/COLOR]'})
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]XXX Search[/COLOR]'})
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'})
+        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR red]<<...OVER 18s ONLY>>[/COLOR] [COLOR blue]<<XXX Movies>>[/COLOR] [COLOR red]<<OVER 18s ONLY...>>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]XXX Search[/COLOR]'}, img=IconPath + 'search.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
 def GetSearchQuery():
-	last_search = addon.load_data('search')
+	last_search = addon.load_data('[COLOR green]search[/COLOR][COLOR red]XXX[/COLOR]')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
         keyboard.setHeading('[COLOR green]Search Adult Bay[/COLOR]')

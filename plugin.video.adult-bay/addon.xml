@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.video.adult-bay" version="0.0.2" name="The Adult Bay" provider-name="TheYid">
+<addon id="plugin.video.adult-bay" version="0.0.3" name="The Adult Bay [COLOR red]XXX[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.0"/>
@@ -9,8 +9,8 @@
         <provides>video</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
-        <summary>Stream XXX movies</summary>
-        <description>OVER 18's ONLY........ Stream a wide selection of XXX movies from the Adult Bay.......... OVER 18's ONLY........ Real-Debrid ONLY</description>
+        <summary>Stream [COLOR red]XXX[/COLOR] movies</summary>
+        <description>OVER 18's ONLY........ Stream a wide selection of [COLOR red]XXX[/COLOR] movies from the Adult Bay[COLOR red]XXX[/COLOR].......... OVER 18's ONLY [COLOR red]XXX[/COLOR]........ Real-Debrid ONLY</description>
         <platform>all</platform>
     </extension>
 </addon>
