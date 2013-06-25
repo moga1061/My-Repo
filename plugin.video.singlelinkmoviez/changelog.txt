@@ -2,3 +2,5 @@
 - Initial version of singlelinkmoviez plugin
 [B]Version 0.1.1[/B]
 - fixed
+[B]Version 0.1.2[/B]
+- added icons

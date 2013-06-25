@@ -24,6 +24,10 @@ addon = Addon('plugin.video.singlelinkmoviez', sys.argv)
 showAllParts = True
 showPlayAll = True
 
+######PATHS########
+AddonPath = addon.get_path()
+IconPath = AddonPath + "/icons/"
+
 if plugin.getSetting('showAllParts') == 'false':
         showAllParts = False
 
@@ -40,6 +44,7 @@ numOfPages = addon.queries.get('numOfPages', None)
 listitem = addon.queries.get('listitem', None)
 urlList = addon.queries.get('urlList', None)
 section = addon.queries.get('section', None)
+
 
 
 
@@ -72,7 +77,8 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                 
 
       
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': 'Next...'})
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR red][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png')
+
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -102,17 +108,10 @@ def GetLinks(section, url): # Get Links
                 if 'Unknown' in host:
                                 continue
 
-                # ignore .rar files
-                r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
                 if r:
                         continue
-                print '*****************************' + host + ' : ' + url
-                title = url.rpartition('/')
-                title = title[2].replace('.html', '')
-                title = title.replace('.htm', '')
-                title = title.replace ('-',' ')
-                title = title.replace('_',' ')
-                name = host+'-'+title
+                print '*****************************' + host
+                name = host
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
 
@@ -122,9 +121,6 @@ def GetLinks(section, url): # Get Links
                 print 'in comments if'
                 html = html[find.end():]
                 CLEAN(html)###
-                match = re.compile('<a href="(http://.+?)" rel="nofollow"', re.DOTALL).findall(html)
-                match1 = re.compile(r'comment-page-numbers(.+?)<!--comments form -->', re.DOTALL).findall(html)
-                match = re.compile('<a href="(htt.+?)" rel="nofollow"', re.DOTALL).findall(str(match1))
                 print 'MATCH IS: '+str(match)
                 print len(match)
                 for url in match:
@@ -132,31 +128,12 @@ def GetLinks(section, url): # Get Links
                         if 'Unknown' in host:
                                 continue
 
-                        # ignore .rar files
-                        r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
-                        if r:
-                                continue
-                        try:
-                                print 'in GetLinks if loop'
-                                title = url.rpartition('/')
-                                title = title[2].replace('.html', '')
-                                title = title.replace('.htm', '')
-                                title = title.replace ('-',' ')
-                                title = title.replace('_',' ')
-                                name = host+'-'+title
-                                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
-                                sources.append(hosted_media)
-                                print sources
-                                print 'URL IS::: '+url
-                        except:
-                                continue
         source = urlresolver.choose_source(sources)
         if source: stream_url = source.resolve()
         else: stream_url = ''
         xbmc.Player().play(stream_url)
 
-
-
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
 def CLEAN(string):
@@ -208,9 +185,9 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]Moviez >>[/COLOR]'})
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search Moviez >>[/COLOR]'})
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'})
+        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]Moviez >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search Moviez >>[/COLOR]'}, img=IconPath + 'search.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
