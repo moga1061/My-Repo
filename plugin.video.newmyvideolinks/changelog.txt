@@ -26,3 +26,6 @@
 
 [B]Version 0.1.5[/B]
 - added art and clean up
+
+[B]Version 0.1.6[/B]
+- fix
