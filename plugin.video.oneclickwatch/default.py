@@ -28,6 +28,7 @@ showPlayAll = True
 AddonPath = addon.get_path()
 IconPath = AddonPath + "/icons/"
 
+
 if plugin.getSetting('showAllParts') == 'false':
         showAllParts = False
 
@@ -186,6 +187,7 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]OCW Tv Shows >>>[/COLOR]'}, img=IconPath + 'tv.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]One click Search[/COLOR]'}, img=IconPath + 'search.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
