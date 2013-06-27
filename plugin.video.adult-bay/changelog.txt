@@ -4,3 +4,5 @@
 - fixed
 [B]Version 0.0.3[/B]
 - added icons
+[B]Version 0.0.4[/B]
+- fix

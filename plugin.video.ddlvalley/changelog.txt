@@ -1,8 +1,10 @@
 [B]Version 0.0.2[/B]
 - Initial version of ddlvalley.eu plugin
 [B]Version 0.0.3[/B]
-- Initial version of ddlvalley.eu plugin
+- 
 [B]Version 0.0.4[/B]
 - fixed
 [B]Version 0.0.5[/B]
 - added icons
+[B]Version 0.0.6[/B]
+- new icons

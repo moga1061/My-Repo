@@ -154,7 +154,6 @@ def GetLinks(section, url): # Get Links
         else: stream_url = ''
         xbmc.Player().play(stream_url)
                        
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 def CLEAN(string):
     def substitute_entity(match):
         ent = match.group(3)

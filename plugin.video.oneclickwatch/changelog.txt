@@ -14,5 +14,7 @@
 - added art
 [B]Version 0.2.0[/B]
 - clean up
-[B]Version 0.2.0[/B]
+[B]Version 0.2.1[/B]
 - new art work
+[B]Version 0.2.2[/B]
+- fix

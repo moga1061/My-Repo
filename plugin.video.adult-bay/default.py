@@ -139,30 +139,12 @@ def GetLinks(section, url): # Get Links
                         if 'Unknown' in host:
                                 continue
 
-                        # ignore .rar files
-                        r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
-                        if r:
-                                continue
-                        try:
-                                print 'in GetLinks if loop'
-                                title = url.rpartition('/')
-                                title = title[2].replace('.html', '')
-                                title = title.replace('.htm', '')
-                                title = title.replace ('-',' ')
-                                title = title.replace('_',' ')
-                                name = host+'-'+title
-                                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
-                                sources.append(hosted_media)
-                                print sources
-                                print 'URL IS::: '+url
-                        except:
-                                continue
         source = urlresolver.choose_source(sources)
         if source: stream_url = source.resolve()
         else: stream_url = ''
         xbmc.Player().play(stream_url)
                        
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 def CLEAN(string):
     def substitute_entity(match):
         ent = match.group(3)
@@ -215,6 +197,7 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR red]<<...OVER 18s ONLY>>[/COLOR] [COLOR blue]<<XXX Movies>>[/COLOR] [COLOR red]<<OVER 18s ONLY...>>[/COLOR]'}, img=IconPath + 'movie.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]XXX Search[/COLOR]'}, img=IconPath + 'search.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
