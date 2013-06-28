@@ -110,6 +110,7 @@ def GetLinks(section, url): # Get Links
                 title = title[2].replace('.html', '')
                 title = title.replace('.htm', '')
                 title = title.replace('.rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
+                title = title.replace('rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
                 title = title.replace('www.', '')
                 title = title.replace ('-',' ')
                 title = title.replace('_',' ')

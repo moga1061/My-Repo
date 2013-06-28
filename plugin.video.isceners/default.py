@@ -24,6 +24,10 @@ addon = Addon('plugin.video.isceners', sys.argv)
 showAllParts = True
 showPlayAll = True
 
+#PATHS
+AddonPath = addon.get_path()
+IconPath = AddonPath + "/icons/"
+
 if plugin.getSetting('showAllParts') == 'false':
         showAllParts = False
 
@@ -63,7 +67,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
+                match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.isceners/?mode=Search&query=%s)' %(name.strip())
@@ -72,7 +76,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
 
 
 
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': 'Next...'})
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -110,8 +114,15 @@ def GetLinks(section, url): # Get Links
                 title = url.rpartition('/')
                 title = title[2].replace('.html', '')
                 title = title.replace('.htm', '')
+                title = title.replace('file', '')
+                title = title.replace('.rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
+                title = title.replace('rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
+                title = title.replace('www.', '')
                 title = title.replace ('-',' ')
                 title = title.replace('_',' ')
+                title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
+                title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
+                title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
                 name = host+'-'+title
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
@@ -154,7 +165,6 @@ def GetLinks(section, url): # Get Links
         else: stream_url = ''
         xbmc.Player().play(stream_url)
                        
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def CLEAN(string):
     def substitute_entity(match):
@@ -205,11 +215,13 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]Movies>>>[/COLOR]'})
-        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]TV Shows>>[/COLOR]'})
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search[/COLOR]'})
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'})
+        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]Movies>>>[/COLOR]'}, img=IconPath + 'movies.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]TV Shows>>[/COLOR]'}, img=IconPath + 'tv.png')
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search[/COLOR]'}, img=IconPath + 'search.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png')
+        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 
 
 def GetSearchQuery():
