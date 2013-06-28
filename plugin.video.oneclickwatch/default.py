@@ -111,6 +111,9 @@ def GetLinks(section, url): # Get Links
                 if r:
                         continue
                 print '*****************************' + host
+                title = url.rpartition('/')
+                host = host.replace('ul.to','[COLOR gold]Uploaded[/COLOR][COLOR red]Real-Debird and Alldebird only[/COLOR]')
+                host = host.replace('movreel.com','movreel.com [COLOR red]Download/Streaming limit of 2GB a day !![/COLOR]')
                 name = host
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)

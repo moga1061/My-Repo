@@ -119,6 +119,10 @@ def GetLinks(section, url): # Get Links
                 title = title.replace('.htm', '')
                 title = title.replace ('-',' ')
                 title = title.replace('_',' ')
+                title = title.replace('.',' ')
+                title = title.replace('XXX','[COLOR red][B][I]XXX[/B][/I][/COLOR]')
+                title = title.replace('DVDRip',' ')
+                title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR]')
                 name = host+'-'+title
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)

@@ -102,6 +102,9 @@ def GetLinks(section, url): # Get Links
                         continue
                 print '*****************************' + host
                 title = url.rpartition('/')
+                host = host.replace('netload.in','[COLOR gold]Netload[/COLOR]')
+                host = host.replace('turbobit.net','[COLOR gold]Turbobit[/COLOR]')
+                host = host.replace('movreel.com','movreel.com [COLOR red]Download/Streaming limit of 2GB a day !![/COLOR]')
                 name = host
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)

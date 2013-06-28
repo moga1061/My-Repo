@@ -104,21 +104,25 @@ def GetLinks(section, url): # Get Links
                                 continue
 
                 # ignore .rar files
-                r = re.search('\.rar\.file[(?:\.html|\.htm)]*', url, re.IGNORECASE)
+                r = re.search('rar\.rar\.file[(?:\.html|\.htm)]*', url, re.IGNORECASE)
                 if r:
                         continue
                 print '*****************************' + host + ' : ' + url
                 title = url.rpartition('/')
                 title = title[2].replace('.html', '')
                 title = title.replace('.htm', '')
-                title = title.replace('file', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
+                title = title.replace('file', '')
                 title = title.replace('.rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
+                title = title.replace('rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
                 title = title.replace('www.', '')
                 title = title.replace ('-',' ')
                 title = title.replace('_',' ')
+                title = title.replace('.',' ')
                 title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
                 title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
                 title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
+                host = host.replace('zippyshare.com','[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
+                host = host.replace('www','')
                 name = host+'-'+title
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
