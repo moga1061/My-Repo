@@ -76,7 +76,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                 
 
       
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png')
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nexts.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -114,8 +114,13 @@ def GetLinks(section, url): # Get Links
                 title = url.rpartition('/')
                 title = title[2].replace('.html', '')
                 title = title.replace('.htm', '')
+                title = title.replace('.rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
+                title = title.replace('www.', '')
                 title = title.replace ('-',' ')
                 title = title.replace('_',' ')
+                title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
+                title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
+                title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
                 name = host+'-'+title
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
@@ -136,30 +141,10 @@ def GetLinks(section, url): # Get Links
                         if 'Unknown' in host:
                                 continue
 
-                        # ignore .rar files
-                        r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
-                        if r:
-                                continue
-                        try:
-                                print 'in GetLinks if loop'
-                                title = url.rpartition('/')
-                                title = title[2].replace('.html', '')
-                                title = title.replace('.htm', '')
-                                title = title.replace ('-',' ')
-                                title = title.replace('_',' ')
-                                name = host+'-'+title
-                                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
-                                sources.append(hosted_media)
-                                print sources
-                                print 'URL IS::: '+url
-                        except:
-                                continue
         source = urlresolver.choose_source(sources)
         if source: stream_url = source.resolve()
         else: stream_url = ''
         xbmc.Player().play(stream_url)
-
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def CLEAN(string):
     def substitute_entity(match):
@@ -210,10 +195,11 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]Scene Movies >>[/COLOR]'}, img=IconPath + 'movie.png')
-        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]Scene TV Shows >>[/COLOR]'}, img=IconPath + 'tv.png')
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]scene-down Search[/COLOR]'}, img=IconPath + 'search.png')
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]Scene Movies >>[/COLOR]'}, img=IconPath + 'movies.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]Scene TV Shows >>[/COLOR]'}, img=IconPath + 'tvs.png')
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]scene-down Search[/COLOR]'}, img=IconPath + 'searchs.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolvers.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
