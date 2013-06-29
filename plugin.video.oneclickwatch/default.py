@@ -112,8 +112,9 @@ def GetLinks(section, url): # Get Links
                         continue
                 print '*****************************' + host
                 title = url.rpartition('/')
-                host = host.replace('ul.to','[COLOR gold]Uploaded[/COLOR][COLOR red]Real-Debird and Alldebird only[/COLOR]')
-                host = host.replace('movreel.com','movreel.com [COLOR red]Download/Streaming limit of 2GB a day !![/COLOR]')
+                host = host.replace('ul.to','[COLOR gold]Uploaded[/COLOR] - [COLOR red]Real-Debird or Alldebird only [/COLOR]')
+                host = host.replace('uptobox.com','[COLOR gold]Uptobox[/COLOR] - [COLOR red]Real-Debird or Alldebird only [/COLOR]')
+                host = host.replace('movreel.com','movreel.com - [COLOR red]Download/Streaming limit of 2GB a day !![/COLOR]')
                 name = host
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
@@ -152,10 +153,6 @@ def CLEAN(string):
     entity_re = re.compile(r'&(#?)(x?)(\d{1,5}|\w{1,8});')
     return entity_re.subn(substitute_entity, string)[0]
 
-def PlayVideo(url, listitem):
-        print 'in PlayVideo %s' % url
-        stream_url = urlresolver.HostedMediaFile(url).resolve()
-	xbmc.Player().play(stream_url, listitem)
 
 def GetDomain(url):
         tmp = re.compile('//(.+?)/').findall(url)

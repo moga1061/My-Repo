@@ -120,9 +120,14 @@ def GetLinks(section, url): # Get Links
                 title = title.replace ('-',' ')
                 title = title.replace('_',' ')
                 title = title.replace('.',' ')
+                title = title.replace('x264','')
                 title = title.replace('XXX','[COLOR red][B][I]XXX[/B][/I][/COLOR]')
-                title = title.replace('DVDRip',' ')
+                title = title.replace('DVDRip','')
                 title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR]')
+                host = host.replace('netload.in','[COLOR gold]Netload[/COLOR]')
+                host = host.replace('rapidgator.net','[COLOR gold]Rapidgator[/COLOR]')
+                host = host.replace('uploaded.net','[COLOR gold]Uploaded[/COLOR]')
+                host = host.replace('-','')
                 name = host+'-'+title
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
@@ -164,10 +169,7 @@ def CLEAN(string):
     entity_re = re.compile(r'&(#?)(x?)(\d{1,5}|\w{1,8});')
     return entity_re.subn(substitute_entity, string)[0]
 
-def PlayVideo(url, listitem):
-        print 'in PlayVideo %s' % url
-        stream_url = urlresolver.HostedMediaFile(url).resolve()
-	xbmc.Player().play(stream_url, listitem)
+
 
 def GetDomain(url):
         tmp = re.compile('//(.+?)/').findall(url)

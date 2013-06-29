@@ -24,10 +24,6 @@ addon = Addon('plugin.video.releaseBB', sys.argv)
 showAllParts = True
 showPlayAll = True
 
-######PATHS########
-AddonPath = addon.get_path()
-IconPath = AddonPath + "/icons/"
-
 if plugin.getSetting('showAllParts') == 'false':
         showAllParts = False
 
@@ -44,7 +40,10 @@ numOfPages = addon.queries.get('numOfPages', None)
 listitem = addon.queries.get('listitem', None)
 urlList = addon.queries.get('urlList', None)
 section = addon.queries.get('section', None)
-########################
+
+AddonPath = addon.get_path()
+IconPath = AddonPath + "/icons/"
+
 
 
 def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
@@ -114,9 +113,14 @@ def GetLinks(section, url): # Get Links
                 title = title.replace('www.', '')
                 title = title.replace ('-',' ')
                 title = title.replace('_',' ')
+                title = title.replace('.',' ')
                 title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
                 title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
                 title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
+                title = title.replace('affiliate python?aff id=456662','')
+                host = host.replace('ryushare.com','[COLOR red]ryushare not working with real-debird or alldebird[/COLOR]')
+                host = host.replace('ul.to','uploaded.net')
+                host = host.replace('netload.in','[COLOR gold]netload.in[/COLOR]')
                 name = host+'-'+title
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
@@ -127,7 +131,6 @@ def GetLinks(section, url): # Get Links
                 print 'in comments if'
                 html = html[find.end():]
                 CLEAN(html)###
-                #match = re.compile('<a href="(http://.+?)" rel="nofollow"', re.DOTALL).findall(html)
                 match1 = re.compile(r'comment-page-numbers(.+?)<!--comments form -->', re.DOTALL).findall(html)
                 match = re.compile('<a href="(htt.+?)" rel="nofollow"', re.DOTALL).findall(str(match1))
                 print 'MATCH IS: '+str(match)
@@ -141,20 +144,7 @@ def GetLinks(section, url): # Get Links
                         r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
                         if r:
                                 continue
-                        try:
-                                print 'in GetLinks if loop'
-                                title = url.rpartition('/')
-                                title = title[2].replace('.html', '')
-                                title = title.replace('.htm', '')
-                                title = title.replace ('-',' ')
-                                title = title.replace('_',' ')
-                                name = host+'-'+title
-                                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
-                                sources.append(hosted_media)
-                                print sources
-                                print 'URL IS::: '+url
-                        except:
-                                continue
+
         source = urlresolver.choose_source(sources)
         if source: stream_url = source.resolve()
         else: stream_url = ''
@@ -175,10 +165,6 @@ def CLEAN(string):
     entity_re = re.compile(r'&(#?)(x?)(\d{1,5}|\w{1,8});')
     return entity_re.subn(substitute_entity, string)[0]
 
-def PlayVideo(url, listitem):
-        print 'in PlayVideo %s' % url
-        stream_url = urlresolver.HostedMediaFile(url).resolve()
-	xbmc.Player().play(stream_url, listitem)
 
 def GetDomain(url):
         tmp = re.compile('//(.+?)/').findall(url)

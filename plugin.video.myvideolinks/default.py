@@ -47,7 +47,7 @@ IconPath = AddonPath + "/icons/"
 
 
 def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
-        print 'newmyvideolinks get Movie Titles Menu %s' % url
+        print 'myvideolinks get Movie Titles Menu %s' % url
 
         # handle paging
         pageUrl = url
@@ -97,14 +97,13 @@ def GetLinks(section, url): # Get Links
                 host = GetDomain(url)
 
                 if 'Unknown' in host:
-                        # ignore .rar files
 
                         continue
                 print '*****************************' + host
                 title = url.rpartition('/')
                 host = host.replace('netload.in','[COLOR gold]Netload[/COLOR]')
                 host = host.replace('turbobit.net','[COLOR gold]Turbobit[/COLOR]')
-                host = host.replace('movreel.com','movreel.com [COLOR red]Download/Streaming limit of 2GB a day !![/COLOR]')
+                host = host.replace('movreel.com','movreel.com - [COLOR red]Download/Streaming limit of 2GB a day !![/COLOR]')
                 name = host
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
@@ -143,10 +142,6 @@ def CLEAN(string):
     entity_re = re.compile(r'&(#?)(x?)(\d{1,5}|\w{1,8});')
     return entity_re.subn(substitute_entity, string)[0]
 
-def PlayVideo(url, listitem):
-        print 'in PlayVideo %s' % url
-        stream_url = urlresolver.HostedMediaFile(url).resolve()
-	xbmc.Player().play(stream_url, listitem)
 
 def GetDomain(url):
         tmp = re.compile('//(.+?)/').findall(url)
@@ -189,7 +184,7 @@ def GetSearchQuery():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]Search Movies & Tv shows[/COLOR]')
+        keyboard.setHeading('[COLOR green]Search my video links[/COLOR]')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):
