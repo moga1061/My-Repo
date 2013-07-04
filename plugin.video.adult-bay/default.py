@@ -1,10 +1,4 @@
-#Begin parental controls hook
-try:
-    import parentalcontrols.wrap
-    parentalcontrols.wrap.check()
-except (KeyboardInterrupt, SystemExit):raise
-except:pass
-#End parental controls hook
+
 import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 import urllib, urllib2
 import re, string, sys, os
@@ -202,8 +196,10 @@ def Categories(section):  #categories
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR red]<<...OVER 18s ONLY>>[/COLOR] [COLOR pink]<<XXX Movies>>[/COLOR] [COLOR red]<<OVER 18s ONLY...>>[/COLOR]'}, img=IconPath + 'movie.png')
         #addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]XXX Search[/COLOR]'}, img=IconPath + 'search.png')
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR] - [COLOR pink]real-debird & alldebird login[/COLOR]'}, img=IconPath + 'setting.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR] - [COLOR pink]real-debird & alldebird login[/COLOR]'}, img=IconPath + 'newsettings.png')
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR red]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR pink][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help.png')
+        dialog = xbmcgui.Dialog()
+        dialog.ok(" [COLOR gold] THE ADULT BAY [/COLOR] [COLOR red]XXX[/COLOR] ", "                          [COLOR red]XXX[/COLOR] [COLOR red] OVER 18's ONLY !!! [/COLOR] [COLOR red]XXX[/COLOR]")
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
