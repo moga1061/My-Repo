@@ -11,6 +11,7 @@
     <extension point="xbmc.addon.metadata">
         <summary>Stream scene releases movies</summary>
         <description>Stream a wide selection of movies from MegaFun...... Real-Debrid ONLY</description>
+        <broken>PLEASE USE My Video Links [COLOR gold]eu[/COLOR] on TheYid's REPO</broken>
         <platform>all</platform>
     </extension>
 </addon>

@@ -11,6 +11,7 @@
     <extension point="xbmc.addon.metadata">
         <summary>Browse New Rls</summary>
         <description>Play a wide selection of movies and Tv shows from New Rls</description>
+        <broken>PLEASE USE Release[COLOR orange]BB[/COLOR] on TheYid's REPO</broken>
         <platform>all</platform>
     </extension>
 </addon>

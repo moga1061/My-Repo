@@ -12,6 +12,7 @@
     <extension point="xbmc.addon.metadata">
         <summary>Browse Streams 4 U Tv Shows </summary>
         <description>Stream a wide selection of mp4 mkv tv shows from Streams 4 U The tv shows free links supported are 180upload, movreel, billionuploads, vidbull, HugeFiles.. and Netload, Turobit real-debrid or alldebrid account for help with this addon or TheYid repo please goto xbmc hub</description>
+        <broken>PLEASE USE My Video Links [COLOR gold]eu[/COLOR] on TheYid's REPO</broken>
         <platform>all</platform>
     </extension>
 </addon>
