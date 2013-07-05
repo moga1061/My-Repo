@@ -51,23 +51,6 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.megafun" version="0.0.3" name="MegaFun" provider-name="TheYid">
-    <requires>
-        <import addon="xbmc.python" version="1.0"/>
-        <import addon="script.module.t0mm0.common" version="0.0.1"/>
-        <import addon="script.module.urlresolver" version="0.0.1"/>
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>Stream scene releases movies</summary>
-        <description>Stream a wide selection of movies from MegaFun...... Real-Debrid ONLY</description>
-        <broken>PLEASE USE My Video Links [COLOR gold]eu[/COLOR] on TheYid's REPO</broken>
-        <platform>all</platform>
-    </extension>
-</addon>
-
 <addon id="plugin.video.myvideolinks" version="0.1.4" name="My Video Links [COLOR gold]eu[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
@@ -83,6 +66,7 @@
         <description>Stream a wide selection of movies and tv shows from My Video Links [COLOR gold]eu[/COLOR] great 3D 1080p mp4 and mkv old and new movies... links supported are movreel 180upload billionuploads hugefiles lemuploads megarelease vidbull and for pepole with real-debrid or alldebrid you get netload turobit.....     [COLOR blue][B][I]for more info or help on this addon and TheYid repo please goto XBMCHUB.com[/B][/I][/COLOR]</description>
         <platform>all</platform>
         <disclaimer lang="en">[COLOR red][B][I]for more info or help on this addon and TheYid repo please goto XBMCHUB.com[/B][/I][/COLOR]</disclaimer>
+        <broken>will try and fix soon for more info please goto www.xbmchub.com</broken>
     </extension>
 </addon>
 
@@ -101,23 +85,6 @@
         <platform>all</platform>
         <disclaimer lang="en">[COLOR red][B][I]for more info or help on this addon and TheYid repo please goto XBMCHUB.com[/B][/I][/COLOR]</disclaimer>
         <broken>PLEASE USE My Video Links [COLOR gold]eu[/COLOR] on TheYid's REPO</broken>
-    </extension>
-</addon>
-
-<addon id="plugin.video.newrls" version="0.0.2" name="New Rls" provider-name="TheYid">
-    <requires>
-        <import addon="xbmc.python" version="1.0"/>
-        <import addon="script.module.TheYid.common" version="0.1.0"/>
-        <import addon="script.module.urlresolver" version="0.0.1"/>
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>Browse New Rls</summary>
-        <description>Play a wide selection of movies and Tv shows from New Rls</description>
-        <broken>PLEASE USE Release[COLOR orange]BB[/COLOR] on TheYid's REPO</broken>
-        <platform>all</platform>
     </extension>
 </addon>
 
@@ -218,24 +185,6 @@
         <description>[COLOR red]UNCATEGORIZED dose not work it throws up a script error[/COLOR] stream a wide selection of Hollywood, Asian and Indian films from Moviez Moviez Moviez IT HAS THE LOT links FREE supported are SOCKSHARE, PUTLOCKER, and real-debrid are LETITBIT, TURBOBIT, RAPIDGATOR, EXTABIT, SHARE-ONLINE</description>
         <platform>all</platform>
         <disclaimer lang="en">[COLOR red][B][I]for more info or help on this addon and TheYid repo please goto XBMCHUB.com[/B][/I][/COLOR]</disclaimer>
-    </extension>
-</addon>
-
-<addon id="plugin.video.tv.newmyvideolinks" version="0.1.3" name="Streams 4 U The tv shows" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
-    <requires>
-        <import addon="xbmc.python" version="1.0"/>
-        <import addon="script.module.TheYid.common" version="0.1.0"/>
-        <import addon="script.module.urlresolver" version="0.0.1"/>
-        <import addon="script.module.metahandler" version="1.0.0"/>
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>Browse Streams 4 U Tv Shows </summary>
-        <description>Stream a wide selection of mp4 mkv tv shows from Streams 4 U The tv shows free links supported are 180upload, movreel, billionuploads, vidbull, HugeFiles.. and Netload, Turobit real-debrid or alldebrid account for help with this addon or TheYid repo please goto xbmc hub</description>
-        <broken>PLEASE USE My Video Links [COLOR gold]eu[/COLOR] on TheYid's REPO</broken>
-        <platform>all</platform>
     </extension>
 </addon>
 
