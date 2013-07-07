@@ -51,7 +51,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.myvideolinks" version="0.1.4" name="My Video Links [COLOR gold]eu[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.myvideolinks" version="0.1.5" name="My Video Links [COLOR gold]eu[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.0"/>
@@ -66,7 +66,6 @@
         <description>Stream a wide selection of movies and tv shows from My Video Links [COLOR gold]eu[/COLOR] great 3D 1080p mp4 and mkv old and new movies... links supported are movreel 180upload billionuploads hugefiles lemuploads megarelease vidbull and for pepole with real-debrid or alldebrid you get netload turobit.....     [COLOR blue][B][I]for more info or help on this addon and TheYid repo please goto XBMCHUB.com[/B][/I][/COLOR]</description>
         <platform>all</platform>
         <disclaimer lang="en">[COLOR red][B][I]for more info or help on this addon and TheYid repo please goto XBMCHUB.com[/B][/I][/COLOR]</disclaimer>
-        <broken>will try and fix soon for more info please goto www.xbmchub.com</broken>
     </extension>
 </addon>
 

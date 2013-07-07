@@ -66,12 +66,12 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('suf-tile-topmost.+?href="(.+?)".+?src="(.+?)".+?href=.+?>(.+?)<', re.DOTALL).findall(html)
-                for movieUrl, img, name in match:
+                match=re.compile("""<li><a href='(.+?)' class='.+?' rel='.+?' title='.+?' >(.+?)</a></li>""").findall(html)
+                for movieUrl, name in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.myvideolinks/?mode=Search&query=%s)' %(name.strip())
         		cm.append(('Search on myvideolinks', runstring))
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm)
                
       
                 addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nexts.png')        
