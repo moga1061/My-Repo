@@ -51,7 +51,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.myvideolinks" version="0.1.5" name="My Video Links [COLOR gold]eu[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.myvideolinks" version="0.1.6" name="My Video Links [COLOR gold]eu[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.0"/>
@@ -69,7 +69,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.newmyvideolinks" version="0.1.6" name="Streams [COLOR red]4[/COLOR] U" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.newmyvideolinks" version="0.1.7" name="Streams [COLOR red]4[/COLOR] U" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.0"/>

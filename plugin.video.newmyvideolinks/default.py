@@ -173,11 +173,13 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]Movies 4U >>[/COLOR]'}, img=IconPath + 'movie.png')
-        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]Tv Shows 4U >>[/COLOR]'}, img=IconPath + 'tv.png')
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search 4U >>[/COLOR]'}, img=IconPath + 'search.png')
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]This addon is broken[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]please ues my video links eu addon[/COLOR]'}, img=IconPath + 'tv.png')
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]This addon is broken[/COLOR]'}, img=IconPath + 'search.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]please ues my video links eu addon[/COLOR]'}, img=IconPath + 'settings.png')
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'fanart.png')
+        dialog = xbmcgui.Dialog()
+        dialog.ok(" [COLOR gold] This addon is broken please use my video links eu addon in TheYid's Repo[/COLOR]  [COLOR red]This addon is broken please use my video links eu addon in TheYid's Repo[/COLOR] ", "   
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
