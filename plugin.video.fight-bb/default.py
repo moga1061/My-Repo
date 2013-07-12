@@ -114,15 +114,17 @@ def GetLinks(section, url): # Get Links
                 title = url.rpartition('/')
                 title = title[2].replace('.html', '')
                 title = title.replace('.htm', '')
-                title = title.replace('file', '')
+                title = title.replace('-', '')
                 title = title.replace('.rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
                 title = title.replace('rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
                 title = title.replace('www.', '')
                 title = title.replace ('-',' ')
                 title = title.replace('_',' ')
+                title = title.replace('.',' ')
                 title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
                 title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
                 title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
+                title = title.replace('415191','[COLOR red][B][I]RAR[/B][/I][/COLOR] ')
                 name = host+'-'+title
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
@@ -163,8 +165,7 @@ def GetLinks(section, url): # Get Links
         source = urlresolver.choose_source(sources)
         if source: stream_url = source.resolve()
         else: stream_url = ''
-        xbmc.Player().play(stream_url)
-                       
+        xbmc.Player().play(stream_url)    
 
 def CLEAN(string):
     def substitute_entity(match):
@@ -180,11 +181,6 @@ def CLEAN(string):
             else: return match.group()
     entity_re = re.compile(r'&(#?)(x?)(\d{1,5}|\w{1,8});')
     return entity_re.subn(substitute_entity, string)[0]
-
-def PlayVideo(url, listitem):
-        print 'in PlayVideo %s' % url
-        stream_url = urlresolver.HostedMediaFile(url).resolve()
-	xbmc.Player().play(stream_url, listitem)
 
 def GetDomain(url):
         tmp = re.compile('//(.+?)/').findall(url)
