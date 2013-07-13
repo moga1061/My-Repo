@@ -211,9 +211,12 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'wrestling-media'},  {'title':  '[COLOR blue]Wrestling >>>[/COLOR]'}, img=IconPath + '1.png')
-        addon.add_directory({'mode': 'Categories', 'section': 'mma-media'},  {'title':  '[COLOR blue]MMA >>>[/COLOR]'}, img=IconPath + '3.png')
-        addon.add_directory({'mode': 'Categories', 'section': 'boxing-media'},  {'title':  '[COLOR blue]Boxing >>>[/COLOR]'}, img=IconPath + '2.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/wrestling-media/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Wrestling >>>[/COLOR]'}, img=IconPath + '1.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/mma-media/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]MMA >>>[/COLOR]'}, img=IconPath + '3.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/boxing-media/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Boxing >>>[/COLOR]'}, img=IconPath + '2.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search[/COLOR]'}, img=IconPath + '6.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + '7.png')
         addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + '8.png')
