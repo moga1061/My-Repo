@@ -6,3 +6,5 @@
 - added icons
 [B]Version 0.0.4[/B]
 - clean
+[B]Version 0.0.5[/B]
+- clean up

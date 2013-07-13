@@ -150,10 +150,6 @@ def CLEAN(string):
     entity_re = re.compile(r'&(#?)(x?)(\d{1,5}|\w{1,8});')
     return entity_re.subn(substitute_entity, string)[0]
 
-def PlayVideo(url, listitem):
-        print 'in PlayVideo %s' % url
-        stream_url = urlresolver.HostedMediaFile(url).resolve()
-	xbmc.Player().play(stream_url, listitem)
 
 def GetDomain(url):
         tmp = re.compile('//(.+?)/').findall(url)
@@ -176,7 +172,7 @@ def Categories(section):  #categories
         url = BASE_URL + '/category/' + section
         html = net.http_GET(BASE_URL).content
         CLEAN(html)
-        match = re.compile('<li class=.+?/category/' + '(.+?)".+?>(.+?)<').findall(html)
+        match = re.compile('<li class=.+?/category/' + section + '(.+?)".+?>(.+?)<').findall(html)
         for cat, title in match:
                 url = url + cat
                 addon.add_directory({'mode': 'GetTitles', 'section': section, 'url': url,
@@ -184,7 +180,15 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]Moviez >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'latest'},  {'title':  '[COLOR blue]latest movies >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'a'},  {'title':  '[COLOR blue]Animated & Asian Movies >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'indian'},  {'title':  '[COLOR blue]Indian Movies  >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'concerts'},  {'title':  '[COLOR blue]Concerts  >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'documentary'},  {'title':  '[COLOR blue]Documentary  >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'uncategorized'},  {'title':  '[COLOR blue]Uncategorized  >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'dvd'},  {'title':  '[COLOR blue]DVDRips,SCR,DVDR  >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'b'},  {'title':  '[COLOR blue]BRRip/BDRip >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'r'},  {'title':  '[COLOR blue]R5 >>[/COLOR]'}, img=IconPath + 'movie.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search Moviez >>[/COLOR]'}, img=IconPath + 'search.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))

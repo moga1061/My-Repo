@@ -14,3 +14,5 @@
 - new art
 [B]Version 0.1.0[/B]
 - new art
+[B]Version 0.1.1[/B]
+- added more to the addon

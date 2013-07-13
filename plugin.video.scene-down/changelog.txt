@@ -1,14 +1,5 @@
 [B]Version 0.0.1[/B]
-- Initial version of scene-down 
+- Initial version of [COLOR orange]scene[/COLOR] source plugin
 
 [B]Version 0.0.2[/B]
-- Initial version of scene-down 
-
-[B]Version 0.0.3[/B]
-- fixed
-
-[B]Version 0.0.4[/B]
-- added icons
-
-[B]Version 0.0.5[/B]
-- added new icons
+- clean up

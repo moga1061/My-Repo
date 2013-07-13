@@ -1,6 +1,6 @@
 
 import xbmc, xbmcgui, xbmcaddon, xbmcplugin
-import urllib, urllib2
+import urllib, urllib
 import re, string, sys, os
 import urlresolver
 from TheYid.common.addon import Addon
@@ -195,7 +195,8 @@ def Categories(section):  #categories
 
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR red]<<...OVER 18s ONLY>>[/COLOR] [COLOR pink]<<XXX Movies>>[/COLOR] [COLOR red]<<OVER 18s ONLY...>>[/COLOR]'}, img=IconPath + 'movie.png')
-        #addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]XXX Search[/COLOR]'}, img=IconPath + 'search.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'hdtv'},  {'title':  '[COLOR red]<<...OVER 18s ONLY>>[/COLOR] [COLOR pink]<<XXX HD>>[/COLOR] [COLOR red]<<OVER 18s ONLY...>>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'clips'},  {'title':  '[COLOR red]<<...OVER 18s ONLY>>[/COLOR] [COLOR pink]<<XXX Clips>>[/COLOR] [COLOR red]<<OVER 18s ONLY...>>[/COLOR]'}, img=IconPath + 'movie.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR] - [COLOR pink]real-debird & alldebird login[/COLOR]'}, img=IconPath + 'newsettings.png')
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR red]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR pink][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help.png')
         dialog = xbmcgui.Dialog()

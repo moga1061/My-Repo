@@ -66,7 +66,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('a></span>.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
+                match = re.compile('a></span>.+?href="(.+?)".+?><h2>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.releasethread/?mode=Search&query=%s)' %(name.strip())
@@ -163,10 +163,6 @@ def CLEAN(string):
     entity_re = re.compile(r'&(#?)(x?)(\d{1,5}|\w{1,8});')
     return entity_re.subn(substitute_entity, string)[0]
 
-def PlayVideo(url, listitem):
-        print 'in PlayVideo %s' % url
-        stream_url = urlresolver.HostedMediaFile(url).resolve()
-	xbmc.Player().play(stream_url, listitem)
 
 def GetDomain(url):
         tmp = re.compile('//(.+?)/').findall(url)
