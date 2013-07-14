@@ -15,13 +15,13 @@ except:
 	from pysqlite2 import dbapi2 as sqlite
 	print "Loading pysqlite2 as DB engine"
 
-addon_id = 'plugin.video.69area'
+addon_id = 'plugin.video.naughtyblog'
 plugin = xbmcaddon.Addon(id=addon_id)
 
-DB = os.path.join(xbmc.translatePath("special://database"), '69area.db')
-BASE_URL = 'https://69area.org/'
+DB = os.path.join(xbmc.translatePath("special://database"), 'naughtyblog.db')
+BASE_URL = 'http://www.naughtyblog.org/'
 net = Net()
-addon = Addon('plugin.video.69area', sys.argv)
+addon = Addon('plugin.video.naughtyblog', sys.argv)
 showAllParts = True
 showPlayAll = True
 
@@ -49,7 +49,7 @@ section = addon.queries.get('section', None)
 
 
 def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
-        print '69area get Movie Titles Menu %s' % url
+        print 'naughtyblog get Movie Titles Menu %s' % url
 
         # handle paging
         pageUrl = url
@@ -68,11 +68,11 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('post-title.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
+                match = re.compile('<h3.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
-                        runstring = 'XBMC.Container.Update(plugin://plugin.video.69area/?mode=Search&query=%s)' %(name.strip())
-        		cm.append(('Search on 69area', runstring))
+                        runstring = 'XBMC.Container.Update(plugin://plugin.video.naughtyblog/?mode=Search&query=%s)' %(name.strip())
+        		cm.append(('Search on naughtyblog', runstring))
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
                 
 
@@ -194,18 +194,16 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR red]<<...OVER 18s ONLY>>[/COLOR] [COLOR pink]<<XXX Movies>>[/COLOR] [COLOR red]<<OVER 18s ONLY...>>[/COLOR]'}, img=IconPath + 'movie.png')
-        addon.add_directory({'mode': 'Categories', 'section': 'clips'},  {'title':  '[COLOR red]<<...OVER 18s ONLY>>[/COLOR] [COLOR pink]<<XXX Clips>>[/COLOR] [COLOR red]<<OVER 18s ONLY...>>[/COLOR]'}, img=IconPath + 'movie.png')
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/hd-porn/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR red]<<...OVER 18s ONLY>>[/COLOR] [COLOR pink]<<XXX Movies HD>>[/COLOR] [COLOR red]<<OVER 18s ONLY...>>[/COLOR]'}, img=IconPath + 'movie.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/siterips/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR red]<<...OVER 18s ONLY>>[/COLOR] [COLOR pink]<<XXX Movies SiteRips>>[/COLOR] [COLOR red]<<OVER 18s ONLY...>>[/COLOR]'}, img=IconPath + 'movie.png')
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/uncategorized/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR red]<<...OVER 18s ONLY>>[/COLOR] [COLOR pink]<<XXX Movies Uncategorized>>[/COLOR] [COLOR red]<<OVER 18s ONLY...>>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR red]<<...OVER 18s ONLY>>[/COLOR] [COLOR pink]<<XXX Movies Latest>>[/COLOR] [COLOR red]<<OVER 18s ONLY...>>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/clips/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR red]<<...OVER 18s ONLY>>[/COLOR] [COLOR pink]<<XXX Movies Clips>>[/COLOR] [COLOR red]<<OVER 18s ONLY...>>[/COLOR]'}, img=IconPath + 'movie.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR] - [COLOR pink]real-debird & alldebird login[/COLOR]'}, img=IconPath + 'settings.png')
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR red]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR pink][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help.png')
         dialog = xbmcgui.Dialog()
-        dialog.ok(" [COLOR gold] 69AREA [/COLOR] [COLOR red]XXX[/COLOR] ", "                          [COLOR red]XXX[/COLOR] [COLOR red] OVER 18's ONLY !!! [/COLOR] [COLOR red]XXX[/COLOR]")
+        dialog.ok(" [COLOR gold] Naughty Blog [/COLOR] [COLOR red]XXX[/COLOR] ", "                          [COLOR red]XXX[/COLOR] [COLOR red] OVER 18's ONLY !!! [/COLOR] [COLOR red]XXX[/COLOR]")
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -225,7 +223,7 @@ def GetSearchQuery():
 
         
 def Search(query):
-        url = 'http://www.google.com/search?q=site:69area.org ' + query
+        url = 'http://www.google.com/search?q=site:naughtyblog.org ' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
