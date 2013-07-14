@@ -200,35 +200,47 @@ def GetMediaInfo(html):
 
 def Categories(section):  #categories
 
-        url = BASE_URL + '/category/' + section
         html = net.http_GET(BASE_URL).content
-        CLEAN(html)
-        match = re.compile('</li><li class=.+?/category/' + section + '(.+?)".+?>(.+?)<').findall(html)
+        addon.add_directory({'mode': 'GetTitles', 'section': section, 'url': BASE_URL + '/category/' + section,
+                             'startPage': '1', 'numOfPages': '2'}, {'title':  'All'})
+
+        match = re.compile('<li class="cat-item.+?/category/' + section + '/(.+?)".+?>(.+?)<').findall(html)
         for cat, title in match:
-                url = url + cat
+                url = BASE_URL + '/category/' + section + '/' + cat
                 addon.add_directory({'mode': 'GetTitles', 'section': section, 'url': url,
-                                     'startPage': '1', 'numOfPages': '1'}, {'title':  title})
+                                     'startPage': '1', 'numOfPages': '2'}, {'title':  title})
+        
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tv/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Tv shows>>[/COLOR]'})
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Tv shows >>[/COLOR]'}, img=IconPath + 'tv.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tv/dvd/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Full Tv series>>[/COLOR]'})
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Full Tv series >>'}, img=IconPath + 'tv.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tv/sports-tv/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Tv sports >>[/COLOR]'})
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Tv sports >>'}, img=IconPath + 'tv.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tv/ppv/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Tv ppv >>[/COLOR]'})
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Tv ppv >>'}, img=IconPath + 'tv.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/films/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Movies >>[/COLOR]'})
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/films/3d/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]3D Movies>>[/COLOR]'})
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Movies >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/films/dvdrip/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'DVDRip Movies >>'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/films/dvdscr/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'DVDScr Movies >>'}, img=IconPath + 'movie.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/films/bdrip/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]BDRip Movies>>[/COLOR]'})
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'BDRip Movies >>'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/films/bluray/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Bluray Movies >>'}, img=IconPath + 'movie.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/films/bdscr/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]BDScr Movies>>[/COLOR]'})
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'BDScr Movies >>'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/films/scr/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Scr Movies >>'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/films/r5/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'R5 Movies >>'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/films/hd/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'HD Movies >>'}, img=IconPath + 'movie.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search[/COLOR]'}, img=IconPath + 'search.png')
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png')
         addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
