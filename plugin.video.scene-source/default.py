@@ -123,6 +123,9 @@ def GetLinks(section, url): # Get Links
                 title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
                 title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
                 title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
+                host = host.replace('ryushare.com','[COLOR red]ryushare not working with real-debird or alldebird[/COLOR]')
+                host = host.replace('ul.to','uploaded.net')
+                host = host.replace('netload.in','[COLOR gold]netload.in[/COLOR]')
                 name = host+'-'+title
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
@@ -198,17 +201,6 @@ def GetMediaInfo(html):
                 listitem.setInfo('video', {'Title': match.group(1), 'Year': int(match.group(2)) } )
         return listitem
 
-def Categories(section):  #categories
-
-        html = net.http_GET(BASE_URL).content
-        addon.add_directory({'mode': 'GetTitles', 'section': section, 'url': BASE_URL + '/category/' + section,
-                             'startPage': '1', 'numOfPages': '2'}, {'title':  'All'})
-
-        match = re.compile('<li class="cat-item.+?/category/' + section + '/(.+?)".+?>(.+?)<').findall(html)
-        for cat, title in match:
-                url = BASE_URL + '/category/' + section + '/' + cat
-                addon.add_directory({'mode': 'GetTitles', 'section': section, 'url': url,
-                                     'startPage': '1', 'numOfPages': '2'}, {'title':  title})
         
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -288,5 +280,4 @@ elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':
         urlresolver.display_settings()
-elif mode == 'Categories':
-        Categories(section)
+

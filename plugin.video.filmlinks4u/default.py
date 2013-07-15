@@ -154,19 +154,6 @@ def GetMediaInfo(html):
                 listitem.setInfo('video', {'Title': match.group(1), 'Year': int(match.group(2)) } )
         return listitem
 
-def Categories(section):  #categories
-
-        html = net.http_GET(BASE_URL).content
-        addon.add_directory({'mode': 'GetTitles', 'section': section, 'url': BASE_URL + '/category/' + section,
-                             'startPage': '1', 'numOfPages': '2'}, {'title':  'All'})
-
-        match = re.compile('<li class="cat-item.+?/category/' + section + '/(.+?)".+?>(.+?)<').findall(html)
-        for cat, title in match:
-                url = BASE_URL + '/category/' + section + '/' + cat
-                addon.add_directory({'mode': 'GetTitles', 'section': section, 'url': url,
-                                     'startPage': '1', 'numOfPages': '2'}, {'title':  title})
-        
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/hollywood',
@@ -196,7 +183,10 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search[/COLOR]'}, img=IconPath + 'icon.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'icon.png')
         addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'icon.png')
+        dialog = xbmcgui.Dialog()
+        dialog.ok(" [COLOR gold] THIS IS A PRE RELEASE [/COLOR]", "[COLOR red]PLEASE DO NOT REPORT BUGS[/COLOR]")
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 
 
 
@@ -242,5 +232,3 @@ elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':
         urlresolver.display_settings()
-elif mode == 'Categories':
-        Categories(section)
