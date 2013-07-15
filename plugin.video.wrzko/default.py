@@ -198,17 +198,6 @@ def GetMediaInfo(html):
                 listitem.setInfo('video', {'Title': match.group(1), 'Year': int(match.group(2)) } )
         return listitem
 
-def Categories(section):  #categories
-
-        url = BASE_URL + '/category/' + section
-        html = net.http_GET(BASE_URL).content
-        CLEAN(html)
-        match = re.compile('</li><li class=.+?/category/' + section + '(.+?)".+?>(.+?)<').findall(html)
-        for cat, title in match:
-                url = url + cat
-                addon.add_directory({'mode': 'GetTitles', 'section': section, 'url': url,
-                                     'startPage': '1', 'numOfPages': '1'}, {'title':  title})
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tv-shows/',
@@ -278,5 +267,4 @@ elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':
         urlresolver.display_settings()
-elif mode == 'Categories':
-        Categories(section)
+

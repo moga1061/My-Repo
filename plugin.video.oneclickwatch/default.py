@@ -95,10 +95,6 @@ def GetLinks(section, url): # Get Links
         r = re.search('<strong>Links.*</strong>', html)
         if r:
                 content = html[r.end():]
-                
-        r = re.search('commentblock', content)
-        if r:
-                content = content[:r.start()]
 
         match = re.compile('href="(.+?)"').findall(content)
         listitem = GetMediaInfo(content)
@@ -107,13 +103,10 @@ def GetLinks(section, url): # Get Links
 
                 if 'Unknown' in host:
                                 continue
-
                 if r:
                         continue
                 print '*****************************' + host
                 title = url.rpartition('/')
-                host = host.replace('ul.to','[COLOR gold]Uploaded[/COLOR] - [COLOR red]Real-Debird or Alldebird only [/COLOR]')
-                host = host.replace('uptobox.com','[COLOR gold]Uptobox[/COLOR] - [COLOR red]Real-Debird or Alldebird only [/COLOR]')
                 host = host.replace('movreel.com','movreel.com - [COLOR red]Download/Streaming limit of 2GB a day !![/COLOR]')
                 name = host
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
@@ -170,17 +163,6 @@ def GetMediaInfo(html):
                 listitem.setInfo('video', {'Title': match.group(1), 'Year': int(match.group(2)) } )
         return listitem
 
-def Categories(section):  #categories
-
-        url = BASE_URL + '/category/' + section
-        html = net.http_GET(BASE_URL).content
-        CLEAN(html)
-        match = re.compile('<li class=.+?/category/' + section + '(.+?)".+?>(.+?)<').findall(html)
-        for cat, title in match:
-                url = url + cat
-                addon.add_directory({'mode': 'GetTitles', 'section': section, 'url': url,
-                                     'startPage': '1', 'numOfPages': '1'}, {'title':  title})
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/',
@@ -235,5 +217,3 @@ elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':
         urlresolver.display_settings()
-elif mode == 'Categories':
-        Categories(section)
