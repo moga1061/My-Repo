@@ -301,19 +301,6 @@
 	</extension>
 </addon>
 
-<addon id="repository.TheYidXXX" name="TheYid's [COLOR red]XXX[/COLOR] repo" version="1.0" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid's [COLOR red]XXX[/COLOR] REPO[/B][/I]">
-	<extension point="xbmc.addon.repository" name="TheYid's [COLOR red]XXX[/COLOR] Repository">
-		<info compressed="false">https://raw.github.com/TheYid/TheYidXXX/master/addons.xml</info>
-		<checksum>https://raw.github.com/TheYid/TheYidXXX/master/addons.xml.md5</checksum>
-		<datadir zip="true">https://github.com/TheYid/TheYidXXX/tree/master/zips</datadir>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary>Install MY [COLOR red]XXX[/COLOR] Addons</summary>
-		<description>Download and install [COLOR red]XXX[/COLOR] addons from TheYid.......For OFFICIAL Support Visit XBMCHUB.COM</description>
-		<platform>all</platform>
-	</extension>
-</addon>
-
 <addon id="script.module.TheYid.common"
 	     name="TheYid's common stuff"
 	     version="0.1.0"
