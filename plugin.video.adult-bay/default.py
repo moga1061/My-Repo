@@ -19,7 +19,7 @@ addon_id = 'plugin.video.adult-bay'
 plugin = xbmcaddon.Addon(id=addon_id)
 
 DB = os.path.join(xbmc.translatePath("special://database"), 'adult-bay.db')
-BASE_URL = 'http://adultbay.org/'
+BASE_URL = 'http://www.megaskanks.com/'
 net = Net()
 addon = Addon('plugin.video.adult-bay', sys.argv)
 showAllParts = True
@@ -68,7 +68,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('post_headerr.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
+                match = re.compile('<span class=".+?".+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.adult-bay/?mode=Search&query=%s)' %(name.strip())
@@ -200,8 +200,10 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR] - [COLOR pink]real-debird & alldebird login[/COLOR]'}, img=IconPath + 'newsettings.png')
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR red]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR pink][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help.png')
         dialog = xbmcgui.Dialog()
-        dialog.ok(" [COLOR gold] THE ADULT BAY [/COLOR] [COLOR red]XXX[/COLOR] ", "                          [COLOR red]XXX[/COLOR] [COLOR red] OVER 18's ONLY !!! [/COLOR] [COLOR red]XXX[/COLOR]")
+        dialog.ok(" [COLOR gold] !!!! Your Attention Please !!!!! [/COLOR] ", "[COLOR red]ALL XXX ADDONS HAVE BEEN MOVED TO[/COLOR] TheYid's[COLOR red]XXX[/COLOR]repo", "[COLOR gold]HOW TO GET THE NEW XXX REPO[/COLOR] goto system/add-ons/", "Get Add-ons/TheYid REPO/Add-on repository/TheYid's XXXrepo")
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
 
 
 def GetSearchQuery():

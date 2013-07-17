@@ -1,5 +1,0 @@
-[B]Version 0.0.1[/B]
-- Initial version of 69area XXX plugin
-
-[B]Version 0.0.2[/B]
-- fix
