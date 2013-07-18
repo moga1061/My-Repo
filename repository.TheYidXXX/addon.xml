@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.TheYidXXX" name="TheYid's [COLOR red]XXX[/COLOR] repo" version="1.1" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid's [COLOR red]XXX[/COLOR] REPO[/B][/I]">
+<addon id="repository.TheYidXXX" name="TheYid's [COLOR red]XXX[/COLOR] repo" version="1.2" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid's [COLOR red]XXX[/COLOR] REPO[/B][/I]">
 	<extension point="xbmc.addon.repository" name="TheYid's [COLOR red]XXX[/COLOR] Repository">
-		<info compressed="false">https://bitbucket.org/tcz009/theyidxxx/raw/934c6416eb07a2ba744a885160db323a78a5b37c/addons.xml</info>
-		<checksum>https://bitbucket.org/tcz009/theyidxxx/raw/934c6416eb07a2ba744a885160db323a78a5b37c/addons.xml.md5</checksum>
-		<datadir zip="true">https://bitbucket.org/tcz009/theyidxxx/raw/934c6416eb07a2ba744a885160db323a78a5b37c/zips</datadir>
+		<info compressed="false">https://bitbucket.org/tcz009/theyidxxx/raw/8050fd2acbe658c8a807cc908de759fa3ba50921/addons.xml</info>
+		<checksum>https://bitbucket.org/tcz009/theyidxxx/raw/8050fd2acbe658c8a807cc908de759fa3ba50921/addons.xml.md5</checksum>
+		<datadir zip="true">https://bitbucket.org/tcz009/theyidxxx/raw/8050fd2acbe658c8a807cc908de759fa3ba50921/zips</datadir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary>Install MY [COLOR red]XXX[/COLOR] Addons</summary>
-		<description>Download and install [COLOR red]XXX[/COLOR] addons from TheYid.......For OFFICIAL Support Visit XBMCHUB.COM</description>
+		<description>Download and install [COLOR red]XXX[/COLOR] addons from TheYid.... [COLOR red][B][I]Real-Debrid or Alldebird PREMIUM NEEDED FOR ALL ADDONS[/B][/I][/COLOR]...For OFFICIAL Support Visit XBMCHUB.COM</description>
 		<platform>all</platform>
 	</extension>
 </addon>
