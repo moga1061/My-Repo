@@ -67,7 +67,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('entry-cdvd.+?href="(.+?)"><img alt=(.+?)".+?src="(.+?)".+?', re.DOTALL).findall(html)
+                match = re.compile('post-home.+?href="(.+?)"><img alt=(.+?)title.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.cinevip/?mode=Search&query=%s)' %(name.strip())
