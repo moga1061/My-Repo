@@ -68,7 +68,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('entry-title.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
+                match = re.compile('entry-title.+?href="(.+?)".+?>(.+?)-.+? .+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.singlelinkmoviez/?mode=Search&query=%s)' %(name.strip())
@@ -95,10 +95,6 @@ def GetLinks(section, url): # Get Links
         r = re.search('<strong>Links.*</strong>', html)
         if r:
                 content = html[r.end():]
-                
-        r = re.search('commentblock', content)
-        if r:
-                content = content[:r.start()]
 
         match = re.compile('href="(.+?)"').findall(content)
         listitem = GetMediaInfo(content)
@@ -106,11 +102,22 @@ def GetLinks(section, url): # Get Links
                 host = GetDomain(url)
 
                 if 'Unknown' in host:
-                                continue
 
-                if r:
                         continue
                 print '*****************************' + host
+                title = url.rpartition('/')
+                host = host.replace('','')
+                host = host.replace('33b1ad22','xbmc link')
+                host = host.replace('.miniurls.co','')
+                host = host.replace('rapidgator.net','rapidgator')
+                host = host.replace('extabit.com','extabit')
+                host = host.replace('ul.to','uploaded')
+                host = host.replace('letitbit.net','letitbit')
+                host = host.replace('www.sockshare.com','sockshare')
+                host = host.replace('www.share-online.biz','share-online')
+                host = host.replace('www.putlocker.com','putlocker')
+                host = host.replace('turbobit.net','turbobit')
+                host = host.replace('ryushare.com','[COLOR red]ryushare[/COLOR]')
                 name = host
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
@@ -156,6 +163,7 @@ def GetDomain(url):
         domain = 'Unknown'
         if len(tmp) > 0 :
             domain = tmp[0].replace('www.', '')
+            domain = tmp[0].replace('http://33b1ad22.miniurls.co/url/.', '')
         return domain
 
 
@@ -180,17 +188,27 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'latest'},  {'title':  '[COLOR blue]latest movies >>[/COLOR]'}, img=IconPath + 'movie.png')
-        addon.add_directory({'mode': 'Categories', 'section': 'a'},  {'title':  '[COLOR blue]Animated & Asian Movies >>[/COLOR]'}, img=IconPath + 'movie.png')
-        addon.add_directory({'mode': 'Categories', 'section': 'indian'},  {'title':  '[COLOR blue]Indian Movies  >>[/COLOR]'}, img=IconPath + 'movie.png')
-        addon.add_directory({'mode': 'Categories', 'section': 'concerts'},  {'title':  '[COLOR blue]Concerts  >>[/COLOR]'}, img=IconPath + 'movie.png')
-        addon.add_directory({'mode': 'Categories', 'section': 'documentary'},  {'title':  '[COLOR blue]Documentary  >>[/COLOR]'}, img=IconPath + 'movie.png')
-        addon.add_directory({'mode': 'Categories', 'section': 'uncategorized'},  {'title':  '[COLOR blue]Uncategorized  >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/latest-movies/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest movies >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/animated-movies/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Animated Movies >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/asian-movies/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Asian Movies >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/indian-movies/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Indian Movies  >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/documentary/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Documentary  >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/concerts/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Concerts  >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/uncategorized/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Web-dl,WEBrip,HDrip  >>[/COLOR]'}, img=IconPath + 'movie.png')
         addon.add_directory({'mode': 'Categories', 'section': 'dvd'},  {'title':  '[COLOR blue]DVDRips,SCR,DVDR  >>[/COLOR]'}, img=IconPath + 'movie.png')
-        addon.add_directory({'mode': 'Categories', 'section': 'b'},  {'title':  '[COLOR blue]BRRip/BDRip >>[/COLOR]'}, img=IconPath + 'movie.png')
-        addon.add_directory({'mode': 'Categories', 'section': 'r'},  {'title':  '[COLOR blue]R5 >>[/COLOR]'}, img=IconPath + 'movie.png')
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search Moviez >>[/COLOR]'}, img=IconPath + 'search.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'b'},  {'title':  '[COLOR blue]BRRip,BDRip >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/r5/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]R5 >>[/COLOR]'}, img=IconPath + 'movie.png')
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search Moviez[/COLOR]'}, img=IconPath + 'search.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'movie.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 

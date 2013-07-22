@@ -8,3 +8,5 @@
 - fix
 [B]Version 0.1.4[/B]
 - clean up
+[B]Version 0.1.4[/B]
+- fixed 33b1ad22.miniurls.co links
