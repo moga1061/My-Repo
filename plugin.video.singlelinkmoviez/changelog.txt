@@ -8,5 +8,7 @@
 - fix
 [B]Version 0.1.4[/B]
 - clean up
-[B]Version 0.1.4[/B]
+[B]Version 0.1.5[/B]
 - fixed 33b1ad22.miniurls.co links
+[B]Version 0.1.6[/B]
+- changed to single link moviez name & new art work

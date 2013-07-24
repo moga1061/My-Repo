@@ -273,7 +273,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.singlelinkmoviez" version="0.1.5" name="Moviez [COLOR red]Moviez[/COLOR] Moviez" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.singlelinkmoviez" version="0.1.6" name="Single [COLOR red]Link[/COLOR] Moviez" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.0"/>
@@ -283,8 +283,8 @@
         <provides>video</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
-        <summary>Stream movies from singlelinkmoviez</summary>
-        <description>Some links are hidden so will just say xbmc link but they work.    stream a wide selection of Hollywood, Asian and Indian films from Moviez Moviez Moviez IT HAS THE LOT links FREE supported are SOCKSHARE, PUTLOCKER, and real-debrid are LETITBIT, TURBOBIT, RAPIDGATOR, EXTABIT, SHARE-ONLINE</description>
+        <summary>Stream movies from Single [COLOR red]Link[/COLOR] Moviez</summary>
+        <description>Some links are hidden so will just say xbmc link but they work.    stream a wide selection of Hollywood, Asian and Indian films from Single Link Moviez IT HAS THE LOT free links supported are SOCKSHARE, PUTLOCKER but not on all films and real-debrid are LETITBIT, TURBOBIT, RAPIDGATOR, EXTABIT, SHARE-ONLINE</description>
         <platform>all</platform>
         <disclaimer lang="en">[COLOR red][B][I]for more info or help on this addon and TheYid repo please goto XBMCHUB.com[/B][/I][/COLOR]</disclaimer>
     </extension>

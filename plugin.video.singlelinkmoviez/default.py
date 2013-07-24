@@ -77,7 +77,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                 
 
       
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR red][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png')
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR red][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'page.png')
 
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -189,26 +189,26 @@ def Categories(section):  #categories
 
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/latest-movies/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest movies >>[/COLOR]'}, img=IconPath + 'movie.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest movies >>[/COLOR]'}, img=IconPath + '1.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/animated-movies/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Animated Movies >>[/COLOR]'}, img=IconPath + 'movie.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Animated Movies >>[/COLOR]'}, img=IconPath + '2.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/asian-movies/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Asian Movies >>[/COLOR]'}, img=IconPath + 'movie.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Asian Movies >>[/COLOR]'}, img=IconPath + '3.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/indian-movies/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Indian Movies  >>[/COLOR]'}, img=IconPath + 'movie.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Indian Movies  >>[/COLOR]'}, img=IconPath + '4.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/documentary/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Documentary  >>[/COLOR]'}, img=IconPath + 'movie.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Documentary  >>[/COLOR]'}, img=IconPath + '5.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/concerts/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Concerts  >>[/COLOR]'}, img=IconPath + 'movie.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Concerts  >>[/COLOR]'}, img=IconPath + '6.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/uncategorized/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Web-dl,WEBrip,HDrip  >>[/COLOR]'}, img=IconPath + 'movie.png')
-        addon.add_directory({'mode': 'Categories', 'section': 'dvd'},  {'title':  '[COLOR blue]DVDRips,SCR,DVDR  >>[/COLOR]'}, img=IconPath + 'movie.png')
-        addon.add_directory({'mode': 'Categories', 'section': 'b'},  {'title':  '[COLOR blue]BRRip,BDRip >>[/COLOR]'}, img=IconPath + 'movie.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Web-dl,WEBrip,HDrip  >>[/COLOR]'}, img=IconPath + '7.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'dvd'},  {'title':  '[COLOR blue]DVDRips,SCR,DVDR  >>[/COLOR]'}, img=IconPath + '8.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'b'},  {'title':  '[COLOR blue]BRRip,BDRip >>[/COLOR]'}, img=IconPath + '9.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/r5/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]R5 >>[/COLOR]'}, img=IconPath + 'movie.png')
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search Moviez[/COLOR]'}, img=IconPath + 'search.png')
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'movie.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]R5 >>[/COLOR]'}, img=IconPath + '10.png')
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search Moviez[/COLOR]'}, img=IconPath + 's.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'r.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'h.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -216,7 +216,7 @@ def GetSearchQuery():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]Search moviez[/COLOR]')
+        keyboard.setHeading('[COLOR green]Search Single Link Moviez[/COLOR]')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):
