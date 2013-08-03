@@ -18,7 +18,7 @@ addon_id = 'plugin.video.releaseBB'
 plugin = xbmcaddon.Addon(id=addon_id)
 
 DB = os.path.join(xbmc.translatePath("special://database"), 'releaseBB.db')
-BASE_URL = 'http://www.rlsbb.com/'
+BASE_URL = 'http://www.rlsbb.ru/'
 net = Net()
 addon = Addon('plugin.video.releaseBB', sys.argv)
 showAllParts = True
@@ -102,6 +102,8 @@ def GetLinks(section, url): # Get Links
                 if 'Unknown' in host:
                                 continue
 
+                # ignore .rar files
+                r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
                 if r:
                         continue
                 print '*****************************' + host + ' : ' + url
@@ -138,6 +140,11 @@ def GetLinks(section, url): # Get Links
                 for url in match:
                         host = GetDomain(url)
                         if 'Unknown' in host:
+                                continue
+                        # ignore .srt files
+                        r = re.search('\.srt[(?:\.html|\.htm)]*$', url, re.IGNORECASE)
+                        if r:
+
                                 continue
 
                         # ignore .rar files
@@ -197,6 +204,8 @@ def Categories(section):  #categories
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR orange][B]BB.. [/B][/COLOR][COLOR blue]Movies> >[/COLOR]'}, img=IconPath + 'movie.png')
         addon.add_directory({'mode': 'Categories', 'section': 'tv'},  {'title':  '[COLOR orange][B]BB.. [/B][/COLOR][COLOR blue]Tv Shows> >[/COLOR]'}, img=IconPath + 'tv.png')
+        #addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/music/music-video/',
+                             #'startPage': '1', 'numOfPages': '2'}, {'title':  '[COLOR orange][B]BB.. [/B][/COLOR][COLOR blue]Music Videos> >[/COLOR]'}, img=IconPath + 'music.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR orange][B]BB.. [/B][/COLOR][COLOR green]Search> >[/COLOR]'}, img=IconPath + 'searcH.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png')
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helP.png')
@@ -219,7 +228,7 @@ def GetSearchQuery():
 
         
 def Search(query):
-        url = 'http://www.google.com/search?q=site:rlsbb.com ' + query
+        url = 'http://www.google.com/search?q=site:rlsbb.ru ' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
