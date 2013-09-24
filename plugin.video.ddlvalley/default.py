@@ -18,13 +18,13 @@ addon_id = 'plugin.video.ddlvalley'
 plugin = xbmcaddon.Addon(id=addon_id)
 
 DB = os.path.join(xbmc.translatePath("special://database"), 'ddlvalley.db')
-BASE_URL = 'http://www.ddlvalley.eu'
+BASE_URL = 'http://www.ddlvalley.eu/'
 net = Net()
 addon = Addon('plugin.video.ddlvalley', sys.argv)
 showAllParts = True
 showPlayAll = True
 
-######PATHS########
+#PATHS
 AddonPath = addon.get_path()
 IconPath = AddonPath + "/icons/"
 
@@ -44,7 +44,7 @@ numOfPages = addon.queries.get('numOfPages', None)
 listitem = addon.queries.get('listitem', None)
 urlList = addon.queries.get('urlList', None)
 section = addon.queries.get('section', None)
-
+##### Queries ##########
 
 
 def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
@@ -73,9 +73,9 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.ddlvalley/?mode=Search&query=%s)' %(name.strip())
         		cm.append(('Search on ddlvalley', runstring))
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
-                
 
-      
+
+
                 addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nexts.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -92,10 +92,6 @@ def GetLinks(section, url): # Get Links
         print'CONTENT: '+str(listitem)
         r = re.search('<strong>Links.*</strong>', html)
         if r:
-                content = html[r.end():]
-                
-        r = re.search('commentblock', content)
-        if r:
                 content = content[:r.start()]
 
         match = re.compile('href="(.+?)"').findall(content)
@@ -107,9 +103,10 @@ def GetLinks(section, url): # Get Links
                                 continue
 
                 # ignore .rar files
-                r = re.search('\.rar\.file[(?:\.html|\.htm)]*', url, re.IGNORECASE)
+                r = re.search('\part1\part2\part3\part4\part5\.rar.html\.rar\.file[(?:\.html|\.htm)]*', url, re.IGNORECASE)
                 if r:
                         continue
+
                 print '*****************************' + host + ' : ' + url
                 title = url.rpartition('/')
                 title = title[2].replace('.html', '')
@@ -120,8 +117,15 @@ def GetLinks(section, url): # Get Links
                 title = title.replace ('-','')
                 title = title.replace('_',' ')
                 title = title.replace('gaz','')
+                title = title.replace('NTb','')
+                title = title.replace('part1','')
+                title = title.replace('part2','')
+                title = title.replace('part3','')
+                title = title.replace('part4','')
+                title = title.replace('part5','')
                 title = title.replace('.',' ')
                 title = title.replace('720p','[COLOR gold][B][I]720p[/B][/I][/COLOR]')
+                title = title.replace('1080p','[COLOR orange][B][I]1080p[/B][/I][/COLOR]')
                 title = title.replace('DDLValley eu','')
                 title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
                 title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
@@ -130,29 +134,12 @@ def GetLinks(section, url): # Get Links
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
 
-                
-        find = re.search('commentblock', html)
-        if find:
-                print 'in comments if'
-                html = html[find.end():]
-                CLEAN(html)
-                match1 = re.compile(r'comment-page-numbers(.+?)<!--comments form -->', re.DOTALL).findall(html)
-                match = re.compile('<a href="(htt.+?)" rel="nofollow"', re.DOTALL).findall(str(match1))
-                print 'MATCH IS: '+str(match)
-                print len(match)
-                for url in match:
-                        host = GetDomain(url)
-                        if 'Unknown' in host:
-                                continue
 
         source = urlresolver.choose_source(sources)
         if source: stream_url = source.resolve()
         else: stream_url = ''
         xbmc.Player().play(stream_url)
-        
-
-
-
+                       
 
 def CLEAN(string):
     def substitute_entity(match):
@@ -169,10 +156,6 @@ def CLEAN(string):
     entity_re = re.compile(r'&(#?)(x?)(\d{1,5}|\w{1,8});')
     return entity_re.subn(substitute_entity, string)[0]
 
-def PlayVideo(url, listitem):
-        print 'in PlayVideo %s' % url
-        stream_url = urlresolver.HostedMediaFile(url).resolve()
-	xbmc.Player().play(stream_url, listitem)
 
 def GetDomain(url):
         tmp = re.compile('//(.+?)/').findall(url)
@@ -190,32 +173,50 @@ def GetMediaInfo(html):
                 listitem.setInfo('video', {'Title': match.group(1), 'Year': int(match.group(2)) } )
         return listitem
 
-def Categories(section):  #categories
-
-        url = BASE_URL + '/category/' + section
-        html = net.http_GET(BASE_URL).content
-        CLEAN(html)
-        match = re.compile('<li class=.+?/category/' + section + '(.+?)".+?>(.+?)<').findall(html)
-        for cat, title in match:
-                url = url + cat
-                addon.add_directory({'mode': 'GetTitles', 'section': section, 'url': url,
-                                     'startPage': '1', 'numOfPages': '1'}, {'title':  title})
+        
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]DDL Movies >[/COLOR]'}, img=IconPath + 'movies.png')
-        addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]DDL TV Shows >[/COLOR]'}, img=IconPath + 'tvs.png')
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search DDL[/COLOR]'}, img=IconPath + 'searchs.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tv-shows/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Tv shows >>[/COLOR]'}, img=IconPath + 'tvs.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tv-shows/hd-720/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Tv shows 720p >>'}, img=IconPath + 'tvs.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tv-shows/sports/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Tv sports >>'}, img=IconPath + 'tvs.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tv-shows/tv-pack/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Tv packs >>'}, img=IconPath + 'tvs.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tv-shows/web-dl/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Tv web-dl >>'}, img=IconPath + 'tvs.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Movies >>[/COLOR]'}, img=IconPath + 'movies.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/dvdrip-movies/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'DVDRip Movies >>'}, img=IconPath + 'movies.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/dvdscr/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'DVDScr Movies >>'}, img=IconPath + 'movies.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/bdrip/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'BDRip Movies >>'}, img=IconPath + 'movies.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/bluray-720p/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Bluray Movies >>'}, img=IconPath + 'movies.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/cam/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Cam Movies >>'}, img=IconPath + 'movies.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/ts/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Ts Movies >>'}, img=IconPath + 'movies.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/r5-movies/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'R5 Movies >>'}, img=IconPath + 'movies.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/web-dl-movies/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Web-dl Movies >>'}, img=IconPath + 'movies.png')
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search[/COLOR]'}, img=IconPath + 'searchs.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helps.png')
+        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helps.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 
 
 def GetSearchQuery():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]Search DDL[/COLOR]')
+        keyboard.setHeading('[COLOR green]Search ddlvalley[/COLOR]')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):
@@ -253,5 +254,4 @@ elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':
         urlresolver.display_settings()
-elif mode == 'Categories':
-        Categories(section)
+

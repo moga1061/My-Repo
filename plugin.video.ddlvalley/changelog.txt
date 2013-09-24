@@ -10,3 +10,5 @@
 - new icons
 [B]Version 0.0.7[/B]
 - fix
+[B]Version 0.1.0[/B]
+- fix
