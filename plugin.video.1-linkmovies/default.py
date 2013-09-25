@@ -76,7 +76,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
 
 
 
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png')
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR gold][B][I]No more pages come back soon...[/COLOR] [COLOR blue][/B]TheYid[/I][/COLOR]'}, img=IconPath + 'help.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 

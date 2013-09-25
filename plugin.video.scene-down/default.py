@@ -18,7 +18,7 @@ addon_id = 'plugin.video.scene-down'
 plugin = xbmcaddon.Addon(id=addon_id)
 
 DB = os.path.join(xbmc.translatePath("special://database"), 'scene-down.db')
-BASE_URL = 'http://scenedown.me/'
+BASE_URL = 'http://scenedown.in/'
 net = Net()
 addon = Addon('plugin.video.scene-down', sys.argv)
 showAllParts = True
@@ -67,7 +67,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('<h2>.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
+                match = re.compile('postTitle.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.scene-down/?mode=Search&query=%s)' %(name.strip())
