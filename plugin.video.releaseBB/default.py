@@ -207,6 +207,7 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR orange][B]BB.. [/B][/COLOR][COLOR green]Search> >[/COLOR]'}, img=IconPath + 'searcH.png')
         addon.add_directory({'mode': 'GetSearchQuery4'},  {'title':  '[COLOR green][B]Scenelog[/B] Search> >[/COLOR] '}, img=IconPath + 'search4a.png')
         addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR green][B]Scene Source[/B] Search> >[/COLOR]'}, img=IconPath + 'search2.png')
+        addon.add_directory({'mode': 'GetSearchQuery5'},  {'title':  '[COLOR green][B]Tv show pad[/B] Search> >[/COLOR] '}, img=IconPath + 'search5.png')
         addon.add_directory({'mode': 'GetSearchQuery3'},  {'title':  '[COLOR green][B]One Click Watch[/B] Search> >[/COLOR]'}, img=IconPath + 'search3.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png')
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helP.png')
@@ -323,6 +324,34 @@ def Search4(query):
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
+def GetSearchQuery5():
+	last_search = addon.load_data('search')
+	if not last_search: last_search = ''
+	keyboard = xbmc.Keyboard()
+        keyboard.setHeading('[COLOR green]Search Scenelog[/COLOR]')
+	keyboard.setDefault(last_search)
+	keyboard.doModal()
+	if (keyboard.isConfirmed()):
+                query = keyboard.getText()
+                addon.save_data('search',query)
+                Search5(query)
+	else:
+                return
+
+        
+def Search5(query):
+        url = 'http://www.google.com/search?q=site:tvshowspad.com ' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        CLEAN(html)
+        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
+        for url, title in match:
+                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
+	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
 
 
 
@@ -348,6 +377,10 @@ elif mode == 'GetSearchQuery4':
 	GetSearchQuery4()
 elif mode == 'Search4':
 	Search4(query)
+elif mode == 'GetSearchQuery5':
+	GetSearchQuery5()
+elif mode == 'Search5':
+	Search5(query)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':

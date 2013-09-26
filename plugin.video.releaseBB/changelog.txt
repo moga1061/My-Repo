@@ -46,3 +46,6 @@
 [B]Version 0.2.3[/B]
 - fix
 
+[B]Version 0.2.4[/B]
+- added tv shows pad to search 
+
