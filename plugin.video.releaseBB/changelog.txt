@@ -40,4 +40,6 @@
 [B]Version 0.2.1[/B]
 - clean up
 
+[B]Version 0.2.2[/B]
+- add more search options
 
