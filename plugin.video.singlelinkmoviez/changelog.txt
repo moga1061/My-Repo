@@ -14,3 +14,5 @@
 - changed to single link moviez name & new art work
 [B]Version 0.1.7[/B]
 - clean up
+[B]Version 0.1.8[/B]
+- clean up

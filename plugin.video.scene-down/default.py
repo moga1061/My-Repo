@@ -239,7 +239,7 @@ elif mode == 'GetLinks':
 elif mode == 'GetSearchQuery':
 	GetSearchQuery()
 elif mode == 'Search':
-	Search(section, query)
+	Search(query)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':
