@@ -12,3 +12,5 @@
 - fixed 33b1ad22.miniurls.co links
 [B]Version 0.1.6[/B]
 - changed to single link moviez name & new art work
+[B]Version 0.1.7[/B]
+- clean up
