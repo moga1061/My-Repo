@@ -230,7 +230,7 @@ elif mode == 'GetLinks':
 elif mode == 'GetSearchQuery':
 	GetSearchQuery(section)
 elif mode == 'Search':
-	Search(query)
+	Search(section, query)
 elif mode == 'Categories':
 	Categories(section)
 elif mode == 'ResolverSettings':
