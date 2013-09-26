@@ -1,0 +1,8 @@
+[B]Version 0.0.1[/B]
+- Initial version of filmlinks4u
+[B]Version 0.0.2[/B]
+- Initial version of filmlinks4u
+[B]Version 0.0.3[/B]
+- i'm still messing with this one
+[B]Version 0.0.4[/B]
+- clean up

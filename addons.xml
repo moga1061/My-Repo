@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-<addon id="plugin.video.1-linkmovies" version="0.0.3" name="1-link movies" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.1-linkmovies" version="0.0.4" name="1-link movies" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.0.1"/>
@@ -17,7 +17,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.cinevip" version="0.0.5" name="Cine [COLOR gold]VIP[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.cinevip" version="0.0.6" name="Cine [COLOR gold]VIP[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.0.1"/>
@@ -34,7 +34,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.ddlvalley" version="0.1.0" name="[COLOR blue]DDL[/COLOR]valley" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.ddlvalley" version="0.1.1" name="[COLOR blue]DDL[/COLOR]valley" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.0"/>
@@ -69,7 +69,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.filmlinks4u" version="0.0.3" name="Film Links 4U" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.filmlinks4u" version="0.0.4" name="Film Links 4U" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.0.1"/>
@@ -104,7 +104,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.isceners" version="0.0.3" name="[COLOR purple][B]i[/B][/COLOR]sceners" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.isceners" version="0.0.4" name="[COLOR purple][B]i[/B][/COLOR]sceners" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.0"/>
@@ -121,7 +121,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.myvideolinks" version="0.1.8" name="My Video Links [COLOR gold]eu[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.myvideolinks" version="0.1.9" name="My Video Links [COLOR gold]eu[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.0"/>
@@ -139,7 +139,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.oneclickwatch" version="0.2.7" name="One Click Watch" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.oneclickwatch" version="0.2.8" name="One Click Watch" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.0"/>
         <import addon="script.module.TheYid.common" version="0.1.0"/>
@@ -156,7 +156,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.releaseBB" version="0.2.0" name="Release[COLOR orange][B]BB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.releaseBB" version="0.2.1" name="Release[COLOR orange][B]BB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.0"/>
@@ -191,7 +191,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.rls-center" version="0.0.2" name="Release [COLOR green]Center[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.rls-center" version="0.0.3" name="Release [COLOR green]Center[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.0.1"/>
@@ -208,7 +208,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.scene-down" version="0.0.6" name="scene[COLOR green]-[/COLOR]down" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.scene-down" version="0.0.7" name="scene[COLOR green]-[/COLOR]down" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.0"/>

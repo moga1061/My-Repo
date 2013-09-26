@@ -12,3 +12,6 @@
 
 [B]Version 0.0.5[/B]
 - fixed first film no showing up
+
+[B]Version 0.0.6[/B]
+-clean up
