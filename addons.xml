@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-<addon id="plugin.video.1-linkmovies" version="0.0.4" name="1-link movies" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.1-linkmovies" version="0.0.5" name="1-link movies" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.0.1"/>
@@ -17,7 +17,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.cinevip" version="0.0.6" name="Cine [COLOR gold]VIP[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.cinevip" version="0.0.7" name="Cine [COLOR gold]VIP[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.0.1"/>
@@ -34,7 +34,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.ddlvalley" version="0.1.1" name="[COLOR blue]DDL[/COLOR]valley" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.ddlvalley" version="0.1.2" name="[COLOR blue]DDL[/COLOR]valley" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.0"/>
@@ -51,25 +51,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.fight-bb" version="0.0.7" name="Fight-[COLOR orange][B]BB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
-    <requires>
-        <import addon="xbmc.python" version="1.0"/>
-        <import addon="script.module.TheYid.common" version="0.1.0"/>
-        <import addon="script.module.urlresolver" version="0.0.1"/>
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>Browse Fight-[COLOR orange][B]BB[/B][/COLOR]</summary>
-        <description>Stream a wide selection of scene release MMA  Boxing and Wrestling in 1080p 720p mp4 from fight-bb....a lot of the 720p stuff is in RAR [COLOR red][B][I]YOU will need a real-debrid or a alldebrid account[/B][/I][/COLOR]</description>
-        <platform>all</platform>
-        <disclaimer lang="en">[COLOR red][B][I]for more info or help on this addon and TheYid repo please goto XBMCHUB.com[/B][/I][/COLOR]</disclaimer>
-        <broken>links have moved</broken>
-    </extension>
-</addon>
-
-<addon id="plugin.video.filmlinks4u" version="0.0.4" name="Film Links 4U" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.filmlinks4u" version="0.0.5" name="Film Links 4U" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.0.1"/>
@@ -86,42 +68,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.hdtv-release" version="0.1.0" name="HDTV Release" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
-    <requires>
-        <import addon="xbmc.python" version="1.0"/>
-        <import addon="script.module.TheYid.common" version="0.0.1"/>
-        <import addon="script.module.urlresolver" version="0.0.1"/>
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>Browse scene-source</summary>
-        <description>Stream a wide selection of scene release Tv shows in 720p and 1080p.... [COLOR red][B][I]YOU will need a real-debrid or a alldebrid account[/B][/I][/COLOR]</description>
-        <platform>all</platform>
-        <disclaimer lang="en">[COLOR red][B][I]for more info or help on this addon and TheYid repo please goto XBMCHUB.com[/B][/I][/COLOR]</disclaimer>
-        <broken>site has shut down</broken>
-    </extension>
-</addon>
-
-<addon id="plugin.video.isceners" version="0.0.4" name="[COLOR purple][B]i[/B][/COLOR]sceners" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
-    <requires>
-        <import addon="xbmc.python" version="1.0"/>
-        <import addon="script.module.TheYid.common" version="0.1.0"/>
-        <import addon="script.module.urlresolver" version="0.0.1"/>
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>Browse [COLOR purple][B]i[/B][/COLOR]sceners</summary>
-        <description>Stream a wide selection of scene release movies and Tv shows from isceners.... [COLOR red][B][I]YOU will need a real-debrid or a alldebrid account[/B][/I][/COLOR]</description>
-        <platform>all</platform>
-        <disclaimer lang="en">[COLOR red][B][I]for more info or help on this addon and TheYid repo please goto XBMCHUB.com[/B][/I][/COLOR]</disclaimer>
-    </extension>
-</addon>
-
-<addon id="plugin.video.myvideolinks" version="0.1.9" name="My Video Links [COLOR gold]eu[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.myvideolinks" version="0.2.0" name="My Video Links [COLOR gold]eu[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.0"/>
@@ -139,7 +86,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.oneclickwatch" version="0.2.8" name="One Click Watch" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.oneclickwatch" version="0.2.9" name="One Click Watch" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.0"/>
         <import addon="script.module.TheYid.common" version="0.1.0"/>
@@ -156,7 +103,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.releaseBB" version="0.2.2" name="Release[COLOR orange][B]BB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.releaseBB" version="0.2.3" name="Release[COLOR orange][B]BB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.0"/>
@@ -170,24 +117,6 @@
         <description>Stream a wide selection of scene release movies and Tv shows from releaseBB.... [COLOR red][B][I]YOU will need a real-debrid or a alldebrid account[/B][/I][/COLOR]</description>
         <platform>all</platform>
         <disclaimer lang="en">[COLOR red][B][I]for more info or help on this addon and TheYid repo please goto XBMCHUB.com[/B][/I][/COLOR]</disclaimer>
-    </extension>
-</addon>
-
-<addon id="plugin.video.releasethread" version="0.0.5" name="Release Thread" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
-    <requires>
-        <import addon="xbmc.python" version="1.0"/>
-        <import addon="script.module.TheYid.common" version="0.1.0"/>
-        <import addon="script.module.urlresolver" version="0.0.1"/>
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>pre Release of Release Thread</summary>
-        <description>Stream a wide selection of movies and tv shows from Release Thread YOU will need a real-debrid or a alldebrid account for more info on this addon and TheYid repo please goto XBMCHUB</description>
-        <platform>all</platform>
-        <disclaimer lang="en">[COLOR red][B][I]This is a pre Release.....[/B][/I][/COLOR]YOU will need a real-debrid or a alldebrid account for more info on this addon and TheYid repo please goto XBMCHUB</disclaimer>
-        <broken>The End is here - We are closing ReleaseThread With a heavy heart the day has come where we part once again. By forces that we cannot control - we have to close by today. Even though our journey ends today, It is definitely not over. Who knows what end of the rainbow you might find us where the internet will one day be free again. Forgive us for all our trespass and hope we meet again! From all the Staff and Admin of ReleaseThread</broken>
     </extension>
 </addon>
 

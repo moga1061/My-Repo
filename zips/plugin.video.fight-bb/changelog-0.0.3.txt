@@ -1,9 +1,0 @@
-[B]Version 0.0.1[/B]
-- Initial version of fight-bb plugin
-
-[B]Version 0.0.2[/B]
-- clean up
-
-[B]Version 0.0.3[/B]
-- clean up
-

@@ -15,3 +15,6 @@
 
 [B]Version 0.0.6[/B]
 -clean up
+
+[B]Version 0.0.7[/B]
+- fix

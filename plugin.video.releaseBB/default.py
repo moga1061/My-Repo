@@ -335,7 +335,7 @@ elif mode == 'GetLinks':
 elif mode == 'GetSearchQuery':
 	GetSearchQuery()
 elif mode == 'Search':
-	Search(section, query)
+	Search(query)
 elif mode == 'GetSearchQuery2':
 	GetSearchQuery2()
 elif mode == 'Search2':
