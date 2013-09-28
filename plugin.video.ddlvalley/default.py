@@ -205,7 +205,10 @@ def MainMenu():    #homescreen
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'R5 Movies >>'}, img=IconPath + 'movies.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/web-dl-movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Web-dl Movies >>'}, img=IconPath + 'movies.png')
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search[/COLOR]'}, img=IconPath + 'searchs.png')
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR blue][B]DDL[/B] [COLOR green]Search[/COLOR]'}, img=IconPath + 'searchs.png')
+        addon.add_directory({'mode': 'GetSearchQuery3'},  {'title':  '[COLOR silver][B]Tv-Release[/B][/COLOR] [COLOR green]Search[/COLOR]'}, img=IconPath + 'search3.png')
+        addon.add_directory({'mode': 'GetSearchQuery4'},  {'title':  '[COLOR silver][B]Tv Show Pad[/B][/COLOR] [COLOR green]Search[/COLOR]'}, img=IconPath + 'search4.png')
+        addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR silver][B]filescroptube[/B][/COLOR] [COLOR green]Search[/COLOR]'}, img=IconPath + 'search2.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png')
         addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helps.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -240,6 +243,91 @@ def Search(query):
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
+def GetSearchQuery2():
+	last_search = addon.load_data('search')
+	if not last_search: last_search = ''
+	keyboard = xbmc.Keyboard()
+        keyboard.setHeading('[COLOR green]Search filescroptube[/COLOR]')
+	keyboard.setDefault(last_search)
+	keyboard.doModal()
+	if (keyboard.isConfirmed()):
+                query = keyboard.getText()
+                addon.save_data('search',query)
+                Search2(query)
+	else:
+                return
+
+        
+def Search2(query):
+        url = 'http://www.google.com/search?q=site:filescroptube.com ' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        CLEAN(html)
+        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
+        for url, title in match:
+                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
+	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
+def GetSearchQuery3():
+	last_search = addon.load_data('search')
+	if not last_search: last_search = ''
+	keyboard = xbmc.Keyboard()
+        keyboard.setHeading('[COLOR green]Search tv-release[/COLOR]')
+	keyboard.setDefault(last_search)
+	keyboard.doModal()
+	if (keyboard.isConfirmed()):
+                query = keyboard.getText()
+                addon.save_data('search',query)
+                Search3(query)
+	else:
+                return
+
+        
+def Search3(query):
+        url = 'http://www.google.com/search?q=site:tv-release.net ' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        CLEAN(html)
+        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
+        for url, title in match:
+                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
+	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
+
+def GetSearchQuery4():
+	last_search = addon.load_data('search')
+	if not last_search: last_search = ''
+	keyboard = xbmc.Keyboard()
+        keyboard.setHeading('[COLOR green]Search TvShowPad[/COLOR]')
+	keyboard.setDefault(last_search)
+	keyboard.doModal()
+	if (keyboard.isConfirmed()):
+                query = keyboard.getText()
+                addon.save_data('search',query)
+                Search4(query)
+	else:
+                return
+
+        
+def Search4(query):
+        url = 'http://www.google.com/search?q=site:tvshowspad.com ' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        CLEAN(html)
+        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
+        for url, title in match:
+                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
+	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
 if mode == 'main': 
 	MainMenu()
 elif mode == 'GetTitles': 
@@ -250,6 +338,18 @@ elif mode == 'GetSearchQuery':
 	GetSearchQuery()
 elif mode == 'Search':
 	Search(query)
+elif mode == 'GetSearchQuery2':
+	GetSearchQuery2()
+elif mode == 'Search2':
+	Search2(query)
+elif mode == 'GetSearchQuery3':
+	GetSearchQuery3()
+elif mode == 'Search3':
+	Search3(query)
+elif mode == 'GetSearchQuery4':
+	GetSearchQuery4()
+elif mode == 'Search4':
+	Search4(query)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':

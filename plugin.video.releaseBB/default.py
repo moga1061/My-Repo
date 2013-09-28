@@ -328,7 +328,7 @@ def GetSearchQuery5():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]Search Scenelog[/COLOR]')
+        keyboard.setHeading('[COLOR green]Search TvShowPad[/COLOR]')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):

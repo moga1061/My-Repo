@@ -29,4 +29,4 @@
 [B]Version 0.2.6[/B]
 - added Archives
 [B]Version 0.2.8[/B]
-- clean up 
+- new search

@@ -16,3 +16,5 @@
 - clean up
 [B]Version 0.1.2[/B]
 - fix
+[B]Version 0.1.3[/B]
+- added more search
