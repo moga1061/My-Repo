@@ -36,3 +36,5 @@
 - new search
 [B]Version 0.3.2[/B]
 - fixed search and added onlinemoviesplayer.com search
+[B]Version 0.3.3[/B]
+- clean up

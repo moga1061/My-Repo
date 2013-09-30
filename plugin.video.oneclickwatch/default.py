@@ -167,17 +167,18 @@ def GetMediaInfo(html):
 
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]OCW Films >>>[/COLOR]'}, img=IconPath + 'movies.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]OCW Latest Movies[/B] >>>[/COLOR]'}, img=IconPath + 'movies.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/tv-shows/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]OCW Tv Shows >>>[/COLOR]'}, img=IconPath + 'tv.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]OCW Latest Tv episodes[/B] >>>[/COLOR]'}, img=IconPath + 'tv.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/2013/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR silver]Archives 2013 >>>[/COLOR]'}, img=IconPath + 'ar.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/2012/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR silver]Archives 2012 >>>[/COLOR]'}, img=IconPath + 'ar.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green][B]OCW[/B] Search[/COLOR]'}, img=IconPath + 'search.png')
-        #addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR green][B]Alluc[/B] Search[/COLOR]'}, img=IconPath + 'search2.png')
-        addon.add_directory({'mode': 'GetSearchQuery3'},  {'title':  '[COLOR green][B]IWannaWatch[/B] Search[/COLOR]'}, img=IconPath + 'search3.png')
-        addon.add_directory({'mode': 'GetSearchQuery4'},  {'title':  '[COLOR green][B]OnlineMoviesPlayer[/B] Search[/COLOR]'}, img=IconPath + 'search4.png')
+        addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR green][B]WatchTvShowz[/B] Search[/COLOR]  (Tv episodes)'}, img=IconPath + 'search9.png')
+        addon.add_directory({'mode': 'GetSearchQuery5'},  {'title':  '[COLOR green][B]Movie Goon[/B] Search[/COLOR]  (movies)'}, img=IconPath + 'search8.png')
+        addon.add_directory({'mode': 'GetSearchQuery3'},  {'title':  '[COLOR green][B]IWannaWatch[/B] Search[/COLOR]  (movies)'}, img=IconPath + 'search3.png')
+        addon.add_directory({'mode': 'GetSearchQuery4'},  {'title':  '[COLOR green][B]OnlineMoviesPlayer[/B] Search[/COLOR]  (movies)'}, img=IconPath + 'search4.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png')
         addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -214,7 +215,7 @@ def GetSearchQuery2():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]Search Alluc[/COLOR]')
+        keyboard.setHeading('[COLOR green]Search Watch Tv Showz[/COLOR]')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):
@@ -226,7 +227,7 @@ def GetSearchQuery2():
 
         
 def Search2(query):
-        url = 'http://www.google.com/search?q=site:alluc.to ' + query
+        url = 'http://www.google.com/search?q=site:watchtvshowz.org ' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
@@ -292,6 +293,33 @@ def Search4(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+def GetSearchQuery5():
+	last_search = addon.load_data('search')
+	if not last_search: last_search = ''
+	keyboard = xbmc.Keyboard()
+        keyboard.setHeading('[COLOR green]Movie Goon Search[/COLOR]')
+	keyboard.setDefault(last_search)
+	keyboard.doModal()
+	if (keyboard.isConfirmed()):
+                query = keyboard.getText()
+                addon.save_data('search',query)
+                Search5(query)
+	else:
+                return
+
+        
+def Search5(query):
+        url = 'http://www.google.com/search?q=site:tvgoon.com ' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        CLEAN(html)
+        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
+        for url, title in match:
+                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '').replace('watch', '').replace('Full Movie Online Free', '').replace('Online |', '')
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
+	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 
 
 if mode == 'main': 
@@ -316,6 +344,10 @@ elif mode == 'GetSearchQuery4':
 	GetSearchQuery4()
 elif mode == 'Search4':
 	Search4(query)
+elif mode == 'GetSearchQuery5':
+	GetSearchQuery5()
+elif mode == 'Search5':
+	Search5(query)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':
