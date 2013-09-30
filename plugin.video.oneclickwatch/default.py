@@ -175,8 +175,9 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/2012/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR silver]Archives 2012 >>>[/COLOR]'}, img=IconPath + 'ar.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green][B]OCW[/B] Search[/COLOR]'}, img=IconPath + 'search.png')
-        addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR green][B]Alluc[/B] Search[/COLOR]'}, img=IconPath + 'search2.png')
+        #addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR green][B]Alluc[/B] Search[/COLOR]'}, img=IconPath + 'search2.png')
         addon.add_directory({'mode': 'GetSearchQuery3'},  {'title':  '[COLOR green][B]IWannaWatch[/B] Search[/COLOR]'}, img=IconPath + 'search3.png')
+        addon.add_directory({'mode': 'GetSearchQuery4'},  {'title':  '[COLOR green][B]OnlineMoviesPlayer[/B] Search[/COLOR]'}, img=IconPath + 'search4.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png')
         addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -210,7 +211,7 @@ def Search(query):
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def GetSearchQuery2():
-	last_search = addon.load_data('search2')
+	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
         keyboard.setHeading('[COLOR green]Search Alluc[/COLOR]')
@@ -232,16 +233,16 @@ def Search2(query):
         CLEAN(html)
         match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
         for url, title in match:
-                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
+                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '').replace('Watch', '')
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
 def GetSearchQuery3():
-	last_search = addon.load_data('search3')
+	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]Search IWannaWatch[/COLOR]')
+        keyboard.setHeading('[COLOR green]Search iwannawatch[/COLOR]')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):
@@ -260,9 +261,37 @@ def Search3(query):
         CLEAN(html)
         match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
         for url, title in match:
-                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
+                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '').replace('Watch', '').replace('Movies Online Free', '').replace('Online |', '')
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def GetSearchQuery4():
+	last_search = addon.load_data('search')
+	if not last_search: last_search = ''
+	keyboard = xbmc.Keyboard()
+        keyboard.setHeading('[COLOR green]online movies player Search[/COLOR]')
+	keyboard.setDefault(last_search)
+	keyboard.doModal()
+	if (keyboard.isConfirmed()):
+                query = keyboard.getText()
+                addon.save_data('search',query)
+                Search4(query)
+	else:
+                return
+
+        
+def Search4(query):
+        url = 'http://www.google.com/search?q=site:onlinemoviesplayer.com ' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        CLEAN(html)
+        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
+        for url, title in match:
+                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '').replace('watch', '').replace('Full Movie Online Free', '').replace('Online |', '')
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
+	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 
 
 if mode == 'main': 
@@ -283,6 +312,10 @@ elif mode == 'GetSearchQuery3':
 	GetSearchQuery3()
 elif mode == 'Search3':
 	Search3(query)
+elif mode == 'GetSearchQuery4':
+	GetSearchQuery4()
+elif mode == 'Search4':
+	Search4(query)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':
