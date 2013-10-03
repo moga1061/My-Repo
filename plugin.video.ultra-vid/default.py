@@ -219,11 +219,11 @@ def MainMenu():    #homescreen
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Family >>'}, img=IconPath + '15.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/tv',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'New TV Episodes >>'}, img=IconPath + '56.png')
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search[/COLOR]'}, img=IconPath + 'search.png')
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search ultra-vid[/COLOR]'}, img=IconPath + 'search.png')
+        addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR green]Search 24-7media[/COLOR]'}, img=IconPath + 'search2.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png')
         addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help.png')
-        dialog = xbmcgui.Dialog()
-        dialog.ok(" [COLOR gold] THIS IS A PRE RELEASE [/COLOR]", "[COLOR red]PLEASE DO NOT REPORT BUGS[/COLOR]")
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR red][B]SAY NO TO ADVERTISING IN ADDONS PLEASE COME TO[/B][/COLOR] [COLOR gold][B][I]www.xbmchub.com [/B][/I][/COLOR] [COLOR red][B]AND SHOW YOUR SUPPORT... THANKS FROM[/B][/COLOR] [COLOR gold][B][I]@TheYid009[/I][/B][/COLOR]   '}, img=IconPath + 'no.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -256,6 +256,34 @@ def Search(query):
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
+def GetSearchQuery2():
+	last_search = addon.load_data('search')
+	if not last_search: last_search = ''
+	keyboard = xbmc.Keyboard()
+        keyboard.setHeading('[COLOR green]Search 24-7media[/COLOR]')
+	keyboard.setDefault(last_search)
+	keyboard.doModal()
+	if (keyboard.isConfirmed()):
+                query = keyboard.getText()
+                addon.save_data('search',query)
+                Search2(query)
+	else:
+                return
+
+        
+def Search2(query):
+        url = 'http://www.google.com/search?q=site:24-7media.org ' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        CLEAN(html)
+        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
+        for url, title in match:
+                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
+	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
 if mode == 'main': 
 	MainMenu()
 elif mode == 'GetTitles': 
@@ -266,6 +294,10 @@ elif mode == 'GetSearchQuery':
 	GetSearchQuery()
 elif mode == 'Search':
 	Search(query)
+elif mode == 'GetSearchQuery2':
+	GetSearchQuery2()
+elif mode == 'Search2':
+	Search2(query)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':

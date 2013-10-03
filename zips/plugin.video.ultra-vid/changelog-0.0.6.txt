@@ -1,0 +1,17 @@
+[B]Version 0.0.1[/B]
+- Initial version of ultra-vid
+
+[B]Version 0.0.2[/B]
+- Initial version of ultra-vid
+
+[B]Version 0.0.3[/B]
+- new site setup 
+
+[B]Version 0.0.4[/B]
+- clean up 
+
+[B]Version 0.0.5[/B]
+- clean up 
+
+[B]Version 0.0.6[/B]
+- clean up 
