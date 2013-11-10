@@ -1,0 +1,28 @@
+[B]Version 0.1.0[/B]
+- Initial version of My Video Links [COLOR gold]eu[/COLOR] plugin
+[B]Version 0.1.1[/B]
+- new art work
+[B]Version 0.1.2[/B]
+- fix
+[B]Version 0.1.3[/B]
+- fix
+[B]Version 0.1.4[/B]
+- clean up
+[B]Version 0.1.5[/B]
+- fixed changes to the site
+[B]Version 0.1.6[/B]
+- fixed more changes to the site (was not going to fix it but my niece wanted to watch a film on there)
+[B]Version 0.1.7[/B]
+- added more
+[B]Version 0.1.8[/B]
+- clean up
+[B]Version 0.1.9[/B]
+- clean up
+[B]Version 0.2.0[/B]
+- clean up
+[B]Version 0.2.1[/B]
+- fixed
+
+
+
+

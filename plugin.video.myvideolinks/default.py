@@ -66,7 +66,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('<h4>.+?href="(.+?)".+?.+?title=.+?>(.+?)<', re.DOTALL).findall(html)
+                match = re.compile('<h3>.+?href="(.+?)".+?.+?title=.+?>(.+?)<', re.DOTALL).findall(html)
                 for movieUrl, name in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.myvideolinks/?mode=Search&query=%s)' %(name.strip())
