@@ -22,6 +22,8 @@
 - clean up
 [B]Version 0.2.1[/B]
 - fixed
+[B]Version 0.2.3[/B]
+- fixed
 
 
 
