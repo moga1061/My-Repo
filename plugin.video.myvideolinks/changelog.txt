@@ -24,6 +24,8 @@
 - fixed
 [B]Version 0.2.3[/B]
 - fixed
+[B]Version 0.2.4[/B]
+- fixed not updating 
 
 
 
