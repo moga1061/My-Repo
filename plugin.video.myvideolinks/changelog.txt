@@ -26,6 +26,8 @@
 - fixed
 [B]Version 0.2.4[/B]
 - fixed not updating 
+[B]Version 0.2.5[/B]
+- fixed changes to the site 
 
 
 
