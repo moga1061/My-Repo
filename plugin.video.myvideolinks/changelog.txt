@@ -28,6 +28,8 @@
 - fixed not updating 
 [B]Version 0.2.5[/B]
 - fixed changes to the site 
+[B]Version 0.2.6[/B]
+- more fixes
 
 
 
