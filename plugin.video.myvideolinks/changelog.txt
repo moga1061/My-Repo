@@ -30,7 +30,8 @@
 - fixed changes to the site 
 [B]Version 0.2.6[/B]
 - more fixes
-
+[B]Version 0.2.7[/B]
+- fixed changes to the site 
 
 
 
