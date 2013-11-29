@@ -32,6 +32,8 @@
 - more fixes
 [B]Version 0.2.7[/B]
 - fixed changes to the site 
+[B]Version 0.2.8[/B]
+- added some new stuff
 
 
 

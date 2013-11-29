@@ -66,8 +66,8 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('<h3>.+?href="(.+?)".+?.+?title=.+?>(.+?)<', re.DOTALL).findall(html)
-                for movieUrl, name in match:
+                match = re.compile('entry.+?href="(.+?)"> <img src="(.+?)".+?href=.+?>(.+?)<', re.DOTALL).findall(html)
+                for movieUrl, img, name in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.myvideolinks/?mode=Search&query=%s)' %(name.strip())
         		cm.append(('Search on myvideolinks', runstring))
@@ -176,12 +176,16 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Movies added >>[/COLOR]'}, img=IconPath + 'movies.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/uncategorized/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Uncategorized Movies & TV Shows >>[/COLOR]'}, img=IconPath + 'tvs.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Uncategorized Movies & TV Shows >>[/COLOR]'}, img=IconPath + '66.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/tv-shows/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Tv shows added >>[/COLOR]'}, img=IconPath + 'tvs.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/index.php?s=HARRY+POTTER',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR aqua]Harry Potter Movie Collection >>[/COLOR]'}, img=IconPath + '12.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/index.php?s=star+wars',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR aqua]Star Wars Movie Collection >>[/COLOR]'}, img=IconPath + '11.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search Movies & Tv shows >>[/COLOR]'}, img=IconPath + 'searchs.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helps.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com or @TheYid009[/B][/I][/COLOR]'}, img=IconPath + 'helps.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
