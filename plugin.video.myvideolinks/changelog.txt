@@ -34,6 +34,8 @@
 - fixed changes to the site 
 [B]Version 0.2.8[/B]
 - added some new stuff
+[B]Version 0.2.9[/B]
+- fixed addon & now xbmc 13 ready
 
 
 
