@@ -17,3 +17,6 @@
 
 [B]Version 0.0.7[/B]
 - fix
+
+[B]Version 0.0.8[/B]
+- testing for xbmc 13
