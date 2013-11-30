@@ -211,7 +211,7 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetSearchQuery3'},  {'title':  '[COLOR green][B]One Click Watch[/B] Search> >[/COLOR]'}, img=IconPath + 'search3.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png')
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helP.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR red][B]SAY NO TO ADVERTISING IN ADDONS PLEASE COME TO[/B][/COLOR] [COLOR gold][B][I]www.xbmchub.com [/B][/I][/COLOR] [COLOR red][B]AND SHOW YOUR SUPPORT... THANKS FROM[/B][/COLOR] [COLOR gold][B][I]@TheYid009[/I][/B][/COLOR]   '}, img=IconPath + 'no.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]OR FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] [COLOR aqua][B]AND SHOW YOUR SUPPORT... [/B][/COLOR] '}, img=IconPath + 'theyid.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 

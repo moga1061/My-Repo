@@ -1,0 +1,60 @@
+[B]Version 0.0.2[/B]
+- Initial version of releaseBB plugin
+
+[B]Version 0.0.3[/B]
+- Fixed movies and tv shows cover art not showing up
+
+[B]Version 0.1.0[/B]
+- clean up
+
+[B]Version 0.1.1[/B]
+- fixed
+
+[B]Version 0.1.2[/B]
+- added icons
+
+[B]Version 0.1.3[/B]
+- new art work
+
+[B]Version 0.1.4[/B]
+- new art work
+
+[B]Version 0.1.5[/B]
+- clean
+
+[B]Version 0.1.6[/B]
+- fix
+
+[B]Version 0.1.7[/B]
+- clean
+
+[B]Version 0.1.8[/B]
+- added music
+
+[B]Version 0.1.9[/B]
+- changed from .com to .ru
+
+[B]Version 0.2.0[/B]
+- changed some stuff
+
+[B]Version 0.2.1[/B]
+- clean up
+
+[B]Version 0.2.2[/B]
+- add more search options
+
+[B]Version 0.2.3[/B]
+- fix
+
+[B]Version 0.2.4[/B]
+- added tv shows pad to search 
+
+[B]Version 0.2.5[/B]
+- added tv shows pad to search 
+
+[B]Version 0.2.6[/B]
+- clean up 
+
+[B]Version 0.2.7[/B]
+- clean up 
+

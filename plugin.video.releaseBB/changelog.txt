@@ -55,3 +55,6 @@
 [B]Version 0.2.6[/B]
 - clean up 
 
+[B]Version 0.2.7[/B]
+- clean up 
+
