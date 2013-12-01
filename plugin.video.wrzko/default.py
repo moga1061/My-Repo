@@ -202,12 +202,19 @@ def GetMediaInfo(html):
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tv-shows/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Tv shows>>[/COLOR]'}, img=IconPath + 'tv.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tv-shows/hd-720p/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Tv HD 720p >>'}, img=IconPath + 'tv.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tv-shows/tv-bluray/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Tv bluray >>'}, img=IconPath + 'tv.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tv-shows/tv-dvdrip/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Tv dvdrip >>'}, img=IconPath + 'tv.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Movies >>[/COLOR]'}, img=IconPath + 'movies.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/yify-brrip-1080p/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Movies Yify 1080p >>'}, img=IconPath + 'movies.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/yify-brrip-720p/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Movies Yify 720p >>'}, img=IconPath + 'movies.png')
+
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/webrip/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Movies webrip >>'}, img=IconPath + 'movies.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/720p/',
@@ -221,6 +228,7 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search[/COLOR]'}, img=IconPath + 'search.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png')
         addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]OR FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] [COLOR aqua][B]AND SHOW YOUR SUPPORT... [/B][/COLOR] '}, img=IconPath + 'theyid.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
