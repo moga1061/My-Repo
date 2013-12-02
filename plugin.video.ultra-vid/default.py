@@ -222,8 +222,8 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search ultra-vid[/COLOR]'}, img=IconPath + 'search.png')
         addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR green]Search 24-7media[/COLOR]'}, img=IconPath + 'search2.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png')
-        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR red][B]SAY NO TO ADVERTISING IN ADDONS PLEASE COME TO[/B][/COLOR] [COLOR gold][B][I]www.xbmchub.com [/B][/I][/COLOR] [COLOR red][B]AND SHOW YOUR SUPPORT... THANKS FROM[/B][/COLOR] [COLOR gold][B][I]@TheYid009[/I][/B][/COLOR]   '}, img=IconPath + 'no.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]OR FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] [COLOR aqua][B]AND SHOW YOUR SUPPORT... [/B][/COLOR] '}, img=IconPath + 'theyid.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 

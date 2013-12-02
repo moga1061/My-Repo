@@ -68,7 +68,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('entry-title.+?href="(.+?)".+?>(.+?)-.+? .+?src="(.+?)".+?', re.DOTALL).findall(html)
+                match = re.compile('entry-title.+?href="(.+?)".+?>(.+?)<.+? .+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.singlelinkmoviez/?mode=Search&query=%s)' %(name.strip())
@@ -209,6 +209,7 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search Moviez[/COLOR]'}, img=IconPath + 's.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'r.png')
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'h.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]OR FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] [COLOR aqua][B]AND SHOW YOUR SUPPORT... [/B][/COLOR] '}, img=IconPath + 'theyid.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 

@@ -17,11 +17,11 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.ddlvalley" version="0.1.4" name="[COLOR blue]DDL[/COLOR]valley" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.ddlvalley" version="0.1.5" name="[COLOR blue]DDL[/COLOR]valley" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
-        <import addon="xbmc.python" version="1.0"/>
-        <import addon="script.module.TheYid.common" version="0.1.0"/>
-        <import addon="script.module.urlresolver" version="0.0.1"/>
+        <import addon="xbmc.python" version="2.1.0"/>
+        <import addon="script.module.TheYid.common" version="0.1.1"/>
+        <import addon="script.module.urlresolver"  version="2.0.9"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
@@ -153,11 +153,11 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.scene-source" version="0.0.6" name="Scene Source" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.scene-source" version="0.0.7" name="Scene Source" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
-        <import addon="xbmc.python" version="1.0"/>
-        <import addon="script.module.TheYid.common" version="0.0.1"/>
-        <import addon="script.module.urlresolver" version="0.0.1"/>
+        <import addon="xbmc.python" version="2.1.0"/>
+        <import addon="script.module.TheYid.common" version="0.1.1"/>
+        <import addon="script.module.urlresolver"  version="2.0.9"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
@@ -202,11 +202,11 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.singlelinkmoviez" version="0.1.8" name="Single [COLOR red]Link[/COLOR] Moviez" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.singlelinkmoviez" version="0.1.9" name="Single [COLOR red]Link[/COLOR] Moviez" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
-        <import addon="xbmc.python" version="1.0"/>
-        <import addon="script.module.TheYid.common" version="0.1.0"/>
-        <import addon="script.module.urlresolver" version="0.0.1"/>
+        <import addon="xbmc.python" version="2.1.0"/>
+        <import addon="script.module.TheYid.common" version="0.1.1"/>
+        <import addon="script.module.urlresolver"  version="2.0.9"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
@@ -236,11 +236,11 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.ultra-vid" version="0.0.7" name="Ultra-Vid" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.ultra-vid" version="0.0.8" name="Ultra-Vid" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
-        <import addon="xbmc.python" version="1.0"/>
-        <import addon="script.module.TheYid.common" version="0.0.1"/>
-        <import addon="script.module.urlresolver" version="0.0.1"/>
+        <import addon="xbmc.python" version="2.1.0"/>
+        <import addon="script.module.TheYid.common" version="0.1.1"/>
+        <import addon="script.module.urlresolver"  version="2.0.9"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>

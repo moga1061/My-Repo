@@ -206,11 +206,12 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/web-dl-movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Web-dl Movies >>'}, img=IconPath + 'movies.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR blue][B]DDL[/B] [COLOR green]Search[/COLOR]'}, img=IconPath + 'searchs.png')
-        addon.add_directory({'mode': 'GetSearchQuery3'},  {'title':  '[COLOR silver][B]Tv-Release[/B][/COLOR] [COLOR green]Search[/COLOR]'}, img=IconPath + 'search3.png')
+        #addon.add_directory({'mode': 'GetSearchQuery3'},  {'title':  '[COLOR silver][B]Tv-Release[/B][/COLOR] [COLOR green]Search[/COLOR]'}, img=IconPath + 'search3.png')
         addon.add_directory({'mode': 'GetSearchQuery4'},  {'title':  '[COLOR silver][B]Tv Show Pad[/B][/COLOR] [COLOR green]Search[/COLOR]'}, img=IconPath + 'search4.png')
         addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR silver][B]filescroptube[/B][/COLOR] [COLOR green]Search[/COLOR]'}, img=IconPath + 'search2.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png')
         addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helps.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]OR FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] [COLOR aqua][B]AND SHOW YOUR SUPPORT... [/B][/COLOR] '}, img=IconPath + 'theyid.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -287,7 +288,7 @@ def GetSearchQuery3():
 
         
 def Search3(query):
-        url = 'http://www.google.com/search?q=site:tv-release.net ' + query
+        url = 'http://www.google.com/search?q=site:dltobe.biz ' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
