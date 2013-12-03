@@ -176,8 +176,8 @@ def MainMenu():    #homescreen
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR silver]Archives 2012 >>>[/COLOR]'}, img=IconPath + 'ar.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green][B]OCW[/B] Search[/COLOR]'}, img=IconPath + 'search.png')
         addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR green][B]WatchTvShowz[/B] Search[/COLOR]  (Tv episodes)'}, img=IconPath + 'search9.png')
+        addon.add_directory({'mode': 'GetSearchQuery3'},  {'title':  '[COLOR green][B]TV junky[/B] Search[/COLOR]  (Tv episodes)'}, img=IconPath + '90.png')
         addon.add_directory({'mode': 'GetSearchQuery5'},  {'title':  '[COLOR green][B]Movie Goon[/B] Search[/COLOR]  (movies)'}, img=IconPath + 'search8.png')
-        #addon.add_directory({'mode': 'GetSearchQuery3'},  {'title':  '[COLOR green][B]IWannaWatch[/B] Search[/COLOR]  (movies)'}, img=IconPath + 'search3.png')
         addon.add_directory({'mode': 'GetSearchQuery4'},  {'title':  '[COLOR green][B]OnlineMoviesPlayer[/B] Search[/COLOR]  (movies)'}, img=IconPath + 'search4.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png')
         addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'fanart.png')
@@ -256,7 +256,7 @@ def GetSearchQuery3():
 
         
 def Search3(query):
-        url = 'http://www.google.com/search?q=site:iwannawatch.eu ' + query
+        url = 'http://www.google.com/search?q=site:tv-junky.eu ' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
