@@ -22,3 +22,5 @@
 - fixed changes to site
 [B]Version 0.1.5[/B]
 - clean up
+[B]Version 0.1.6[/B]
+- clean up

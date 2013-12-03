@@ -74,7 +74,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
 
                         
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR orange]Next...[/COLOR]'}, img=IconPath + 'next.png')
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR aqua]Next...[/COLOR]'}, img=IconPath + '99.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -116,13 +116,13 @@ def GetLinks(section, url): # Get Links
                 title = title.replace ('-',' ')
                 title = title.replace('_',' ')
                 title = title.replace('.',' ')
+                title = title.replace('watch?v=',' ')
                 title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
-                title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
+                title = title.replace('720p','[COLOR gold][B][I]720p[/B][/I][/COLOR] ')
                 title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
-                title = title.replace('affiliate python?aff id=456662','')
-                host = host.replace('ryushare.com','[COLOR red]ryushare not working with real-debird or alldebird[/COLOR]')
+                title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
+                host = host.replace('youtube.com','[COLOR lime]Movie Trailer[/COLOR]')
                 host = host.replace('ul.to','uploaded.net')
-                host = host.replace('netload.in','[COLOR gold]netload.in[/COLOR]')
                 name = host+'-'+title
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
