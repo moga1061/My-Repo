@@ -188,14 +188,14 @@ def MainMenu():    #homescreen
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Harry Potter Movie Collection >>[/COLOR]'}, img=IconPath + '12.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/index.php?s=star+wars',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Star Wars Movie Collection >>[/COLOR]'}, img=IconPath + '11.png')
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search Movies & Tv shows >>[/COLOR]'}, img=IconPath + 'searchs.png')
+        addon.add_directory({'mode': 'GetSearchQuery9'},  {'title':  '[COLOR green]Search Movies & Tv shows >>[/COLOR]'}, img=IconPath + 'searchs.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png')
         addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helps.png')
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]OR FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] [COLOR aqua][B]AND SHOW YOUR SUPPORT... [/B][/COLOR] '}, img=IconPath + 'theyid.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
-def GetSearchQuery():
+def GetSearchQuery9():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
@@ -205,12 +205,12 @@ def GetSearchQuery():
 	if (keyboard.isConfirmed()):
                 query = keyboard.getText()
                 addon.save_data('search',query)
-                Search(query)
+                Search9(query)
 	else:
                 return
 
         
-def Search(query):
+def Search9(query):
         url = 'http://www.google.com/search?q=site:myvideolinks.eu  ' + query
         url = url.replace(' ', '+')
         print url
@@ -229,10 +229,10 @@ elif mode == 'GetTitles':
 	GetTitles(section, url, startPage, numOfPages)
 elif mode == 'GetLinks':
 	GetLinks(section, url)
-elif mode == 'GetSearchQuery':
-	GetSearchQuery()
-elif mode == 'Search':
-	Search(query)
+elif mode == 'GetSearchQuery9':
+	GetSearchQuery9()
+elif mode == 'Search9':
+	Search9(query)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':

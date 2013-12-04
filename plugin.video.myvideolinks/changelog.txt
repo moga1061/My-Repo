@@ -38,6 +38,8 @@
 - fixed addon & now xbmc 13 ready
 [B]Version 0.3.0[/B]
 - added some new stuff
+[B]Version 0.3.1[/B]
+- fix
 
 
 

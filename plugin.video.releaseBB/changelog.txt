@@ -58,3 +58,6 @@
 [B]Version 0.2.7[/B]
 - clean up 
 
+[B]Version 0.2.8[/B]
+- fix
+

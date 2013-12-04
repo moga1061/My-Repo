@@ -174,7 +174,7 @@ def MainMenu():    #homescreen
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR silver]Archives 2013 >>>[/COLOR]'}, img=IconPath + 'ar.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/2012/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR silver]Archives 2012 >>>[/COLOR]'}, img=IconPath + 'ar.png')
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green][B]OCW[/B] Search[/COLOR]'}, img=IconPath + 'search.png')
+        addon.add_directory({'mode': 'GetSearchQuery9'},  {'title':  '[COLOR green][B]OCW[/B] Search[/COLOR]'}, img=IconPath + 'search.png')
         addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR green][B]WatchTvShowz[/B] Search[/COLOR]  (Tv episodes)'}, img=IconPath + 'search9.png')
         addon.add_directory({'mode': 'GetSearchQuery3'},  {'title':  '[COLOR green][B]TV junky[/B] Search[/COLOR]  (Tv episodes)'}, img=IconPath + '90.png')
         addon.add_directory({'mode': 'GetSearchQuery5'},  {'title':  '[COLOR green][B]Movie Goon[/B] Search[/COLOR]  (movies)'}, img=IconPath + 'search8.png')
@@ -185,7 +185,7 @@ def MainMenu():    #homescreen
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
-def GetSearchQuery():
+def GetSearchQuery9():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
@@ -195,12 +195,12 @@ def GetSearchQuery():
 	if (keyboard.isConfirmed()):
                 query = keyboard.getText()
                 addon.save_data('search',query)
-                Search(query)
+                Search9(query)
 	else:
                 return
 
         
-def Search(query):
+def Search9(query):
         url = 'http://www.google.com/search?q=site:oneclickwatch.org ' + query
         url = url.replace(' ', '+')
         print url
@@ -329,10 +329,10 @@ elif mode == 'GetTitles':
 	GetTitles(section, url, startPage, numOfPages)
 elif mode == 'GetLinks':
 	GetLinks(section, url)
-elif mode == 'GetSearchQuery':
-	GetSearchQuery()
-elif mode == 'Search':
-	Search(query)
+elif mode == 'GetSearchQuery9':
+	GetSearchQuery9()
+elif mode == 'Search9':
+	Search9(query)
 elif mode == 'GetSearchQuery2':
 	GetSearchQuery2()
 elif mode == 'Search2':

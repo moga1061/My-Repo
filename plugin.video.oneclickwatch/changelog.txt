@@ -44,3 +44,5 @@
 - clean up
 [B]Version 0.3.6[/B]
 - new search
+[B]Version 0.3.7[/B]
+- fix
