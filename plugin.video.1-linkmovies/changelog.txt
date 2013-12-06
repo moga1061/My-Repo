@@ -20,3 +20,6 @@
 
 [B]Version 0.0.8[/B]
 - testing for xbmc 13
+
+[B]Version 0.0.9[/B]
+- Cool movies
