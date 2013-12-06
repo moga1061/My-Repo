@@ -40,6 +40,8 @@
 - added some new stuff
 [B]Version 0.3.1[/B]
 - fix
+[B]Version 0.3.2[/B]
+- new stuff
 
 
 
