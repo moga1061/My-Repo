@@ -22,4 +22,7 @@
 - testing for xbmc 13
 
 [B]Version 0.0.9[/B]
-- Cool movies
+- changed to coolmovies
+
+[B]Version 0.1.0[/B]
+- changed back to 1linkmovies / site problems with coolmovie
