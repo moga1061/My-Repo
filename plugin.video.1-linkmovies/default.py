@@ -164,8 +164,10 @@ def GetMediaInfo(html):
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Movies >>[/COLOR][COLOR red] (movies with BRRIP have no links)[/COLOR] '}, img=IconPath + '99.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/categories/movies',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Movies >>[/COLOR]'}, img=IconPath + '99.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Movies >>'}, img=IconPath + '99.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/categories/action',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Action >>'}, img=IconPath + '99.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/categories/adventure',

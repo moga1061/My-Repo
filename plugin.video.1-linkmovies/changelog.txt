@@ -26,3 +26,6 @@
 
 [B]Version 0.1.0[/B]
 - changed back to 1linkmovies / site problems with coolmovie
+
+[B]Version 0.1.1[/B]
+- cleanup

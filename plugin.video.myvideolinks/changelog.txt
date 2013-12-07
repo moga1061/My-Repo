@@ -42,6 +42,7 @@
 - fix
 [B]Version 0.3.2[/B]
 - new stuff
-
+[B]Version 0.3.3[/B]
+- new stuff
 
 
