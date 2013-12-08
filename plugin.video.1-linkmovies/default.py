@@ -165,7 +165,7 @@ def GetMediaInfo(html):
 
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Movies >>[/COLOR][COLOR red] (movies with BRRIP have no links)[/COLOR] '}, img=IconPath + '99.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Movies >>[/COLOR][COLOR red] (movies with [/COLOR]BRRIP 720p[COLOR red] have no links)[/COLOR] '}, img=IconPath + '99.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/categories/movies',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Movies >>'}, img=IconPath + '99.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/categories/action',
