@@ -76,7 +76,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
 
 
 
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'icon.png')
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -167,39 +167,39 @@ def GetMediaInfo(html):
 
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/new',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]New Release Movies >>[/COLOR]'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]New Release Movies >>[/COLOR]'}, img=IconPath + 'new.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/featured',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Featured Movies >>[/COLOR]'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Featured Movies >>[/COLOR]'}, img=IconPath + 'fe.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/recent',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Recently Added Movies >>[/COLOR]'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Recently Added Movies >>[/COLOR]'}, img=IconPath + 'added.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/action',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Action >>'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Action >>'}, img=IconPath + 'ac.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/adventure',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Adventure >>'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Adventure >>'}, img=IconPath + 'ad.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/animation',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Animation >>'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Animation >>'}, img=IconPath + 'an.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/Comedy',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Comedy >>'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Comedy >>'}, img=IconPath + 'co.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/crime',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Crime >>'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Crime >>'}, img=IconPath + 'cr.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/documentary',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Documentary >>'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Documentary >>'}, img=IconPath + 'do.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/drama',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Drama >>'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Drama >>'}, img=IconPath + 'dr.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/fantasy',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Fantasy >>'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Fantasy >>'}, img=IconPath + 'fa.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/horror',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Horror >>'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Horror >>'}, img=IconPath + 'ho.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/romance',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Romance >>'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Romance >>'}, img=IconPath + 'ro.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/sci-Fi',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Sci Fi >>'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Sci Fi >>'}, img=IconPath + 'sc.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/thriller',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Thriller >>'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Thriller >>'}, img=IconPath + 'th.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/sport',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Sport >>'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Sport >>'}, img=IconPath + 'sp.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/western',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Western >>'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Western >>'}, img=IconPath + 'we.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search [/COLOR]'}, img=IconPath + 's1.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'rs.png')
         addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'h1.png')

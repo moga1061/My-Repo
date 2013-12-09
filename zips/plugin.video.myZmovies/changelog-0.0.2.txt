@@ -1,0 +1,7 @@
+
+
+[B]Version 0.0.1[/B]
+- zmovies
+
+[B]Version 0.0.2[/B]
+- new icons
