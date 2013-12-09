@@ -53,7 +53,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
         # handle paging
         pageUrl = url
         if int(startPage)> 1:
-                pageUrl = url + 'page/' + startPage + '/'
+                pageUrl = url + '/page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
         CLEAN(html)
@@ -63,11 +63,11 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
 
         for page in range( start, end):
                 if ( page != start):
-                        pageUrl = url + 'page/' + str(page) + '/'
+                        pageUrl = url + '/page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('itemdets.+?href="(.+?)" title=(.+?)".+?.+?src="(.+?)".+?', re.DOTALL).findall(html)
+                match = re.compile('itemdets.+?href="(.+?)" title=(.+?)>.+?.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.ultra-vid/?mode=Search&query=%s)' %(name.strip())
@@ -76,7 +76,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
 
 
 
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR gold][B][I]No more pages come back soon...[/COLOR] [COLOR blue][/B]TheYid[/I][/COLOR]'}, img=IconPath + 'help.png')
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR gold][B][I]NEXT PAGE >>[/I][/B][/COLOR]'}, img=IconPath + 'n1.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -129,16 +129,6 @@ def GetLinks(section, url): # Get Links
                         host = GetDomain(url)
                         if 'Unknown' in host:
                                 continue
-                        # ignore .srt files
-                        r = re.search('\.srt[(?:\.html|\.htm)]*$', url, re.IGNORECASE)
-                        if r:
-
-                                continue
-
-                        # ignore .rar files
-                        r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
-                        if r:
-                                continue
 
         source = urlresolver.choose_source(sources)
         if source: stream_url = source.resolve()
@@ -180,9 +170,9 @@ def GetMediaInfo(html):
 
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Movies & TV Shows >>[/COLOR]'}, img=IconPath + '1.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Added Movies >>[/COLOR]'}, img=IconPath + '1.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/hd',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]BluRay HD Movies >>[/COLOR]'}, img=IconPath + '2.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'HD Movies >>'}, img=IconPath + '2.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/action',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Action >>'}, img=IconPath + '4.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/adventure',
@@ -195,15 +185,12 @@ def MainMenu():    #homescreen
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Comedy >>'}, img=IconPath + '10.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/crime',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Crime >>'}, img=IconPath + '11.png')
-
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/documentary',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Documentary >>'}, img=IconPath + '13.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/fantasy',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Fantasy >>'}, img=IconPath + '27.png')
-
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/horror',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Horror >>'}, img=IconPath + '17.png')
-
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/drama',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Mystery drama >>'}, img=IconPath + '19.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/romance-movies',
@@ -212,18 +199,14 @@ def MainMenu():    #homescreen
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Romantic comedy>>'}, img=IconPath + '9.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/sci-fi',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Sci-fi >>'}, img=IconPath + '21.png')
-
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/thriller',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Thriller >>'}, img=IconPath + '24.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/family/holiday',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Family >>'}, img=IconPath + '15.png')
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/tv',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'New TV Episodes >>'}, img=IconPath + '56.png')
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search ultra-vid[/COLOR]'}, img=IconPath + 'search.png')
-        addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR green]Search 24-7media[/COLOR]'}, img=IconPath + 'search2.png')
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]OR FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] [COLOR aqua][B]AND SHOW YOUR SUPPORT... [/B][/COLOR] '}, img=IconPath + 'theyid.png')
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search [/COLOR]'}, img=IconPath + 's1.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'set.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'h1.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER @TheYid009 [/B][/COLOR] '}, img=IconPath + 'y1.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
