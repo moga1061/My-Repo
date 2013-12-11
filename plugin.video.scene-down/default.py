@@ -198,7 +198,8 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'Categories', 'section': 'tv-shows'},  {'title':  '[COLOR blue]Scene TV Shows >>[/COLOR]'}, img=IconPath + 'tvs.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]scene-down Search[/COLOR]'}, img=IconPath + 'searchs.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolvers.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helps.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'theyid.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
