@@ -207,8 +207,8 @@ def MainMenu():    #homescreen
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]TV Packs / Full Seasons >>[/COLOR]'}, img=IconPath + '2.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search[/COLOR]'}, img=IconPath + 'search.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png')
-        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]OR FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] [COLOR aqua][B]AND SHOW YOUR SUPPORT... [/B][/COLOR] '}, img=IconPath + 'theyid.png')
+        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'theyid.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -217,7 +217,7 @@ def GetSearchQuery():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]Search[/COLOR]')
+        keyboard.setHeading('[COLOR lime]Search[/COLOR]')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):

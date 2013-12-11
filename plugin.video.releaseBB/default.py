@@ -207,11 +207,11 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetSearchQuery9'},  {'title':  '[COLOR orange][B]BB.. [/B][/COLOR][COLOR green]Search> >[/COLOR]'}, img=IconPath + 'searcH.png')
         addon.add_directory({'mode': 'GetSearchQuery4'},  {'title':  '[COLOR green][B]Scenelog[/B] Search> >[/COLOR] '}, img=IconPath + 'search4a.png')
         addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR green][B]Scene Source[/B] Search> >[/COLOR]'}, img=IconPath + 'search2.png')
-        addon.add_directory({'mode': 'GetSearchQuery5'},  {'title':  '[COLOR green][B]Tv show pad[/B] Search> >[/COLOR] '}, img=IconPath + 'search5.png')
+        #addon.add_directory({'mode': 'GetSearchQuery5'},  {'title':  '[COLOR green][B]Wrzko[/B] Search> >[/COLOR] '}, img=IconPath + 'wsearch.png')
         addon.add_directory({'mode': 'GetSearchQuery3'},  {'title':  '[COLOR green][B]One Click Watch[/B] Search> >[/COLOR]'}, img=IconPath + 'search3.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helP.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]OR FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] [COLOR aqua][B]AND SHOW YOUR SUPPORT... [/B][/COLOR] '}, img=IconPath + 'theyid.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helP.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'theyid.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -341,7 +341,7 @@ def GetSearchQuery5():
 
         
 def Search5(query):
-        url = 'http://www.google.com/search?q=site:tvshowspad.com ' + query
+        url = 'http://www.google.com/search?q=site:wrzko.eu ' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content

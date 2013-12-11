@@ -68,7 +68,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.myZmovies" version="0.0.2" name="Zmovies" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.myZmovies" version="0.0.3" name="Zmovies" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -85,7 +85,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.oneclickwatch" version="0.3.7" name="One Click Watch" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.oneclickwatch" version="0.3.8" name="One Click Watch" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -102,7 +102,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.releaseBB" version="0.2.8" name="Release[COLOR orange][B]BB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.releaseBB" version="0.2.9" name="Release[COLOR orange][B]BB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -119,7 +119,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.rls-center" version="0.0.5" name="Release [COLOR green]Center[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.rls-center" version="0.0.6" name="Release [COLOR lime]Center[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -130,13 +130,13 @@
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary>Browse Release Center tv shows and movies</summary>
-        <description>Stream Tv shows and movies from Release [COLOR green]Center[/COLOR].... [COLOR red][B][I]YOU will need a real-debrid or a alldebrid account[/B][/I][/COLOR]</description>
+        <description>Stream Tv shows and movies from Release [COLOR lime]Center[/COLOR].... [COLOR red][B][I]YOU will need a real-debrid or a alldebrid account[/B][/I][/COLOR]</description>
         <platform>all</platform>
         <disclaimer lang="en">[COLOR red][B][I]for more info or help on this addon and TheYid repo please goto XBMCHUB.com[/B][/I][/COLOR]</disclaimer>
     </extension>
 </addon>
 
-<addon id="plugin.video.rls1click" version="0.0.2" name="Release[COLOR aqua][B]1[/B][/COLOR] Click" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.rls1click" version="0.0.3" name="Release[COLOR orange][B]1[/B][/COLOR]Click" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -253,7 +253,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.ultra-vid" version="0.1.1" name="Ultra-Vid" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.ultra-vid" version="0.1.2" name="Ultra-Vid" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>

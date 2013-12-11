@@ -5,3 +5,6 @@
 
 [B]Version 0.0.2[/B]
 - new icons
+
+[B]Version 0.0.3[/B]
+- fixed search

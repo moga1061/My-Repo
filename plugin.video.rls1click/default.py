@@ -74,7 +74,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
 
                         
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR aqua]Next...[/COLOR]'}, img=IconPath + '99.png')
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR orange]Next...[/COLOR]'}, img=IconPath + '99.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -202,15 +202,16 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR aqua][B]R1C.. [/B][/COLOR][COLOR blue]Movies> >[/COLOR]'}, img=IconPath + '1.png')
-        addon.add_directory({'mode': 'Categories', 'section': 'tv'},  {'title':  '[COLOR aqua][B]R1C..  [/B][/COLOR][COLOR blue]Tv Shows> >[/COLOR]'}, img=IconPath + '2.png')
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR aqua][B]R1C..  [/B][/COLOR][COLOR green]Search> >[/COLOR]'}, img=IconPath + '3.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR orange][B]R1C.. [/B][/COLOR][COLOR blue]Movies> >[/COLOR]'}, img=IconPath + 'mo.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'tv'},  {'title':  '[COLOR orange][B]R1C..  [/B][/COLOR][COLOR blue]Tv Shows> >[/COLOR]'}, img=IconPath + 'tv.png')
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR orange][B]R1C..  [/B][/COLOR][COLOR green]Search> >[/COLOR]'}, img=IconPath + 'se.png')
         #addon.add_directory({'mode': 'GetSearchQuery4'},  {'title':  '[COLOR green][B]Scenelog[/B] Search> >[/COLOR] '}, img=IconPath + 'search4a.png')
         #addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR green][B]Scene Source[/B] Search> >[/COLOR]'}, img=IconPath + 'search2.png')
         #addon.add_directory({'mode': 'GetSearchQuery5'},  {'title':  '[COLOR green][B]Tv show pad[/B] Search> >[/COLOR] '}, img=IconPath + 'search5.png')
         #addon.add_directory({'mode': 'GetSearchQuery3'},  {'title':  '[COLOR green][B]One Click Watch[/B] Search> >[/COLOR]'}, img=IconPath + 'search3.png')
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + '4.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com or @TheYid009[/B][/I][/COLOR]'}, img=IconPath + '5.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 're.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'he.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'theyid.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 

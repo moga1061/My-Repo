@@ -61,3 +61,5 @@
 [B]Version 0.2.8[/B]
 - fix
 
+[B]Version 0.2.9[/B]
+- new icon

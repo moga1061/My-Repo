@@ -167,11 +167,11 @@ def GetMediaInfo(html):
 
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/new',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]New Release Movies >>[/COLOR]'}, img=IconPath + 'new.png')
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/featured',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Featured Movies >>[/COLOR]'}, img=IconPath + 'fe.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '(30) [COLOR blue]New Release >>[/COLOR]'}, img=IconPath + 'new.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/recent',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Recently Added Movies >>[/COLOR]'}, img=IconPath + 'added.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '(30) [COLOR blue]Recently Added >>[/COLOR]'}, img=IconPath + 'added.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/featured',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '(30) [COLOR blue]Featured Movies >>[/COLOR]'}, img=IconPath + 'fe.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/action',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Action >>'}, img=IconPath + 'ac.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/adventure',
@@ -202,8 +202,8 @@ def MainMenu():    #homescreen
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Western >>'}, img=IconPath + 'we.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search [/COLOR]'}, img=IconPath + 's1.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'rs.png')
-        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'h1.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]OR FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] [COLOR aqua][B]AND SHOW YOUR SUPPORT... [/B][/COLOR] '}, img=IconPath + 'theyid.png')
+        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'h1.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] [COLOR aqua][B]AND SHOW YOUR SUPPORT... [/B][/COLOR] '}, img=IconPath + 'theyid.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -224,7 +224,7 @@ def GetSearchQuery():
 
         
 def Search(query):
-        url = 'http://www.google.com/search?q=site:coolmoviesonline.com ' + query
+        url = 'http://www.google.com/search?q=site:zmovie.tw ' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
@@ -235,33 +235,6 @@ def Search(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-
-def GetSearchQuery2():
-	last_search = addon.load_data('search')
-	if not last_search: last_search = ''
-	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]Search 24-7media[/COLOR]')
-	keyboard.setDefault(last_search)
-	keyboard.doModal()
-	if (keyboard.isConfirmed()):
-                query = keyboard.getText()
-                addon.save_data('search',query)
-                Search2(query)
-	else:
-                return
-
-        
-def Search2(query):
-        url = 'http://www.google.com/search?q=site:24-7media.org ' + query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        CLEAN(html)
-        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
-        for url, title in match:
-                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
-                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
-	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
 if mode == 'main': 
@@ -274,10 +247,6 @@ elif mode == 'GetSearchQuery':
 	GetSearchQuery()
 elif mode == 'Search':
 	Search(query)
-elif mode == 'GetSearchQuery2':
-	GetSearchQuery2()
-elif mode == 'Search2':
-	Search2(query)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':

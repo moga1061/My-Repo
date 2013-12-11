@@ -67,7 +67,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('itemdets.+?href="(.+?)" title=(.+?)>.+?.+?src="(.+?)".+?', re.DOTALL).findall(html)
+                match = re.compile('itemdets.+?href="(.+?)" title=(.+?)".+?.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.ultra-vid/?mode=Search&query=%s)' %(name.strip())
@@ -76,7 +76,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
 
 
 
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR gold][B][I]NEXT PAGE >>[/I][/B][/COLOR]'}, img=IconPath + 'n1.png')
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page ->[/I][/B][/COLOR]'}, img=IconPath + 'n1.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -90,10 +90,9 @@ def GetLinks(section, url): # Get Links
         print 'LISTITEM: '+str(listitem)
         content = html
         print'CONTENT: '+str(listitem)
-        r = re.search('<strong>Links.*</strong>', html)
+        r = re.search('Links', html)
         if r:
                 content = html[r.end():]
-
         match = re.compile('href="(.+?)"').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
@@ -110,24 +109,27 @@ def GetLinks(section, url): # Get Links
                 host = host.replace('.org','')
                 host = host.replace('.ch','')
                 host = host.replace('.tv','')
+                host = host.replace('.sx','')
+                host = host.replace('.me','')
+                host = host.replace('.to','')
                 host = host.replace('youtube','                                        [COLOR gold]Watch trailer[/COLOR]')
                 name = host
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
-
-                
-        find = re.search('commentblock', html)
+        find = re.search('commentbolck', html)
         if find:
                 print 'in comments if'
                 html = html[find.end():]
                 CLEAN(html)###
-                match1 = re.compile(r'comment-page-numbers(.+?)<!--comments form -->', re.DOTALL).findall(html)
-                match = re.compile('<a href="(htt.+?)" rel="nofollow"', re.DOTALL).findall(str(match1))
+
+                match = re.compile('<a href="(htt.+?)"', re.DOTALL).findall(str(match1))
                 print 'MATCH IS: '+str(match)
                 print len(match)
                 for url in match:
                         host = GetDomain(url)
                         if 'Unknown' in host:
+                
+
                                 continue
 
         source = urlresolver.choose_source(sources)
@@ -170,7 +172,7 @@ def GetMediaInfo(html):
 
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Added Movies >>[/COLOR]'}, img=IconPath + '1.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Added >>[/COLOR]'}, img=IconPath + '1.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/hd',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'HD Movies >>'}, img=IconPath + '2.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/action',
@@ -179,8 +181,6 @@ def MainMenu():    #homescreen
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Adventure>>'}, img=IconPath + '6.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/animation',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Animation >>'}, img=IconPath + '7.png')
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + 'bollywood-top-20-movies',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Bollywood >>'}, img=IconPath + '8.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/comedy',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Comedy >>'}, img=IconPath + '10.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/crime',
@@ -239,32 +239,7 @@ def Search(query):
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
-def GetSearchQuery2():
-	last_search = addon.load_data('search')
-	if not last_search: last_search = ''
-	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]Search 24-7media[/COLOR]')
-	keyboard.setDefault(last_search)
-	keyboard.doModal()
-	if (keyboard.isConfirmed()):
-                query = keyboard.getText()
-                addon.save_data('search',query)
-                Search2(query)
-	else:
-                return
 
-        
-def Search2(query):
-        url = 'http://www.google.com/search?q=site:24-7media.org ' + query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        CLEAN(html)
-        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
-        for url, title in match:
-                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
-                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
-	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
 if mode == 'main': 
@@ -277,10 +252,6 @@ elif mode == 'GetSearchQuery':
 	GetSearchQuery()
 elif mode == 'Search':
 	Search(query)
-elif mode == 'GetSearchQuery2':
-	GetSearchQuery2()
-elif mode == 'Search2':
-	Search2(query)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':
