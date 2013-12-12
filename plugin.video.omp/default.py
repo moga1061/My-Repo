@@ -76,7 +76,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
 
 
 
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'icon.png')
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR purple][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'ne.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -167,9 +167,9 @@ def GetMediaInfo(html):
 
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]LATEST ADDED >>[/COLOR]'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR purple]LATEST ADDED >>[/COLOR]'}, img=IconPath + 'icon.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/old-movies',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]OLD MOVIES >>[/COLOR]'}, img=IconPath + 'icon.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR purple]CLASSIC MOVIES >>[/COLOR]'}, img=IconPath + 'icon.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tag/action',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Action >>'}, img=IconPath + 'icon.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tag/adventure',
@@ -199,7 +199,6 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tag/western',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Western >>'}, img=IconPath + 'icon.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search Online Movies Player [/COLOR]'}, img=IconPath + 'se.png')
-        #addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR green]Search 24-7media[/COLOR]'}, img=IconPath + 'search2.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 're.png')
         addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'he.png')
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'theyid.png')
@@ -235,32 +234,6 @@ def Search(query):
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
-def GetSearchQuery2():
-	last_search = addon.load_data('search')
-	if not last_search: last_search = ''
-	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]Search 24-7media[/COLOR]')
-	keyboard.setDefault(last_search)
-	keyboard.doModal()
-	if (keyboard.isConfirmed()):
-                query = keyboard.getText()
-                addon.save_data('search',query)
-                Search2(query)
-	else:
-                return
-
-        
-def Search2(query):
-        url = 'http://www.google.com/search?q=site:24-7media.org ' + query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        CLEAN(html)
-        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
-        for url, title in match:
-                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
-                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
-	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
 if mode == 'main': 
@@ -273,10 +246,6 @@ elif mode == 'GetSearchQuery':
 	GetSearchQuery()
 elif mode == 'Search':
 	Search(query)
-elif mode == 'GetSearchQuery2':
-	GetSearchQuery2()
-elif mode == 'Search2':
-	Search2(query)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':
