@@ -53,7 +53,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
         # handle paging
         pageUrl = url
         if int(startPage)> 1:
-                pageUrl = url + 'page/' + startPage + '/'
+                pageUrl = url + '/page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
         CLEAN(html)
@@ -63,11 +63,11 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
 
         for page in range( start, end):
                 if ( page != start):
-                        pageUrl = url + 'page/' + str(page) + '/'
+                        pageUrl = url + '/page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('clearfix.+?href="(.+?)".+?.+?src="(.+?)" .+?rel=.+?>(.+?)<', re.DOTALL).findall(html)
+                match = re.compile('clearfix.+?href="(.+?)".+?.+?src="(.+?)" .+?rel=.+?>(.+?)Watch Online Free<', re.DOTALL).findall(html)
                 for movieUrl, img, name in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.omp/?mode=Search&query=%s)' %(name.strip())
@@ -176,12 +176,10 @@ def MainMenu():    #homescreen
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Adventure >>'}, img=IconPath + 'icon.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tag/animation',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Animation >>'}, img=IconPath + 'icon.png')
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + 'Comedy',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Comedy >>'}, img=IconPath + 'icon.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tag/comedy',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Comedy >>'}, img=IconPath + 'icon.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tag/crime',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Crime >>'}, img=IconPath + 'icon.png')
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tag/documentary',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Documentary >>'}, img=IconPath + 'icon.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tag/drama',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Drama >>'}, img=IconPath + 'icon.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tag/fantasy',

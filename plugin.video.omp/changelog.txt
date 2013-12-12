@@ -5,3 +5,6 @@
 
 [B]Version 0.0.2[/B]
 - icons & fixes
+
+[B]Version 0.0.3[/B]
+- fixes

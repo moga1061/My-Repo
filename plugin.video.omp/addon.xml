@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.video.omp" version="0.0.2" name="Online [COLOR purple]Movie[/COLOR] Player" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.omp" version="0.0.3" name="Online [COLOR purple]Movies[/COLOR] Player" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -10,7 +10,7 @@
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary>Browse Online Movie Player new and old films</summary>
-        <description>Stream a wide selection Movies from Online Movie Player.... Great for Old movies, ufc and loads more... best hosts are putlocker vidhog divxstage sharesix vidxden vidbux + more</description>
+        <description>Stream a wide selection Movies from Online Movie Player.... Great for Old movies, ufc and loads more... best hosts are putlocker vidhog divxstage sharesix nowvideo vidbux + more</description>
         <platform>all</platform>
         <disclaimer lang="en">[COLOR red][B][I]SAY NO TO ADVERTISING IN ADDONS please come to XBMCHUB.com and show your support thanks from @TheYid009 [/B][/I][/COLOR]</disclaimer>
     </extension>
