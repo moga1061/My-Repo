@@ -34,6 +34,40 @@
     </extension>
 </addon>
 
+<addon id="plugin.video.downloadz" version="0.0.1" name="Downloadz [COLOR crimson].me[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+        <import addon="script.module.TheYid.common" version="0.1.1"/>
+        <import addon="script.module.urlresolver"  version="2.0.9"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Browse downloadz.me</summary>
+        <description>Stream Tv shows and movies from downloadz.me.... [COLOR red][B][I]YOU will need a real-debrid or a alldebrid account[/B][/I][/COLOR]</description>
+        <platform>all</platform>
+        <disclaimer lang="en">[COLOR red][B][I]for more info or help on this addon and TheYid repo please goto XBMCHUB.com[/B][/I][/COLOR]</disclaimer>
+    </extension>
+</addon>
+
+<addon id="plugin.video.jfoised" version="0.0.1" name="JFOISED" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+        <import addon="script.module.TheYid.common" version="0.1.1"/>
+        <import addon="script.module.urlresolver"  version="2.0.9"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>JFOISED</summary>
+        <description>Stream Tv shows and movies from JFOISED.... [COLOR red][B][I]YOU will need a real-debrid or a alldebrid account[/B][/I][/COLOR]</description>
+        <platform>all</platform>
+        <disclaimer lang="en">[COLOR red][B][I]please come to XBMCHUB.com and show your support thanks from @TheYid009 [/B][/I][/COLOR]</disclaimer>
+    </extension>
+</addon>
+
 <addon id="plugin.video.myvideolinks" version="0.3.5" name="My Video Links [COLOR gold]eu[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
@@ -287,7 +321,24 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.wttyid" version="0.0.2" name="Watch [COLOR salmon]The Tapes[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.wtb" version="0.0.1" name="[COLOR darkred]wtb[/COLOR]Video" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+        <import addon="script.module.TheYid.common" version="0.1.1"/>
+        <import addon="script.module.urlresolver"  version="2.0.9"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Browse [COLOR darkred]wtb[/COLOR]Video</summary>
+        <description>Stream a wide selection Movies from [COLOR darkred]wtb[/COLOR]Video.... best hosts are watchfreehd billionuploads vidbull 180upload putlocker vidxden vidbux + more</description>
+        <platform>all</platform>
+        <disclaimer lang="en">[COLOR red][B][I]SAY NO TO ADVERTISING IN ADDONS please come to XBMCHUB.com and show your support thanks from @TheYid009 [/B][/I][/COLOR]</disclaimer>
+    </extension>
+</addon>
+
+<addon id="plugin.video.wttyid" version="0.0.3" name="Watch [COLOR salmon]The Tapes[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>

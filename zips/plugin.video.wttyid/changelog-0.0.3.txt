@@ -1,0 +1,5 @@
+[B]Version 0.0.2[/B]
+- Initial version of watch the tapes
+
+[B]Version 0.0.3[/B]
+- fix on next page

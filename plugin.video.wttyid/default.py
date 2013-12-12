@@ -53,7 +53,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
         # handle paging
         pageUrl = url
         if int(startPage)> 1:
-                pageUrl = url + 'page/' + startPage + '/'
+                pageUrl = url + '/page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
         CLEAN(html)
@@ -63,7 +63,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
 
         for page in range( start, end):
                 if ( page != start):
-                        pageUrl = url + 'page/' + str(page) + '/'
+                        pageUrl = url + '/page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
