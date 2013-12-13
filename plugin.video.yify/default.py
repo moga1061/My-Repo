@@ -14,13 +14,13 @@ except:
 	from pysqlite2 import dbapi2 as sqlite
 	print "Loading pysqlite2 as DB engine"
 
-addon_id = 'plugin.video.downloadz'
+addon_id = 'plugin.video.yify'
 plugin = xbmcaddon.Addon(id=addon_id)
 
-DB = os.path.join(xbmc.translatePath("special://database"), 'downloadz.db')
-BASE_URL = 'http://www.downloadz.me/'
+DB = os.path.join(xbmc.translatePath("special://database"), 'yify.db')
+BASE_URL = 'http://yify.pw/'
 net = Net()
-addon = Addon('plugin.video.downloadz', sys.argv)
+addon = Addon('plugin.video.yify', sys.argv)
 showAllParts = True
 showPlayAll = True
 
@@ -48,7 +48,7 @@ section = addon.queries.get('section', None)
 
 
 def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
-        print 'downloadz get Movie Titles Menu %s' % url
+        print 'yify get Movie Titles Menu %s' % url
 
         # handle paging
         pageUrl = url
@@ -67,16 +67,16 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('<h3>.+?href="(.+?)">(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
+                match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
-                        runstring = 'XBMC.Container.Update(plugin://plugin.video.downloadz/?mode=Search&query=%s)' %(name.strip())
-        		cm.append(('Search on downloadz', runstring))
+                        runstring = 'XBMC.Container.Update(plugin://plugin.video.yify/?mode=Search&query=%s)' %(name.strip())
+        		cm.append(('Search on yify', runstring))
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
 
 
 
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR crimson][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'ne.png')
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR darkorange][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + '1.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -91,8 +91,6 @@ def GetLinks(section, url): # Get Links
         content = html
         print'CONTENT: '+str(listitem)
         r = re.search('<strong>Links.*</strong>', html)
-        if r:
-                content = html[r.end():]
                 
         r = re.search('commentblock', content)
         if r:
@@ -110,16 +108,24 @@ def GetLinks(section, url): # Get Links
                 r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
                 if r:
                         continue
-                print '*****************************' + host + ' : ' + url
+                print '*****************************' + host
                 title = url.rpartition('/')
                 title = title[2].replace('.html', '')
                 title = title.replace('.htm', '')
+                title = title.replace('.rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
+                title = title.replace('rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
+                title = title.replace('watch?v=', ' ')
                 title = title.replace('www.', '')
                 title = title.replace ('-',' ')
                 title = title.replace('_',' ')
+                title = title.replace('.',' ')
                 title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
-                title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
                 title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
+                host = host.replace('youtube.com','[COLOR lime]Movie Trailer[/COLOR]')
+                host = host.replace('putlocker.com','[COLOR red]RAR FILE NO STREAMING[/COLOR]')
+                host = host.replace('filecloud.io','[COLOR red]RAR FILE NO STREAMING[/COLOR]')
+                host = host.replace('uploaded.net','[COLOR gold]uploaded.net[/COLOR]')
+                host = host.replace('rapidgator.net','[COLOR gold]rapidgator.net[/COLOR]')
                 name = host+'-'+title
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
@@ -138,25 +144,17 @@ def GetLinks(section, url): # Get Links
                         host = GetDomain(url)
                         if 'Unknown' in host:
                                 continue
+                        # ignore .srt files
+                        r = re.search('\.srt[(?:\.html|\.htm)]*$', url, re.IGNORECASE)
+                        if r:
+
+                                continue
 
                         # ignore .rar files
                         r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
                         if r:
                                 continue
-                        try:
-                                print 'in GetLinks if loop'
-                                title = url.rpartition('/')
-                                title = title[2].replace('.html', '')
-                                title = title.replace('.htm', '')
-                                title = title.replace ('-',' ')
-                                title = title.replace('_',' ')
-                                name = host+'-'+title
-                                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
-                                sources.append(hosted_media)
-                                print sources
-                                print 'URL IS::: '+url
-                        except:
-                                continue
+
         source = urlresolver.choose_source(sources)
         if source: stream_url = source.resolve()
         else: stream_url = ''
@@ -199,14 +197,18 @@ def GetMediaInfo(html):
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR crimson]Latest Movies >>[/COLOR]'}, img=IconPath + 'mov.png')
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tv-shows/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR crimson]Latest Tv shows >>[/COLOR]'}, img=IconPath + 't.png')
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search[/COLOR]'}, img=IconPath + 'se.png')
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 're.png')
-        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'he.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'theyid.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]New YIFY >>[/COLOR]'}, img=IconPath + '2.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/yify-brrip-1080p/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue]1080p YIFY[/COLOR] >>'}, img=IconPath + '3.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/yify-brrip-720p/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue]720p YIFY[/COLOR] >>'}, img=IconPath + '4.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/yify-brrip-3d/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue]3D YIFY[/COLOR] >>'}, img=IconPath + '5.png')
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search [/COLOR]'}, img=IconPath + '6.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + '7.png')
+        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + '8.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'he.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -215,7 +217,7 @@ def GetSearchQuery():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR blue]Search[/COLOR]')
+        keyboard.setHeading('[COLOR green]Search[/COLOR]')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):
@@ -227,7 +229,7 @@ def GetSearchQuery():
 
         
 def Search(query):
-        url = 'http://www.google.com/search?q=site:downloadz.me ' + query
+        url = 'http://www.google.com/search?q=site:yify.pw ' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
@@ -237,6 +239,8 @@ def Search(query):
                 title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
 
 
 if mode == 'main': 
