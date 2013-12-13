@@ -4,4 +4,6 @@
 - clean up 
 [B]Version 0.0.3[/B]
 - new icons
+[B]Version 0.0.4[/B]
+- fix
 

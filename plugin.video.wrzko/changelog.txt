@@ -15,3 +15,6 @@
 
 [B]Version 0.0.6[/B]
 - added new stuff
+
+[B]Version 0.0.7[/B]
+- new icon

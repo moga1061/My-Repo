@@ -153,7 +153,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.rls1click" version="0.0.3" name="Release[COLOR orange][B]1[/B][/COLOR]Click" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.rls1click" version="0.0.4" name="Release[COLOR orange][B]1[/B][/COLOR]Click" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -236,7 +236,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.singlelinkmoviez" version="0.1.9" name="Single [COLOR red]Link[/COLOR] Moviez" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.singlelinkmoviez" version="0.2.0" name="Single [COLOR red]Link[/COLOR] Moviez" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -287,7 +287,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.wrzko" version="0.0.6" name="Wrzko" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.wrzko" version="0.0.7" name="Wrzko" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
