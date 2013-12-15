@@ -28,6 +28,7 @@ BASE_URL6 = 'http://com2dl.com/'
 BASE_URL7 = 'http://www.wrzko.eu/'
 BASE_URL8 = 'http://sceper.ws/'
 BASE_URL9 = 'http://scenedown.in/'
+BASE_URL10 = 'http://www.ddlvalley.eu/'
 
 
 
@@ -161,7 +162,7 @@ def GetTitles4(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
 
 
 
-                addon.add_directory({'mode': 'GetTitles4', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR lime][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + '3.png')
+                addon.add_directory({'mode': 'GetTitles4', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -463,8 +464,41 @@ def GetTitles10(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
 
 ##########################################################################################################################################################
 
+def GetTitles11(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
+        print 'theyidrh get Movie Titles Menu %s' % url
+
+        # handle paging
+        pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + 'page/' + startPage + '/'
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        CLEAN(html)
+
+        start = int(startPage)
+        end = start + int(numOfPages)
+
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + 'page/' + str(page) + '/'
+                        html = net.http_GET(pageUrl).content
+                        CLEAN(html)
+                        
+                match = re.compile('<h2>.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
+                for movieUrl, name, img in match:
+                        cm  = []
+                        runstring = 'XBMC.Container.Update(plugin://plugin.video.theyidrh/?mode=Search&query=%s)' %(name.strip())
+        		cm.append(('Search on theyidrh', runstring))
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
 
 
+
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png')
+        
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
+######################################################################################################################################################
 
 def GetLinks(section, url): # Get Links
         print 'GETLINKS FROM URL: '+url
@@ -504,6 +538,17 @@ def GetLinks(section, url): # Get Links
                 title = title.replace ('-',' ')
                 title = title.replace('_',' ')
                 title = title.replace('.',' ')
+                title = title.replace('gaz','')
+                title = title.replace('NTb','')
+                title = title.replace('part1','')
+                title = title.replace('part2','')
+                title = title.replace('part3','')
+                title = title.replace('part4','')
+                title = title.replace('part5','')
+                title = title.replace('.',' ')
+                title = title.replace('720p','[COLOR gold][B][I]720p[/B][/I][/COLOR]')
+                title = title.replace('1080p','[COLOR orange][B][I]1080p[/B][/I][/COLOR]')
+                title = title.replace('DDLValley eu','')
                 title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
                 title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
                 title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
@@ -513,7 +558,7 @@ def GetLinks(section, url): # Get Links
                 host = host.replace('netload.in','[COLOR gold]Netload[/COLOR]')
                 host = host.replace('rapidgator.net','[COLOR gold]rapidgator.net[/COLOR]')
                 host = host.replace('hugefiles.net','[COLOR goldenrod]hugefiles.net[/COLOR]')
-                host = host.replace('putlocker.com','[COLOR goldenrod]rapidgator.net[/COLOR]')
+                host = host.replace('putlocker.com','[COLOR goldenrod]Putlocker[/COLOR]')
                 name = host+'-'+title
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
@@ -602,6 +647,7 @@ def Categories(section):  #categories
 def MainMenu():    #homescreen        
         addon.add_directory({'mode': 'menu2'}, {'title': '[COLOR blue][B]Movies >>[/B] [/COLOR]>>'}, img=IconPath + 'films.png') 
         addon.add_directory({'mode': 'menu4'}, {'title': '[COLOR darkorange][B]Tv Shows >>[/B] [/COLOR]>>'}, img=IconPath + 'tvshows.png') 
+        addon.add_directory({'mode': 'menu6'}, {'title': '[COLOR lemonchiffon][B]Sport >>[/B] [/COLOR]>>'}, img=IconPath + 'sport.png') 
         addon.add_directory({'mode': 'menu5'}, {'title': '[COLOR green][B]Searches >>[/B] [/COLOR]>>'}, img=IconPath + 'searches.png') 
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png')
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink][B]FOR HELP PLEASE GOTO...[/B][/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helphub.png')
@@ -609,7 +655,8 @@ def MainMenu():    #homescreen
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def Menu2():   #movies
-
+        addon.add_directory({'mode': 'GetTitles11', 'section': 'ALL', 'url': BASE_URL10 + '/category/movies/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR powderblue](DDLvalley)[/COLOR] >>'}, img=IconPath + 'ddlmo.png')
         addon.add_directory({'mode': 'GetTitles1', 'section': 'ALL', 'url': BASE_URL1 + '/films/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR orangered](Scene Source)[/COLOR] >>'}, img=IconPath + 'ssmovies.png')
         addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL8 + '/category/movies',
@@ -650,7 +697,8 @@ def Menu3():   #yify
 
 
 def Menu4():    #tv
-
+        addon.add_directory({'mode': 'GetTitles11', 'section': 'ALL', 'url': BASE_URL10 + '/category/tv-shows/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Tv Shows[/B] [/COLOR] [COLOR powderblue](DDLvalley)[/COLOR] >>'}, img=IconPath + 'ddltv.png')
         addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL8 + '/category/tv-shows',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Tv Shows[/B] [/COLOR] [COLOR mediumspringgreen](Sceper)[/COLOR] >>'}, img=IconPath + 'setv.png')
         addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL9 + '/category/tv-shows/',
@@ -673,7 +721,7 @@ def Menu4():    #tv
 
 
 def Menu5():   #search
-
+        addon.add_directory({'mode': 'GetSearchQuery8'},  {'title':  '[COLOR green][B]Search[/B] [/COLOR] [COLOR powderblue](DDLvalley)[/COLOR]'}, img=IconPath + 'searches.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green][B]Search[/B] [/COLOR] [COLOR lime](Release Center)[/COLOR]'}, img=IconPath + 'searches.png')
         addon.add_directory({'mode': 'GetSearchQuery5'},  {'title':  '[COLOR green][B]Search[/B] [/COLOR] [COLOR mediumspringgreen](Sceper)[/COLOR]'}, img=IconPath + 'searches.png')
         addon.add_directory({'mode': 'GetSearchQuery4'},  {'title':  '[COLOR green][B]Search[/B] [/COLOR] [COLOR plum](Scene down)[/COLOR]'}, img=IconPath + 'searches.png')
@@ -682,6 +730,13 @@ def Menu5():   #search
         addon.add_directory({'mode': 'GetSearchQuery6'},  {'title':  '[COLOR green][B]Search[/B] [/COLOR] [COLOR orangered](Scene Source)[/COLOR]'}, img=IconPath + 'searches.png')
         addon.add_directory({'mode': 'GetSearchQuery7'},  {'title':  '[COLOR green][B]Search[/B] [/COLOR] [COLOR orange](Release 1 click)[/COLOR]'}, img=IconPath + 'searches.png')
 
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
+def Menu6():   #sport
+
+        addon.add_directory({'mode': 'GetTitles11', 'section': 'ALL', 'url': BASE_URL10 + '/category/tv-shows/sports/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest Sport[/B] [/COLOR] [COLOR powderblue](DDLvalley)[/COLOR] >>'}, img=IconPath + 'ddlsport.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ########################################################################################################################
@@ -899,8 +954,34 @@ def Search7(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+###########################################################################################################################################################
 
+def GetSearchQuery8():
+	last_search = addon.load_data('search')
+	if not last_search: last_search = ''
+	keyboard = xbmc.Keyboard()
+        keyboard.setHeading('[COLOR green]Search[/COLOR]')
+	keyboard.setDefault(last_search)
+	keyboard.doModal()
+	if (keyboard.isConfirmed()):
+                query = keyboard.getText()
+                addon.save_data('search',query)
+                Search8(query)
+	else:
+                return
 
+        
+def Search8(query):
+        url = 'http://www.google.com/search?q=site:ddlvalley.eu ' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        CLEAN(html)
+        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
+        for url, title in match:
+                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
+	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
 
@@ -933,6 +1014,8 @@ elif mode == 'GetTitles1':
 	GetTitles1(section, url, startPage, numOfPages)
 elif mode == 'GetTitles10': 
 	GetTitles10(section, url, startPage, numOfPages)
+elif mode == 'GetTitles11': 
+	GetTitles11(section, url, startPage, numOfPages)
 elif mode == 'GetLinks':
 	GetLinks(section, url)
 elif mode == 'GetSearchQuery':
@@ -963,6 +1046,10 @@ elif mode == 'GetSearchQuery7':
 	GetSearchQuery7()
 elif mode == 'Search7':
 	Search7(query)
+elif mode == 'GetSearchQuery8':
+	GetSearchQuery8()
+elif mode == 'Search8':
+	Search8(query)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':
@@ -977,4 +1064,6 @@ if mode == 'menu4':
        Menu4()
 if mode == 'menu5':
        Menu5()
+if mode == 'menu6':
+       Menu6()
 
