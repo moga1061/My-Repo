@@ -613,7 +613,7 @@ def GetLinks(section, url): # Get Links
                 title = title.replace('part4','')
                 title = title.replace('part5','')
                 title = title.replace('.',' ')
-                title = title.replace('720p','[COLOR coral][B][I]480p[/B][/I][/COLOR]')
+                title = title.replace('480p','[COLOR coral][B][I]480p[/B][/I][/COLOR]')
                 title = title.replace('720p','[COLOR gold][B][I]720p[/B][/I][/COLOR]')
                 title = title.replace('1080p','[COLOR orange][B][I]1080p[/B][/I][/COLOR]')
                 title = title.replace('DDLValley eu','')
