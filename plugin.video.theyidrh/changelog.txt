@@ -6,3 +6,6 @@
 
 [B]Version 0.0.3[/B]
 - added releasebb & theextopia.com
+
+[B]Version 0.0.4[/B]
+- clean up

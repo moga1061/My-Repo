@@ -19,6 +19,7 @@ plugin = xbmcaddon.Addon(id=addon_id)
 
 DB = os.path.join(xbmc.translatePath("special://database"), 'oneclickwatch.db')
 BASE_URL = 'http://oneclickwatch.org/'
+BASE_URL1 = 'http://watchthetapes.com/'
 net = Net()
 addon = Addon('plugin.video.oneclickwatch', sys.argv)
 showAllParts = True
@@ -48,7 +49,7 @@ urlList = addon.queries.get('urlList', None)
 section = addon.queries.get('section', None)
 ##### Queries ##########
 
-
+###############################################################################################                 #################################################################
 
 def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
         print 'oneclickwatch get Movie Titles Menu %s' % url
@@ -75,13 +76,51 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.oneclickwatch/?mode=Search&query=%s)' %(name.strip())
         		cm.append(('Search on oneclickwatch', runstring))
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
                 
 
       
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png')
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png', fanart=FanartPath + 'fanart.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#################################################################################################################################################################################
+
+def GetTitles1(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles  #WTT
+        print 'oneclickwatch get Movie Titles Menu %s' % url
+
+        # handle paging
+        pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + '/page/' + startPage + '/'
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        CLEAN(html)
+
+        start = int(startPage)
+        end = start + int(numOfPages)
+
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + '/page/' + str(page) + '/'
+                        html = net.http_GET(pageUrl).content
+                        CLEAN(html)
+                        
+                match = re.compile('entry-title.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
+                for movieUrl, name, img in match:
+                        cm  = []
+                        runstring = 'XBMC.Container.Update(plugin://plugin.video.oneclickwatch/?mode=Search&query=%s)' %(name.strip())
+        		cm.append(('Search on oneclickwatch', runstring))
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
+
+
+
+                addon.add_directory({'mode': 'GetTitles1', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR salmon][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next2.png')
+        
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
+###############################################################################links#############################################################################################
 
 
 def GetLinks(section, url): # Get Links
@@ -132,6 +171,9 @@ def GetLinks(section, url): # Get Links
         xbmc.Player().play(stream_url)
 
 
+#####################################################################################           ##################################################################################
+
+
 def CLEAN(string):
     def substitute_entity(match):
         ent = match.group(3)
@@ -165,25 +207,44 @@ def GetMediaInfo(html):
         return listitem
 
 
+######################################################################menu####################################################################################################
+
+
+
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]OCW Latest Movies[/B] >>>[/COLOR]'}, img=IconPath + 'movies.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]OCW Latest Movies[/B] [/COLOR]>>'}, img=IconPath + 'movies.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/tv-shows/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]OCW Latest Tv episodes[/B] >>>[/COLOR]'}, img=IconPath + 'tv.png')
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/2013/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR silver]Archives 2013 >>>[/COLOR]'}, img=IconPath + 'ar.png')
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/2012/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR silver]Archives 2012 >>>[/COLOR]'}, img=IconPath + 'ar.png')
-        addon.add_directory({'mode': 'GetSearchQuery9'},  {'title':  '[COLOR green][B]OCW[/B] Search[/COLOR]'}, img=IconPath + 'search.png')
-        addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR green][B]WatchTvShowz[/B] Search[/COLOR]  (Tv episodes)'}, img=IconPath + 'search9.png')
-        addon.add_directory({'mode': 'GetSearchQuery3'},  {'title':  '[COLOR green][B]TV junky[/B] Search[/COLOR]  (Tv episodes)'}, img=IconPath + '90.png')
-        addon.add_directory({'mode': 'GetSearchQuery5'},  {'title':  '[COLOR green][B]Movie Goon[/B] Search[/COLOR]  (movies)'}, img=IconPath + 'search8.png')
-        addon.add_directory({'mode': 'GetSearchQuery4'},  {'title':  '[COLOR green][B]OnlineMoviesPlayer[/B] Search[/COLOR]  (movies)'}, img=IconPath + 'search4.png')
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png')
-        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'fanart.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'theyid.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]OCW Latest Tv episodes[/B] [/COLOR]>>'}, img=IconPath + 'tv.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'WttMenu'}, {'title':  '[COLOR beige][B]Watch[/COLOR] [COLOR salmon]The Tapes[/B] [/COLOR](addon) >>'}, img=IconPath + 'wtticon.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'DateMenu'}, {'title':  '[COLOR green][B]Searches [/B] [/COLOR]>>'}, img=IconPath + 'search.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help1.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'theyid.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+def WttMenu():       #wtt
+        addon.add_directory({'mode': 'GetTitles1', 'section': 'ALL', 'url': BASE_URL1 + '/category/movies/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR salmon][B]WTT Latest Movies[/B] >>[/COLOR]>'}, img=IconPath + 'moviewtt.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles1', 'section': 'ALL', 'url': BASE_URL1 + '/category/tvshows',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR salmon][B]WTT Latest Tv shows[/B] >>[/COLOR]>'}, img=IconPath + 'tvwtt.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
+
+
+def DateMenu():
+        addon.add_directory({'mode': 'GetSearchQuery9'},  {'title':  '[COLOR green][B]OCW[/B] Search[/COLOR]'}, img=IconPath + 'search.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery1'},  {'title':  '[COLOR green][B]WTT[/B] Search[/COLOR]'}, img=IconPath + 'search1.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR green][B]WatchTvShowz[/B] Search[/COLOR]  (Tv episodes)'}, img=IconPath + 'search9.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery3'},  {'title':  '[COLOR green][B]TV junky[/B] Search[/COLOR]  (Tv episodes)'}, img=IconPath + '90.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery5'},  {'title':  '[COLOR green][B]Movie Goon[/B] Search[/COLOR]  (movies)'}, img=IconPath + 'search8.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery4'},  {'title':  '[COLOR green][B]OnlineMoviesPlayer[/B] Search[/COLOR]  (movies)'}, img=IconPath + 'search4.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
+
+########################################################################search#################################################################################################
 
 def GetSearchQuery9():
 	last_search = addon.load_data('search')
@@ -212,6 +273,9 @@ def Search9(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+#######################################################################################################
+
+
 def GetSearchQuery2():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
@@ -238,6 +302,8 @@ def Search2(query):
                 title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '').replace('Watch', '')
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+###########################################################################
 
 
 def GetSearchQuery3():
@@ -267,6 +333,8 @@ def Search3(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+########################################################################
+
 def GetSearchQuery4():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
@@ -293,6 +361,8 @@ def Search4(query):
                 title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '').replace('watch', '').replace('Full Movie Online Free', '').replace('Online |', '')
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+######################################################################################
 
 def GetSearchQuery5():
 	last_search = addon.load_data('search')
@@ -321,12 +391,46 @@ def Search5(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+###########################################################################
+
+def GetSearchQuery1():
+	last_search = addon.load_data('search')
+	if not last_search: last_search = ''
+	keyboard = xbmc.Keyboard()
+        keyboard.setHeading('[COLOR green]WTT Search[/COLOR]')
+	keyboard.setDefault(last_search)
+	keyboard.doModal()
+	if (keyboard.isConfirmed()):
+                query = keyboard.getText()
+                addon.save_data('search',query)
+                Search1(query)
+	else:
+                return
+
+        
+def Search1(query):
+        url = 'http://www.google.com/search?q=site:watchthetapes.com ' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        CLEAN(html)
+        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
+        for url, title in match:
+                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '').replace('Watch', '')
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
+	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
+######################################################################################              ##########################################################################
+
 
 
 if mode == 'main': 
 	MainMenu()
 elif mode == 'GetTitles': 
 	GetTitles(section, url, startPage, numOfPages)
+elif mode == 'GetTitles1': 
+	GetTitles1(section, url, startPage, numOfPages)
 elif mode == 'GetLinks':
 	GetLinks(section, url)
 elif mode == 'GetSearchQuery9':
@@ -349,7 +453,15 @@ elif mode == 'GetSearchQuery5':
 	GetSearchQuery5()
 elif mode == 'Search5':
 	Search5(query)
+elif mode == 'GetSearchQuery1':
+	GetSearchQuery1()
+elif mode == 'Search1':
+	Search1(query)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':
         urlresolver.display_settings()
+elif mode == 'DateMenu':
+        DateMenu()
+elif mode == 'WttMenu':
+        WttMenu()

@@ -50,3 +50,5 @@
 - clean up
 [B]Version 0.4.0[/B]
 - fix
+[B]Version 0.4.1[/B]
+- added WTT addon
