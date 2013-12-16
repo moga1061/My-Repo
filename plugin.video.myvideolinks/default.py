@@ -25,6 +25,12 @@ addon = Addon('plugin.video.myvideolinks', sys.argv)
 showAllParts = True
 showPlayAll = True
 
+#PATHS
+AddonPath = addon.get_path()
+IconPath = AddonPath + "/icons/"
+FanartPath = AddonPath + "/icons/"
+
+
 if plugin.getSetting('showAllParts') == 'false':
         showAllParts = False
 
@@ -175,41 +181,41 @@ def Categories(section):  #categories
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]Movie by year & release group >>[/COLOR]'}, img=IconPath + 'date.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR blue]Movie by year & release group >>[/COLOR]'}, img=IconPath + 'date.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Movies added >>[/COLOR]'}, img=IconPath + 'newmovies.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Movies added >>[/COLOR]'}, img=IconPath + 'newmovies.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/tv-shows/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Tv shows added >>[/COLOR]'}, img=IconPath + 'newtvs.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Tv shows added >>[/COLOR]'}, img=IconPath + 'newtvs.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/uncategorized/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Uncategorized Movies & TV Shows >>[/COLOR]'}, img=IconPath + '66a.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Uncategorized Movies & TV Shows >>[/COLOR]'}, img=IconPath + '66a.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/index.php?s=Christmas',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Christmas[/COLOR] [COLOR red]Movie[/COLOR] [COLOR lime]Collection >>[/COLOR]'}, img=IconPath + '69.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Christmas[/COLOR] [COLOR red]Movie[/COLOR] [COLOR lime]Collection >>[/COLOR]'}, img=IconPath + '69.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/index.php?s=HARRY+POTTER',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Harry Potter Movie Collection >>[/COLOR]'}, img=IconPath + '12.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Harry Potter Movie Collection >>[/COLOR]'}, img=IconPath + '12.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/index.php?s=star+wars',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Star Wars Movie Collection >>[/COLOR]'}, img=IconPath + '11.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Star Wars Movie Collection >>[/COLOR]'}, img=IconPath + '11.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/3-d-movies/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]3D Movies >>[/COLOR]'}, img=IconPath + '3d1.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]3D Movies >>[/COLOR]'}, img=IconPath + '3d1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tag/family/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Family Movies >>[/COLOR]'}, img=IconPath + 'fam.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Family Movies >>[/COLOR]'}, img=IconPath + 'fam.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tag/animation/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Animation Movies >>[/COLOR]'}, img=IconPath + 'an.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Animation Movies >>[/COLOR]'}, img=IconPath + 'an.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tag/action/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Action Movies >>[/COLOR]'}, img=IconPath + 'ac.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Action Movies >>[/COLOR]'}, img=IconPath + 'ac.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tag/adventure/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Adventure Movies >>[/COLOR]'}, img=IconPath + 'ad.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Adventure Movies >>[/COLOR]'}, img=IconPath + 'ad.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tag/comedy/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Comedy Movies >>[/COLOR]'}, img=IconPath + 'com.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Comedy Movies >>[/COLOR]'}, img=IconPath + 'com.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tag/documentary-2/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Documentary Movies >>[/COLOR]'}, img=IconPath + 'doc1.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Documentary Movies >>[/COLOR]'}, img=IconPath + 'doc1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tag/horror/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Horror Movies >>[/COLOR]'}, img=IconPath + 'ho.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Horror Movies >>[/COLOR]'}, img=IconPath + 'ho.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/tag/sci-fi/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Sci-fi Movies >>[/COLOR]'}, img=IconPath + 'sci.png')
-        addon.add_directory({'mode': 'GetSearchQuery9'},  {'title':  '[COLOR green]Search Movies & Tv shows >>[/COLOR]'}, img=IconPath + 'searchse.png')
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolvere.png')
-        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helps.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]OR FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] [COLOR aqua][B]AND SHOW YOUR SUPPORT... [/B][/COLOR] '}, img=IconPath + 'theyid.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Sci-fi Movies >>[/COLOR]'}, img=IconPath + 'sci.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery9'},  {'title':  '[COLOR green]Search Movies & Tv shows >>[/COLOR]'}, img=IconPath + 'searchse.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolvere.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helps.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] '}, img=IconPath + 'theyid.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 

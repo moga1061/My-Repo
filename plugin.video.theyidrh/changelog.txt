@@ -3,3 +3,6 @@
 
 [B]Version 0.0.2[/B]
 - added ddlvalley
+
+[B]Version 0.0.3[/B]
+- added releasebb & theextopia.com
