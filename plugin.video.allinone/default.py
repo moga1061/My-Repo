@@ -25,6 +25,7 @@ BASE_URL3 = 'http://viooz.pw/'
 BASE_URL4 = 'http://www.ultra-vid.com/'
 BASE_URL5 = 'http://afsky.org/'
 BASE_URL6 = 'http://www1.zmovie.tw/'
+BASE_URL7 = 'http://www.movie-kingdom.com/'
 net = Net()
 addon = Addon('plugin.video.allinone', sys.argv)
 showAllParts = True
@@ -338,6 +339,43 @@ def GetTitles6a(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
+##############################################################################################################################################################
+
+def GetTitles7(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles #moviekingdom
+        print 'allinone get Movie Titles Menu %s' % url
+
+        # handle paging
+        pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + '/' + startPage + ''
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        CLEAN(html)
+
+        start = int(startPage)
+        end = start + int(numOfPages)
+
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + '/' + str(page) + ''
+                        html = net.http_GET(pageUrl).content
+                        CLEAN(html)
+                        
+
+                match = re.compile('img-preview spec-border.+?src="(.+?)".+?href="(.+?)".+?>(.+?)<.+?', re.DOTALL).findall(html)
+                for img, movieUrl, name in match:
+                        cm  = []
+                        runstring = 'XBMC.Container.Update(plugin://plugin.video.allinone/?mode=Search&query=%s)' %(name.strip())
+        		cm.append(('Search on allinone', runstring))
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
+
+
+
+                addon.add_directory({'mode': 'GetTitles7', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png')
+        
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
 ###############################################################################links#############################################################################################
 
 
@@ -387,6 +425,8 @@ def GetLinks(section, url): # Get Links
         if source: stream_url = source.resolve()
         else: stream_url = ''
         xbmc.Player().play(stream_url)
+
+
 
 
 #####################################################################################           ##################################################################################
@@ -448,13 +488,16 @@ def MovieMenu():   #movies
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR lightslategray](ViooZ) [/COLOR]>>'}, img=IconPath + 'vio.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles4', 'section': 'ALL', 'url': BASE_URL4 + '/category/movies',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR floralwhite](Ultra-Vid) [/COLOR]>>'}, img=IconPath + '1.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/new-movies',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR gold](Movie-Kingdom) [/COLOR]>>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles6a', 'section': 'ALL', 'url': BASE_URL6 + '/movies/new',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR plum](Zmovies) [/COLOR]>>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles5', 'section': 'ALL', 'url': BASE_URL5 + '/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR darkred](WTB) [/COLOR]>>'}, img=IconPath + 'wtb.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles6a', 'section': 'ALL', 'url': BASE_URL6 + '/movies/new',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR plum](Zmovies) [/COLOR]>>'}, img=IconPath + 'ze.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'MovMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR lightslategray](ViooZ) [/COLOR]>>'}, img=IconPath + 'vio.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'UvMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR floralwhite](Ultra-Vid) [/COLOR]>>'}, img=IconPath + '1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'ZmMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR plum](Zmovies) [/COLOR]>>'}, img=IconPath + 'ze.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'MkMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR gold](Movie-Kingdom) [/COLOR]>>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'ZmMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR plum](Zmovies) [/COLOR]>>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'WtMenu'}, {'title':  '[COLOR lightsteelblue][B]International Genre[/B][/COLOR] [COLOR darkred](WTB) [/COLOR]>>'}, img=IconPath + 'wtb.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -553,33 +596,74 @@ def WtMenu():   #moviesWt
 
 def ZmMenu():
         addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/action',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Action >>'}, img=IconPath + 'ze.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Action >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/adventure',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Adventure >>'}, img=IconPath + 'ze.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Adventure >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/animation',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Animation >>'}, img=IconPath + 'ze.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Animation >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/Comedy',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Comedy >>'}, img=IconPath + 'ze.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Comedy >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/crime',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Crime >>'}, img=IconPath + 'ze.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Crime >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/documentary',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Documentary >>'}, img=IconPath + 'ze.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Documentary >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/drama',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Drama >>'}, img=IconPath + 'ze.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Drama >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/fantasy',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Fantasy >>'}, img=IconPath + 'ze.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Fantasy >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/horror',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Horror >>'}, img=IconPath + 'ze.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Horror >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/romance',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Romance >>'}, img=IconPath + 'ze.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Romance >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/sci-Fi',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Sci Fi >>'}, img=IconPath + 'ze.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Sci Fi >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/thriller',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Thriller >>'}, img=IconPath + 'ze.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Thriller >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/sport',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Sport >>'}, img=IconPath + 'ze.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Sport >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/western',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Western >>'}, img=IconPath + 'ze.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Western >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
+
+def MkMenu():
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/movie-tags/action',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Action >>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/movie-tags/adventure',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Adventure >>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/movie-tags/animation',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Animation >>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/movie-tags/biography',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Biography >>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/movie-tags/comedy',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Comedy >>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/movie-tags/crime',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Crime >>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/movie-tags/documentary',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Documentary >>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/movie-tags/drama',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Drama >>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/movie-tags/family',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Family >>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/movie-tags/fantasy',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Fantasy >>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/movie-tags/history',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'History >>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/movie-tags/horror',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Horror >>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/movie-tags/music',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Music >>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/movie-tags/musical',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'musical >>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/movie-tags/mystery',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Mystery >>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/movie-tags/romance',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Romance >>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/movie-tags/sci-fi',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Sci-fi >>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/movie-tags/short',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Short >>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -591,6 +675,8 @@ def TvMenu():       #tv
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR salmon](WTT) [/COLOR]>>'}, img=IconPath + 'wtt.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles2', 'section': 'ALL', 'url': BASE_URL2 + '/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR darkslateblue](WTS) [/COLOR]>>'}, img=IconPath + 'tvtv.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles7', 'section': 'ALL', 'url': BASE_URL7 + '/new-shows',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR gold](Movie-Kingdom) [/COLOR]>>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -716,6 +802,8 @@ elif mode == 'GetTitles6':
 	GetTitles6(section, url, startPage, numOfPages)
 elif mode == 'GetTitles6a': 
 	GetTitles6a(section, url, startPage, numOfPages)
+elif mode == 'GetTitles7': 
+	GetTitles7(section, url, startPage, numOfPages)
 elif mode == 'GetLinks':
 	GetLinks(section, url)
 elif mode == 'GetSearchQuery9':
@@ -752,3 +840,5 @@ elif mode == 'WtMenu':
         WtMenu()
 elif mode == 'ZmMenu':
         ZmMenu()
+elif mode == 'MkMenu':
+        MkMenu()
