@@ -1,3 +1,4 @@
+################MyZmovies#################
 import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 import urllib, urllib2
 import re, string, sys, os
@@ -27,6 +28,7 @@ showPlayAll = True
 #PATHS
 AddonPath = addon.get_path()
 IconPath = AddonPath + "/icons/"
+FanartPath = AddonPath + "/icons/"
 
 if plugin.getSetting('showAllParts') == 'false':
         showAllParts = False
@@ -48,6 +50,41 @@ section = addon.queries.get('section', None)
 
 
 def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
+        print 'myZmovies get Movie Titles Menu %s' % url
+
+        # handle paging
+        pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + '/' + startPage + ''
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        CLEAN(html)
+
+        start = int(startPage)
+        end = start + int(numOfPages)
+
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + '/' + str(page) + ''
+                        html = net.http_GET(pageUrl).content
+                        CLEAN(html)
+                        
+                match = re.compile('width: 68px; height: 100px; position: relative;.+?href="(.+?)" title=(.+?)>.+?src=.+?src="(.+?)"', re.DOTALL).findall(html)
+                for movieUrl, name, img in match:
+                        cm  = []
+                        runstring = 'XBMC.Container.Update(plugin://plugin.video.myZmovies/?mode=Search&query=%s)' %(name.strip())
+        		cm.append(('Search on myZmovies', runstring))
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
+
+
+
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'znext.png', fanart=FanartPath + 'fanart.png')
+        
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#################################                        ##################################                        ##################################                      #################
+
+def GetTitles1(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
         print 'myZmovies get Movie Titles Menu %s' % url
 
         # handle paging
@@ -75,8 +112,6 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
 
 
-
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -166,44 +201,183 @@ def GetMediaInfo(html):
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/new',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '(30) [COLOR blue]New Release >>[/COLOR]'}, img=IconPath + 'new.png')
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/recent',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '(30) [COLOR blue]Recently Added >>[/COLOR]'}, img=IconPath + 'added.png')
+        addon.add_directory({'mode': 'GetTitles1', 'section': 'ALL', 'url': BASE_URL + '/movies/new',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]New Release[/COLOR] >>'}, img=IconPath + 'newre.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles1', 'section': 'ALL', 'url': BASE_URL + '/movies/recent',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Recently Added[/COLOR] >>'}, img=IconPath + 'radded.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/movies/featured',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '(30) [COLOR blue]Featured Movies >>[/COLOR]'}, img=IconPath + 'fe.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR dodgerblue]Featured Movies[/COLOR] >>'}, img=IconPath + 'femovies.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GenreMenu'}, {'title':  '[COLOR cornflowerblue]Movie by Genre[/COLOR] >>'}, img=IconPath + 'mg.png', fanart=FanartPath + 'fanart.png') 
+        addon.add_directory({'mode': 'AzMenu'}, {'title':  '[COLOR lightskyblue]Movie by A-Z[/COLOR] >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png') 
+        addon.add_directory({'mode': 'DateMenu'}, {'title':  '[COLOR lightsteelblue]Movie by Date[/COLOR] >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search [/COLOR]'}, img=IconPath + 'sea.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resttings.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'zzhub.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'twit.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
+def GenreMenu():
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/action',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Action >>'}, img=IconPath + 'ac.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Action >>'}, img=IconPath + 'mg.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/adventure',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Adventure >>'}, img=IconPath + 'ad.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Adventure >>'}, img=IconPath + 'mg.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/animation',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Animation >>'}, img=IconPath + 'an.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Animation >>'}, img=IconPath + 'mg.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/Comedy',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Comedy >>'}, img=IconPath + 'co.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Comedy >>'}, img=IconPath + 'mg.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/crime',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Crime >>'}, img=IconPath + 'cr.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Crime >>'}, img=IconPath + 'mg.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/documentary',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Documentary >>'}, img=IconPath + 'do.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Documentary >>'}, img=IconPath + 'mg.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/drama',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Drama >>'}, img=IconPath + 'dr.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Drama >>'}, img=IconPath + 'mg.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/fantasy',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Fantasy >>'}, img=IconPath + 'fa.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Fantasy >>'}, img=IconPath + 'mg.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/horror',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Horror >>'}, img=IconPath + 'ho.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Horror >>'}, img=IconPath + 'mg.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/romance',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Romance >>'}, img=IconPath + 'ro.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Romance >>'}, img=IconPath + 'mg.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/sci-Fi',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Sci Fi >>'}, img=IconPath + 'sc.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Sci Fi >>'}, img=IconPath + 'mg.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/thriller',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Thriller >>'}, img=IconPath + 'th.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Thriller >>'}, img=IconPath + 'mg.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/sport',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Sport >>'}, img=IconPath + 'sp.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Sport >>'}, img=IconPath + 'mg.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/genre/western',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Western >>'}, img=IconPath + 'we.png')
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search [/COLOR]'}, img=IconPath + 's1.png')
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'rs.png')
-        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'h1.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] [COLOR aqua][B]AND SHOW YOUR SUPPORT... [/B][/COLOR] '}, img=IconPath + 'theyid.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Western >>'}, img=IconPath + 'mg.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
+def AzMenu():
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/0-9',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1?2 >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/A',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'A >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/B',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'B >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/C',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'C >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/D',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'D >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/E',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'E >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/F',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'F >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/G',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'G >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/H',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'H >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/I',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'I >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/J',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'J >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/K',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'K >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/L',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'L >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/M',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'M >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/N',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'N >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/O',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'O >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/P',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'P >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/Q',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Q >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/R',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'R >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/S',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'S >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/T',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'T >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/U',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'U >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/V',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'V >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/W',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'W >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/X',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'X >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/Y',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Y >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/alpha/Z',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Z >>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
+def DateMenu():
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1970',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1970 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1980',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1980 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1981',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1981 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1982',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1982 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1983',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1983 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png') 
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1984',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1984 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1985',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1985 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png') 
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1986',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1986 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1987',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1987 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1988',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1988 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1989',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1989 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1990',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1990 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1991',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1991 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1992',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1992 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1993',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1993 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1994',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1994 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1995',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1995 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1996',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1996 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1997',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1997 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1998',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1998 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/1999',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '1999 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/2000',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '2000 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/2001',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '2001 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/2002',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '2002 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/2003',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '2003 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/2004',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '2004 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/2005',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '2005 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/2006',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '2006 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/2007',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '2007 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/2008',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '2008 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/2009',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '2009 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/2010',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '2010 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/2011',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '2011 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/2012',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '2012 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/search/date/2013',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '2013 >>'}, img=IconPath + 'md.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -212,7 +386,7 @@ def GetSearchQuery():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]Search Zmovies[/COLOR]')
+        keyboard.setHeading('[COLOR green]Search[/COLOR]')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):
@@ -241,6 +415,8 @@ if mode == 'main':
 	MainMenu()
 elif mode == 'GetTitles': 
 	GetTitles(section, url, startPage, numOfPages)
+elif mode == 'GetTitles1': 
+	GetTitles1(section, url, startPage, numOfPages)
 elif mode == 'GetLinks':
 	GetLinks(section, url)
 elif mode == 'GetSearchQuery':
@@ -251,4 +427,10 @@ elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':
         urlresolver.display_settings()
+elif mode == 'GenreMenu':
+        GenreMenu()
+elif mode == 'AzMenu':
+        AzMenu()
+elif mode == 'DateMenu':
+        DateMenu()
 

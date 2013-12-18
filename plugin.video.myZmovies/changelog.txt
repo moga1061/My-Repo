@@ -8,3 +8,6 @@
 
 [B]Version 0.0.3[/B]
 - fixed search
+
+[B]Version 0.0.4[/B]
+- fixed featured showing more then 10 ;-) .. added a-z, date & genre sections 

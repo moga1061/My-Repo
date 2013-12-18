@@ -1,2 +1,5 @@
 [B]Version 0.0.1[/B]
 - Initial version of All in one
+
+[B]Version 0.0.2[/B]
+- added zmovies
