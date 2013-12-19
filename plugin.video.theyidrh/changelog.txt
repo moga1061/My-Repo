@@ -12,3 +12,6 @@
 
 [B]Version 0.0.5[/B]
 - fix
+
+[B]Version 0.0.6[/B]
+- fix R1Click

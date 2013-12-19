@@ -6,4 +6,6 @@
 - new icons
 [B]Version 0.0.4[/B]
 - fix
+[B]Version 0.0.5[/B]
+- fix
 

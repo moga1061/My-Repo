@@ -297,7 +297,7 @@ def GetTitles8(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('postHeader.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
+                match = re.compile('post-meta.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://theyidrh/?mode=Search&query=%s)' %(name.strip())
@@ -504,7 +504,7 @@ def GetTitles13(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
         # handle paging
         pageUrl = url
         if int(startPage)> 1:
-                pageUrl = url + 'page/' + startPage + '/'
+                pageUrl = url + 'page/' + startPage + ''
         print pageUrl
         html = net.http_GET(pageUrl).content
         CLEAN(html)
@@ -514,7 +514,7 @@ def GetTitles13(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
 
         for page in range( start, end):
                 if ( page != start):
-                        pageUrl = url + 'page/' + str(page) + '/'
+                        pageUrl = url + 'page/' + str(page) + ''
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
@@ -660,6 +660,7 @@ def GetLinks(section, url): # Get Links
         if source: stream_url = source.resolve()
         else: stream_url = ''
         xbmc.Player().play(stream_url)
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ###############################################################################################################################################################################
 

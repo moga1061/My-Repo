@@ -6,3 +6,6 @@
 
 [B]Version 0.0.3[/B]
 - added movie-kingdom
+
+[B]Version 0.0.4[/B]
+- still testing
