@@ -71,9 +71,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                 match = re.compile('itemdets.+?href="(.+?)" title=(.+?)".+?.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
-                        runstring = 'XBMC.Container.Update(plugin://plugin.video.ultra-vid/?mode=Search&query=%s)' %(name.strip())
-        		cm.append(('Search on ultra-vid', runstring))
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
 
 
 
@@ -178,7 +176,7 @@ def MainMenu():    #homescreen
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Added [/COLOR]>>'}, img=IconPath + '1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/hd',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]HD Movies [/COLOR]>>'}, img=IconPath + '2.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GenreMenu'}, {'title':  '[COLOR blue]Movies by Genre [/COLOR]>>'}, img=IconPath + 'icon.png', fanart=FanartPath + 'fanart.png') 
+        addon.add_directory({'mode': 'GenreMenu'}, {'title':  '[COLOR blue]Movies by Genre [/COLOR]>>'}, img=IconPath + 'gen.png', fanart=FanartPath + 'fanart.png') 
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search [/COLOR]'}, img=IconPath + 's1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'set.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'h1.png', fanart=FanartPath + 'fanart.png')
