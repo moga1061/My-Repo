@@ -166,7 +166,7 @@ def GetTitles2(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
 
 ####################################################################################################################################################################
 
-def GetTitles3(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles    #vi
+def GetTitles3(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles    #viooz
         print 'allinone get Movie Titles Menu %s' % url
 
         # handle paging    
@@ -186,7 +186,7 @@ def GetTitles3(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('postsbody.+?href="(.+?)".+?=(.+?)>.+?src="(.+?)"', re.DOTALL).findall(html)
+                match = re.compile('postsbody.+?href="(.+?)".+?="(.+?)">.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
@@ -219,7 +219,7 @@ def GetTitles4(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('itemdets.+?href="(.+?)" title=(.+?)".+?.+?src="(.+?)".+?', re.DOTALL).findall(html)
+                match = re.compile('itemdets.+?href="(.+?)" title="(.+?)".+?.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.allinone/?mode=Search&query=%s)' %(name.strip())
@@ -232,7 +232,8 @@ def GetTitles4(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-################################################################################################################################################################
+##################################################################################################################################################################################
+
 
 def GetTitles5(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles  #wtb
         print 'allinone get Movie Titles Menu %s' % url
@@ -240,7 +241,7 @@ def GetTitles5(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
         # handle paging
         pageUrl = url
         if int(startPage)> 1:
-                pageUrl = url + 'page/' + startPage + '/'
+                pageUrl = url  + '/' + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
         CLEAN(html)
@@ -250,13 +251,13 @@ def GetTitles5(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
 
         for page in range( start, end):
                 if ( page != start):
-                        pageUrl = url + 'page/' + str(page) + '/'
+                        pageUrl = url + '/' + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
                 match = re.compile('latestname.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-        		cm.append(('Search on allinone', runstring))
+                        cm  = []
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
 
 
@@ -264,6 +265,7 @@ def GetTitles5(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                 addon.add_directory({'mode': 'GetTitles5', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png', fanart=FanartPath + 'fanart.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 
 ####################################################################################################################################################################
 
@@ -287,7 +289,7 @@ def GetTitles6(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('width: 68px; height: 100px; position: relative;.+?href="(.+?)" title=(.+?)>.+?src=.+?src="(.+?)"', re.DOTALL).findall(html)
+                match = re.compile('width: 68px; height: 100px; position: relative;.+?href="(.+?)" title="(.+?)">.+?src=.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
@@ -320,7 +322,7 @@ def GetTitles6a(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('width: 68px; height: 100px; position: relative;.+?href="(.+?)" title=(.+?)>.+?src=.+?src="(.+?)"', re.DOTALL).findall(html)
+                match = re.compile('width: 68px; height: 100px; position: relative;.+?href="(.+?)" title="(.+?)">.+?src=.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
@@ -398,7 +400,7 @@ def GetTitles7a(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
 ####################################################################################################################################################################################
 
 
-def GetTitles8(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles  
+def GetTitles8(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles  ##wsus
         print 'allinone get Movie Titles Menu %s' % url
 
         # handle paging
@@ -658,8 +660,6 @@ def RgMenu():   #movies  #mvl rg
 
 
 def MovMenu():   #movies
-        addon.add_directory({'mode': 'GetTitles4', 'section': 'ALL', 'url': BASE_URL4 + '/category/movies',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR floralwhite](Ultra-Vid) [/COLOR]>>'}, img=IconPath + 'uv1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles3', 'section': 'ALL', 'url': BASE_URL3 + '/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR lightslategray](ViooZ) [/COLOR]>>'}, img=IconPath + 'vu1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles3', 'section': 'ALL', 'url': BASE_URL3 + '/category/hd-movies',
@@ -696,6 +696,8 @@ def MovMenu():   #movies
 
 
 def UvMenu():   #moviesUv
+        addon.add_directory({'mode': 'GetTitles4', 'section': 'ALL', 'url': BASE_URL4 + '/category/movies',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR floralwhite](Ultra-Vid) [/COLOR]>>'}, img=IconPath + 'uv1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles4', 'section': 'ALL', 'url': BASE_URL4 + '/category/hd',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'HD Movies >>'}, img=IconPath + 'uv1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles4', 'section': 'ALL', 'url': BASE_URL4 + '/category/movies/action',

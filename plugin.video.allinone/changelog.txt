@@ -12,3 +12,6 @@
 
 [B]Version 0.0.5[/B]
 - new icons. clean up & still testing.......
+
+[B]Version 0.0.6[/B]
+- clean up

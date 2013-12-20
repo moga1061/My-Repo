@@ -11,3 +11,6 @@
 
 [B]Version 0.0.4[/B]
 - added more stuff
+
+[B]Version 0.0.5[/B]
+- all cleaned up and ready to go ....
