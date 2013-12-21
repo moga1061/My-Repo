@@ -30,6 +30,7 @@ BASE_URL8 = 'http://sceper.ws/'
 BASE_URL9 = 'http://scenedown.in/'
 BASE_URL10 = 'http://www.ddlvalley.eu/'
 BASE_URL11 = 'http://www.rlsbb.ru/'
+BASE_URL12 = 'http://singlelinkmoviez.com/'
 
 net = Net()
 addon = Addon('plugin.video.theyidrh', sys.argv)
@@ -168,8 +169,8 @@ def GetTitles4(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
 
 #####################################################################################################################################################################################
 
-def GetTitles5(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles #Release Zone
-        print 'theyidrh get Movie Titles Menu %s' % url
+def GetTitles5(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
+        print 'singlelinkmoviez get Movie Titles Menu %s' % url
 
         # handle paging
         pageUrl = url
@@ -188,16 +189,15 @@ def GetTitles5(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
                         
-                match = re.compile('<h2.+?href="(.+?)">(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
+                match = re.compile('entry-title.+?href="(.+?)".+?>(.+?)<.+? .+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
-                        runstring = 'XBMC.Container.Update(plugin://plugin.video.theyidrh/?mode=Search&query=%s)' %(name.strip())
-        		cm.append(('Search on theyidrh', runstring))
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
+                
 
-
-
+      
                 addon.add_directory({'mode': 'GetTitles5', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png')
+
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -532,7 +532,7 @@ def GetTitles13(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
 
 ################################################################################################################################################################################
 
-def GetTitles14(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
+def GetTitles14(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles #
         print 'theyidrh get Movie Titles Menu %s' % url
 
         # handle paging
@@ -660,7 +660,7 @@ def GetLinks(section, url): # Get Links
         if source: stream_url = source.resolve()
         else: stream_url = ''
         xbmc.Player().play(stream_url)
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 
 ###############################################################################################################################################################################
 
@@ -735,6 +735,8 @@ def Menu2():   #movies
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR darkorchid](Com2dl.com)[/COLOR] >>'}, img=IconPath + 'commovies.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL5 + '/category/movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR whitesmoke](The Extopia)[/COLOR] >>'}, img=IconPath + 'exmo.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles5', 'section': 'ALL', 'url': BASE_URL12 + '/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR crimson](SingleLinkMoviez)[/COLOR] >>'}, img=IconPath + 'slm.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'menu3'}, {'title': '[COLOR steelblue][B]YIFY Movies >>[/B] [/COLOR]>>'}, img=IconPath + 'yify.png', fanart=FanartPath + 'fanart.png') 
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
