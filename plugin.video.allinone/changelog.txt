@@ -21,3 +21,7 @@
 
 [B]Version 0.0.8[/B]
 - fixed omp.. changes to the site
+
+[B]Version 0.0.9[/B]
+- added more to tv shows (a-z) clean up
+
