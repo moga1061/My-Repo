@@ -31,6 +31,7 @@ BASE_URL9 = 'http://scenedown.in/'
 BASE_URL10 = 'http://www.ddlvalley.eu/'
 BASE_URL11 = 'http://www.rlsbb.ru/'
 BASE_URL12 = 'http://singlelinkmoviez.com/'
+BASE_URL13 = 'http://shawnrebecca.com/'
 
 net = Net()
 addon = Addon('plugin.video.theyidrh', sys.argv)
@@ -85,9 +86,6 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         
                 match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        cm  = []
-                        runstring = 'XBMC.Container.Update(plugin://plugin.video.theyidrh/?mode=Search&query=%s)' %(name.strip())
-        		cm.append(('Search on theyidrh', runstring))
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
 
 
@@ -810,7 +808,8 @@ def Menu6():   #sport
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest (7) Boxing[/B] [COLOR gold](ReleaseBB)[/COLOR] >>'}, img=IconPath + 'bbsport.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles13', 'section': 'ALL', 'url': BASE_URL11 + '/?s=match+of+the+day&submit=Find',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest (7) Match Of The Day[/B] [COLOR gold](ReleaseBB)[/COLOR] >>'}, img=IconPath + 'bbsport.png', fanart=FanartPath + 'fanart.png')
-
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL13 + '/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest MMA/Boxing[/B] [COLOR orange](Fight-BB)[/COLOR] >>'}, img=IconPath + 'fbb.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
