@@ -21,3 +21,6 @@
 
 [B]Version 0.0.8[/B]
 - added fight-bb
+
+[B]Version 0.0.9[/B]
+- clean up
