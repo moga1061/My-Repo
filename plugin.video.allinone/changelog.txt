@@ -25,3 +25,6 @@
 [B]Version 0.0.9[/B]
 - added more to tv shows (a-z) clean up
 
+[B]Version 0.1.0[/B]
+- clean up
+
