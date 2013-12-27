@@ -28,3 +28,6 @@
 [B]Version 0.1.0[/B]
 - clean up
 
+[B]Version 0.1.1[/B]
+- added set views
+
