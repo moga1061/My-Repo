@@ -17,3 +17,6 @@
 
 [B]Version 0.0.6[/B]
 - fixed changes to the site
+
+[B]Version 0.0.7[/B]
+- added set views

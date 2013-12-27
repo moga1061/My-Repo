@@ -36,3 +36,6 @@
 
 [B]Version 0.1.4[/B]
 - clean up & new icon
+
+[B]Version 0.1.5[/B]
+- added set views

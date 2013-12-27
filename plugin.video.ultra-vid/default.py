@@ -50,33 +50,24 @@ section = addon.queries.get('section', None)
 
 def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
         print 'ultra-vid get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + '/page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
         CLEAN(html)
-
         start = int(startPage)
         end = start + int(numOfPages)
-
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + '/page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
-                        
                 match = re.compile('itemdets.+?href="(.+?)" title=(.+?)".+?.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        cm  = []
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
-
-
-
                 addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page ->[/I][/B][/COLOR]'}, img=IconPath + 'n1.png', fanart=FanartPath + 'fanart.png')
-        
+        setView('tvshows', 'tvshows-view')    
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -243,7 +234,21 @@ def Search(query):
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
+def setView(content, viewType):
 
+	if content:
+		xbmcplugin.setContent(int(sys.argv[1]), content)
+	if addon.get_setting('auto-view') == 'true':
+		xbmc.executebuiltin("Container.SetViewMode(%s)" % addon.get_setting(viewType) )
+
+
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_UNSORTED )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_LABEL )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_VIDEO_RATING )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_DATE )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_PROGRAM_COUNT )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_VIDEO_RUNTIME )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_GENRE )
 
 
 if mode == 'main': 

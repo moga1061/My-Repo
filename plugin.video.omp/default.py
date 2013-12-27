@@ -50,93 +50,72 @@ section = addon.queries.get('section', None)
 
 def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
         print 'omp get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
         CLEAN(html)
-
         start = int(startPage)
         end = start + int(numOfPages)
-
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
-                        CLEAN(html)
-                        
+                        CLEAN(html) 
                 match = re.compile('<div class=".+?"><a class=".+?" href="(.+?)"><img width=".+?" height=".+?" src="(.+?)" .+?rel=.+?>(.+?)Watch Online ', re.DOTALL).findall(html)
                 for movieUrl, img, name in match:
-                        cm  = []
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
-
                 addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR darkorchid][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png', fanart=FanartPath + 'fanart.png')
-        
+        setView('tvshows', 'tvshows-view')  
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ##################################################################################################################################
 
 def GetTitles1(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles #222222222
         print 'omp get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + '/' + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
         CLEAN(html)
-
         start = int(startPage)
         end = start + int(numOfPages)
-
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + '/' + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
-                        CLEAN(html)
-                        
+                        CLEAN(html)  
                 match = re.compile('<div class=".+?"><a class=".+?" href="(.+?)"><img width=".+?" height=".+?" src="(.+?)" .+?rel=.+?>(.+?)Watch Online ', re.DOTALL).findall(html)
                 for movieUrl, img, name in match:
-                        cm  = []
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
-
                 addon.add_directory({'mode': 'GetTitles1', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR darkorchid][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png', fanart=FanartPath + 'fanart.png')
-        
+        setView('tvshows', 'tvshows-view')      
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #########################################################################################################################################################################
 
 def GetTitles2(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles #33333
         print 'omp get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + '/page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
         CLEAN(html)
-
         start = int(startPage)
         end = start + int(numOfPages)
-
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + '/page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
-                        CLEAN(html)
-                        
+                        CLEAN(html) 
                 match = re.compile('<div class=".+?"><a class=".+?" href="(.+?)"><img width=".+?" height=".+?" src="(.+?)" .+?rel=.+?>(.+?)Watch Online ', re.DOTALL).findall(html)
                 for movieUrl, img, name in match:
-                        cm  = []
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
-
                 addon.add_directory({'mode': 'GetTitles2', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR darkorchid][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png', fanart=FanartPath + 'fanart.png')
-        
+        setView('tvshows', 'tvshows-view')      
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #######################################################################################################################################################################
@@ -387,6 +366,24 @@ def Search(query):
                 title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
+
+def setView(content, viewType):
+
+	if content:
+		xbmcplugin.setContent(int(sys.argv[1]), content)
+	if addon.get_setting('auto-view') == 'true':
+		xbmc.executebuiltin("Container.SetViewMode(%s)" % addon.get_setting(viewType) )
+
+
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_UNSORTED )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_LABEL )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_VIDEO_RATING )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_DATE )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_PROGRAM_COUNT )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_VIDEO_RUNTIME )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_GENRE )
 
 
 

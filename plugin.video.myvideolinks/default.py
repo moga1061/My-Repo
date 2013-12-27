@@ -47,38 +47,29 @@ numOfPages = addon.queries.get('numOfPages', None)
 listitem = addon.queries.get('listitem', None)
 urlList = addon.queries.get('urlList', None)
 section = addon.queries.get('section', None)
-AddonPath = addon.get_path()
-IconPath = AddonPath + "/icons/"
 ##### Queries ##########
 
 
 def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
         print 'myvideolinks get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
         CLEAN(html)
-
         start = int(startPage)
         end = start + int(numOfPages)
-
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
-                        CLEAN(html)
-                        
+                        CLEAN(html)                        
                 match = re.compile('entry.+?href="(.+?)".+?.+?<img src="(.+?)".+?title=.+?.+?title=.+?>(.+?)<', re.DOTALL).findall(html)
                 for movieUrl, img, name in match:
-                        cm  = []
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
-               
-      
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'np.png', fanart=FanartPath + 'fanart.png')        
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)      
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'np.png', fanart=FanartPath + 'fanart.png')
+        setView('tvshows', 'tvshows-view')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -93,41 +84,29 @@ def GetLinks(section, url): # Get Links
         print'CONTENT: '+str(listitem)
         r = re.search('<strong>Links.*</strong>', html)
         if r:
-                content = html[r.end():]
-               
+                content = html[r.end():]               
+        if r:
+                content = content[:r.start()]
         match = re.compile('href="(.+?)"').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
                 host = GetDomain(url)
-
                 if 'Unknown' in host:
-
                         continue
-                print '*****************************' + host
+                print '*****************************' + host + ' : ' + url
                 title = url.rpartition('/')
+                title = title[2].replace('.html', '')
                 host = host.replace('youtube.com','[COLOR lime]Movie Trailer[/COLOR]')
                 host = host.replace('netload.in','[COLOR gold]Netload[/COLOR]')
                 host = host.replace('turbobit.net','[COLOR gold]Turbobit[/COLOR]')
-                host = host.replace('movreel.com','movreel.com - [COLOR red]Download/Streaming limit of 2GB a day !![/COLOR]')
                 name = host
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
-
-                
-        find = re.search('commentblock', html)
-        if find:
-                print 'in comments if'
-                html = html[find.end():]
-                CLEAN(html)###
-                match1 = re.compile(r'comment-page-numbers(.+?)<!--comments form -->', re.DOTALL).findall(html)
-                match = re.compile('<a href="(htt.+?)" rel="nofollow"', re.DOTALL).findall(str(match1))
-                print 'MATCH IS: '+str(match)
                 print len(match)
                 for url in match:
                         host = GetDomain(url)
                         if 'Unknown' in host:
                                 continue
-
         source = urlresolver.choose_source(sources)
         if source: stream_url = source.resolve()
         else: stream_url = ''
@@ -239,7 +218,7 @@ def GetSearchQuery9():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]Search my video links[/COLOR]')
+        keyboard.setHeading('[COLOR green]Search[/COLOR]')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):
@@ -261,6 +240,23 @@ def Search9(query):
                 title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
+def setView(content, viewType):
+
+	if content:
+		xbmcplugin.setContent(int(sys.argv[1]), content)
+	if addon.get_setting('auto-view') == 'true':
+		xbmc.executebuiltin("Container.SetViewMode(%s)" % addon.get_setting(viewType) )
+
+
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_UNSORTED )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_LABEL )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_VIDEO_RATING )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_DATE )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_PROGRAM_COUNT )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_VIDEO_RUNTIME )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_GENRE )
 
 
 if mode == 'main': 
