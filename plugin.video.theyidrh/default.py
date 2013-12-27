@@ -16,6 +16,8 @@ except:
 
 addon_id = 'plugin.video.theyidrh'
 plugin = xbmcaddon.Addon(id=addon_id)
+net = Net()
+addon = Addon('plugin.video.theyidrh', sys.argv)
 
 DB = os.path.join(xbmc.translatePath("special://database"), 'theyidrh.db')
 BASE_URL = 'http://rls-center.com/'
@@ -33,22 +35,13 @@ BASE_URL11 = 'http://www.rlsbb.ru/'
 BASE_URL12 = 'http://singlelinkmoviez.com/'
 BASE_URL13 = 'http://shawnrebecca.com/'
 BASE_URL14 = 'http://watchtvstreaming.eu/'
-
-net = Net()
-addon = Addon('plugin.video.theyidrh', sys.argv)
-showAllParts = True
-showPlayAll = True
+BASE_URL15 = 'http://www.fullmatches.net/'
 
 #PATHS
 AddonPath = addon.get_path()
 IconPath = AddonPath + "/icons/"
 FanartPath = AddonPath + "/icons/"
 
-if plugin.getSetting('showAllParts') == 'false':
-        showAllParts = False
-
-if plugin.getSetting('showPlayAll') == 'false':
-        showPlayAll = False
 
 ##### Queries ##########
 mode = addon.queries['mode']
@@ -65,10 +58,8 @@ section = addon.queries.get('section', None)
 
 ###############################################################################Movie Titles#######################################################################################
 
-def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles   # Release Center, Newdownload.net
+def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles   # Release Center, Newdownload.net, fight bb
         print 'theyidrh get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -93,8 +84,6 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
 
 def GetTitles2(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles   #Hdleak.com
         print 'theyidrh get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -119,8 +108,6 @@ def GetTitles2(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
 
 def GetTitles4(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles  # com2dl
         print 'theyidrh get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + '/page/' + startPage + '/'
@@ -144,8 +131,6 @@ def GetTitles4(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
 
 def GetTitles5(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
         print 'singlelinkmoviez get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -172,8 +157,6 @@ def GetTitles5(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
 
 def GetTitles6(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles    #Scene down
         print 'theyidrh get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -199,8 +182,6 @@ def GetTitles6(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
 
 def GetTitles7(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles  # Sceper
         print 'theyidrh get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + '/page/' + startPage + '/'
@@ -226,8 +207,6 @@ def GetTitles7(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
 
 def GetTitles8(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles   #rls1click
         print 'theyidrh get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -252,8 +231,6 @@ def GetTitles8(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
 
 def GetTitles9(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles    #wrzko
         print 'theyidrh get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -278,8 +255,6 @@ def GetTitles9(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
 
 def GetTitles1(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles #scnsrc movies
         print 'theyidrh get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -304,8 +279,6 @@ def GetTitles1(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
 
 def GetTitles10(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles   #scnsrc tv
         print 'theyidrh get Movie Titles Menu %s' % url
-
-        # handle paging movies
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -330,8 +303,6 @@ def GetTitles10(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
 
 def GetTitles11(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles #ddlv
         print 'theyidrh get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -355,8 +326,6 @@ def GetTitles11(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
 
 def GetTitles12(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles  #rbb
         print 'theyidrh get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -382,8 +351,6 @@ def GetTitles12(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
 
 def GetTitles13(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles  #rbb2
         print 'theyidrh get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + ''
@@ -407,8 +374,6 @@ def GetTitles13(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
 
 def GetTitles14(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles #
         print 'theyidrh get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -433,8 +398,6 @@ def GetTitles14(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
 
 def GetTitles15(section, url, startPage= '1', numOfPages= '1'): # watchtvstreaming
         print 'theyidrh get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -458,8 +421,6 @@ def GetTitles15(section, url, startPage= '1', numOfPages= '1'): # watchtvstreami
 
 def GetTitles15a(section, url, startPage= '1', numOfPages= '1'): # watchtvstreaming
         print 'theyidrh get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -476,6 +437,53 @@ def GetTitles15a(section, url, startPage= '1', numOfPages= '1'): # watchtvstream
                 match = re.compile('<li><a title=.+? href="(.+?)">(.+?)</a>', re.DOTALL).findall(html)
                 for movieUrl, title in match:
                         addon.add_directory({'mode': 'GetTitles15', 'section': section, 'url': movieUrl, 'startPage': '1', 'numOfPages': '1'}, {'title':  title})   
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#####################################################################################################################################################################################
+
+def GetTitles16(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
+        print 'theyidrh get Movie Titles Menu %s' % url
+        pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + 'page/' + startPage + '/'
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        CLEAN(html)
+        start = int(startPage)
+        end = start + int(numOfPages)
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + 'page/' + str(page) + '/'
+                        html = net.http_GET(pageUrl).content
+                        CLEAN(html)
+                match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
+                for movieUrl, name, img in match:
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
+                addon.add_directory({'mode': 'GetTitles16', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png', fanart=FanartPath + 'fanart.png')
+        
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+######################################################################################################################################################################################
+
+def GetTitles17(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
+        print 'fight-bb get Movie Titles Menu %s' % url
+        pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + 'page/' + startPage + '/'
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        CLEAN(html)
+        start = int(startPage)
+        end = start + int(numOfPages)
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + 'page/' + str(page) + '/'
+                        html = net.http_GET(pageUrl).content
+                        CLEAN(html)
+                match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?', re.DOTALL).findall(html)
+                for movieUrl, name in match:
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}) 
+                addon.add_directory({'mode': 'GetTitles17', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + '9.png', fanart=FanartPath + 'fanart.png')
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #################################################################################getlinks###############################################################################################
@@ -534,6 +542,7 @@ def GetLinks(section, url): # Get Links
                 title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
                 title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
                 title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
+                title = title.replace('20%',' ')
                 host = host.replace('ul.to','[COLOR gold]Uploaded[/COLOR]')
                 host = host.replace('uploaded.net','[COLOR gold]Uploaded[/COLOR]')
                 host = host.replace('youtube.com','[COLOR lime]Movie Trailer[/COLOR]')
@@ -726,9 +735,36 @@ def Menu6():   #sport
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest (7) Boxing[/B] [COLOR gold](ReleaseBB)[/COLOR] >>'}, img=IconPath + 'bbsport.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles13', 'section': 'ALL', 'url': BASE_URL11 + '/?s=match+of+the+day&submit=Find',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest (7) Match Of The Day[/B] [COLOR gold](ReleaseBB)[/COLOR] >>'}, img=IconPath + 'bbsport.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL13 + '/',
+        addon.add_directory({'mode': 'GetTitles17', 'section': 'ALL', 'url': BASE_URL13 + '/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest MMA/Wrestling/Boxing[/B] [COLOR orange](Fight-BB)[/COLOR] >>'}, img=IconPath + 'fbb.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'menu8'}, {'title': '[COLOR lightyellow][B]Football Full Matches[/B] [/COLOR]>>'}, img=IconPath + 'fullsport.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def Menu8():   #fullmatch
+        addon.add_directory({'mode': 'GetTitles16', 'section': 'ALL', 'url': BASE_URL15 + '/category/full-matches/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lightyellow]Full Matches [/COLOR]>>'}, img=IconPath + 'fullsport.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles16', 'section': 'ALL', 'url': BASE_URL15 + '/category/full-matches/england-premier-league/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lightyellow]England Premier League [/COLOR]>>'}, img=IconPath + 'fullsport.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles16', 'section': 'ALL', 'url': BASE_URL15 + '/category/full-matches/la-liga/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lightyellow]La Liga [/COLOR]>>'}, img=IconPath + 'fullsport.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles16', 'section': 'ALL', 'url': BASE_URL15 + '/category/full-matches/serie-a/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lightyellow]Serie A [/COLOR]>>'}, img=IconPath + 'fullsport.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles16', 'section': 'ALL', 'url': BASE_URL15 + '/category/full-matches/bundesliga/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lightyellow]Bundesliga [/COLOR]>>'}, img=IconPath + 'fullsport.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles16', 'section': 'ALL', 'url': BASE_URL15 + '/category/full-matches/ligue-1/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lightyellow]Ligue 1 [/COLOR]>>'}, img=IconPath + 'fullsport.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles16', 'section': 'ALL', 'url': BASE_URL15 + '/category/full-matches/matches-other/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lightyellow]Matches Other [/COLOR]>>'}, img=IconPath + 'fullsport.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles16', 'section': 'ALL', 'url': BASE_URL15 + '/category/full-matches/uefa-champions-league/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lightyellow]Uefa Champions League [/COLOR]>>'}, img=IconPath + 'fullsport.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles16', 'section': 'ALL', 'url': BASE_URL15 + '/category/full-matches/uefa-europa-league/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lightyellow]Uefa Europa League [/COLOR]>>'}, img=IconPath + 'fullsport.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles16', 'section': 'ALL', 'url': BASE_URL15 + '/category/hd-full-matches/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lightyellow]HD Matches [/COLOR]>>'}, img=IconPath + 'fullsport.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles16', 'section': 'ALL', 'url': BASE_URL15 + '/category/highlights/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lightyellow]Highlights [/COLOR]>>'}, img=IconPath + 'fullsport.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 
 
 def Menu7():   #an
@@ -1054,6 +1090,10 @@ elif mode == 'GetTitles15':
 	GetTitles15(section, url, startPage, numOfPages)
 elif mode == 'GetTitles15a': 
 	GetTitles15a(section, url, startPage, numOfPages)
+elif mode == 'GetTitles16': 
+	GetTitles16(section, url, startPage, numOfPages)
+elif mode == 'GetTitles17': 
+	GetTitles17(section, url, startPage, numOfPages)
 elif mode == 'GetLinks':
 	GetLinks(section, url)
 elif mode == 'GetSearchQuery':
@@ -1110,4 +1150,6 @@ if mode == 'menu6':
        Menu6()
 if mode == 'menu7':
        Menu7()
+if mode == 'menu8':
+       Menu8()
 

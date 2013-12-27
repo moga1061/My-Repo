@@ -24,3 +24,6 @@
 
 [B]Version 0.0.9[/B]
 - clean up
+
+[B]Version 0.1.0[/B]
+- added full match football
