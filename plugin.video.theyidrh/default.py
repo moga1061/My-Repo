@@ -99,8 +99,8 @@ def GetTitles2(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                         CLEAN(html)                        
                 match = re.compile('<h2>.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)                        
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR orange]Next...[/COLOR]'}, img=IconPath + 'ne.png')        
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR orange]Next...[/COLOR]'}, img=IconPath + 'ne.png', fanart=FanartPath + 'fanart.png')       
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -123,14 +123,14 @@ def GetTitles4(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                         CLEAN(html)                       
                 match = re.compile('<h2.+?href="(.+?)">(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
-                addon.add_directory({'mode': 'GetTitles4', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png')       
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetTitles4', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png', fanart=FanartPath + 'fanart.png')       
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #####################################################################################################################################################################################
 
-def GetTitles5(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
-        print 'singlelinkmoviez get Movie Titles Menu %s' % url
+def GetTitles5(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles #singlelinkmoviez
+        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -149,8 +149,9 @@ def GetTitles5(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                         
                 match = re.compile('entry-title.+?href="(.+?)".+?>(.+?)<.+? .+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
-                addon.add_directory({'mode': 'GetTitles5', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png')
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetTitles5', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png', fanart=FanartPath + 'fanart.png')
+        setView('tvshows', 'tvshows-view') 
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #####################################################################################################################################################################################
@@ -172,8 +173,8 @@ def GetTitles6(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                         CLEAN(html)                      
                 match = re.compile('postTitle.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
-                addon.add_directory({'mode': 'GetTitles6', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png')        
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetTitles6', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #####################################################################################################################################################################################
@@ -197,8 +198,8 @@ def GetTitles7(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                         CLEAN(html)                        
                 match = re.compile('<h2.+?href="(.+?)">(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
-                addon.add_directory({'mode': 'GetTitles7', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + '3.png')       
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetTitles7', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png', fanart=FanartPath + 'fanart.png')       
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ####################################################################################################################################################################################
@@ -222,8 +223,8 @@ def GetTitles8(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                         CLEAN(html)                        
                 match = re.compile('post-meta.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)                        
-                addon.add_directory({'mode': 'GetTitles8', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue]Next...[/COLOR]'}, img=IconPath + 'nextpage.png')        
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
+                addon.add_directory({'mode': 'GetTitles8', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue]Next...[/COLOR]'}, img=IconPath + 'nextpage.png', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #####################################################################################################################################################################################
@@ -246,8 +247,8 @@ def GetTitles9(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                         CLEAN(html)                        
                 match = re.compile('maintitle.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
-                addon.add_directory({'mode': 'GetTitles9', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png')        
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetTitles9', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -270,8 +271,8 @@ def GetTitles1(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                         CLEAN(html)                        
                 match = re.compile('<h2>.+?href="(.+?)".+?>(.+?)<.+?.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
-                addon.add_directory({'mode': 'GetTitles1', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png')        
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetTitles1', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ##############                ##########                #######                                ###########            #############                         ################
@@ -294,8 +295,8 @@ def GetTitles10(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                         CLEAN(html)                       
                 match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?.+?src=(.+?)', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
-                addon.add_directory({'mode': 'GetTitles10', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png')       
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetTitles10', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png', fanart=FanartPath + 'fanart.png')       
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -318,8 +319,8 @@ def GetTitles11(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                         CLEAN(html)                       
                 match = re.compile('<h2>.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png')        
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #####################################################################################################################################################################################
@@ -341,8 +342,8 @@ def GetTitles12(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                         CLEAN(html)                        
                 match = re.compile('postTitle.+?href="(.+?)".+?>(.+?)<.+?src=.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)                        
-                addon.add_directory({'mode': 'GetTitles12', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue]Next...[/COLOR]'}, img=IconPath + 'nextpage.png')        
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
+                addon.add_directory({'mode': 'GetTitles12', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue]Next...[/COLOR]'}, img=IconPath + 'nextpage.png', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #######################                        #############                     ############                     ##############       ##########               ##############
@@ -366,8 +367,8 @@ def GetTitles13(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                         CLEAN(html)                        
                 match = re.compile('postTitle.+?href="(.+?)".+?>(.+?)<.+?src=.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)                        
-                addon.add_directory({'mode': 'GetTitles13', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue]Come back soon[/COLOR]'}, img=IconPath + '')        
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
+                addon.add_directory({'mode': 'GetTitles13', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue]Come back soon[/COLOR]'}, img=IconPath + '', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ################################################################################################################################################################################
@@ -389,8 +390,8 @@ def GetTitles14(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                         CLEAN(html)                        
                 match = re.compile('<h2><a.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
-                addon.add_directory({'mode': 'GetTitles14', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png')        
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetTitles14', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png', fanart=FanartPath + 'fanart.png')       
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ######################################################################################################################################################
@@ -413,7 +414,7 @@ def GetTitles15(section, url, startPage= '1', numOfPages= '1'): # watchtvstreami
                         CLEAN(html)                      
                 match = re.compile('<h1><a href="(.+?)" rel=.+?>(.+?)</a></h1>', re.DOTALL).findall(html)
                 for movieUrl, name in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()})
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'tvaz.png', fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles15', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png', fanart=FanartPath + 'fanart.png') 
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -436,7 +437,7 @@ def GetTitles15a(section, url, startPage= '1', numOfPages= '1'): # watchtvstream
                         CLEAN(html)                        
                 match = re.compile('<li><a title=.+? href="(.+?)">(.+?)</a>', re.DOTALL).findall(html)
                 for movieUrl, title in match:
-                        addon.add_directory({'mode': 'GetTitles15', 'section': section, 'url': movieUrl, 'startPage': '1', 'numOfPages': '1'}, {'title':  title})   
+                        addon.add_directory({'mode': 'GetTitles15', 'section': section, 'url': movieUrl, 'startPage': '1', 'numOfPages': '1'}, {'title':  title}, img=IconPath + 'tvaz.png', fanart=FanartPath + 'fanart.png')   
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #####################################################################################################################################################################################
@@ -458,7 +459,7 @@ def GetTitles16(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                         CLEAN(html)
                 match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles16', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png', fanart=FanartPath + 'fanart.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -482,8 +483,8 @@ def GetTitles17(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                         CLEAN(html)
                 match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?', re.DOTALL).findall(html)
                 for movieUrl, name in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}) 
-                addon.add_directory({'mode': 'GetTitles17', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + '9.png', fanart=FanartPath + 'fanart.png')
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'fbb.png', fanart=FanartPath + 'fanart.png') 
+                addon.add_directory({'mode': 'GetTitles17', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png', fanart=FanartPath + 'fanart.png')
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #################################################################################getlinks###############################################################################################
@@ -533,6 +534,9 @@ def GetLinks(section, url): # Get Links
                 title = title.replace('part3','')
                 title = title.replace('part4','')
                 title = title.replace('part5','')
+                title = title.replace('1st','[COLOR coral][B]1st HALF[/B][/COLOR]')
+                title = title.replace('2nd','[COLOR coral][B]2nd HALF[/B][/COLOR]')
+                title = title.replace('fullmatches net','')
                 title = title.replace('.',' ')
                 title = title.replace('480p','[COLOR coral][B][I]480p[/B][/I][/COLOR]')
                 title = title.replace('720p','[COLOR gold][B][I]720p[/B][/I][/COLOR]')
@@ -542,7 +546,7 @@ def GetLinks(section, url): # Get Links
                 title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
                 title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
                 title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
-                title = title.replace('20%',' ')
+                title = title.replace('%20',' ')
                 host = host.replace('ul.to','[COLOR gold]Uploaded[/COLOR]')
                 host = host.replace('uploaded.net','[COLOR gold]Uploaded[/COLOR]')
                 host = host.replace('youtube.com','[COLOR lime]Movie Trailer[/COLOR]')
@@ -1053,6 +1057,23 @@ def Search9(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+####################################################################################################################################################
+
+def setView(content, viewType):
+
+	if content:
+		xbmcplugin.setContent(int(sys.argv[1]), content)
+	if addon.get_setting('auto-view') == 'true':
+		xbmc.executebuiltin("Container.SetViewMode(%s)" % addon.get_setting(viewType) )
+
+
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_UNSORTED )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_LABEL )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_VIDEO_RATING )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_DATE )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_PROGRAM_COUNT )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_VIDEO_RUNTIME )
+	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_GENRE )
 
 ####################################################################################################################################################
 

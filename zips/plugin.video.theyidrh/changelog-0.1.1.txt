@@ -1,0 +1,32 @@
+[B]Version 0.0.1[/B]
+- Initial version of Release [COLOR dodgerblue][B]HUB[/B][/COLOR]
+
+[B]Version 0.0.2[/B]
+- added ddlvalley
+
+[B]Version 0.0.3[/B]
+- added releasebb & theextopia.com
+
+[B]Version 0.0.4[/B]
+- clean up
+
+[B]Version 0.0.5[/B]
+- fix
+
+[B]Version 0.0.6[/B]
+- fix R1Click
+
+[B]Version 0.0.7[/B]
+- added singlelinkmovies
+
+[B]Version 0.0.8[/B]
+- added fight-bb
+
+[B]Version 0.0.9[/B]
+- clean up
+
+[B]Version 0.1.0[/B]
+- added full match football
+
+[B]Version 0.1.1[/B]
+- clean up
