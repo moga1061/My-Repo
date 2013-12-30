@@ -1,9 +1,0 @@
-[B]Version 0.0.1[/B]
-- Initial version 
-[B]Version 0.0.2[/B]
-- clean up 
-[B]Version 0.0.3[/B]
-- new icons
-[B]Version 0.0.4[/B]
-- fix
-

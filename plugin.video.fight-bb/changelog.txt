@@ -25,3 +25,6 @@
 [B]Version 0.1.1[/B]
 - fixed links not showing up for now
 
+[B]Version 0.1.2[/B]
+- clean up
+

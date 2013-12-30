@@ -67,8 +67,8 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         CLEAN(html)                        
                 match = re.compile('entry.+?href="(.+?)".+?.+?<img src="(.+?)".+?title=.+?.+?title=.+?>(.+?)<', re.DOTALL).findall(html)
                 for movieUrl, img, name in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img)      
-                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'np.png', fanart=FanartPath + 'fanart.png')
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')      
+                addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -97,8 +97,11 @@ def GetLinks(section, url): # Get Links
                 title = url.rpartition('/')
                 title = title[2].replace('.html', '')
                 host = host.replace('youtube.com','[COLOR lime]Movie Trailer[/COLOR]')
+                host = host.replace('youtu.be','[COLOR lime]Movie Trailer[/COLOR]')
                 host = host.replace('netload.in','[COLOR gold]Netload[/COLOR]')
                 host = host.replace('turbobit.net','[COLOR gold]Turbobit[/COLOR]')
+                host = host.replace('.net','')
+                host = host.replace('.com','')
                 name = host
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
@@ -154,7 +157,7 @@ def Categories(section):  #categories
         for cat, title in match:
                 url = url + cat
                 addon.add_directory({'mode': 'GetTitles', 'section': section, 'url': url,
-                                     'startPage': '1', 'numOfPages': '1'}, {'title':  title})
+                                     'startPage': '1', 'numOfPages': '1'}, {'title':  title}, img=IconPath + 'icon.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen

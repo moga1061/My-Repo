@@ -50,8 +50,6 @@ section = addon.queries.get('section', None)
 
 def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
         print 'fight-bb get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -67,7 +65,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         CLEAN(html)
                 match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?', re.DOTALL).findall(html)
                 for movieUrl, name in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}) 
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'icon.png', fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + '9.png', fanart=FanartPath + 'fanart.png')
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 

@@ -20,3 +20,6 @@
 
 [B]Version 0.0.7[/B]
 - added set views
+
+[B]Version 0.0.8[/B]
+- new next page icon

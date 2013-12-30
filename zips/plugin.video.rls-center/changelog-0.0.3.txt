@@ -1,8 +1,0 @@
-[B]Version 0.0.1[/B]
-- Initial version of Release Center [COLOR green]TV[/COLOR]
-
-[B]Version 0.0.2[/B]
-- Initial version of Release [COLOR green]Center[/COLOR] added movies
-
-[B]Version 0.0.3[/B]
-- clean up

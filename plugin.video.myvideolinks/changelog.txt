@@ -61,3 +61,6 @@
 
 [B]Version 0.4.0[/B]
 - added set view 
+
+[B]Version 0.4.1[/B]
+- new next page icon
