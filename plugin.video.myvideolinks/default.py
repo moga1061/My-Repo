@@ -65,7 +65,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)                        
-                match = re.compile('entry.+?href="(.+?)".+?.+?<img src="(.+?)".+?title=.+?.+?title=.+?>(.+?)<', re.DOTALL).findall(html)
+                match = re.compile('entry.+?href="(.+?)".+?.+?<img src="(.+?)".+?title="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, img, name in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')      
                 addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
@@ -174,7 +174,7 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/index.php?s=HARRY+POTTER',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Harry Potter Movie Collection [/COLOR]>>'}, img=IconPath + '12.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/index.php?s=star+wars',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Star Wars Movie Collection [/COLOR]>>'}, img=IconPath + '11.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Star Wars Movie Collection [/COLOR]>>'}, img= 'https://bitbucket.org/tcz009/private-repo/raw/a69a9cdf88989b266a2861505d21f7946a8f0da2/icons/11.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetSearchQuery9'},  {'title':  '[COLOR green]Search[/COLOR]'}, img=IconPath + 'searchse.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolvere.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helps.png', fanart=FanartPath + 'fanart.png')

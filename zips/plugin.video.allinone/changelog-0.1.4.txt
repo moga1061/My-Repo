@@ -1,0 +1,43 @@
+[B]Version 0.0.1[/B]
+- Initial version of All in one
+
+[B]Version 0.0.2[/B]
+- added zmovies 
+
+[B]Version 0.0.3[/B]
+- added movie-kingdom
+
+[B]Version 0.0.4[/B]
+- still testing
+
+[B]Version 0.0.5[/B]
+- new icons. clean up & still testing.......
+
+[B]Version 0.0.6[/B]
+- clean up
+
+[B]Version 0.0.7[/B]
+- added OMP, sport
+
+[B]Version 0.0.8[/B]
+- fixed omp.. changes to the site
+
+[B]Version 0.0.9[/B]
+- added more to tv shows (a-z) clean up
+
+[B]Version 0.1.0[/B]
+- clean up
+
+[B]Version 0.1.1[/B]
+- added set views
+
+[B]Version 0.1.2[/B]
+- clean up
+
+[B]Version 0.1.3[/B]
+- new next page icon
+
+[B]Version 0.1.4[/B]
+- quick fix changes to the sit (my video links eu)
+
+

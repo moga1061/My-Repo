@@ -64,3 +64,6 @@
 
 [B]Version 0.4.1[/B]
 - new next page icon
+
+[B]Version 0.4.2[/B]
+- quick fix changes to the sit
