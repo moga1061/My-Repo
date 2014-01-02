@@ -40,4 +40,7 @@
 [B]Version 0.1.4[/B]
 - quick fix changes to the sit (my video links eu)
 
+[B]Version 0.1.5[/B]
+- added tv-junky
+
 

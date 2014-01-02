@@ -36,6 +36,7 @@ BASE_URL13 = 'http://fullepisode.info/'
 BASE_URL14 = 'http://www.channelcut.me/'
 BASE_URL15 = 'http://watchtvstreaming.eu/'
 BASE_URL16 = 'http://putlocker.bz/'
+BASE_URL17 = 'http://tv-junky.eu/'
 
 #### PATHS ##########
 AddonPath = addon.get_path()
@@ -554,6 +555,29 @@ def GetTitles16(section, url, startPage= '1', numOfPages= '1'): # Get putlocker.
         setView('tvshows', 'tvshows-view')       
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+#############################################################################################################################################################
+
+def GetTitles17(section, url, startPage= '1', numOfPages= '1'): #Tv-junky
+        print 'fight-bb get Movie Titles Menu %s' % url
+        pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + 'page/' + startPage + '/'
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        CLEAN(html)
+        start = int(startPage)
+        end = start + int(numOfPages)
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + 'page/' + str(page) + '/'
+                        html = net.http_GET(pageUrl).content
+                        CLEAN(html)
+                match = re.compile('posttitle.+?href="(.+?)".+?>(.+?)<.+?', re.DOTALL).findall(html)
+                for movieUrl, name in match:
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'tvj.png', fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetTitles17', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png', fanart=FanartPath + 'fanart.png')
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 ###############################################################################links#############################################################################################
 
 
@@ -920,6 +944,10 @@ def TvMenu():       #tv
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR gold](Movie-Kingdom) [/COLOR]>>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles13', 'section': 'ALL', 'url': BASE_URL13 + '/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes list[/B][/COLOR] [COLOR cadetblue](FullEpisode) [/COLOR]>>'}, img=IconPath + 'fei.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes list[/B][/COLOR] [COLOR tomato](ChannelCut) [/COLOR]>>'}, img=IconPath + 'cc.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles17', 'section': 'ALL', 'url': BASE_URL17 + '/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes list[/B][/COLOR] [COLOR sienna](Tv-Junky) [/COLOR]>>'}, img=IconPath + 'tvj.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles15a', 'section': 'ALL', 'url': BASE_URL15 + '/categories/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orange][B]Tv show A-Z list[/B][/COLOR] [COLOR lime](WatchTvStreaming) [/COLOR]>>'}, img=IconPath + 'tvaz.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -1149,6 +1177,8 @@ elif mode == 'GetTitles15a':
 	GetTitles15a(section, url, startPage, numOfPages)
 elif mode == 'GetTitles16': 
 	GetTitles16(section, url, startPage, numOfPages)
+elif mode == 'GetTitles17': 
+	GetTitles17(section, url, startPage, numOfPages)
 elif mode == 'GetLinks':
 	GetLinks(section, url)
 elif mode == 'GetSearchQuery9':
