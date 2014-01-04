@@ -23,3 +23,6 @@
 
 [B]Version 0.0.8[/B]
 - new next page icon
+
+[B]Version 0.0.9[/B]
+- fixed changes to the site

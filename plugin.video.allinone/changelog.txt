@@ -43,4 +43,7 @@
 [B]Version 0.1.5[/B]
 - added tv-junky
 
+[B]Version 0.1.6[/B]
+- fixed omp & added a2z
+
 
