@@ -46,4 +46,8 @@
 [B]Version 0.1.6[/B]
 - fixed omp & added a2z
 
+[B]Version 0.1.7[/B]
+- fixed omp
+
+
 

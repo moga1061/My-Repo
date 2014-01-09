@@ -26,3 +26,6 @@
 
 [B]Version 0.0.9[/B]
 - fixed changes to the site
+
+[B]Version 0.1.0[/B]
+- fixed more changes to the site
