@@ -49,5 +49,8 @@
 [B]Version 0.1.7[/B]
 - fixed omp
 
+[B]Version 0.1.8[/B]
+- temp fix for omp
+
 
 
