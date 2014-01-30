@@ -58,5 +58,8 @@
 [B]Version 0.2.0[/B]
 - clean up
 
+[B]Version 0.2.1[/B]
+- fixed next on one click moviez
+
 
 

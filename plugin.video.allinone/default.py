@@ -326,7 +326,7 @@ def GetTitles9(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
         print 'allinone get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
-                pageUrl = url + '/page/' + startPage + '/'
+                pageUrl = url + '/' + startPage + ''
         print pageUrl
         html = net.http_GET(pageUrl).content
         CLEAN(html)
@@ -334,13 +334,13 @@ def GetTitles9(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
-                        pageUrl = url + '/page/' + str(page) + '/'
+                        pageUrl = url + '/' + str(page) + ''
                         html = net.http_GET(pageUrl).content
-                        CLEAN(html)                       
+                        CLEAN(html)                      
                 match = re.compile('text-align:center.+?href="(.+?)".+?>.+?<.+?src="(.+?)" .+?=.+? .+?=.+? .+?=.+? .+?=.+? title="(.+?)">', re.DOTALL).findall(html)
                 for movieUrl, img, name in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
-                #addon.add_directory({'mode': 'GetTitles9', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png') 
+                addon.add_directory({'mode': 'GetTitles9', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png') 
         setView('tvshows', 'tvshows-view')          
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
