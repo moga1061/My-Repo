@@ -26,7 +26,7 @@ addon = Addon('plugin.video.omp', sys.argv)
 AddonPath = addon.get_path()
 IconPath = AddonPath + "/icons/"
 FanartPath = AddonPath + "/icons/"
-
+######
 
 ##### Queries ##########
 mode = addon.queries['mode']
@@ -56,8 +56,8 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
                         CLEAN(html) 
-                match = re.compile('<div class=".+?"><a class=".+?" href="(.+?)"><img width=".+?" height=".+?" src="(.+?)" .+?rel=.+?>(.+?)Watch Online ', re.DOTALL).findall(html)
-                for movieUrl, img, name in match:
+                match = re.compile('<h2 .+?=.+?><a href="(.+?)" .+?=.+? .+?=.+?>.+?</a></h2><div class=.+?><img src=.+? src=.+?><img .+?=.+? .+?="(.+?)" src="(.+?)"', re.DOTALL).findall(html)
+                for movieUrl, name, img in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR darkorchid][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')  
@@ -80,11 +80,10 @@ def GetTitles1(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                         pageUrl = url + '/' + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)  
-                match = re.compile('<div class=".+?"><a class=".+?" href="(.+?)"><img width=".+?" height=".+?" src="(.+?)" .+?rel=.+?>(.+?)Watch Online <', re.DOTALL).findall(html)
-                for movieUrl, img, name in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
-                addon.add_directory({'mode': 'GetTitles1', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR darkorchid][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
-        setView('tvshows', 'tvshows-view')      
+                match = re.compile('<h2 class=.+? id=.+?><a href="(.+?)" rel=.+? title=.+?>(.+?)</a></h2><div', re.DOTALL).findall(html)
+                for movieUrl, name in match:
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetTitles1', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR darkorchid][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')     
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #########################################################################################################################################################################
@@ -104,11 +103,10 @@ def GetTitles2(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                         pageUrl = url + '/page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
                         CLEAN(html) 
-                match = re.compile('<div class=".+?"><a class=".+?" href="(.+?)"><img width=".+?" height=".+?" src="(.+?)" .+?rel=.+?>(.+?)Watch Online ', re.DOTALL).findall(html)
-                for movieUrl, img, name in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
-                addon.add_directory({'mode': 'GetTitles2', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR darkorchid][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
-        setView('tvshows', 'tvshows-view')      
+                match = re.compile('<h2 class=.+? id=.+?><a href="(.+?)" rel=.+? title=.+?>(.+?)</a></h2><div', re.DOTALL).findall(html)
+                for movieUrl, name in match:
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetTitles2', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR darkorchid][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')   
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #######################################################################################################################################################################
@@ -202,7 +200,7 @@ def MainMenu():    #homescreen
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorchid]LATEST ADDED [/COLOR]>>'}, img=IconPath + 'la.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles1', 'section': 'ALL', 'url': BASE_URL + '/category/old-movies',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorchid]CLASSIC MOVIES [/COLOR]>>'}, img=IconPath + 'ca.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/boxing/',
+        addon.add_directory({'mode': 'GetTitles1', 'section': 'ALL', 'url': BASE_URL + '/category/boxing/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorchid]SPORTS [/COLOR]>>'}, img=IconPath + 'spo.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GenreMenu'}, {'title':  '[COLOR darkorchid]GENRE [/COLOR]>>'}, img=IconPath + 'gen.png', fanart=FanartPath + 'fanart.png') 
         addon.add_directory({'mode': 'AzMenu'}, {'title':  '[COLOR darkorchid] A-Z [/COLOR]>>'}, img=IconPath + 'az.png', fanart=FanartPath + 'fanart.png')  
@@ -327,8 +325,8 @@ def DateMenu():
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '2012 >>'}, img=IconPath + 'icon.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles1', 'section': 'ALL', 'url': BASE_URL + '/tag/2013-english-movies',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '2013 >>'}, img=IconPath + 'icon.png', fanart=FanartPath + 'fanart.png')
-        #addon.add_directory({'mode': 'GetTitles1', 'section': 'ALL', 'url': BASE_URL + '/tag/2014-english-movies',
-                             #'startPage': '1', 'numOfPages': '1'}, {'title':  '2014 >>'}, img=IconPath + 'icon.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles1', 'section': 'ALL', 'url': BASE_URL + '/tag/2014-english-movies',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '2014 >>'}, img=IconPath + 'icon.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
