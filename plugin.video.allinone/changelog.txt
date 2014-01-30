@@ -55,5 +55,8 @@
 [B]Version 0.1.9[/B]
 - fixed omp removed R1C & added the new one click moviez
 
+[B]Version 0.2.0[/B]
+- clean up
+
 
 

@@ -32,7 +32,7 @@ BASE_URL8 = 'http://sceper.ws/'
 BASE_URL9 = 'http://scenedown.in/'
 BASE_URL10 = 'http://www.ddlvalley.eu/'
 BASE_URL11 = 'http://www.rlsbb.ru/'
-BASE_URL12 = 'http://singlelinkmoviez.com/'
+BASE_URL12 = ''
 BASE_URL13 = 'http://shawnrebecca.com/'
 BASE_URL14 = 'http://watchtvstreaming.eu/'
 BASE_URL15 = 'http://www.fullmatches.net/'
@@ -654,16 +654,16 @@ def Menu2():   #movies
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR lime](Release Center)[/COLOR] >>'}, img=IconPath + 'rcmovies.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles9', 'section': 'ALL', 'url': BASE_URL7 + '/movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR deepskyblue](wrzKO)[/COLOR] >>'}, img=IconPath + 'wmovies.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles8', 'section': 'ALL', 'url': BASE_URL3 + '/category/movies',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR orange](Release 1 click)[/COLOR] >>'}, img=IconPath + 'r1movies.png', fanart=FanartPath + 'fanart.png')
+        #addon.add_directory({'mode': 'GetTitles8', 'section': 'ALL', 'url': BASE_URL3 + '/category/movies',
+                             #'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR orange](Release 1 click)[/COLOR] >>'}, img=IconPath + 'r1movies.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL2 + '/category/movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR skyblue](Newdownload.net)[/COLOR] >>'}, img=IconPath + 'nemovies.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles4', 'section': 'ALL', 'url': BASE_URL6 + '/movie/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR darkorchid](Com2dl.com)[/COLOR] >>'}, img=IconPath + 'commovies.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL5 + '/category/movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR whitesmoke](The Extopia)[/COLOR] >>'}, img=IconPath + 'exmo.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles5', 'section': 'ALL', 'url': BASE_URL12 + '/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR crimson](SingleLinkMoviez)[/COLOR] >>'}, img=IconPath + 'slm.png', fanart=FanartPath + 'fanart.png')
+        #addon.add_directory({'mode': 'GetTitles5', 'section': 'ALL', 'url': BASE_URL12 + '/',
+                             #'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR crimson](SingleLinkMoviez)[/COLOR] >>'}, img=IconPath + 'slm.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'menu3'}, {'title': '[COLOR steelblue][B]YIFY Movies >>[/B] [/COLOR]>>'}, img=IconPath + 'yify.png', fanart=FanartPath + 'fanart.png') 
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -698,8 +698,8 @@ def Menu4():    #tv
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Tv Shows[/B] [/COLOR] [COLOR deepskyblue](wrzKO)[/COLOR] >>'}, img=IconPath + 'wtv.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles10', 'section': 'ALL', 'url': BASE_URL1 + '/tv/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Tv Shows[/B] [/COLOR] [COLOR orangered](Scene Source)[/COLOR] >>'}, img=IconPath + 'sstv.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles8', 'section': 'ALL', 'url': BASE_URL3 + '/category/tv-shows/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Tv Shows[/B] [/COLOR] [COLOR orange](Release 1 click)[/COLOR] >>'}, img=IconPath + 'r1tv.png', fanart=FanartPath + 'fanart.png')
+        #addon.add_directory({'mode': 'GetTitles8', 'section': 'ALL', 'url': BASE_URL3 + '/category/tv-shows/',
+                             #'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Tv Shows[/B] [/COLOR] [COLOR orange](Release 1 click)[/COLOR] >>'}, img=IconPath + 'r1tv.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL2 + '/category/tv-shows/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Tv Shows[/B] [/COLOR] [COLOR skyblue](Newdownload.net)[/COLOR] >>'}, img=IconPath + 'netv.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles4', 'section': 'ALL', 'url': BASE_URL6 + '/tv-show/',

@@ -33,3 +33,6 @@
 
 [B]Version 0.1.2[/B]
 - new next page icon
+
+[B]Version 0.1.3[/B]
+- clean up
