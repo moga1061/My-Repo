@@ -64,5 +64,8 @@
 [B]Version 0.2.2[/B]
 - removed online movies player untill they stop messing with the site 
 
+[B]Version 0.2.3[/B]
+- fixed some stuff in one click moviez
+
 
 
