@@ -61,5 +61,8 @@
 [B]Version 0.2.1[/B]
 - fixed next on one click moviez
 
+[B]Version 0.2.2[/B]
+- removed online movies player untill they stop messing with the site 
+
 
 
