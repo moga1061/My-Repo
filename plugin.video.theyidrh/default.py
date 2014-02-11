@@ -36,6 +36,7 @@ BASE_URL12 = 'http://300mbmovies4u.com/'
 BASE_URL13 = 'http://shawnrebecca.com/'
 BASE_URL14 = 'http://watchtvstreaming.eu/'
 BASE_URL15 = 'http://www.fullmatches.net/'
+BASE_URL16 = 'http://tv-release.net/'
 
 #PATHS
 AddonPath = addon.get_path()
@@ -144,8 +145,8 @@ def GetTitles4(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                         pageUrl = url + '/page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)                       
-                match = re.compile('<h2.+?href="(.+?)">(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
-                for movieUrl, name, img in match:
+                match = re.compile('shstory-img.+?href="(.+?)"><img src="(.+?)" alt="(.+?)"', re.DOTALL).findall(html)
+                for movieUrl, img, name in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles4', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')       
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -224,15 +225,15 @@ def GetTitles7(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                 addon.add_directory({'mode': 'GetTitles7', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')       
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-####################################################################################################################################################################################
+###########################################################################################################################################################################
 
+def GetTitles8(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
+        print 'rls-tv get Movie Titles Menu %s' % url
 
-
-def GetTitles8(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles   #rls1click
-        print 'theyidrh get Movie Titles Menu %s' % url
+        # handle paging
         pageUrl = url
         if int(startPage)> 1:
-                pageUrl = url + 'page/' + startPage + '/'
+                pageUrl = url + '/index.php?page=' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
         CLEAN(html)
@@ -240,13 +241,12 @@ def GetTitles8(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
-                        pageUrl = url + 'page/' + str(page) + '/'
+                        pageUrl = url + '/index.php?page=' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
-                        CLEAN(html)                        
-                match = re.compile('post-meta.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
-                for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
-                addon.add_directory({'mode': 'GetTitles8', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue]Next...[/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')        
+                        CLEAN(html)
+                match = re.compile("<td width=.+? style=.+?><a href='(.+?)'>(.+?)</a></td><td", re.DOTALL).findall(html)
+                for movieUrl, name in match:
+                        addon.add_directory({'mode': 'GetLinks1', 'section': section, 'url': 'http://tv-release.net/' + movieUrl}, {'title':  name.strip()}, img=IconPath + 'rlstv.png', fanart=FanartPath + 'fanart.png')
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #####################################################################################################################################################################################
@@ -551,11 +551,6 @@ def GetLinks(section, url): # Get Links
                 title = title.replace('.',' ')
                 title = title.replace('gaz','')
                 title = title.replace('NTb','')
-                title = title.replace('part1','')
-                title = title.replace('part2','')
-                title = title.replace('part3','')
-                title = title.replace('part4','')
-                title = title.replace('part5','')
                 title = title.replace('1st','[COLOR coral][B]1st HALF[/B][/COLOR]')
                 title = title.replace('2nd','[COLOR coral][B]2nd HALF[/B][/COLOR]')
                 title = title.replace('fullmatches net','')
@@ -563,8 +558,6 @@ def GetLinks(section, url): # Get Links
                 title = title.replace('480p','[COLOR coral][B][I]480p[/B][/I][/COLOR]')
                 title = title.replace('720p','[COLOR gold][B][I]720p[/B][/I][/COLOR]')
                 title = title.replace('1080p','[COLOR orange][B][I]1080p[/B][/I][/COLOR]')
-                title = title.replace('DDLValley eu','')
-                title = title.replace('theextopia com','')
                 title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
                 title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
                 title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
@@ -605,6 +598,53 @@ def GetLinks(section, url): # Get Links
                         # ignore .rar files
                         r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
                         if r:
+                                continue
+
+        source = urlresolver.choose_source(sources)
+        if source: stream_url = source.resolve()
+        else: stream_url = ''
+        xbmc.Player().play(stream_url)
+
+#########################---------------------------------------------------------------------#######################################
+
+def GetLinks1(section, url): # Get Links
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(str(url)).content
+        CLEAN(html)
+        sources = []
+        listitem = GetMediaInfo(html)
+        print 'LISTITEM: '+str(listitem)
+        content = html
+        print'CONTENT: '+str(listitem)
+        r = re.search('<strong>Links.*</strong>', html)
+        if r:
+                content = html[r.end():]
+
+        match = re.compile("href='(.+?)'").findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match:
+                host = GetDomain(url)
+
+                if 'Unknown' in host:
+
+                        continue
+                print '*****************************' + host + ' : ' + url
+                title = url.rpartition('/')
+                name = host
+                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
+                sources.append(hosted_media)
+
+                
+        find = re.search('commentblock', html)
+        if find:
+                print 'in comments if'
+                html = html[find.end():]
+                CLEAN(html)###
+                print 'MATCH IS: '+str(match)
+                print len(match)
+                for url in match:
+                        host = GetDomain(url)
+                        if 'Unknown' in host:
                                 continue
 
         source = urlresolver.choose_source(sources)
@@ -757,6 +797,30 @@ def Menu11():    #tv
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest 1080p / 720p packs[/B] [/COLOR] [COLOR whitesmoke](The Extopia)[/COLOR] >>'}, img=IconPath + 'extv1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles11', 'section': 'ALL', 'url': BASE_URL10 + '/category/tv-shows/web-dl/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Web-DL[/B] [/COLOR] [COLOR powderblue](DDLvalley)[/COLOR] >>'}, img=IconPath + 'ddltv.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'menu12'}, {'title': '[COLOR darkorange][B]Latest 1080p / 720p[/B] [/COLOR] [COLOR red](Rls-TV)[/COLOR] >>'}, img=IconPath + 'rlstv.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def Menu12():    #rlstv
+        addon.add_directory({'mode': 'GetTitles8', 'section': 'ALL', 'url': BASE_URL16 + '/?cat=TV-720p',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Page 1[/B] [/COLOR]>>'}, img=IconPath + 'rlstv.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles8', 'section': 'ALL', 'url': BASE_URL16 + '/index.php?page=2&cat=TV-720p',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Page 2[/B] [/COLOR]>>'}, img=IconPath + 'rlstv.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles8', 'section': 'ALL', 'url': BASE_URL16 + '/index.php?page=3&cat=TV-720p',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Page 3[/B] [/COLOR]>>'}, img=IconPath + 'rlstv.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles8', 'section': 'ALL', 'url': BASE_URL16 + '/index.php?page=4&cat=TV-720p',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Page 4[/B] [/COLOR]>>'}, img=IconPath + 'rlstv.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles8', 'section': 'ALL', 'url': BASE_URL16 + '/index.php?page=5&cat=TV-720p',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Page 5[/B] [/COLOR]>>'}, img=IconPath + 'rlstv.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles8', 'section': 'ALL', 'url': BASE_URL16 + '/index.php?page=6&cat=TV-720p',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Page 6[/B] [/COLOR]>>'}, img=IconPath + 'rlstv.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles8', 'section': 'ALL', 'url': BASE_URL16 + '/index.php?page=7&cat=TV-720p',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Page 7[/B] [/COLOR]>>'}, img=IconPath + 'rlstv.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles8', 'section': 'ALL', 'url': BASE_URL16 + '/index.php?page=8&cat=TV-720p',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Page 8[/B] [/COLOR]>>'}, img=IconPath + 'rlstv.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles8', 'section': 'ALL', 'url': BASE_URL16 + '/index.php?page=9&cat=TV-720p',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Page 9[/B] [/COLOR]>>'}, img=IconPath + 'rlstv.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles8', 'section': 'ALL', 'url': BASE_URL16 + '/index.php?page=10&cat=TV-720p',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Page 10[/B] [/COLOR]>>'}, img=IconPath + 'rlstv.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -1167,6 +1231,8 @@ elif mode == 'GetTitles17':
 	GetTitles17(section, url, startPage, numOfPages)
 elif mode == 'GetLinks':
 	GetLinks(section, url)
+elif mode == 'GetLinks1':
+	GetLinks1(section, url)
 elif mode == 'GetSearchQuery':
 	GetSearchQuery()
 elif mode == 'Search':
@@ -1227,6 +1293,8 @@ if mode == 'menu9':
        Menu9()
 if mode == 'menu11':
        Menu11()
+if mode == 'menu12':
+       Menu12()
 
 
 
