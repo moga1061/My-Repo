@@ -1,0 +1,112 @@
+[B]Version 0.0.1[/B]
+- Initial version of All in one
+
+[B]Version 0.0.2[/B]
+- added zmovies 
+
+[B]Version 0.0.3[/B]
+- added movie-kingdom
+
+[B]Version 0.0.4[/B]
+- still testing
+
+[B]Version 0.0.5[/B]
+- new icons. clean up & still testing.......
+
+[B]Version 0.0.6[/B]
+- clean up
+
+[B]Version 0.0.7[/B]
+- added OMP, sport
+
+[B]Version 0.0.8[/B]
+- fixed omp.. changes to the site
+
+[B]Version 0.0.9[/B]
+- added more to tv shows (a-z) clean up
+
+[B]Version 0.1.0[/B]
+- clean up
+
+[B]Version 0.1.1[/B]
+- added set views
+
+[B]Version 0.1.2[/B]
+- clean up
+
+[B]Version 0.1.3[/B]
+- new next page icon
+
+[B]Version 0.1.4[/B]
+- quick fix changes to the sit (my video links eu)
+
+[B]Version 0.1.5[/B]
+- added tv-junky
+
+[B]Version 0.1.6[/B]
+- fixed omp & added a2z
+
+[B]Version 0.1.7[/B]
+- fixed omp
+
+[B]Version 0.1.8[/B]
+- temp fix for omp
+
+[B]Version 0.1.9[/B]
+- fixed omp removed R1C & added the new one click moviez
+
+[B]Version 0.2.0[/B]
+- clean up
+
+[B]Version 0.2.1[/B]
+- fixed next on one click moviez
+
+[B]Version 0.2.2[/B]
+- removed online movies player untill they stop messing with the site 
+
+[B]Version 0.2.3[/B]
+- fixed some stuff in one click moviez
+
+[B]Version 0.2.4[/B]
+- added some stuff in one click moviez
+
+[B]Version 0.2.5[/B]
+- added some stuff in one click moviez & Q. fix for WTT
+
+[B]Version 0.2.6[/B]
+- fixed next page on featured (oneclickmoviez) & added tv shows (oneclickmoviez) the addon works better then there site now ;-)
+
+[B]Version 0.2.7[/B]
+- fixed online movies player now there back online
+
+[B]Version 0.2.8[/B]
+- fixed one click moviez lol my bad
+
+[B]Version 0.2.9[/B]
+- Added MoviesAll4U & all4youz sites full HD hollywood Hindi & indian movies & added putlocker series (putseries.com) tv shows & 1000s of movies
+
+[B]Version 0.3.0[/B]
+- Added DDLvalleys yify movies
+
+[B]Version 0.3.1[/B]
+- fix update
+
+[B]Version 0.3.2[/B]
+- added movies2k.eu (hollywood hindi hindi dubbed malayalam tamil telugu movies) 
+
+[B]Version 0.3.3[/B]
+- added cinemadivx.com for all your Spanish movie needs
+
+[B]Version 0.3.4[/B]
+- added 300mbmovies4u.com
+
+[B]Version 0.3.5[/B]
+- removed omp
+
+[B]Version 0.3.6[/B]
+- fixed tv junky, omp, ddlvally & oneclickmoviez
+
+[B]Version 0.3.7[/B]
+- fixed oneclickmoviez
+
+
