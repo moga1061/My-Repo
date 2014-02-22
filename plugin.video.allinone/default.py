@@ -42,6 +42,7 @@ BASE_URL20 = 'http://world4ufree.com/'
 BASE_URL21 = 'http://movies2k.eu/'
 BASE_URL22 = 'http://www.cinemadivx.com/'
 BASE_URL23 = 'http://300mbmovies4u.com/'
+BASE_URL24 = 'http://www.hotnewhiphop.com/'
 
 #### PATHS ##########
 AddonPath = addon.get_path()
@@ -791,6 +792,29 @@ def GetTitles23(section, url, startPage= '1', numOfPages= '1'): # 300mbmovies4u
         setView('tvshows', 'tvshows-view') 
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+#############################################################################################################################################################################
+
+def GetTitles24(section, url, startPage= '1', numOfPages= '1'): # hiphop
+        print 'allinone get Movie Titles Menu %s' % url
+        pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + '/page/' + startPage + '/'
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        CLEAN(html)
+        start = int(startPage)
+        end = start + int(numOfPages)
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + '/page/' + str(page) + '/'
+                        html = net.http_GET(pageUrl).content
+                        CLEAN(html)
+                match = re.compile('http://schema.org/VideoObject.+?href="(.+?)".+?>.+?<.+?src="(.+?)" alt="(.+?)"', re.DOTALL).findall(html)
+                for movieUrl, img, name in match:
+                        addon.add_directory({'mode': 'GetLinks4', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+        
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 ###############################################################################links#############################################################################################
 
 
@@ -942,6 +966,41 @@ def GetLinks3(section, url): # Get Links
         else: stream_url = ''
         xbmc.Player().play(stream_url)
 
+#----------------------------------------------------------------------#
+
+def GetLinks4(section, url): # Get Links
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(str(url)).content
+        CLEAN(html)
+        sources = []
+        listitem = GetMediaInfo(html)
+        print 'LISTITEM: '+str(listitem)
+        content = html
+        print'CONTENT: '+str(listitem)
+        r = re.search('<strong>Links.*</strong>', html)
+        if r:
+                content = content[:r.start()]
+
+        match = re.compile('content="(.+?)"').findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match:
+                host = GetDomain(url)
+
+                if 'Unknown' in host:
+                        continue
+
+                print '*****************************' + host
+                title = url.rpartition('/')
+                name = host
+                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
+                sources.append(hosted_media)
+
+
+        source = urlresolver.choose_source(sources)
+        if source: stream_url = source.resolve()
+        else: stream_url = ''
+        xbmc.Player().play(stream_url)
+
 
 #####################################################################################           ##################################################################################
 
@@ -987,10 +1046,16 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'MovieMenu'}, {'title':  '[COLOR cornflowerblue][B]Movies >[/B][/COLOR] >'}, img=IconPath + 'films.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'TvMenu'}, {'title':  '[COLOR darkorange][B]Tv Shows >[/B][/COLOR] >'}, img=IconPath + 'tv2.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'SportMenu'}, {'title':  '[COLOR lemonchiffon][B]Sport >[/B][/COLOR] >'}, img=IconPath + 'sport1.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'MusicMenu'}, {'title':  '[COLOR cadetblue][B]Music >[/B][/COLOR] >'}, img=IconPath + 'music.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'SearchMenu'}, {'title':  '[COLOR green][B]Searches [/B] [/COLOR]'}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helphub.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'twit.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def MusicMenu():   #Menu
+        addon.add_directory({'mode': 'GetTitles24', 'section': 'ALL', 'url': BASE_URL24 + '/videos/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cadetblue][B]Latest Rap videos[/B][/COLOR] [COLOR crimson](HotNewHipHop) [/COLOR]>>'}, img=IconPath + 'hiphop.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def SportMenu():   #sport
@@ -2066,12 +2131,16 @@ elif mode == 'GetTitles22':
 	GetTitles22(section, url, startPage, numOfPages)
 elif mode == 'GetTitles23': 
 	GetTitles23(section, url, startPage, numOfPages)
+elif mode == 'GetTitles24': 
+	GetTitles24(section, url, startPage, numOfPages)
 elif mode == 'GetLinks':
 	GetLinks(section, url)
 elif mode == 'GetLinks1':
 	GetLinks1(section, url)
 elif mode == 'GetLinks3':
 	GetLinks3(section, url)
+elif mode == 'GetLinks4':
+	GetLinks4(section, url)
 elif mode == 'GetSearchQuery9':
 	GetSearchQuery9()
 elif mode == 'Search9':
@@ -2106,6 +2175,8 @@ elif mode == 'MovieMenu':
         MovieMenu()
 elif mode == 'TvMenu':
         TvMenu()
+elif mode == 'MusicMenu':
+        MusicMenu()
 elif mode == 'MovMenu':
         MovMenu()
 elif mode == 'UvMenu':
