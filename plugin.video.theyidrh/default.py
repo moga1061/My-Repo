@@ -37,6 +37,7 @@ BASE_URL13 = 'http://shawnrebecca.com/'
 BASE_URL14 = 'http://watchtvstreaming.eu/'
 BASE_URL15 = 'http://www.fullmatches.net/'
 BASE_URL16 = 'http://tv-release.net/'
+BASE_URL17 = 'http://www.tribalmixes.com/'
 
 #PATHS
 AddonPath = addon.get_path()
@@ -489,7 +490,7 @@ def GetTitles16(section, url, startPage= '1', numOfPages= '1'): # fullmatch
 ######################################################################################################################################################################################
 
 def GetTitles17(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
-        print 'fight-bb get Movie Titles Menu %s' % url
+        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -507,6 +508,29 @@ def GetTitles17(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                 for movieUrl, name in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'fbb.png', fanart=FanartPath + 'fanart.png') 
                 addon.add_directory({'mode': 'GetTitles17', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+###################################################################################################################################################################################
+
+def GetTitles18(section, url, startPage= '1', numOfPages= '1'): #house
+        print 'theyidrh get Movie Titles Menu %s' % url
+        pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + 'page/' + startPage + '/'
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        CLEAN(html)
+        start = int(startPage)
+        end = start + int(numOfPages)
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + 'page/' + str(page) + '/'
+                        html = net.http_GET(pageUrl).content
+                        CLEAN(html)
+                match = re.compile('width=100%><a href="(.+?)" class=.+? ><.+?>(.+?)</font>(.+?)</a></td>', re.DOTALL).findall(html)
+                for movieUrl, name, name in match:
+                        addon.add_directory({'mode': 'GetLinks2', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'tm.png', fanart=FanartPath + 'fanart.png') 
+        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #################################################################################getlinks###############################################################################################
@@ -652,6 +676,41 @@ def GetLinks1(section, url): # Get Links
         else: stream_url = ''
         xbmc.Player().play(stream_url)
 
+#-----------------------------------------------------------------------------------------#
+
+def GetLinks2(section, url): # Get Links
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(str(url)).content
+        CLEAN(html)
+        sources = []
+        listitem = GetMediaInfo(html)
+        print 'LISTITEM: '+str(listitem)
+        content = html
+        print'CONTENT: '+str(listitem)
+        r = re.search('<strong>Links.*</strong>', html)
+        if r:
+                content = content[:r.start()]
+
+        match = re.compile('width=150 > (.+?)<').findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match:
+                host = GetDomain(url)
+
+                if 'Unknown' in host:
+                                continue
+
+                print '*****************************' + host
+                title = url.rpartition('/')
+                name = host
+                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
+                sources.append(hosted_media)
+
+
+        source = urlresolver.choose_source(sources)
+        if source: stream_url = source.resolve()
+        else: stream_url = ''
+        xbmc.Player().play(stream_url)
+
 
 ###############################################################################################################################################################################
 
@@ -697,10 +756,16 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'menu4'}, {'title': '[COLOR darkorange][B]Tv Shows >>[/B] [/COLOR]>>'}, img=IconPath + 'tv2.png', fanart=FanartPath + 'fanart.png') 
         addon.add_directory({'mode': 'menu6'}, {'title': '[COLOR lemonchiffon][B]Sport >>[/B] [/COLOR]>>'}, img=IconPath + 'sport1.png', fanart=FanartPath + 'fanart.png') 
         addon.add_directory({'mode': 'menu7'}, {'title': '[COLOR violet][B]Anime >>[/B] [/COLOR]>>'}, img=IconPath + 'anex.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'menu13'}, {'title':  '[COLOR cadetblue][B]Music >[/B][/COLOR] >'}, img=IconPath + 'music.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'menu5'}, {'title': '[COLOR green][B]Searches >>[/B] [/COLOR]>>'}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png') 
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink][B]FOR HELP PLEASE GOTO...[/B][/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helphub.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER... [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'twit.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def Menu13():   #music
+        addon.add_directory({'mode': 'GetTitles18', 'section': 'ALL', 'url': BASE_URL17 + '/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]House Music mixes[/B] [/COLOR] [COLOR crimson](tribalmixes.com)[/COLOR] >>'}, img=IconPath + 'tm.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -1231,10 +1296,14 @@ elif mode == 'GetTitles16':
 	GetTitles16(section, url, startPage, numOfPages)
 elif mode == 'GetTitles17': 
 	GetTitles17(section, url, startPage, numOfPages)
+elif mode == 'GetTitles18': 
+	GetTitles18(section, url, startPage, numOfPages)
 elif mode == 'GetLinks':
 	GetLinks(section, url)
 elif mode == 'GetLinks1':
 	GetLinks1(section, url)
+elif mode == 'GetLinks2':
+	GetLinks2(section, url)
 elif mode == 'GetSearchQuery':
 	GetSearchQuery()
 elif mode == 'Search':
@@ -1297,6 +1366,8 @@ if mode == 'menu11':
        Menu11()
 if mode == 'menu12':
        Menu12()
+if mode == 'menu13':
+       Menu13()
 
 
 
