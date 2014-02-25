@@ -17,7 +17,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.allinone" version="0.4.1" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.allinone" version="0.4.2" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -28,7 +28,7 @@
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary>All in one [COLOR lime]SUPER ADDON[/COLOR] for all you movies tv shows sports and music video lovers free on demand streaming 720p 1080p HD SD MP4 MKV AVI</summary>
-        <description>Play a wide selection of scene release movies and Tv shows from OneClickWatch OneClickMoviz WatchTheTapes Viooz Ultra-vid WtbVideo WatchTvShows Zmovies Movie-Kingdom DDLvally MyVideoLinks OnelineMoviesPlayer and loads more in this [COLOR lime]SUPER ADDON[/COLOR] .... best hosts are putlocker vidto billionuploads vidbull 180upload movreel vidxden vidbux and many more... Best for HOLLYWOOD SPANISH BOLLYWOOD HINDIE TAMIL INDIAN BANGLA MOVIES DUAL AUDIO</description>
+        <description>Play a wide selection of scene release movies and Tv shows from OneClickWatch OneClickMoviz WatchTheTapes Viooz Ultra-vid WtbVideo WatchTvShows Zmovies Movie-Kingdom DDLvally MyVideoLinks and loads more in this [COLOR lime]SUPER ADDON[/COLOR] .... best hosts are putlocker vidto billionuploads vidbull 180upload movreel vidxden vidbux and many more... Best for HOLLYWOOD SPANISH BOLLYWOOD HINDIE TAMIL INDIAN BANGLA MOVIES DUAL AUDIO</description>
         <platform>all</platform>
         <disclaimer lang="en">[COLOR red][B][I] @TheYid009 [/B][/I][/COLOR] [COLOR dodgerblue][B]xbmchub.com[/B][/COLOR]</disclaimer>
     </extension>
@@ -68,7 +68,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.myvideolinks" version="0.4.4" name="My Video Links [COLOR gold]eu[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.myvideolinks" version="0.4.5" name="My Video Links [COLOR gold]eu[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>

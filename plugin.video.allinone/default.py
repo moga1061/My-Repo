@@ -369,7 +369,7 @@ def GetTitles10(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)                        
-                match = re.compile('<img src="(.+?)"  title="(.+?)" class=".+?" alt=".+?" /></a>\r\n\t\t\r\n<h3><a href="(.+?)" rel=".+?"', re.DOTALL).findall(html)
+                match = re.compile(' <img src="(.+?)"  title=".+?" class="alignleft" alt="(.+?)" /></a>\r\n\t\t\r\n<h3><a href="(.+?)" rel="bookmark"', re.DOTALL).findall(html)
                 for img, name, movieUrl in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')      
                 addon.add_directory({'mode': 'GetTitles10', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
@@ -1218,7 +1218,7 @@ def MovieMenu():   #movies
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Featured Movies[/B][/COLOR] [COLOR moccasin](Putlocker.bz) [/COLOR]>>'}, img=IconPath + 'pl.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'OcmMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR peru](OneClickMoviez) [/COLOR]>>'}, img=IconPath + '1cm.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'PutMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR teal](Putlocker Series) [/COLOR]>>'}, img=IconPath + 'ps.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'OmpMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR darkorchid](OMP) [/COLOR]>>'}, img=IconPath + 'omp.png', fanart=FanartPath + 'fanart.png')
+        #addon.add_directory({'mode': 'OmpMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR darkorchid](OMP) [/COLOR]>>'}, img=IconPath + 'omp.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'MovMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR lightslategray](ViooZ) [/COLOR]>>'}, img=IconPath + 'vu1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'UvMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR floralwhite](Ultra-Vid) [/COLOR]>>'}, img=IconPath + 'uv1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'MkMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR gold](Movie-Kingdom) [/COLOR]>>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
