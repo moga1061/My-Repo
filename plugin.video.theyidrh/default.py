@@ -38,6 +38,7 @@ BASE_URL14 = 'http://watchtvstreaming.eu/'
 BASE_URL15 = 'http://www.fullmatches.net/'
 BASE_URL16 = 'http://tv-release.net/'
 BASE_URL17 = 'http://www.tribalmixes.com/'
+BASE_URL18 = 'http://www.freshremix.org/'
 
 #PATHS
 AddonPath = addon.get_path()
@@ -480,7 +481,7 @@ def GetTitles16(section, url, startPage= '1', numOfPages= '1'): # fullmatch
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
                         CLEAN(html)
-                match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?src=.+?', re.DOTALL).findall(html)
+                match = re.compile("<td width=\'60%\' style=\'text-align:left; font-size:12px;font-weight:bold;\'><a href=\'(.+?)'>(.+?)</a></td", re.DOTALL).findall(html)
                 for movieUrl, name in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'fullsport.png', fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles16', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
@@ -530,6 +531,31 @@ def GetTitles18(section, url, startPage= '1', numOfPages= '1'): #house
                 match = re.compile('width=100%><a href="(.+?)" class=.+? ><.+?>(.+?)</font>(.+?)</a></td>', re.DOTALL).findall(html)
                 for movieUrl, name, name in match:
                         addon.add_directory({'mode': 'GetLinks2', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'tm.png', fanart=FanartPath + 'fanart.png') 
+        
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+############################################################################################################################################################################
+
+def GetTitles19(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
+        print 'theyidrh get Movie Titles Menu %s' % url
+        pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + '/page/' + startPage + '/'
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        CLEAN(html)
+        start = int(startPage)
+        end = start + int(numOfPages)
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + '/page/' + str(page) + '/'
+                        html = net.http_GET(pageUrl).content
+                        CLEAN(html)
+                match = re.compile('<h2.+?href="(.+?)">(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
+                for movieUrl, name, img in match:
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+
+                addon.add_directory({'mode': 'GetTitles19', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -766,6 +792,8 @@ def MainMenu():    #homescreen
 def Menu13():   #music
         addon.add_directory({'mode': 'GetTitles18', 'section': 'ALL', 'url': BASE_URL17 + '/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]House Music mixes[/B] [/COLOR] [COLOR crimson](tribalmixes.com)[/COLOR] >>'}, img=IconPath + 'tm.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles19', 'section': 'ALL', 'url': BASE_URL18 + '/video',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]1080p Music videos[/B] [/COLOR] [COLOR darkorchid](freshremix.org)[/COLOR] >>'}, img=IconPath + 'fm.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -1298,6 +1326,8 @@ elif mode == 'GetTitles17':
 	GetTitles17(section, url, startPage, numOfPages)
 elif mode == 'GetTitles18': 
 	GetTitles18(section, url, startPage, numOfPages)
+elif mode == 'GetTitles19': 
+	GetTitles19(section, url, startPage, numOfPages)
 elif mode == 'GetLinks':
 	GetLinks(section, url)
 elif mode == 'GetLinks1':
