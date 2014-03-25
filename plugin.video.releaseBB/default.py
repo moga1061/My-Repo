@@ -18,7 +18,7 @@ addon_id = 'plugin.video.releaseBB'
 plugin = xbmcaddon.Addon(id=addon_id)
 
 DB = os.path.join(xbmc.translatePath("special://database"), 'releaseBB.db')
-BASE_URL = 'http://www.rlsbb.ru/'
+BASE_URL = 'http://www.rlsbb.com/'
 net = Net()
 addon = Addon('plugin.video.releaseBB', sys.argv)
 showAllParts = True
@@ -43,37 +43,26 @@ section = addon.queries.get('section', None)
 
 AddonPath = addon.get_path()
 IconPath = AddonPath + "/icons/"
+FanartPath = AddonPath + "/icons/"
 
 
 
 def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
         print 'releaseBB get Movie Titles Menu %s' % url
-
-        # handle paging
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
-
         start = int(startPage)
         end = start + int(numOfPages)
-
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
-                        CLEAN(html)
-                        
-                match = re.compile('postTitle.+?href="(.+?)".+?>(.+?)<.+?src=.+?src="(.+?)"', re.DOTALL).findall(html)
+                match = re.compile('postHeader.+?href="(.+?)".+?>(.+?)<.+?src=.+? src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        cm  = []
-                        runstring = 'XBMC.Container.Update(plugin://plugin.video.releaseBB/?mode=Search&query=%s)' %(name.strip())
-        		cm.append(('Search on releaseBB', runstring))
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img)
-
-                        
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR orange]Next...[/COLOR]'}, img=IconPath + 'next.png')
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -82,7 +71,6 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
 def GetLinks(section, url): # Get Links
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(str(url)).content
-        CLEAN(html)
         sources = []
         listitem = GetMediaInfo(html)
         print 'LISTITEM: '+str(listitem)
@@ -132,7 +120,6 @@ def GetLinks(section, url): # Get Links
         if find:
                 print 'in comments if'
                 html = html[find.end():]
-                CLEAN(html)###
                 match1 = re.compile(r'comment-page-numbers(.+?)<!--comments form -->', re.DOTALL).findall(html)
                 match = re.compile('<a href="(htt.+?)" rel="nofollow"', re.DOTALL).findall(str(match1))
                 print 'MATCH IS: '+str(match)
@@ -156,21 +143,6 @@ def GetLinks(section, url): # Get Links
         if source: stream_url = source.resolve()
         else: stream_url = ''
         xbmc.Player().play(stream_url)
-                       
-def CLEAN(string):
-    def substitute_entity(match):
-        ent = match.group(3)
-        if match.group(1) == "#":
-            if match.group(2) == '':
-                return unichr(int(ent))
-            elif match.group(2) == 'x':
-                return unichr(int('0x'+ent, 16))
-        else:
-            cp = n2cp.get(ent)
-            if cp: return unichr(cp)
-            else: return match.group()
-    entity_re = re.compile(r'&(#?)(x?)(\d{1,5}|\w{1,8});')
-    return entity_re.subn(substitute_entity, string)[0]
 
 
 def GetDomain(url):
@@ -193,25 +165,20 @@ def Categories(section):  #categories
 
         url = BASE_URL + '/category/'+ section   
         html = net.http_GET(BASE_URL).content
-        CLEAN(html)
         match = re.compile('<li class=.+?/category/' + section + '(.+?)".+?>(.+?)<').findall(html)
         for cat, title in match:
                 url = url + cat
                 addon.add_directory({'mode': 'GetTitles', 'section': section, 'url': url,
-                                     'startPage': '1', 'numOfPages': '2'}, {'title':  title})
+                                     'startPage': '1', 'numOfPages': '2'}, {'title':  title}, img=IconPath + 'BB.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def MainMenu():    #homescreen
-        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR orange][B]BB.. [/B][/COLOR][COLOR blue]Movies> >[/COLOR]'}, img=IconPath + 'movie.png')
-        addon.add_directory({'mode': 'Categories', 'section': 'tv'},  {'title':  '[COLOR orange][B]BB.. [/B][/COLOR][COLOR blue]Tv Shows> >[/COLOR]'}, img=IconPath + 'tv.png')
-        addon.add_directory({'mode': 'GetSearchQuery9'},  {'title':  '[COLOR orange][B]BB.. [/B][/COLOR][COLOR green]Search> >[/COLOR]'}, img=IconPath + 'searcH.png')
-        addon.add_directory({'mode': 'GetSearchQuery4'},  {'title':  '[COLOR green][B]Scenelog[/B] Search> >[/COLOR] '}, img=IconPath + 'search4a.png')
-        addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR green][B]Scene Source[/B] Search> >[/COLOR]'}, img=IconPath + 'search2.png')
-        #addon.add_directory({'mode': 'GetSearchQuery5'},  {'title':  '[COLOR green][B]Wrzko[/B] Search> >[/COLOR] '}, img=IconPath + 'wsearch.png')
-        addon.add_directory({'mode': 'GetSearchQuery3'},  {'title':  '[COLOR green][B]One Click Watch[/B] Search> >[/COLOR]'}, img=IconPath + 'search3.png')
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helP.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'theyid.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'movies'},  {'title':  '[COLOR orange][B]BB.. [/B][/COLOR][COLOR blue]Movies> >[/COLOR]'}, img=IconPath + 'movie.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'Categories', 'section': 'tv'},  {'title':  '[COLOR orange][B]BB.. [/B][/COLOR][COLOR blue]Tv Shows> >[/COLOR]'}, img=IconPath + 'tv.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery9'},  {'title':  '[COLOR orange][B]BB.. [/B][/COLOR][COLOR green]Search> >[/COLOR]'}, img=IconPath + 'searcH.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'helP.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'theyid.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -235,117 +202,6 @@ def Search9(query):
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        CLEAN(html)
-        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
-        for url, title in match:
-                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
-                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
-	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
-def GetSearchQuery2():
-	last_search = addon.load_data('search')
-	if not last_search: last_search = ''
-	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]Scene Source Search[/COLOR]')
-	keyboard.setDefault(last_search)
-	keyboard.doModal()
-	if (keyboard.isConfirmed()):
-                query = keyboard.getText()
-                addon.save_data('search',query)
-                Search2(query)
-	else:
-                return
-
-        
-def Search2(query):
-        url = 'http://www.google.com/search?q=site:scnsrc.me ' + query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        CLEAN(html)
-        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
-        for url, title in match:
-                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
-                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
-	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
-def GetSearchQuery3():
-	last_search = addon.load_data('search')
-	if not last_search: last_search = ''
-	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]OneClickWatch Search[/COLOR]')
-	keyboard.setDefault(last_search)
-	keyboard.doModal()
-	if (keyboard.isConfirmed()):
-                query = keyboard.getText()
-                addon.save_data('search',query)
-                Search3(query)
-	else:
-                return
-
-        
-def Search3(query):
-        url = 'http://www.google.com/search?q=site:oneclickwatch.org ' + query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        CLEAN(html)
-        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
-        for url, title in match:
-                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
-                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
-	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
-
-def GetSearchQuery4():
-	last_search = addon.load_data('search')
-	if not last_search: last_search = ''
-	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]Search Scenelog[/COLOR]')
-	keyboard.setDefault(last_search)
-	keyboard.doModal()
-	if (keyboard.isConfirmed()):
-                query = keyboard.getText()
-                addon.save_data('search',query)
-                Search4(query)
-	else:
-                return
-
-        
-def Search4(query):
-        url = 'http://www.google.com/search?q=site:scenelog.eu ' + query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        CLEAN(html)
-        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
-        for url, title in match:
-                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
-                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
-	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
-
-def GetSearchQuery5():
-	last_search = addon.load_data('search')
-	if not last_search: last_search = ''
-	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]Search TvShowPad[/COLOR]')
-	keyboard.setDefault(last_search)
-	keyboard.doModal()
-	if (keyboard.isConfirmed()):
-                query = keyboard.getText()
-                addon.save_data('search',query)
-                Search5(query)
-	else:
-                return
-
-        
-def Search5(query):
-        url = 'http://www.google.com/search?q=site:wrzko.eu ' + query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        CLEAN(html)
         match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
         for url, title in match:
                 title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
@@ -366,22 +222,6 @@ elif mode == 'GetSearchQuery9':
 	GetSearchQuery9()
 elif mode == 'Search9':
 	Search9(query)
-elif mode == 'GetSearchQuery2':
-	GetSearchQuery2()
-elif mode == 'Search2':
-	Search2(query)
-elif mode == 'GetSearchQuery3':
-	GetSearchQuery3()
-elif mode == 'Search3':
-	Search3(query)
-elif mode == 'GetSearchQuery4':
-	GetSearchQuery4()
-elif mode == 'Search4':
-	Search4(query)
-elif mode == 'GetSearchQuery5':
-	GetSearchQuery5()
-elif mode == 'Search5':
-	Search5(query)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':

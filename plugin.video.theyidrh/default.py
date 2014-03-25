@@ -356,17 +356,15 @@ def GetTitles12(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                 pageUrl = url + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content
-                        CLEAN(html)                        
+                        html = net.http_GET(pageUrl).content                       
                 match = re.compile('postTitle.+?href="(.+?)".+?>(.+?)<.+?src=.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
+                        addon.add_directory({'mode': 'GetLinks3', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
                 addon.add_directory({'mode': 'GetTitles12', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue]Next...[/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -381,17 +379,15 @@ def GetTitles13(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                 pageUrl = url + 'page/' + startPage + ''
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + ''
-                        html = net.http_GET(pageUrl).content
-                        CLEAN(html)                        
+                        html = net.http_GET(pageUrl).content                      
                 match = re.compile('postTitle.+?href="(.+?)".+?>(.+?)<.+?src=.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
+                        addon.add_directory({'mode': 'GetLinks3', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
                 addon.add_directory({'mode': 'GetTitles13', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue]Come back soon[/COLOR]'}, img=IconPath + '', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -731,6 +727,100 @@ def GetLinks2(section, url): # Get Links
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
 
+
+        source = urlresolver.choose_source(sources)
+        if source: stream_url = source.resolve()
+        else: stream_url = ''
+        xbmc.Player().play(stream_url)
+
+#################################################################################getlinks###############################################################################################
+
+def GetLinks3(section, url): # Get Links
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(str(url)).content
+        sources = []
+        listitem = GetMediaInfo(html)
+        print 'LISTITEM: '+str(listitem)
+        content = html
+        print'CONTENT: '+str(listitem)
+        r = re.search('<strong>Links.*</strong>', html)
+                
+        r = re.search('commentblock', content)
+        if r:
+                content = content[:r.start()]
+
+        match = re.compile('href="(.+?)"').findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match:
+                host = GetDomain(url)
+
+                if 'Unknown' in host:
+                                continue
+
+                # ignore .rar files
+                r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
+                if r:
+                        continue
+                print '*****************************' + host + ' : ' + url
+                title = url.rpartition('/')
+                title = title[2].replace('.html', '')
+                title = title.replace('.htm', '')
+                title = title.replace('.rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
+                title = title.replace('rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
+                title = title.replace('sample', '[COLOR lime]Movie Trailer[/COLOR]')
+                title = title.replace('www.', '')
+                title = title.replace ('-',' ')
+                title = title.replace('_',' ')
+                title = title.replace('.',' ')
+                title = title.replace('gaz','')
+                title = title.replace('NTb','')
+                title = title.replace('1st','[COLOR coral][B]1st HALF[/B][/COLOR]')
+                title = title.replace('2nd','[COLOR coral][B]2nd HALF[/B][/COLOR]')
+                title = title.replace('fullmatches net','')
+                title = title.replace('.',' ')
+                title = title.replace('480p','[COLOR coral][B][I]480p[/B][/I][/COLOR]')
+                title = title.replace('720p','[COLOR gold][B][I]720p[/B][/I][/COLOR]')
+                title = title.replace('1080p','[COLOR orange][B][I]1080p[/B][/I][/COLOR]')
+                title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
+                title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
+                title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
+                title = title.replace('%20',' ')
+                host = host.replace('ul.to','[COLOR gold]Uploaded[/COLOR]')
+                host = host.replace('uploaded.net','[COLOR gold]Uploaded[/COLOR]')
+                host = host.replace('youtube.com','[COLOR lime]Movie Trailer[/COLOR]')
+                host = host.replace('netload.in','[COLOR gold]Netload[/COLOR]')
+                host = host.replace('rapidgator.net','[COLOR gold]Rapidgator[/COLOR]')
+                host = host.replace('cloudzer.net','[COLOR gold]Cloudzer[/COLOR]')
+                host = host.replace('k2s.cc','[COLOR red]Unsupported Link[/COLOR]')
+                host = host.replace('uptobox.com','[COLOR gold]UpToBox[/COLOR]')
+                host = host.replace('.1fichier.com','[COLOR gold] 1fichier[/COLOR]')
+                name = host+'-'+title
+                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
+                sources.append(hosted_media)
+
+                
+        find = re.search('commentblock', html)
+        if find:
+                print 'in comments if'
+                html = html[find.end():]
+                match1 = re.compile(r'comment-page-numbers(.+?)<!--comments form -->', re.DOTALL).findall(html)
+                match = re.compile('<a href="(htt.+?)" rel="nofollow"', re.DOTALL).findall(str(match1))
+                print 'MATCH IS: '+str(match)
+                print len(match)
+                for url in match:
+                        host = GetDomain(url)
+                        if 'Unknown' in host:
+                                continue
+                        # ignore .srt files
+                        r = re.search('\.srt[(?:\.html|\.htm)]*$', url, re.IGNORECASE)
+                        if r:
+
+                                continue
+
+                        # ignore .rar files
+                        r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
+                        if r:
+                                continue
 
         source = urlresolver.choose_source(sources)
         if source: stream_url = source.resolve()
@@ -1334,6 +1424,8 @@ elif mode == 'GetLinks1':
 	GetLinks1(section, url)
 elif mode == 'GetLinks2':
 	GetLinks2(section, url)
+elif mode == 'GetLinks3':
+	GetLinks3(section, url)
 elif mode == 'GetSearchQuery':
 	GetSearchQuery()
 elif mode == 'Search':
