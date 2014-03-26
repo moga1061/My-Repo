@@ -1,0 +1,5 @@
+[B]Version 0.5.1[/B]
+- addon clean up
+
+[B]Version 0.5.0[/B]
+- Initial version of oneclickwatch plugin v5
