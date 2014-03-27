@@ -1,0 +1,40 @@
+[B]Version 0.0.1[/B]
+- Initial version of 1-linkmovies
+
+[B]Version 0.0.2[/B]
+- Initial version of 1-linkmovies
+
+[B]Version 0.0.3[/B]
+- clean up
+
+[B]Version 0.0.4[/B]
+- clean up
+
+[B]Version 0.0.5[/B]
+- fix
+[B]Version 0.0.6[/B]
+- fix
+
+[B]Version 0.0.7[/B]
+- fix
+
+[B]Version 0.0.8[/B]
+- testing for xbmc 13
+
+[B]Version 0.0.9[/B]
+- changed to coolmovies
+
+[B]Version 0.1.0[/B]
+- changed back to 1linkmovies / site problems with coolmovie
+
+[B]Version 0.1.1[/B]
+- cleanup
+
+[B]Version 0.1.2[/B]
+- cleanup
+
+[B]Version 0.1.3[/B]
+- next page added
+
+[B]Version 0.1.4[/B]
+- addon clean up

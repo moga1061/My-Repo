@@ -68,14 +68,12 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                 pageUrl = url + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
-                        CLEAN(html)
                 match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
@@ -92,14 +90,12 @@ def GetTitles2(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                 pageUrl = url + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content
-                        CLEAN(html)                        
+                        html = net.http_GET(pageUrl).content                       
                 match = re.compile('<h2>.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
@@ -115,14 +111,12 @@ def GetTitles3(section, url, startPage= '1', numOfPages= '1'): #crazyhdsource
                 pageUrl = url + '/page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + '/page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
-                        CLEAN(html)
                 match = re.compile('<h4><span>.+?href="(.+?)".+?>(.+?)<.+?src=.+? .+?="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
@@ -139,14 +133,12 @@ def GetTitles4(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                 pageUrl = url + '/page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + '/page/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content
-                        CLEAN(html)                       
+                        html = net.http_GET(pageUrl).content                      
                 match = re.compile('shstory-img.+?href="(.+?)"><img src="(.+?)" alt="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, img, name in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
@@ -162,16 +154,12 @@ def GetTitles5(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                 pageUrl = url + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
-
         start = int(startPage)
         end = start + int(numOfPages)
-
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
-                        CLEAN(html)
                 match = re.compile('cover.+?href="(.+?)".+?.+?<img src="(.+?)".+?alt="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, img, name in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
@@ -188,14 +176,12 @@ def GetTitles6(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                 pageUrl = url + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content
-                        CLEAN(html)                      
+                        html = net.http_GET(pageUrl).content                    
                 match = re.compile('postTitle.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
@@ -213,14 +199,12 @@ def GetTitles7(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                 pageUrl = url + '/page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + '/page/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content
-                        CLEAN(html)                        
+                        html = net.http_GET(pageUrl).content                      
                 match = re.compile('<h2.+?href="(.+?)">(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
@@ -229,23 +213,19 @@ def GetTitles7(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
 
 ###########################################################################################################################################################################
 
-def GetTitles8(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
-        print 'rls-tv get Movie Titles Menu %s' % url
-
-        # handle paging
+def GetTitles8(section, url, startPage= '1', numOfPages= '1'): # rls-tv
+        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + '/index.php?page=' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + '/index.php?page=' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
-                        CLEAN(html)
                 match = re.compile("<td width=.+? style=.+?><a href='(.+?)'>(.+?)</a></td><td", re.DOTALL).findall(html)
                 for movieUrl, name in match:
                         addon.add_directory({'mode': 'GetLinks1', 'section': section, 'url': 'http://tv-release.net/' + movieUrl}, {'title':  name.strip()}, img=IconPath + 'rlstv.png', fanart=FanartPath + 'fanart.png')
@@ -261,14 +241,12 @@ def GetTitles9(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                 pageUrl = url + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content
-                        CLEAN(html)                        
+                        html = net.http_GET(pageUrl).content                     
                 match = re.compile('maintitle.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
@@ -285,14 +263,12 @@ def GetTitles1(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                 pageUrl = url + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content
-                        CLEAN(html)                        
+                        html = net.http_GET(pageUrl).content                       
                 match = re.compile('<h2>.+?href="(.+?)".+?>(.+?)<.+?.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
@@ -309,14 +285,12 @@ def GetTitles10(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                 pageUrl = url + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content
-                        CLEAN(html)                       
+                        html = net.http_GET(pageUrl).content                      
                 match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?.+?src=(.+?)', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
@@ -333,14 +307,12 @@ def GetTitles11(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                 pageUrl = url + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content
-                        CLEAN(html)                       
+                        html = net.http_GET(pageUrl).content                      
                 match = re.compile('<h2>.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
@@ -364,7 +336,7 @@ def GetTitles12(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                         html = net.http_GET(pageUrl).content                       
                 match = re.compile('postTitle.+?href="(.+?)".+?>(.+?)<.+?src=.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks3', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
                 addon.add_directory({'mode': 'GetTitles12', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue]Next...[/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -387,7 +359,7 @@ def GetTitles13(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                         html = net.http_GET(pageUrl).content                      
                 match = re.compile('postTitle.+?href="(.+?)".+?>(.+?)<.+?src=.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks3', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
                 addon.add_directory({'mode': 'GetTitles13', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue]Come back soon[/COLOR]'}, img=IconPath + '', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -400,14 +372,12 @@ def GetTitles14(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                 pageUrl = url + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content
-                        CLEAN(html)                        
+                        html = net.http_GET(pageUrl).content                      
                 match = re.compile('<h2><a.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
@@ -424,14 +394,12 @@ def GetTitles15(section, url, startPage= '1', numOfPages= '1'): # watchtvstreami
                 pageUrl = url + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content
-                        CLEAN(html)                      
+                        html = net.http_GET(pageUrl).content                     
                 match = re.compile('<h1><a href="(.+?)" rel=.+?>(.+?)</a></h1>', re.DOTALL).findall(html)
                 for movieUrl, name in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'tvaz.png', fanart=FanartPath + 'fanart.png')
@@ -447,14 +415,12 @@ def GetTitles15a(section, url, startPage= '1', numOfPages= '1'): # watchtvstream
                 pageUrl = url + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content
-                        CLEAN(html)                        
+                        html = net.http_GET(pageUrl).content                      
                 match = re.compile('<li><a title=.+? href="(.+?)">(.+?)</a>', re.DOTALL).findall(html)
                 for movieUrl, title in match:
                         addon.add_directory({'mode': 'GetTitles15', 'section': section, 'url': movieUrl, 'startPage': '1', 'numOfPages': '1'}, {'title':  title}, img=IconPath + 'tvaz.png', fanart=FanartPath + 'fanart.png')   
@@ -469,14 +435,12 @@ def GetTitles16(section, url, startPage= '1', numOfPages= '1'): # fullmatch
                 pageUrl = url + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
-                        CLEAN(html)
                 match = re.compile('<h2><a.+?href="(.+?)".+?>(.+?)<.+?src=.+?.+?', re.DOTALL).findall(html)
                 for movieUrl, name in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'fullsport.png', fanart=FanartPath + 'fanart.png')
@@ -493,14 +457,12 @@ def GetTitles17(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                 pageUrl = url + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
-                        CLEAN(html)
                 match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?', re.DOTALL).findall(html)
                 for movieUrl, name in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'fbb.png', fanart=FanartPath + 'fanart.png') 
@@ -516,14 +478,12 @@ def GetTitles18(section, url, startPage= '1', numOfPages= '1'): #house
                 pageUrl = url + 'page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
-                        CLEAN(html)
                 match = re.compile('width=100%><a href="(.+?)" class=.+? ><.+?>(.+?)</font>(.+?)</a></td>', re.DOTALL).findall(html)
                 for movieUrl, name, name in match:
                         addon.add_directory({'mode': 'GetLinks2', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'tm.png', fanart=FanartPath + 'fanart.png') 
@@ -539,14 +499,12 @@ def GetTitles19(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                 pageUrl = url + '/page/' + startPage + '/'
         print pageUrl
         html = net.http_GET(pageUrl).content
-        CLEAN(html)
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + '/page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
-                        CLEAN(html)
                 match = re.compile('<h2.+?href="(.+?)">(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
@@ -560,7 +518,6 @@ def GetTitles19(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
 def GetLinks(section, url): # Get Links
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(str(url)).content
-        CLEAN(html)
         sources = []
         listitem = GetMediaInfo(html)
         print 'LISTITEM: '+str(listitem)
@@ -626,7 +583,6 @@ def GetLinks(section, url): # Get Links
         if find:
                 print 'in comments if'
                 html = html[find.end():]
-                CLEAN(html)###
                 match1 = re.compile(r'comment-page-numbers(.+?)<!--comments form -->', re.DOTALL).findall(html)
                 match = re.compile('<a href="(htt.+?)" rel="nofollow"', re.DOTALL).findall(str(match1))
                 print 'MATCH IS: '+str(match)
@@ -656,7 +612,6 @@ def GetLinks(section, url): # Get Links
 def GetLinks1(section, url): # Get Links
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(str(url)).content
-        CLEAN(html)
         sources = []
         listitem = GetMediaInfo(html)
         print 'LISTITEM: '+str(listitem)
@@ -685,7 +640,6 @@ def GetLinks1(section, url): # Get Links
         if find:
                 print 'in comments if'
                 html = html[find.end():]
-                CLEAN(html)###
                 print 'MATCH IS: '+str(match)
                 print len(match)
                 for url in match:
@@ -703,7 +657,6 @@ def GetLinks1(section, url): # Get Links
 def GetLinks2(section, url): # Get Links
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(str(url)).content
-        CLEAN(html)
         sources = []
         listitem = GetMediaInfo(html)
         print 'LISTITEM: '+str(listitem)
@@ -733,117 +686,8 @@ def GetLinks2(section, url): # Get Links
         else: stream_url = ''
         xbmc.Player().play(stream_url)
 
-#################################################################################getlinks###############################################################################################
-
-def GetLinks3(section, url): # Get Links
-        print 'GETLINKS FROM URL: '+url
-        html = net.http_GET(str(url)).content
-        sources = []
-        listitem = GetMediaInfo(html)
-        print 'LISTITEM: '+str(listitem)
-        content = html
-        print'CONTENT: '+str(listitem)
-        r = re.search('<strong>Links.*</strong>', html)
-                
-        r = re.search('commentblock', content)
-        if r:
-                content = content[:r.start()]
-
-        match = re.compile('href="(.+?)"').findall(content)
-        listitem = GetMediaInfo(content)
-        for url in match:
-                host = GetDomain(url)
-
-                if 'Unknown' in host:
-                                continue
-
-                # ignore .rar files
-                r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
-                if r:
-                        continue
-                print '*****************************' + host + ' : ' + url
-                title = url.rpartition('/')
-                title = title[2].replace('.html', '')
-                title = title.replace('.htm', '')
-                title = title.replace('.rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
-                title = title.replace('rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
-                title = title.replace('sample', '[COLOR lime]Movie Trailer[/COLOR]')
-                title = title.replace('www.', '')
-                title = title.replace ('-',' ')
-                title = title.replace('_',' ')
-                title = title.replace('.',' ')
-                title = title.replace('gaz','')
-                title = title.replace('NTb','')
-                title = title.replace('1st','[COLOR coral][B]1st HALF[/B][/COLOR]')
-                title = title.replace('2nd','[COLOR coral][B]2nd HALF[/B][/COLOR]')
-                title = title.replace('fullmatches net','')
-                title = title.replace('.',' ')
-                title = title.replace('480p','[COLOR coral][B][I]480p[/B][/I][/COLOR]')
-                title = title.replace('720p','[COLOR gold][B][I]720p[/B][/I][/COLOR]')
-                title = title.replace('1080p','[COLOR orange][B][I]1080p[/B][/I][/COLOR]')
-                title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
-                title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
-                title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
-                title = title.replace('%20',' ')
-                host = host.replace('ul.to','[COLOR gold]Uploaded[/COLOR]')
-                host = host.replace('uploaded.net','[COLOR gold]Uploaded[/COLOR]')
-                host = host.replace('youtube.com','[COLOR lime]Movie Trailer[/COLOR]')
-                host = host.replace('netload.in','[COLOR gold]Netload[/COLOR]')
-                host = host.replace('rapidgator.net','[COLOR gold]Rapidgator[/COLOR]')
-                host = host.replace('cloudzer.net','[COLOR gold]Cloudzer[/COLOR]')
-                host = host.replace('k2s.cc','[COLOR red]Unsupported Link[/COLOR]')
-                host = host.replace('uptobox.com','[COLOR gold]UpToBox[/COLOR]')
-                host = host.replace('.1fichier.com','[COLOR gold] 1fichier[/COLOR]')
-                name = host+'-'+title
-                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
-                sources.append(hosted_media)
-
-                
-        find = re.search('commentblock', html)
-        if find:
-                print 'in comments if'
-                html = html[find.end():]
-                match1 = re.compile(r'comment-page-numbers(.+?)<!--comments form -->', re.DOTALL).findall(html)
-                match = re.compile('<a href="(htt.+?)" rel="nofollow"', re.DOTALL).findall(str(match1))
-                print 'MATCH IS: '+str(match)
-                print len(match)
-                for url in match:
-                        host = GetDomain(url)
-                        if 'Unknown' in host:
-                                continue
-                        # ignore .srt files
-                        r = re.search('\.srt[(?:\.html|\.htm)]*$', url, re.IGNORECASE)
-                        if r:
-
-                                continue
-
-                        # ignore .rar files
-                        r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
-                        if r:
-                                continue
-
-        source = urlresolver.choose_source(sources)
-        if source: stream_url = source.resolve()
-        else: stream_url = ''
-        xbmc.Player().play(stream_url)
-
 
 ###############################################################################################################################################################################
-
-def CLEAN(string):
-    def substitute_entity(match):
-        ent = match.group(3)
-        if match.group(1) == "#":
-            if match.group(2) == '':
-                return unichr(int(ent))
-            elif match.group(2) == 'x':
-                return unichr(int('0x'+ent, 16))
-        else:
-            cp = n2cp.get(ent)
-            if cp: return unichr(cp)
-            else: return match.group()
-    entity_re = re.compile(r'&(#?)(x?)(\d{1,5}|\w{1,8});')
-    return entity_re.subn(substitute_entity, string)[0]
 
 
 def GetDomain(url):
@@ -1101,7 +945,6 @@ def Search(query):
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        CLEAN(html)
         match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
         for url, title in match:
                 title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
@@ -1131,7 +974,6 @@ def Search2(query):
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        CLEAN(html)
         match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
         for url, title in match:
                 title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
@@ -1161,7 +1003,6 @@ def Search3(query):
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        CLEAN(html)
         match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
         for url, title in match:
                 title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
@@ -1191,7 +1032,6 @@ def Search4(query):
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        CLEAN(html)
         match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
         for url, title in match:
                 title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
@@ -1221,7 +1061,6 @@ def Search5(query):
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        CLEAN(html)
         match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
         for url, title in match:
                 title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
@@ -1252,7 +1091,6 @@ def Search6(query):
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        CLEAN(html)
         match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
         for url, title in match:
                 title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
@@ -1287,7 +1125,6 @@ def Search7(query):
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        CLEAN(html)
         match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
         for url, title in match:
                 title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
@@ -1316,7 +1153,6 @@ def Search8(query):
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        CLEAN(html)
         match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
         for url, title in match:
                 title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
@@ -1347,7 +1183,6 @@ def Search9(query):
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        CLEAN(html)
         match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
         for url, title in match:
                 title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
@@ -1424,8 +1259,6 @@ elif mode == 'GetLinks1':
 	GetLinks1(section, url)
 elif mode == 'GetLinks2':
 	GetLinks2(section, url)
-elif mode == 'GetLinks3':
-	GetLinks3(section, url)
 elif mode == 'GetSearchQuery':
 	GetSearchQuery()
 elif mode == 'Search':

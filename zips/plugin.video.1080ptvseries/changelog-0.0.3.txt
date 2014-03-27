@@ -1,0 +1,8 @@
+[B]Version 0.0.1[/B]
+- test
+
+[B]Version 0.0.2[/B]
+- Initial version of HD series
+
+[B]Version 0.0.3[/B]
+- clean up
