@@ -1,0 +1,5 @@
+[B]Version 0.4.1[/B]
+- clean up
+
+[B]Version 0.4.0[/B]
+- Initial version of releaseBB plugin

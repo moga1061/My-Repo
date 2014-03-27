@@ -2,8 +2,8 @@ import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 import urllib, urllib2
 import re, string, sys, os
 import urlresolver
-from TheYid.common.addon import Addon
-from TheYid.common.net import Net
+from t0mm0.common.addon import Addon
+from t0mm0.common.net import Net
 from htmlentitydefs import name2codepoint as n2cp
 import HTMLParser
 
@@ -25,7 +25,6 @@ addon = Addon('plugin.video.oneclickwatch', sys.argv)
 AddonPath = addon.get_path()
 IconPath = AddonPath + "/icons/"
 FanartPath = AddonPath + "/icons/"
-###### PATHS ###########
 
 ##### Queries ##########
 mode = addon.queries['mode']
@@ -37,7 +36,7 @@ numOfPages = addon.queries.get('numOfPages', None)
 listitem = addon.queries.get('listitem', None)
 urlList = addon.queries.get('urlList', None)
 section = addon.queries.get('section', None)
-##### Queries ##########
+
 
 ################################################################################# Titles #################################################################################
 
