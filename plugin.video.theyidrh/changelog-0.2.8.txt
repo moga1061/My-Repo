@@ -75,3 +75,6 @@
 
 [B]Version 0.2.7[/B]
 - code clean up
+
+[B]Version 0.2.8[/B]
+- clean up

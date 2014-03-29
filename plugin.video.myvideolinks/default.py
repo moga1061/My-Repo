@@ -7,7 +7,6 @@ from TheYid.common.addon import Addon
 from TheYid.common.net import Net
 from htmlentitydefs import name2codepoint as n2cp
 
-
 try:
 	from sqlite3 import dbapi2 as sqlite
 	print "Loading sqlite3 as DB engine"
@@ -23,12 +22,10 @@ BASE_URL = 'http://www.myvideolinks.eu/'
 net = Net()
 addon = Addon('plugin.video.myvideolinks', sys.argv)
 
-
 #PATHS
 AddonPath = addon.get_path()
 IconPath = AddonPath + "/icons/"
 FanartPath = AddonPath + "/icons/"
-
 
 ##### Queries ##########
 mode = addon.queries['mode']
@@ -43,7 +40,7 @@ section = addon.queries.get('section', None)
 ##### Queries ##########
 
 
-def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
+def GetTitles(section, url, startPage= '1', numOfPages= '1'): 
         print 'myvideolinks get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
@@ -64,7 +61,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
-def GetLinks(section, url): # Get Links
+def GetLinks(section, url): 
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(str(url)).content
         sources = []

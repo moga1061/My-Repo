@@ -79,3 +79,6 @@
 
 [B]Version 0.4.6[/B]
 - addon clean up
+
+[B]Version 0.4.7[/B]
+- clean up
