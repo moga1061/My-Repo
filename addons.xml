@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-<addon id="plugin.video.1-linkmovies" version="0.1.4" name="1-link movies" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.1-linkmovies" version="0.1.5" name="1-link movies" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -17,7 +17,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.1080ptvseries" version="0.0.3" name="[COLOR blue]HD[/COLOR] Series" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.1080ptvseries" version="0.0.4" name="[COLOR blue]HD[/COLOR] Series" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -34,7 +34,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.allinone" version="0.4.3" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.allinone" version="0.4.4" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -51,7 +51,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.ddlvalley" version="0.2.2" name="[COLOR blue]DDL[/COLOR]valley" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.ddlvalley" version="0.2.3" name="[COLOR blue]DDL[/COLOR]valley" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.t0mm0.common" version="2.1.1"/>
@@ -85,7 +85,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.myvideolinks" version="0.4.7" name="My Video Links [COLOR gold]eu[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.myvideolinks" version="0.4.8" name="My Video Links [COLOR gold]eu[/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -102,7 +102,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.oneclickwatch" version="0.5.2" name="One Click Watch" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.oneclickwatch" version="0.5.3" name="One Click Watch" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.t0mm0.common" version="2.1.1"/>
@@ -119,7 +119,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.releaseBB" version="0.4.1" name="Release[COLOR orange][B]BB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.releaseBB" version="0.4.2" name="Release[COLOR orange][B]BB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.t0mm0.common" version="2.1.1"/>
@@ -136,10 +136,10 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.scenelog" version="0.0.6" name="SceneLog" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.scenelog" version="0.0.7" name="SceneLog" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
-        <import addon="script.module.TheYid.common" version="0.1.1"/>
+        <import addon="script.module.t0mm0.common" version="2.1.1"/>
         <import addon="script.module.urlresolver"  version="2.0.9"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="default.py">

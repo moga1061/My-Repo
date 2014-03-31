@@ -1,17 +1,11 @@
 [B]Version 0.0.1[/B]
-- Initial version of scenelog
+- test
 
 [B]Version 0.0.2[/B]
-- clean up
+- Initial version of HD series
 
 [B]Version 0.0.3[/B]
 - clean up
 
 [B]Version 0.0.4[/B]
-- clean up
-
-[B]Version 0.0.5[/B]
-- clean up
-
-[B]Version 0.0.6[/B]
 - clean up

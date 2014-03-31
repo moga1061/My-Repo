@@ -2,8 +2,8 @@ import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 import urllib, urllib2
 import re, string, sys, os
 import urlresolver
-from TheYid.common.addon import Addon
-from TheYid.common.net import Net
+from t0mm0.common.addon import Addon
+from t0mm0.common.net import Net
 from htmlentitydefs import name2codepoint as n2cp
 import HTMLParser
 

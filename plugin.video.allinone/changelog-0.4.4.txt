@@ -127,3 +127,6 @@
 [B]Version 0.4.3[/B]
 - clean up
 
+[B]Version 0.4.4[/B]
+- fixed my video links eu
+

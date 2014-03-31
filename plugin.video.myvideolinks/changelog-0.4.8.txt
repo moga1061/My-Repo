@@ -82,3 +82,6 @@
 
 [B]Version 0.4.7[/B]
 - clean up
+
+[B]Version 0.4.8[/B]
+- fixed addon not scraping movie lists & fixed search

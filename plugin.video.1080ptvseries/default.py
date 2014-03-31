@@ -22,7 +22,7 @@ BASE_URL = 'http://www.blue1city.net/'
 net = Net()
 addon = Addon('plugin.video.1080ptvseries', sys.argv)
 
-#PATHS
+#PATHS#
 AddonPath = addon.get_path()
 IconPath = AddonPath + "/icons/"
 FanartPath = AddonPath + "/icons/"
@@ -199,7 +199,6 @@ def setView(content, viewType):
 	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_PROGRAM_COUNT )
 	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_VIDEO_RUNTIME )
 	xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_GENRE )
-
 
 ######################################################################################################################################################
 

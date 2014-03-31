@@ -39,6 +39,7 @@ listitem = addon.queries.get('listitem', None)
 urlList = addon.queries.get('urlList', None)
 section = addon.queries.get('section', None)
 
+##### paths ##########
 AddonPath = addon.get_path()
 IconPath = AddonPath + "/icons/"
 FanartPath = AddonPath + "/icons/"
@@ -205,8 +206,6 @@ def Search9(query):
                 title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
-
 
 
 
