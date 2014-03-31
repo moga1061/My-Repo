@@ -130,3 +130,6 @@
 [B]Version 0.4.4[/B]
 - fixed my video links eu
 
+[B]Version 0.4.5[/B]
+- added free movies & removed putlocker series (putseries.com) 
+
