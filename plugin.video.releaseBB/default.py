@@ -16,17 +16,11 @@ except:
 
 addon_id = 'plugin.video.releaseBB'
 plugin = xbmcaddon.Addon(id=addon_id)
-
 DB = os.path.join(xbmc.translatePath("special://database"), 'releaseBB.db')
 BASE_URL = 'http://www.rlsbb.com/'
 net = Net()
 addon = Addon('plugin.video.releaseBB', sys.argv)
 
-if plugin.getSetting('showAllParts') == 'false':
-        showAllParts = False
-
-if plugin.getSetting('showPlayAll') == 'false':
-        showPlayAll = False
 
 ##### Queries ##########
 mode = addon.queries['mode']
@@ -67,20 +61,21 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
+
+
 def GetLinks(section, url): # Get Links
         print 'GETLINKS FROM URL: '+url
-        html = net.http_GET(str(url)).content
-        sources = []
+        html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
-        print 'LISTITEM: '+str(listitem)
         content = html
-        print'CONTENT: '+str(listitem)
         r = re.search('<strong>Links.*</strong>', html)
-                
+        if r:
+                content = html[r.end():]
+
         r = re.search('commentblock', content)
         if r:
                 content = content[:r.start()]
-
+                
         match = re.compile('href="(.+?)"').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
@@ -88,59 +83,60 @@ def GetLinks(section, url): # Get Links
 
                 if 'Unknown' in host:
                                 continue
-
+                        
                 # ignore .rar files
                 r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
                 if r:
                         continue
                 print '*****************************' + host + ' : ' + url
-                title = url.rpartition('/')
-                title = title[2].replace('.html', '')
-                title = title.replace('.htm', '')
-                title = title.replace('.rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
-                title = title.replace('rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
-                title = title.replace('www.', '')
-                title = title.replace ('-',' ')
-                title = title.replace('_',' ')
-                title = title.replace('.',' ')
-                title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
-                title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
-                title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
-                title = title.replace('affiliate python?aff id=456662','')
-                host = host.replace('ryushare.com','[COLOR red]ryushare not working with real-debird or alldebird[/COLOR]')
-                host = host.replace('ul.to','uploaded.net')
-                host = host.replace('netload.in','[COLOR gold]netload.in[/COLOR]')
-                name = host+'-'+title
-                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
-                sources.append(hosted_media)
+                if urlresolver.HostedMediaFile(url= url):
+                        print 'in GetLinks if loop'
+                        title = url.rpartition('/')
+                        title = title[2].replace('.html', '')
+                        title = title.replace('.htm', '')
+                        title = title.replace('.rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
+                        title = title.replace('rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
+                        title = title.replace('www.', '')
+                        title = title.replace ('-',' ')
+                        title = title.replace('_',' ')
+                        title = title.replace('.',' ')
+                        title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
+                        title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
+                        title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
+                        title = title.replace('affiliate python?aff id=456662','')
+                        host = host.replace('ryushare.com','[COLOR red]ryushare not working with real-debird or alldebird[/COLOR]')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host + ' : ' + title}, img=IconPath + 'BB.png', fanart=FanartPath + 'fanart.png')
 
-                
         find = re.search('commentblock', html)
         if find:
                 print 'in comments if'
                 html = html[find.end():]
-                match1 = re.compile(r'comment-page-numbers(.+?)<!--comments form -->', re.DOTALL).findall(html)
-                match = re.compile('<a href="(htt.+?)" rel="nofollow"', re.DOTALL).findall(str(match1))
-                print 'MATCH IS: '+str(match)
+                match = re.compile('<a href="(.+?)" rel="nofollow"', re.DOTALL).findall(html)
                 print len(match)
                 for url in match:
                         host = GetDomain(url)
                         if 'Unknown' in host:
                                 continue
-                        # ignore .srt files
-                        r = re.search('\.srt[(?:\.html|\.htm)]*$', url, re.IGNORECASE)
-                        if r:
-
-                                continue
-
+                        
                         # ignore .rar files
                         r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
                         if r:
                                 continue
+                        try:
+                                if urlresolver.HostedMediaFile(url= url):
+                                        print 'in GetLinks if loop'
+                                        title = url.rpartition('/')
+                                        title = title[2].replace('.html', '')
+                                        title = title.replace('.htm', '')
+                                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host + ' : ' + title}, img=IconPath + 'BB.png', fanart=FanartPath + 'fanart.png')
+                        except:
+                                continue
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-        source = urlresolver.choose_source(sources)
-        if source: stream_url = source.resolve()
-        else: stream_url = ''
+
+def PlayVideo(url, listitem):
+        print 'in PlayVideo %s' % url
+        stream_url = urlresolver.HostedMediaFile(url).resolve()
         xbmc.Player().play(stream_url)
 
 

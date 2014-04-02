@@ -67,44 +67,34 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
 
 def GetLinks(section, url): # Get Links
         print 'GETLINKS FROM URL: '+url
-        html = net.http_GET(str(url)).content
-        CLEAN(html)
-        sources = []
+        html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
-        print 'LISTITEM: '+str(listitem)
         content = html
-        print'CONTENT: '+str(listitem)
-        r = re.search('<strong>Links.*</strong>', html)
-        if r:
-                content = html[r.end():]               
-        if r:
-                content = content[:r.start()]
         match = re.compile('<li><a href="(.+?)">.+?</a></li>').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
                 host = GetDomain(url)
                 if 'Unknown' in host:
-                        continue
-                print '*****************************' + host + ' : ' + url
-                title = url.rpartition('/')
-                title = title[2].replace('.html', '')
-                host = host.replace('youtube.com','[COLOR lime]Movie Trailer[/COLOR]')
-                host = host.replace('youtu.be','[COLOR lime]Movie Trailer[/COLOR]')
-                host = host.replace('netload.in','[COLOR gold]Netload[/COLOR]')
-                host = host.replace('turbobit.net','[COLOR gold]Turbobit[/COLOR]')
-                host = host.replace('.net','')
-                host = host.replace('.com','')
-                name = host
-                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
-                sources.append(hosted_media)
-                print len(match)
-                for url in match:
-                        host = GetDomain(url)
-                        if 'Unknown' in host:
                                 continue
-        source = urlresolver.choose_source(sources)
-        if source: stream_url = source.resolve()
-        else: stream_url = ''
+                print '*****************************' + host + ' : ' + url
+                if urlresolver.HostedMediaFile(url= url):
+                        print 'in GetLinks if loop'
+                        title = url.rpartition('/')
+                        title = title[2].replace('.html', '')
+                        title = title.replace('.htm', '')
+                        host = host.replace('youtube.com','[COLOR lime]Movie Trailer[/COLOR]')
+                        host = host.replace('youtu.be','[COLOR lime]Movie Trailer[/COLOR]')
+                        host = host.replace('netload.in','[COLOR gold]Netload[/COLOR]')
+                        host = host.replace('turbobit.net','[COLOR gold]Turbobit[/COLOR]')
+                        host = host.replace('.net','')
+                        host = host.replace('.com','')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'icon.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
+def PlayVideo(url, listitem):
+        print 'in PlayVideo %s' % url
+        stream_url = urlresolver.HostedMediaFile(url).resolve()
         xbmc.Player().play(stream_url)
 
 

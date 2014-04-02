@@ -78,3 +78,6 @@
 
 [B]Version 0.2.8[/B]
 - clean up
+
+[B]Version 0.3.0[/B]
+- code clean up

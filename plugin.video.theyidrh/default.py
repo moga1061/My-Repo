@@ -24,7 +24,7 @@ BASE_URL = 'http://rls-center.com/'
 BASE_URL1 = 'http://www.scnsrc.me/'
 BASE_URL2 = ''
 BASE_URL3 = 'http://crazyhdsource.com/'
-BASE_URL4 = 'http://www.hdleak.com/'
+BASE_URL4 = ''
 BASE_URL5 = 'http://www.theextopia.com/'
 BASE_URL6 = 'http://com2dl.com/'
 BASE_URL7 = 'http://www.wrzko.eu/'
@@ -61,7 +61,7 @@ section = addon.queries.get('section', None)
 
 ###############################################################################Movie Titles#######################################################################################
 
-def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles   # Release Center
+def GetTitles(section, url, startPage= '1', numOfPages= '1'):   # Release Center
         print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
@@ -83,24 +83,6 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
 #####################################################################################################################################################################################
 
 
-def GetTitles2(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles   #Hdleak.com
-        print 'theyidrh get Movie Titles Menu %s' % url
-        pageUrl = url
-        if int(startPage)> 1:
-                pageUrl = url + 'page/' + startPage + '/'
-        print pageUrl
-        html = net.http_GET(pageUrl).content
-        start = int(startPage)
-        end = start + int(numOfPages)
-        for page in range( start, end):
-                if ( page != start):
-                        pageUrl = url + 'page/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content                       
-                match = re.compile('<h2>.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
-                for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
-                addon.add_directory({'mode': 'GetTitles2', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue]Next...[/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')       
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ##########################################################################################################################################################################
 
@@ -315,7 +297,7 @@ def GetTitles11(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                         html = net.http_GET(pageUrl).content                      
                 match = re.compile('<h2>.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+                        addon.add_directory({'mode': 'GetLinks3', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -517,6 +499,142 @@ def GetTitles19(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
 
 def GetLinks(section, url): # Get Links
         print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        content = html
+        r = re.search('<strong>Links.*</strong>', html)
+        if r:
+                content = html[r.end():]
+
+        r = re.search('commentblock', content)
+        if r:
+                content = content[:r.start()]
+                
+        match = re.compile('href="(.+?)"').findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match:
+                host = GetDomain(url)
+
+                if 'Unknown' in host:
+                                continue
+                        
+                # ignore .rar files
+                r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
+                if r:
+                        continue
+                print '*****************************' + host + ' : ' + url
+                if urlresolver.HostedMediaFile(url= url):
+                        print 'in GetLinks if loop'
+                        title = url.rpartition('/')
+                        title = title[2].replace('.html', '')
+                        title = title.replace('.htm', '')
+                        title = title.replace('.rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
+                        title = title.replace('rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
+                        title = title.replace('sample', '[COLOR lime]Movie Trailer[/COLOR]')
+                        title = title.replace('www.', '')
+                        title = title.replace ('-',' ')
+                        title = title.replace('_',' ')
+                        title = title.replace('.',' ')
+                        title = title.replace('gaz','')
+                        title = title.replace('NTb','')
+                        title = title.replace('1st','[COLOR coral][B]1st HALF[/B][/COLOR]')
+                        title = title.replace('2nd','[COLOR coral][B]2nd HALF[/B][/COLOR]')
+                        title = title.replace('fullmatches net','')
+                        title = title.replace('.',' ')
+                        title = title.replace('480p','[COLOR coral][B][I]480p[/B][/I][/COLOR]')
+                        title = title.replace('720p','[COLOR gold][B][I]720p[/B][/I][/COLOR]')
+                        title = title.replace('1080p','[COLOR orange][B][I]1080p[/B][/I][/COLOR]')
+                        title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
+                        title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
+                        title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
+                        title = title.replace('%20',' ')
+                        host = host.replace('ul.to','[COLOR gold]Uploaded[/COLOR]')
+                        host = host.replace('uploaded.net','[COLOR gold]Uploaded[/COLOR]')
+                        host = host.replace('youtube.com','[COLOR lime]Movie Trailer[/COLOR]')
+                        host = host.replace('netload.in','[COLOR gold]Netload[/COLOR]')
+                        host = host.replace('rapidgator.net','[COLOR gold]Rapidgator[/COLOR]')
+                        host = host.replace('cloudzer.net','[COLOR gold]Cloudzer[/COLOR]')
+                        host = host.replace('k2s.cc','[COLOR red]Unsupported Link[/COLOR]')
+                        host = host.replace('uptobox.com','[COLOR gold]UpToBox[/COLOR]')
+                        host = host.replace('.1fichier.com','[COLOR gold] 1fichier[/COLOR]')
+                        host = host.replace('ryushare.com','[COLOR red]ryushare not working with real-debird or alldebird[/COLOR]')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host + ' : ' + title}, img=IconPath + 'icon.png', fanart=FanartPath + 'fanart.png')
+
+        find = re.search('commentblock', html)
+        if find:
+                print 'in comments if'
+                html = html[find.end():]
+                match = re.compile('<a href="(.+?)" rel="nofollow"', re.DOTALL).findall(html)
+                print len(match)
+                for url in match:
+                        host = GetDomain(url)
+                        if 'Unknown' in host:
+                                continue
+                        
+                        # ignore .rar files
+                        r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
+                        if r:
+                                continue
+                        try:
+                                if urlresolver.HostedMediaFile(url= url):
+                                        print 'in GetLinks if loop'
+                                        title = url.rpartition('/')
+                                        title = title[2].replace('.html', '')
+                                        title = title.replace('.htm', '')
+                                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host + ' : ' + title}, img=IconPath + 'icon.png', fanart=FanartPath + 'fanart.png')
+                        except:
+                                continue
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
+#########################---------------------------------------------------------------------#######################################
+
+def GetLinks1(section, url): # Get Links
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        content = html
+        match = re.compile('href="(.+?)"').findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match:
+                host = GetDomain(url)
+                if 'Unknown' in host:
+                                continue
+                print '*****************************' + host + ' : ' + url
+                if urlresolver.HostedMediaFile(url= url):
+                        print 'in GetLinks if loop'
+                        title = url.rpartition('/')
+                        title = title[2].replace('.html', '')
+                        title = title.replace('.htm', '')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'icon.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#-----------------------------------------------------------------------------------------#
+
+def GetLinks2(section, url): # Get Links
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        content = html
+        match = re.compile('width=150 > (.+?)<').findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match:
+                host = GetDomain(url)
+                if 'Unknown' in host:
+                                continue
+                print '*****************************' + host + ' : ' + url
+                if urlresolver.HostedMediaFile(url= url):
+                        print 'in GetLinks if loop'
+                        title = url.rpartition('/')
+                        title = title[2].replace('.html', '')
+                        title = title.replace('.htm', '')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'icon.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#------------------------------------------------------------------------------------------#
+
+def GetLinks3(section, url): # Get Links ddlvalley
+        print 'GETLINKS FROM URL: '+url
         html = net.http_GET(str(url)).content
         sources = []
         listitem = GetMediaInfo(html)
@@ -524,8 +642,6 @@ def GetLinks(section, url): # Get Links
         content = html
         print'CONTENT: '+str(listitem)
         r = re.search('<strong>Links.*</strong>', html)
-                
-        r = re.search('commentblock', content)
         if r:
                 content = content[:r.start()]
 
@@ -538,154 +654,49 @@ def GetLinks(section, url): # Get Links
                                 continue
 
                 # ignore .rar files
-                r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
+                r = re.search('\part1\part2\part3\part4\part5\.rar.html\.rar\.file[(?:\.html|\.htm)]*', url, re.IGNORECASE)
                 if r:
                         continue
+
                 print '*****************************' + host + ' : ' + url
                 title = url.rpartition('/')
                 title = title[2].replace('.html', '')
                 title = title.replace('.htm', '')
+                title = title.replace('file', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
                 title = title.replace('.rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
-                title = title.replace('rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
-                title = title.replace('sample', '[COLOR lime]Movie Trailer[/COLOR]')
                 title = title.replace('www.', '')
-                title = title.replace ('-',' ')
+                title = title.replace ('-','')
                 title = title.replace('_',' ')
-                title = title.replace('.',' ')
                 title = title.replace('gaz','')
                 title = title.replace('NTb','')
-                title = title.replace('1st','[COLOR coral][B]1st HALF[/B][/COLOR]')
-                title = title.replace('2nd','[COLOR coral][B]2nd HALF[/B][/COLOR]')
-                title = title.replace('fullmatches net','')
+                title = title.replace('part1','')
+                title = title.replace('part2','')
+                title = title.replace('part3','')
+                title = title.replace('part4','')
+                title = title.replace('part5','')
                 title = title.replace('.',' ')
-                title = title.replace('480p','[COLOR coral][B][I]480p[/B][/I][/COLOR]')
                 title = title.replace('720p','[COLOR gold][B][I]720p[/B][/I][/COLOR]')
                 title = title.replace('1080p','[COLOR orange][B][I]1080p[/B][/I][/COLOR]')
+                title = title.replace('DDLValley eu','')
                 title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
                 title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
                 title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
-                title = title.replace('%20',' ')
-                host = host.replace('ul.to','[COLOR gold]Uploaded[/COLOR]')
-                host = host.replace('uploaded.net','[COLOR gold]Uploaded[/COLOR]')
-                host = host.replace('youtube.com','[COLOR lime]Movie Trailer[/COLOR]')
-                host = host.replace('netload.in','[COLOR gold]Netload[/COLOR]')
-                host = host.replace('rapidgator.net','[COLOR gold]Rapidgator[/COLOR]')
-                host = host.replace('cloudzer.net','[COLOR gold]Cloudzer[/COLOR]')
-                host = host.replace('k2s.cc','[COLOR red]Unsupported Link[/COLOR]')
-                host = host.replace('uptobox.com','[COLOR gold]UpToBox[/COLOR]')
-                host = host.replace('.1fichier.com','[COLOR gold] 1fichier[/COLOR]')
                 name = host+'-'+title
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
 
-                
-        find = re.search('commentblock', html)
-        if find:
-                print 'in comments if'
-                html = html[find.end():]
-                match1 = re.compile(r'comment-page-numbers(.+?)<!--comments form -->', re.DOTALL).findall(html)
-                match = re.compile('<a href="(htt.+?)" rel="nofollow"', re.DOTALL).findall(str(match1))
-                print 'MATCH IS: '+str(match)
-                print len(match)
-                for url in match:
-                        host = GetDomain(url)
-                        if 'Unknown' in host:
-                                continue
-                        # ignore .srt files
-                        r = re.search('\.srt[(?:\.html|\.htm)]*$', url, re.IGNORECASE)
-                        if r:
-
-                                continue
-
-                        # ignore .rar files
-                        r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
-                        if r:
-                                continue
 
         source = urlresolver.choose_source(sources)
         if source: stream_url = source.resolve()
         else: stream_url = ''
         xbmc.Player().play(stream_url)
 
-#########################---------------------------------------------------------------------#######################################
+############################################################################# PlayVideo #################################################################################
 
-def GetLinks1(section, url): # Get Links
-        print 'GETLINKS FROM URL: '+url
-        html = net.http_GET(str(url)).content
-        sources = []
-        listitem = GetMediaInfo(html)
-        print 'LISTITEM: '+str(listitem)
-        content = html
-        print'CONTENT: '+str(listitem)
-        r = re.search('<strong>Links.*</strong>', html)
-        if r:
-                content = html[r.end():]
-
-        match = re.compile("href='(.+?)'").findall(content)
-        listitem = GetMediaInfo(content)
-        for url in match:
-                host = GetDomain(url)
-
-                if 'Unknown' in host:
-
-                        continue
-                print '*****************************' + host + ' : ' + url
-                title = url.rpartition('/')
-                name = host
-                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
-                sources.append(hosted_media)
-
-                
-        find = re.search('commentblock', html)
-        if find:
-                print 'in comments if'
-                html = html[find.end():]
-                print 'MATCH IS: '+str(match)
-                print len(match)
-                for url in match:
-                        host = GetDomain(url)
-                        if 'Unknown' in host:
-                                continue
-
-        source = urlresolver.choose_source(sources)
-        if source: stream_url = source.resolve()
-        else: stream_url = ''
+def PlayVideo(url, listitem):
+        print 'in PlayVideo %s' % url
+        stream_url = urlresolver.HostedMediaFile(url).resolve()
         xbmc.Player().play(stream_url)
-
-#-----------------------------------------------------------------------------------------#
-
-def GetLinks2(section, url): # Get Links
-        print 'GETLINKS FROM URL: '+url
-        html = net.http_GET(str(url)).content
-        sources = []
-        listitem = GetMediaInfo(html)
-        print 'LISTITEM: '+str(listitem)
-        content = html
-        print'CONTENT: '+str(listitem)
-        r = re.search('<strong>Links.*</strong>', html)
-        if r:
-                content = content[:r.start()]
-
-        match = re.compile('width=150 > (.+?)<').findall(content)
-        listitem = GetMediaInfo(content)
-        for url in match:
-                host = GetDomain(url)
-
-                if 'Unknown' in host:
-                                continue
-
-                print '*****************************' + host
-                title = url.rpartition('/')
-                name = host
-                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
-                sources.append(hosted_media)
-
-
-        source = urlresolver.choose_source(sources)
-        if source: stream_url = source.resolve()
-        else: stream_url = ''
-        xbmc.Player().play(stream_url)
-
 
 ###############################################################################################################################################################################
 
@@ -772,12 +783,6 @@ def Menu9():   #300mb movies4u
 def Menu3():   #yify
         addon.add_directory({'mode': 'GetTitles5', 'section': 'ALL', 'url': BASE_URL12 + '/category/hollywood-movie/english-yify-movie/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Latest YIFY[/B][/COLOR] [COLOR crimson](300mb movies4u) [/COLOR] >>'}, img=IconPath + 'm4u1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles2', 'section': 'ALL', 'url': BASE_URL4 + '/category/yify-brrip-1080p/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Latest 1080p YIFY[/B] [/COLOR] [COLOR goldenrod](Hdleak.com)[/COLOR] >>'}, img=IconPath + 'hdmovies.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles2', 'section': 'ALL', 'url': BASE_URL4 + '/category/yify-brrip-720p/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Latest 720p YIFY[/B] [/COLOR] [COLOR goldenrod](Hdleak.com)[/COLOR] >>'}, img=IconPath + 'hdmovies.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles2', 'section': 'ALL', 'url': BASE_URL4 + '/category/yify-brrip-3d/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Latest 3D YIFY[/B] [/COLOR] [COLOR goldenrod](Hdleak.com)[/COLOR] >>'}, img=IconPath + 'hdmovies.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles9', 'section': 'ALL', 'url': BASE_URL7 + '/movies/yify-brrip-1080p/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Latest 1080p YIFY[/B] [/COLOR] [COLOR deepskyblue](wrzKO)[/COLOR] >>'}, img=IconPath + 'wmovies.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles9', 'section': 'ALL', 'url': BASE_URL7 + '/movies/yify-brrip-720p/',
@@ -1209,8 +1214,6 @@ if mode == 'main':
 	MainMenu()
 elif mode == 'GetTitles': 
 	GetTitles(section, url, startPage, numOfPages)
-elif mode == 'GetTitles2': 
-	GetTitles2(section, url, startPage, numOfPages)
 elif mode == 'GetTitles3': 
 	GetTitles3(section, url, startPage, numOfPages)
 elif mode == 'GetTitles4': 
@@ -1255,6 +1258,8 @@ elif mode == 'GetLinks1':
 	GetLinks1(section, url)
 elif mode == 'GetLinks2':
 	GetLinks2(section, url)
+elif mode == 'GetLinks3':
+	GetLinks3(section, url)
 elif mode == 'GetSearchQuery':
 	GetSearchQuery()
 elif mode == 'Search':

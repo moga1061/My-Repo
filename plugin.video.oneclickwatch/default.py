@@ -61,44 +61,32 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie & tv s
 
 ############################################################################### links #############################################################################################
 
-
 def GetLinks(section, url): # Get Links
         print 'GETLINKS FROM URL: '+url
-        html = net.http_GET(str(url)).content
-        sources = []
+        html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
-        print 'LISTITEM: '+str(listitem)
         content = html
-        print'CONTENT: '+str(listitem)
-        r = re.search('<strong>Links.*</strong>', html)
-        if r:
-                content = html[r.end():]
-
-        match = re.compile('<a href="(.+?)"').findall(content)
+        match = re.compile('href="(.+?)"').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
                 host = GetDomain(url)
                 if 'Unknown' in host:
-                        continue
-                print '*****************************' + host
-                title = url.rpartition('/')
-                host = host.replace('.com','')
-                name = host
-                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
-                sources.append(hosted_media)
-        find = re.search('commentblock', html)
-        if find:
-                print 'in comments if'
-                html = html[find.end():]
-                print 'MATCH IS: '+str(match)
-                print len(match)
-                for url in match:
-                        host = GetDomain(url)
-                        if 'Unknown' in host:
                                 continue
-        source = urlresolver.choose_source(sources)
-        if source: stream_url = source.resolve()
-        else: stream_url = ''
+                print '*****************************' + host + ' : ' + url
+                if urlresolver.HostedMediaFile(url= url):
+                        print 'in GetLinks if loop'
+                        title = url.rpartition('/')
+                        title = title[2].replace('.html', '')
+                        title = title.replace('.htm', '')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'icon.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+############################################################################# PlayVideo #####################################################################################
+
+
+def PlayVideo(url, listitem):
+        print 'in PlayVideo %s' % url
+        stream_url = urlresolver.HostedMediaFile(url).resolve()
         xbmc.Player().play(stream_url)
 
 
