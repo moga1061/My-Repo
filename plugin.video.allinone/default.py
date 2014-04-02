@@ -421,7 +421,7 @@ def GetTitles14(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
 ######################################################################################################################################################
 
 
-def GetTitles15(section, url, startPage= '1', numOfPages= '1'): # freemoviesntvshows
+def GetTitles15(section, url, startPage= '1', numOfPages= '1'): # freemovies
         print 'allinone get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
@@ -499,8 +499,10 @@ def GetTitles18(section, url, startPage= '1', numOfPages= '1'): #2nd list onecli
                 if ( page != start):
                         pageUrl = url + '/' + str(page) + ''
                         html = net.http_GET(pageUrl).content                     
-                match = re.compile('span-6 inner-6 tt view.+?href="(.+?)".+?>.+?<.+?src="(.+?)" title="(.+?)">', re.DOTALL).findall(html)
-                for movieUrl, img, name in match:
+                match = re.compile('<img class="img-preview spec-border"  src="http://www.oneclickmoviez.ag/templates/svarog/timthumb.php\?src=(.+?)&amp;.+?" alt=" ".+?<a class="link" href="(.+?)" title="(.+?)">',re.DOTALL).findall(html)
+                if not match:
+                    match = re.compile('<img class="img-preview spec-border show-thumbnail"  src="http://www.oneclickmoviez.ag/templates/svarog/timthumb.php\?src=(.+?)&amp;.+?" alt=" ".+?<a class="link" href="(.+?)" title="(.+?)">',re.DOTALL).findall(html)
+                for img, movieUrl, name in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=img, fanart=FanartPath + 'fanart.png')
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 

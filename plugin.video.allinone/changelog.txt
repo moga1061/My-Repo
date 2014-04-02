@@ -135,3 +135,6 @@
 
 [B]Version 0.4.6[/B]
 -  fixed oneclickmoviez tv shows
+
+[B]Version 0.4.7[/B]
+-  clean up
