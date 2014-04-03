@@ -18,11 +18,12 @@ addon_id = 'plugin.video.theyidrh'
 plugin = xbmcaddon.Addon(id=addon_id)
 net = Net()
 addon = Addon('plugin.video.theyidrh', sys.argv)
-
 DB = os.path.join(xbmc.translatePath("special://database"), 'theyidrh.db')
+
+########### url's ###########
 BASE_URL = 'http://rls-center.com/'
 BASE_URL1 = 'http://www.scnsrc.me/'
-BASE_URL2 = ''
+BASE_URL2 = 'http://scenelog.eu/'
 BASE_URL3 = 'http://crazyhdsource.com/'
 BASE_URL4 = ''
 BASE_URL5 = 'http://www.theextopia.com/'
@@ -40,11 +41,10 @@ BASE_URL16 = 'http://tv-release.net/'
 BASE_URL17 = 'http://www.tribalmixes.com/'
 BASE_URL18 = 'http://www.freshremix.org/'
 
-#PATHS
+###### PATHS #########
 AddonPath = addon.get_path()
 IconPath = AddonPath + "/icons/"
 FanartPath = AddonPath + "/icons/"
-
 
 ##### Queries ##########
 mode = addon.queries['mode']
@@ -56,10 +56,8 @@ numOfPages = addon.queries.get('numOfPages', None)
 listitem = addon.queries.get('listitem', None)
 urlList = addon.queries.get('urlList', None)
 section = addon.queries.get('section', None)
-##### Queries ##########
 
-
-###############################################################################Movie Titles#######################################################################################
+############################################################################### Movie Titles #######################################################################################
 
 def GetTitles(section, url, startPage= '1', numOfPages= '1'):   # Release Center
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -80,11 +78,28 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'):   # Release Center
                 addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#####################################################################################################################################################################################
+#--------------------------------------------------------------------------------------------#
 
+def GetTitles2(section, url, startPage= '1', numOfPages= '1'): # scenelog
+        print 'theyidrh get Movie Titles Menu %s' % url
+        pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + 'page/' + startPage + '/'
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        start = int(startPage)
+        end = start + int(numOfPages)
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + 'page/' + str(page) + '/'
+                        html = net.http_GET(pageUrl).content
+                match = re.compile('<h1>.+?href="(.+?)".+?>(.+?)<.+?', re.DOTALL).findall(html)
+                for movieUrl, name in match:
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'sl.png', fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetTitles2', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-
-##########################################################################################################################################################################
+#--------------------------------------------------------------------------------------------#
 
 def GetTitles3(section, url, startPage= '1', numOfPages= '1'): #crazyhdsource
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -105,8 +120,7 @@ def GetTitles3(section, url, startPage= '1', numOfPages= '1'): #crazyhdsource
                 addon.add_directory({'mode': 'GetTitles3', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue]Next...[/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-
-#####################################################################################################################################################################################
+#--------------------------------------------------------------------------------------------#
 
 def GetTitles4(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles  # com2dl
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -127,7 +141,7 @@ def GetTitles4(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                 addon.add_directory({'mode': 'GetTitles4', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')       
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#####################################################################################################################################################################################
+#--------------------------------------------------------------------------------------------#
 
 def GetTitles5(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles #url:12 300mbmovies4u
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -149,7 +163,7 @@ def GetTitles5(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
         setView('tvshows', 'tvshows-view') 
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#####################################################################################################################################################################################
+#--------------------------------------------------------------------------------------------#
 
 def GetTitles6(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles    #Scene down
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -170,9 +184,7 @@ def GetTitles6(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                 addon.add_directory({'mode': 'GetTitles6', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#####################################################################################################################################################################################
-
-
+#--------------------------------------------------------------------------------------------#
 
 def GetTitles7(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles  # Sceper
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -193,7 +205,7 @@ def GetTitles7(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                 addon.add_directory({'mode': 'GetTitles7', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')       
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-###########################################################################################################################################################################
+#--------------------------------------------------------------------------------------------#
 
 def GetTitles8(section, url, startPage= '1', numOfPages= '1'): # rls-tv
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -213,8 +225,7 @@ def GetTitles8(section, url, startPage= '1', numOfPages= '1'): # rls-tv
                         addon.add_directory({'mode': 'GetLinks1', 'section': section, 'url': 'http://tv-release.net/' + movieUrl}, {'title':  name.strip()}, img=IconPath + 'rlstv.png', fanart=FanartPath + 'fanart.png')
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#####################################################################################################################################################################################
-
+#--------------------------------------------------------------------------------------------#
 
 def GetTitles9(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles    #wrzko
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -236,7 +247,7 @@ def GetTitles9(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
-#######################################################################################################################################################################################
+#--------------------------------------------------------------------------------------------#
 
 def GetTitles1(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles #scnsrc movies
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -257,8 +268,7 @@ def GetTitles1(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
                 addon.add_directory({'mode': 'GetTitles1', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-##############                ##########                #######                                ###########            #############                         ################
-
+#------------------------------------------#
 
 def GetTitles10(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles   #scnsrc tv
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -279,8 +289,7 @@ def GetTitles10(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                 addon.add_directory({'mode': 'GetTitles10', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')       
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-
-########################################################################################################################################################################################
+#--------------------------------------------------------------------------------------------#
 
 def GetTitles11(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles #ddlv
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -301,7 +310,7 @@ def GetTitles11(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                 addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#####################################################################################################################################################################################
+#--------------------------------------------------------------------------------------------#
 
 def GetTitles12(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles  #rbb
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -322,9 +331,7 @@ def GetTitles12(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                 addon.add_directory({'mode': 'GetTitles12', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue]Next...[/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#######################                        #############                     ############                     ##############       ##########               ##############
-
-
+#------------------------------------#
 
 def GetTitles13(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles  #rbb2
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -345,7 +352,7 @@ def GetTitles13(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                 addon.add_directory({'mode': 'GetTitles13', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue]Come back soon[/COLOR]'}, img=IconPath + '', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-################################################################################################################################################################################
+#--------------------------------------------------------------------------------------------#
 
 def GetTitles14(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles #
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -366,8 +373,7 @@ def GetTitles14(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                 addon.add_directory({'mode': 'GetTitles14', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')       
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-######################################################################################################################################################
-
+#--------------------------------------------------------------------------------------------#
 
 def GetTitles15(section, url, startPage= '1', numOfPages= '1'): # watchtvstreaming
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -388,7 +394,7 @@ def GetTitles15(section, url, startPage= '1', numOfPages= '1'): # watchtvstreami
                 addon.add_directory({'mode': 'GetTitles15', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage.png1', fanart=FanartPath + 'fanart.png') 
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-
+#-------------------------------#
 
 def GetTitles15a(section, url, startPage= '1', numOfPages= '1'): # watchtvstreaming
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -408,7 +414,7 @@ def GetTitles15a(section, url, startPage= '1', numOfPages= '1'): # watchtvstream
                         addon.add_directory({'mode': 'GetTitles15', 'section': section, 'url': movieUrl, 'startPage': '1', 'numOfPages': '1'}, {'title':  title}, img=IconPath + 'tvaz.png', fanart=FanartPath + 'fanart.png')   
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#####################################################################################################################################################################################
+#--------------------------------------------------------------------------------------------#
 
 def GetTitles16(section, url, startPage= '1', numOfPages= '1'): # fullmatch
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -430,7 +436,7 @@ def GetTitles16(section, url, startPage= '1', numOfPages= '1'): # fullmatch
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-######################################################################################################################################################################################
+#--------------------------------------------------------------------------------------------#
 
 def GetTitles17(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -451,7 +457,7 @@ def GetTitles17(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                 addon.add_directory({'mode': 'GetTitles17', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-###################################################################################################################################################################################
+#--------------------------------------------------------------------------------------------#
 
 def GetTitles18(section, url, startPage= '1', numOfPages= '1'): #house
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -472,7 +478,7 @@ def GetTitles18(section, url, startPage= '1', numOfPages= '1'): #house
         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-############################################################################################################################################################################
+#--------------------------------------------------------------------------------------------#
 
 def GetTitles19(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
         print 'theyidrh get Movie Titles Menu %s' % url
@@ -548,17 +554,10 @@ def GetLinks(section, url): # Get Links
                         title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
                         title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
                         title = title.replace('%20',' ')
-                        host = host.replace('ul.to','[COLOR gold]Uploaded[/COLOR]')
-                        host = host.replace('uploaded.net','[COLOR gold]Uploaded[/COLOR]')
                         host = host.replace('youtube.com','[COLOR lime]Movie Trailer[/COLOR]')
-                        host = host.replace('netload.in','[COLOR gold]Netload[/COLOR]')
-                        host = host.replace('rapidgator.net','[COLOR gold]Rapidgator[/COLOR]')
-                        host = host.replace('cloudzer.net','[COLOR gold]Cloudzer[/COLOR]')
                         host = host.replace('k2s.cc','[COLOR red]Unsupported Link[/COLOR]')
-                        host = host.replace('uptobox.com','[COLOR gold]UpToBox[/COLOR]')
-                        host = host.replace('.1fichier.com','[COLOR gold] 1fichier[/COLOR]')
-                        host = host.replace('ryushare.com','[COLOR red]ryushare not working with real-debird or alldebird[/COLOR]')
-                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host + ' : ' + title}, img=IconPath + 'icon.png', fanart=FanartPath + 'fanart.png')
+                        host = host.replace('ryushare.com','[COLOR red]Unsupported Link[/COLOR]')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host + ' [COLOR gold]:[/COLOR] ' + title}, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
 
         find = re.search('commentblock', html)
         if find:
@@ -581,13 +580,12 @@ def GetLinks(section, url): # Get Links
                                         title = url.rpartition('/')
                                         title = title[2].replace('.html', '')
                                         title = title.replace('.htm', '')
-                                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host + ' : ' + title}, img=IconPath + 'icon.png', fanart=FanartPath + 'fanart.png')
+                                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host + ' : ' + title}, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
                         except:
                                 continue
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-
-#########################---------------------------------------------------------------------#######################################
+#--------------------------------------------------------------------------------------------#
 
 def GetLinks1(section, url): # Get Links
         print 'GETLINKS FROM URL: '+url
@@ -606,7 +604,7 @@ def GetLinks1(section, url): # Get Links
                         title = url.rpartition('/')
                         title = title[2].replace('.html', '')
                         title = title.replace('.htm', '')
-                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'icon.png', fanart=FanartPath + 'fanart.png')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-----------------------------------------------------------------------------------------#
@@ -628,7 +626,7 @@ def GetLinks2(section, url): # Get Links
                         title = url.rpartition('/')
                         title = title[2].replace('.html', '')
                         title = title.replace('.htm', '')
-                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'icon.png', fanart=FanartPath + 'fanart.png')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------------------------#
@@ -761,6 +759,8 @@ def Menu2():   #movies
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR darkorchid](Com2dl.com)[/COLOR] >>'}, img=IconPath + 'commovies.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL5 + '/category/movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR whitesmoke](The Extopia)[/COLOR] >>'}, img=IconPath + 'exmo.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles2', 'section': 'ALL', 'url': BASE_URL2 + '/movies/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR powderblue](SceneLog)[/COLOR] >>'}, img=IconPath + 'slm1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'menu9'}, {'title': '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR crimson](300mb movies4u)[/COLOR] >>'}, img=IconPath + 'm4u1.png', fanart=FanartPath + 'fanart.png') 
         addon.add_directory({'mode': 'menu3'}, {'title': '[COLOR steelblue][B]YIFY Movies >>[/B] [/COLOR]>>'}, img=IconPath + 'yify.png', fanart=FanartPath + 'fanart.png') 
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -809,10 +809,10 @@ def Menu4():    #tv
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Tv Shows[/B] [/COLOR] [COLOR orangered](Scene Source)[/COLOR] >>'}, img=IconPath + 'sstv.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL5 + '/category/tvshow/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Releases[/B] [/COLOR] [COLOR whitesmoke](The Extopia)[/COLOR] >>'}, img=IconPath + 'extv1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles4', 'section': 'ALL', 'url': BASE_URL6 + '/tv-show/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Tv Shows[/B] [/COLOR] [COLOR darkorchid](Com2dl.com)[/COLOR] >>'}, img=IconPath + 'comtv.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles5', 'section': 'ALL', 'url': BASE_URL12 + '/category/tv-shows/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Tv Shows[/B][/COLOR] [COLOR crimson](300mb movies4u)[/COLOR] >>'}, img=IconPath + '3mb4.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles2', 'section': 'ALL', 'url': BASE_URL2 + '/tv-shows/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Tv shows[/B] [/COLOR] [COLOR powderblue](SceneLog)[/COLOR] >>'}, img=IconPath + 'slt1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles15a', 'section': 'ALL', 'url': BASE_URL14 + '/categories/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Tv Show A-Z list[/B][/COLOR] [COLOR chartreuse](WatchTvStreaming) [/COLOR]>>'}, img=IconPath + 'tvaz.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'menu11'}, {'title': '[COLOR darkorange][B]Latest Added[/B] [/COLOR] [COLOR blue](1080p zone)[/COLOR] >>'}, img=IconPath + '1080.png', fanart=FanartPath + 'fanart.png')
@@ -1214,6 +1214,8 @@ if mode == 'main':
 	MainMenu()
 elif mode == 'GetTitles': 
 	GetTitles(section, url, startPage, numOfPages)
+elif mode == 'GetTitles2': 
+	GetTitles2(section, url, startPage, numOfPages)
 elif mode == 'GetTitles3': 
 	GetTitles3(section, url, startPage, numOfPages)
 elif mode == 'GetTitles4': 
@@ -1324,7 +1326,3 @@ if mode == 'menu12':
        Menu12()
 if mode == 'menu13':
        Menu13()
-
-
-
-

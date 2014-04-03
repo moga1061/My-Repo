@@ -25,13 +25,13 @@ BASE_URL2 = 'http://www.watchtvshowz.org/'
 BASE_URL3 = 'http://viooz.pw/'
 BASE_URL4 = 'http://www.ultra-vid.com/'
 BASE_URL5 = 'http://moviesall4u.com/'
-BASE_URL6 = 'http://www1.zmovie.tw/'
+BASE_URL6 = ''
 BASE_URL7 = 'http://www.movie-kingdom.com/'
 BASE_URL8 = 'http://watchseriesus.com/'
 BASE_URL9 = 'http://www.oneclickmoviez.ag/'
 BASE_URL10 = 'http://www.myvideolinks.eu/'
 BASE_URL11 = 'http://www.ddlvalley.eu/'
-BASE_URL12 = ''
+BASE_URL12 = 'http://www.flixanity.com/'
 BASE_URL13 = 'http://fullepisode.info/'
 BASE_URL14 = 'http://www.channelcut.me/'
 BASE_URL15 = 'http://freemoviesntvshows.com/'
@@ -196,47 +196,12 @@ def GetTitles5(section, url, startPage= '1', numOfPages= '1'): # Get Movie Title
 
 ####################################################################################################################################################################
 
-def GetTitles6(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles #ZMOVIES
-        print 'allinone get Movie Titles Menu %s' % url
-        pageUrl = url
-        if int(startPage)> 1:
-                pageUrl = url + '/' + startPage + '/'
-        print pageUrl
-        html = net.http_GET(pageUrl).content
-        start = int(startPage)
-        end = start + int(numOfPages)
-        for page in range( start, end):
-                if ( page != start):
-                        pageUrl = url + '/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content                     
-                match = re.compile('width: 68px; height: 100px; position: relative;.+?href="(.+?)" title="(.+?)">.+?src=.+?src="(.+?)"', re.DOTALL).findall(html)
-                for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
-                addon.add_directory({'mode': 'GetTitles6', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
-        setView('tvshows', 'tvshows-view')          
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+#def GetTitles6(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles 
 
 ###############             ########################               #######################            ##################            ######################        ####################
 
 
-def GetTitles6a(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles #z2
-        print 'allinone get Movie Titles Menu %s' % url
-        pageUrl = url
-        if int(startPage)> 1:
-                pageUrl = url + '/' + startPage + '/'
-        print pageUrl
-        html = net.http_GET(pageUrl).content
-        start = int(startPage)
-        end = start + int(numOfPages)
-        for page in range( start, end):
-                if ( page != start):
-                        pageUrl = url + '/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content                        
-                match = re.compile('width: 68px; height: 100px; position: relative;.+?href="(.+?)" title="(.+?)">.+?src=.+?src="(.+?)"', re.DOTALL).findall(html)
-                for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
-        setView('tvshows', 'tvshows-view')          
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+#def GetTitles6a(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles 
 
 
 ##############################################################################################################################################################
@@ -346,7 +311,7 @@ def GetTitles10(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
                         html = net.http_GET(pageUrl).content                        
                 match = re.compile(' <img src="(.+?)"  title=".+?" class="alignleft" alt="(.+?)" /></a>\r\n\t\t\r\n<h4><a href="(.+?)" rel="bookmark"', re.DOTALL).findall(html)
                 for img, name, movieUrl in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')      
+                        addon.add_directory({'mode': 'GetLinks7', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')      
                 addon.add_directory({'mode': 'GetTitles10', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')         
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -375,6 +340,25 @@ def GetTitles11(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
 
 ##################################################################################################################################################################################
 
+def GetTitles12(section, url, startPage= '1', numOfPages= '1'): # flixanity
+        print 'allinone get Movie Titles Menu %s' % url
+        pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + '/' + startPage + '/page'
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        start = int(startPage)
+        end = start + int(numOfPages)
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + '/' + startPage + '/page'
+                        html = net.http_GET(pageUrl).content
+                match = re.compile('text-align:center.+?href="(.+?)".+?.+?src="(.+?)".+?<p><strong>(.+?)</strong></p>', re.DOTALL).findall(html)
+                for movieUrl, img, name in match:
+                        addon.add_directory({'mode': 'GetLinks1', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+                #addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
+        setView('tvshows', 'tvshows-view')  
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ################################################################################################################################################################################
 
@@ -704,81 +688,50 @@ def GetTitles26(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
 
 def GetLinks(section, url): # Get Links
         print 'GETLINKS FROM URL: '+url
-        html = net.http_GET(str(url)).content
-        sources = []
+        html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
-        print 'LISTITEM: '+str(listitem)
         content = html
-        print'CONTENT: '+str(listitem)
-        r = re.search('<strong>Links.*</strong>', html)
-        if r:
-                content = html[r.end():]               
-        if r:
-                content = content[:r.start()]
         match = re.compile('href="(.+?)"').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
                 host = GetDomain(url)
                 if 'Unknown' in host:
-                        continue
-                print '*****************************' + host + ' : ' + url
-                title = url.rpartition('/')
-                title = title[2].replace('.html', '')
-                host = host.replace('youtube.com','[COLOR lime]Movie Trailer[/COLOR]')
-                name = host
-                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
-                sources.append(hosted_media)
-                print len(match)
-                for url in match:
-                        host = GetDomain(url)
-                        if 'Unknown' in host:
                                 continue
-        source = urlresolver.choose_source(sources)
-        if source: stream_url = source.resolve()
-        else: stream_url = ''
-        xbmc.Player().play(stream_url)
+                print '*****************************' + host + ' : ' + url
+                if urlresolver.HostedMediaFile(url= url):
+                        print 'in GetLinks if loop'
+                        title = url.rpartition('/')
+                        title = title[2].replace('.html', '')
+                        title = title.replace('.htm', '')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #---------------------------------------------------------------------------------#
 
 def GetLinks1(section, url): # Get Links #putseries
         print 'GETLINKS FROM URL: '+url
-        html = net.http_GET(str(url)).content
-        sources = []
+        html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
-        print 'LISTITEM: '+str(listitem)
         content = html
-        print'CONTENT: '+str(listitem)
-        r = re.search('<strong>Links.*</strong>', html)
-        if r:
-                content = html[r.end():]               
-        if r:
-                content = content[:r.start()]
         match = re.compile('src="(.+?)"').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
                 host = GetDomain(url)
                 if 'Unknown' in host:
-                        continue
-                print '*****************************' + host + ' : ' + url
-                title = url.rpartition('/')
-                title = title[2].replace('.html', '')
-                host = host.replace('embed.','')
-                name = host
-                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
-                sources.append(hosted_media)
-                print len(match)
-                for url in match:
-                        host = GetDomain(url)
-                        if 'Unknown' in host:
                                 continue
-        source = urlresolver.choose_source(sources)
-        if source: stream_url = source.resolve()
-        else: stream_url = ''
-        xbmc.Player().play(stream_url)
+                print '*****************************' + host + ' : ' + url
+                if urlresolver.HostedMediaFile(url= url):
+                        print 'in GetLinks if loop'
+                        title = url.rpartition('/')
+                        title = title[2].replace('.html', '')
+                        title = title.replace('.htm', '')
+                        host = host.replace('embed.','')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-------------------------------------------------------------------------------#
 
-def GetLinks3(section, url): # Get Links
+def GetLinks3(section, url): # Get Links ddlvalley
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(str(url)).content
         sources = []
@@ -787,8 +740,6 @@ def GetLinks3(section, url): # Get Links
         content = html
         print'CONTENT: '+str(listitem)
         r = re.search('<strong>Links.*</strong>', html)
-                
-        r = re.search('commentblock', content)
         if r:
                 content = content[:r.start()]
 
@@ -800,46 +751,18 @@ def GetLinks3(section, url): # Get Links
                 if 'Unknown' in host:
                                 continue
 
-                # ignore .rar files
-                r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
+                r = re.search('\part1\part2\part3\part4\part5\.rar.html\.rar\.file[(?:\.html|\.htm)]*', url, re.IGNORECASE)
                 if r:
                         continue
+
                 print '*****************************' + host + ' : ' + url
                 title = url.rpartition('/')
                 title = title[2].replace('.html', '')
                 title = title.replace('.htm', '')
-                title = title.replace('www.', '')
-                title = title.replace ('-',' ')
-                title = title.replace('_',' ')
-                title = title.replace('.',' ')
-                title = title.replace('.',' ')
+                title = title.replace('.rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
                 name = host+'-'+title
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
-
-                
-        find = re.search('commentblock', html)
-        if find:
-                print 'in comments if'
-                html = html[find.end():]
-                match1 = re.compile(r'comment-page-numbers(.+?)<!--comments form -->', re.DOTALL).findall(html)
-                match = re.compile('<a href="(htt.+?)" rel="nofollow"', re.DOTALL).findall(str(match1))
-                print 'MATCH IS: '+str(match)
-                print len(match)
-                for url in match:
-                        host = GetDomain(url)
-                        if 'Unknown' in host:
-                                continue
-                        # ignore .srt files
-                        r = re.search('\.srt[(?:\.html|\.htm)]*$', url, re.IGNORECASE)
-                        if r:
-
-                                continue
-
-                        # ignore .rar files
-                        r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
-                        if r:
-                                continue
 
         source = urlresolver.choose_source(sources)
         if source: stream_url = source.resolve()
@@ -850,117 +773,107 @@ def GetLinks3(section, url): # Get Links
 
 def GetLinks4(section, url): # Get Links
         print 'GETLINKS FROM URL: '+url
-        html = net.http_GET(str(url)).content
-        sources = []
+        html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
-        print 'LISTITEM: '+str(listitem)
         content = html
-        print'CONTENT: '+str(listitem)
-        r = re.search('<strong>Links.*</strong>', html)
-        if r:
-                content = content[:r.start()]
-
         match = re.compile('content="(.+?)"').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
                 host = GetDomain(url)
-
                 if 'Unknown' in host:
-                        continue
-
-                print '*****************************' + host
-                title = url.rpartition('/')
-                name = host
-                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
-                sources.append(hosted_media)
-
-
-        source = urlresolver.choose_source(sources)
-        if source: stream_url = source.resolve()
-        else: stream_url = ''
-        xbmc.Player().play(stream_url)
+                                continue
+                print '*****************************' + host + ' : ' + url
+                if urlresolver.HostedMediaFile(url= url):
+                        print 'in GetLinks if loop'
+                        title = url.rpartition('/')
+                        title = title[2].replace('.html', '')
+                        title = title.replace('.htm', '')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-----------------------------------------------------------------------#
 
 def GetLinks5(section, url): # Get Links
         print 'GETLINKS FROM URL: '+url
-        html = net.http_GET(str(url)).content
-        sources = []
+        html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
-        print 'LISTITEM: '+str(listitem)
         content = html
-        print'CONTENT: '+str(listitem)
-        r = re.search('<strong>Links.*</strong>', html)
-        if r:
-                content = content[:r.start()]
-
         match = re.compile("file: '(.+?)'").findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
                 host = GetDomain(url)
                 if 'Unknown' in host:
-                        continue
-                print '*****************************' + host + ' : ' + url
-                title = url.rpartition('/')
-                title = title[2].replace('.html', '')
-                host = host.replace('embed.','')
-                name = host
-                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
-                sources.append(hosted_media)
-                print len(match)
-                for url in match:
-                        host = GetDomain(url)
-                        if 'Unknown' in host:
                                 continue
-        source = urlresolver.choose_source(sources)
-        if source: stream_url = source.resolve()
-        else: stream_url = ''
-        xbmc.Player().play(stream_url)
+                print '*****************************' + host + ' : ' + url
+                if urlresolver.HostedMediaFile(url= url):
+                        print 'in GetLinks if loop'
+                        title = url.rpartition('/')
+                        title = title[2].replace('.html', '')
+                        title = title.replace('.htm', '')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------------#
 
 def GetLinks6(section, url): # Get Links
         print 'GETLINKS FROM URL: '+url
-        html = net.http_GET(str(url)).content
-        sources = []
+        html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
-        print 'LISTITEM: '+str(listitem)
         content = html
-        print'CONTENT: '+str(listitem)
-        r = re.search('<strong>Links.*</strong>', html)
-        if r:
-                content = html[r.end():]               
-        if r:
-                content = content[:r.start()]
         match = re.compile('content="(.+?)"').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
                 host = GetDomain(url)
                 if 'Unknown' in host:
-                        continue
-                print '*****************************' + host + ' : ' + url
-                title = url.rpartition('/')
-                title = title[2].replace('.html', '')
-                title = title.replace('.htm', '')
-                title = title.replace('www.', '')
-                title = title.replace ('-','')
-                title = title.replace('_',' ')
-                title = title.replace('x1ct',' ')
-                title = title.replace('?',' ')
-                title = title.replace('=','')
-                title = title.replace('1','')
-                title = title.replace('autoplay','[COLOR blue]this link to play video     [/COLOR]')
-                name = host+'-'+title
-                hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
-                sources.append(hosted_media)
-                print len(match)
-                for url in match:
-                        host = GetDomain(url)
-                        if 'Unknown' in host:
                                 continue
-        source = urlresolver.choose_source(sources)
-        if source: stream_url = source.resolve()
-        else: stream_url = ''
+                print '*****************************' + host + ' : ' + url
+                if urlresolver.HostedMediaFile(url= url):
+                        print 'in GetLinks if loop'
+                        title = url.rpartition('/')
+                        title = title[2].replace('.html', '')
+                        title = title.replace('.htm', '')
+                        title = title.replace('www.', '')
+                        title = title.replace ('-','')
+                        title = title.replace('_',' ')
+                        title = title.replace('x1ct',' ')
+                        title = title.replace('?',' ')
+                        title = title.replace('=','')
+                        title = title.replace('1','')
+                        title = title.replace('autoplay','[COLOR blue]this link to play video     [/COLOR]')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#-------------------------------------------------------------------------#
+
+def GetLinks7(section, url): # Get Links mvl
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        content = html
+        match = re.compile('<li><a href="(.+?)">.+?</a></li>').findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match:
+                host = GetDomain(url)
+                if 'Unknown' in host:
+                                continue
+                print '*****************************' + host + ' : ' + url
+                if urlresolver.HostedMediaFile(url= url):
+                        print 'in GetLinks if loop'
+                        title = url.rpartition('/')
+                        title = title[2].replace('.html', '')
+                        title = title.replace('.htm', '')
+                        host = host.replace('youtube.com','[COLOR lime]Movie Trailer[/COLOR]')
+                        host = host.replace('youtu.be','[COLOR lime]Movie Trailer[/COLOR]')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
+############################################################################# PlayVideo #####################################################################################
+
+
+def PlayVideo(url, listitem):
+        print 'in PlayVideo %s' % url
+        stream_url = urlresolver.HostedMediaFile(url).resolve()
         xbmc.Player().play(stream_url)
  
 
@@ -1010,12 +923,16 @@ def MusicMenu():   #Music
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def SportMenu():   #sport
-        addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/category/ufc',
+        addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/watch/ufc',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest UFC list[/B][/COLOR] [COLOR tomato](ChannelCut) [/COLOR]>>'}, img=IconPath + 'cc.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/category/wwe',
+        addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/watch/wwe',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest WWE list[/B][/COLOR] [COLOR tomato](ChannelCut) [/COLOR]>>'}, img=IconPath + 'cc.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/category/impact-wrestling',
+        addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/watch/impact-wrestling',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest Impact Wrestling list[/B][/COLOR] [COLOR tomato](ChannelCut) [/COLOR]>>'}, img=IconPath + 'cc.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/watch/tna',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest TNA list[/B][/COLOR] [COLOR tomato](ChannelCut) [/COLOR]>>'}, img=IconPath + 'cc.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/watch/fights',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest Fights list[/B][/COLOR] [COLOR tomato](ChannelCut) [/COLOR]>>'}, img=IconPath + 'cc.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -1029,11 +946,11 @@ def MovieMenu():   #movies
         addon.add_directory({'mode': 'GetTitles16', 'section': 'ALL', 'url': BASE_URL16 + '/featured/1',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Featured Movies[/B][/COLOR] [COLOR moccasin](Putlocker.bz) [/COLOR]>>'}, img=IconPath + 'pl.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'OcmMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR peru](OneClickMoviez) [/COLOR]>>'}, img=IconPath + '1cm.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'ZmMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR plum](flixanity) [/COLOR]>>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'PutMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR teal](free movies) [/COLOR]>>'}, img=IconPath + 'fm.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'MovMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR lightslategray](ViooZ) [/COLOR]>>'}, img=IconPath + 'vu1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'UvMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR floralwhite](Ultra-Vid) [/COLOR]>>'}, img=IconPath + 'uv1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'MkMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR gold](Movie-Kingdom) [/COLOR]>>'}, img=IconPath + 'mk.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'ZmMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR plum](Zmovies) [/COLOR]>>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'WtMenu'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR lightsteelblue][B]International Movies Zone[/B][/COLOR] >>'}, img=IconPath + 'iz.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'RgMenu'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR mediumturquoise][B]Full HD Zone[/B][/COLOR] >>'}, img=IconPath + 'fhz.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -1229,37 +1146,59 @@ def UvMenu():   #moviesUv
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
-def ZmMenu():
-        addon.add_directory({'mode': 'GetTitles6a', 'section': 'ALL', 'url': BASE_URL6 + '/movies/new',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR plum](Zmovies) [/COLOR]>>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/action',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Action >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/adventure',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Adventure >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/animation',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Animation >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/Comedy',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Comedy >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/crime',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Crime >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/documentary',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Documentary >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/drama',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Drama >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/fantasy',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Fantasy >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/horror',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Horror >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/romance',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Romance >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/sci-Fi',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Sci Fi >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/thriller',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Thriller >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/sport',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Sport >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles6', 'section': 'ALL', 'url': BASE_URL6 + '/search/genre/western',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Western >>'}, img=IconPath + 'ze1.png', fanart=FanartPath + 'fanart.png')
+def ZmMenu(): #flixanity
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movies/new',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR plum](flixanity) [/COLOR]>>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/featuredmovies',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Box Office[/B][/COLOR] >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movies/abc',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]movies (acb)[/B][/COLOR] >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movies/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]movies (imdb)[/B][/COLOR] >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/action/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Action (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/adventure/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Adventure (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/animation/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Animation (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/biography/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Biography (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/comedy/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Comedy (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/crime/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Crime (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/documentary/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Documentary (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/drama/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Drama (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/family/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Family (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/fantasy/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Fantasy (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/horror/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Horror (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/music/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Music (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/musical/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Musical (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/mystery/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Mystery (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/romance/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Romance (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/sci-fi/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Sci-Fi (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/sport/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Sport (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/superhero/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Superhero (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/thriller/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Thriller (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/war/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'War (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/western/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Western (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/wwf-wwe/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  'Wwf - Wwe (top 50 imdb) >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -1868,10 +1807,6 @@ elif mode == 'GetTitles4':
 	GetTitles4(section, url, startPage, numOfPages)
 elif mode == 'GetTitles5': 
 	GetTitles5(section, url, startPage, numOfPages)
-elif mode == 'GetTitles6': 
-	GetTitles6(section, url, startPage, numOfPages)
-elif mode == 'GetTitles6a': 
-	GetTitles6a(section, url, startPage, numOfPages)
 elif mode == 'GetTitles7': 
 	GetTitles7(section, url, startPage, numOfPages)
 elif mode == 'GetTitles7a': 
@@ -1884,6 +1819,8 @@ elif mode == 'GetTitles10':
 	GetTitles10(section, url, startPage, numOfPages)
 elif mode == 'GetTitles11': 
 	GetTitles11(section, url, startPage, numOfPages)
+elif mode == 'GetTitles12': 
+	GetTitles12(section, url, startPage, numOfPages)
 elif mode == 'GetTitles13': 
 	GetTitles13(section, url, startPage, numOfPages)
 elif mode == 'GetTitles14': 
@@ -1928,6 +1865,8 @@ elif mode == 'GetLinks5':
 	GetLinks5(section, url)
 elif mode == 'GetLinks6':
 	GetLinks6(section, url)
+elif mode == 'GetLinks7':
+	GetLinks7(section, url)
 elif mode == 'GetSearchQuery9':
 	GetSearchQuery9()
 elif mode == 'Search9':
