@@ -652,9 +652,9 @@ def GetTitles27(section, url, startPage= '1', numOfPages= '1'): #2nd
                 if ( page != start):
                         pageUrl = url + '/' + startPage + '/'
                         html = net.http_GET(pageUrl).content                     
-                match = re.compile('<a class="link" href="(.+?)" title=".+?">(.+?)</a>', re.DOTALL).findall(html)
-                for movieUrl, name in match:
-                        addon.add_directory({'mode': 'GetLinks1', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+                match = re.compile('<img class="img-preview spec-border show-thumbnail"  src=".+?src=(.+?)&amp;.+?" href="(.+?)" title=".+?">(.+?)</a>', re.DOTALL).findall(html)
+                for img, movieUrl, name in match:
+                        addon.add_directory({'mode': 'GetLinks1', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=img, fanart=FanartPath + 'fanart.png')
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------#
@@ -898,7 +898,40 @@ def MusicMenu():   #Music
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cadetblue][B]Rap Battle videos[/B][/COLOR] [COLOR springgreen](Rap Grid) [/COLOR]>>'}, img=IconPath + 'rg.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles26', 'section': 'ALL', 'url': BASE_URL26 + '/en/music/videos',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cadetblue][B]Latest Music videos[/B][/COLOR] [COLOR red](2kmusic) [/COLOR]>>'}, img=IconPath + '2km.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'RadioMenu'}, {'title':  '[COLOR aqua][B]Radio [/B][/COLOR]>>'}, img=IconPath + 'radio.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def RadioMenu():   #radio
+        addon.add_directory({'': '', '': '', '': '',
+                             '': '', '': ''}, {'title':  '[COLOR yellow][B].....WE ARE.....[/B][/COLOR] [COLOR red][I][B]LIVE[/B][/I][/COLOR] [COLOR yellow][B].....TheYids RADIO.....[/B][/COLOR]'}, img=IconPath + 'radioty.png', fanart=FanartPath + 'fanart.png')
+
+        addon_handle = int(sys.argv[1])
+        xbmcplugin.setContent(addon_handle, 'audio')
+
+        url = 'http://uk1-pn.webcast-server.net:8698'
+        li = xbmcgui.ListItem('[COLOR blue][B]Kool London[/B][/COLOR] [COLOR red][B][I](Live)[/B][/I][/COLOR] >>', iconImage='http://s1.postimg.org/fko2kyu9b/icon.png')
+        li.setProperty('fanart_image', 'http://s27.postimg.org/47ti3qg6b/fanart.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://176.31.239.83:9136/'
+        li = xbmcgui.ListItem('[COLOR blue][B]Deja Classic = Studio 2[/B][/COLOR] >>', iconImage='http://s2.postimg.org/eg7k51z3t/icon.png')
+        li.setProperty('fanart_image', 'http://s18.postimg.org/fnbfwgw3d/fanart.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://176.31.239.83:9041/'
+        li = xbmcgui.ListItem('[COLOR blue][B]DejaVu Live = Studio 2[/B][/COLOR] >>', iconImage='http://s2.postimg.org/eg7k51z3t/icon.png')
+        li.setProperty('fanart_image', 'http://s18.postimg.org/fnbfwgw3d/fanart.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://typhoon.exequo.org:8000/rinseradio'
+        li = xbmcgui.ListItem('[COLOR blue][B]Rince fm [/B][/COLOR] >>', iconImage='http://s16.postimg.org/kdlyi29j9/icon.png')
+        li.setProperty('fanart_image', 'http://s7.postimg.org/u3877stpn/fanart.png')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        xbmcplugin.endOfDirectory(addon_handle)
+
+#--------------------------------------------------------------------------------------------#
+
 
 def SportMenu():   #sport
         addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/watch/ufc',
@@ -912,7 +945,7 @@ def SportMenu():   #sport
         addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/watch/fights',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest Fights list[/B][/COLOR] [COLOR tomato](ChannelCut) [/COLOR]>>'}, img=IconPath + 'cc.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/wwf-wwe/imdb_rating',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B] Wwf - Wwe[/B][/COLOR]  [COLOR plum](flixanity) [/COLOR] >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Wwf - Wwe[/B][/COLOR]  [COLOR plum](flixanity) [/COLOR] >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #---------------------------------------------------#
@@ -1148,6 +1181,7 @@ def ZmMenu(): #flixanity
         addon.add_directory({'mode': 'Zm1Menu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR teal](IMDB rating) [/COLOR]>>'}, img=IconPath + 'fl1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'Zm2Menu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR teal](Newest) [/COLOR]>>'}, img=IconPath + 'fl1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'Zm3Menu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR teal](ABC) [/COLOR]>>'}, img=IconPath + 'fl1.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery6'},  {'title':  '[COLOR green][B]Search[/B][/COLOR] [COLOR plum]flixanity[/COLOR] >> '}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -1469,7 +1503,8 @@ def OcmMenu():          #one click moviez
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Top IMDB [/B][/COLOR] >>'}, img=IconPath + '1cm.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'Ocm1Menu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR peru](Latest added) [/COLOR]>>'}, img=IconPath + '1cm.png', fanart=FanartPath + 'fanart.png') 
         addon.add_directory({'mode': 'Ocm2Menu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR peru](IMDB rating) [/COLOR]>>'}, img=IconPath + '1cm.png', fanart=FanartPath + 'fanart.png') 
-        addon.add_directory({'mode': 'Ocm3Menu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR peru](A/Z) [/COLOR]>>'}, img=IconPath + '1cm.png', fanart=FanartPath + 'fanart.png') 
+        addon.add_directory({'mode': 'Ocm3Menu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR peru](A/Z) [/COLOR]>>'}, img=IconPath + '1cm.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery5'},  {'title':  '[COLOR green][B]Search[/B][/COLOR] [COLOR peru](OneClickMoviez) [/COLOR] >> '}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png') 
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -1682,14 +1717,14 @@ def Tvocm1Menu():
 
 def TzmMenu():  #flixanitytv
         addon.add_directory({'mode': 'GetTitles27a', 'section': 'ALL', 'url': BASE_URL12 + '/tv-shows',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orange][B]Full Seasons[/B][/COLOR] [COLOR peru](Latest added) [/COLOR]>>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orange][B]Latest added[/B][/COLOR] >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles27a', 'section': 'ALL', 'url': BASE_URL12 + '/tv-shows/imdb_rating',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orange][B]Full Seasons[/B][/COLOR] [COLOR peru](Top IMDB) [/COLOR]>>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orange][B]Top IMDB[/B][/COLOR] >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles27a', 'section': 'ALL', 'url': BASE_URL12 + '/tv-shows/abc',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orange][B]Full Seasons[/B][/COLOR] [COLOR peru](ABC) [/COLOR]>>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orange][B]ABC[/B][/COLOR] >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'Tzm1Menu'}, {'title':  '[COLOR orange][B]Tv Show Genre[/B][/COLOR] [COLOR peru](Top IMDB) [/COLOR]>>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'Tzm2Menu'}, {'title':  '[COLOR orange][B]Tv Show Genre[/B][/COLOR] [COLOR peru](Newest) [/COLOR]>>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'Tzm3Menu'}, {'title':  '[COLOR orange][B]Tv Show Genre[/B][/COLOR] [COLOR peru](ABC) [/COLOR]>>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'Tzm2Menu'}, {'title':  '[COLOR orange][B]Tv Show Genre[/B][/COLOR] [COLOR peru](Newest) [/COLOR]>>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def Tzm1Menu():
@@ -1976,7 +2011,7 @@ def Search4(query):
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
-######################################################################################
+##---------------------------------------------------------------------------------------------------------------##
 
 def GetSearchQuery5():
 	last_search = addon.load_data('search')
@@ -2000,8 +2035,36 @@ def Search5(query):
         html = net.http_GET(url).content
         match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
         for url, title in match:
-                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '').replace('Watch', '').replace('ONE CLICK MOVIEZ ', '')
-                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
+                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '').replace('ONE CLICK MOVIEZ', '').replace('Watch', '').replace('Online', '').replace('|', '')
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title}, img=IconPath + '1cm.png', fanart=FanartPath + 'fanart.png')
+	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+##---------------------------------------------------------------------------------------------------------------##
+
+def GetSearchQuery6():
+	last_search = addon.load_data('search')
+	if not last_search: last_search = ''
+	keyboard = xbmc.Keyboard()
+        keyboard.setHeading('[COLOR green]Search flixanity[/COLOR]')
+	keyboard.setDefault(last_search)
+	keyboard.doModal()
+	if (keyboard.isConfirmed()):
+                query = keyboard.getText()
+                addon.save_data('search',query)
+                Search6(query)
+	else:
+                return
+
+        
+def Search6(query):
+        url = 'http://www.google.com/search?q=site:flixanity.com ' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
+        for url, title in match:
+                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '').replace('Online', '').replace('Watch', '')
+                addon.add_directory({'mode': 'GetLinks1', 'url': url}, {'title':  title}, img=IconPath + 'fl1.png', fanart=FanartPath + 'fanart.png')
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -2127,6 +2190,10 @@ elif mode == 'GetSearchQuery5':
 	GetSearchQuery5()
 elif mode == 'Search5':
 	Search5(query)
+elif mode == 'GetSearchQuery6':
+	GetSearchQuery6()
+elif mode == 'Search6':
+	Search6(query)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':
@@ -2193,3 +2260,5 @@ elif mode == 'Put2Menu':
         Put2Menu()
 elif mode == 'Put3Menu':
         Put3Menu()
+elif mode == 'RadioMenu':
+        RadioMenu()
