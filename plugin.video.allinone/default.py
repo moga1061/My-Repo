@@ -903,29 +903,34 @@ def MusicMenu():   #Music
 
 def RadioMenu():   #radio
         addon.add_directory({'': '', '': '', '': '',
-                             '': '', '': ''}, {'title':  '[COLOR yellow][B].....WE ARE.....[/B][/COLOR] [COLOR red][I][B]LIVE[/B][/I][/COLOR] [COLOR yellow][B].....TheYids RADIO.....[/B][/COLOR]'}, img=IconPath + 'radioty.png', fanart=FanartPath + 'fanart.png')
+                             '': '', '': ''}, {'title':  '[COLOR lime]~~~~~~~[/COLOR][COLOR yellow][B].....WE ARE.....[/B][/COLOR] [COLOR red][I][B](((LIVE)))[/B][/I][/COLOR] [COLOR yellow][B].....TheYids RADIO.....[/B][/COLOR][COLOR lime]~~~~~~~[/COLOR]'}, img=IconPath + 'radioty.png', fanart=FanartPath + 'fanart.png')
 
         addon_handle = int(sys.argv[1])
         xbmcplugin.setContent(addon_handle, 'audio')
 
         url = 'http://uk1-pn.webcast-server.net:8698'
-        li = xbmcgui.ListItem('[COLOR blue][B]Kool London[/B][/COLOR] [COLOR red][B][I](Live)[/B][/I][/COLOR] >>', iconImage='http://s1.postimg.org/fko2kyu9b/icon.png')
+        li = xbmcgui.ListItem('[COLOR blue][B]Kool London[/B][/COLOR] >>          [COLOR lime](Drum n bass. jungle. old skool)[/COLOR]', iconImage='http://s1.postimg.org/fko2kyu9b/icon.png')
         li.setProperty('fanart_image', 'http://s27.postimg.org/47ti3qg6b/fanart.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
         url = 'http://176.31.239.83:9136/'
-        li = xbmcgui.ListItem('[COLOR blue][B]Deja Classic = Studio 2[/B][/COLOR] >>', iconImage='http://s2.postimg.org/eg7k51z3t/icon.png')
+        li = xbmcgui.ListItem('[COLOR blue][B]Deja Classic [/B][/COLOR] >>         [COLOR lime](Urban. RnB. Rap)[/COLOR]', iconImage='http://s2.postimg.org/eg7k51z3t/icon.png')
         li.setProperty('fanart_image', 'http://s18.postimg.org/fnbfwgw3d/fanart.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
         url = 'http://176.31.239.83:9041/'
-        li = xbmcgui.ListItem('[COLOR blue][B]DejaVu Live = Studio 2[/B][/COLOR] >>', iconImage='http://s2.postimg.org/eg7k51z3t/icon.png')
+        li = xbmcgui.ListItem('[COLOR blue][B]DejaVu Live [/B][/COLOR] >>          [COLOR lime](Urban. RnB. Rap)[/COLOR]', iconImage='http://s2.postimg.org/eg7k51z3t/icon.png')
         li.setProperty('fanart_image', 'http://s18.postimg.org/fnbfwgw3d/fanart.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
         url = 'http://typhoon.exequo.org:8000/rinseradio'
-        li = xbmcgui.ListItem('[COLOR blue][B]Rince fm [/B][/COLOR] >>', iconImage='http://s16.postimg.org/kdlyi29j9/icon.png')
+        li = xbmcgui.ListItem('[COLOR blue][B]Rince fm [/B][/COLOR] >>             [COLOR lime](Urban. RnB. Rap)[/COLOR]', iconImage='http://s16.postimg.org/kdlyi29j9/icon.png')
         li.setProperty('fanart_image', 'http://s7.postimg.org/u3877stpn/fanart.png')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://bbc.co.uk/radio/listen/live/r1x.asx'
+        li = xbmcgui.ListItem('[COLOR blue][B]bbc 1xtra[/B][/COLOR] >>             [COLOR lime](Urban. RnB. Rap)[/COLOR]', iconImage='http://www.madtechrecords.com/wp-content/uploads/2013/08/artworks-000014947132-lbebhn-original.jpg')
+        li.setProperty('fanart_image', 'http://s23.postimg.org/5jq12phff/fanart.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
         xbmcplugin.endOfDirectory(addon_handle)
