@@ -40,7 +40,7 @@ BASE_URL17 = 'http://tv-junky.eu/'
 BASE_URL19 = 'http://all4youz.com/'
 BASE_URL20 = 'http://world4ufree.com/'
 BASE_URL21 = 'http://movies2k.eu/'
-BASE_URL22 = 'http://www.cinemadivx.com/'
+BASE_URL22 = ''
 BASE_URL23 = 'http://300mbmovies4u.com/'
 BASE_URL24 = 'http://www.hotnewhiphop.com/'
 BASE_URL25 = 'http://www.rapgrid.com/'
@@ -510,7 +510,7 @@ def GetTitles20(section, url, startPage= '1', numOfPages= '1'): #world4ufree
 
 #-------------------------------------------------------------------------------#
 
-def GetTitles21(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
+def GetTitles21(section, url, startPage= '1', numOfPages= '1'): #movies2k.eu
         print 'allinone get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
@@ -532,25 +532,8 @@ def GetTitles21(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titl
 
 #-------------------------------------------------------------------------------#
 
-def GetTitles22(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
-        print 'allinone get Movie Titles Menu %s' % url
-        pageUrl = url
-        if int(startPage)> 1:
-                pageUrl = url + 'page/' + startPage + '/'
-        print pageUrl
-        html = net.http_GET(pageUrl).content
-        start = int(startPage)
-        end = start + int(numOfPages)
-        for page in range( start, end):
-                if ( page != start):
-                        pageUrl = url + 'page/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content
-                match = re.compile('class="entry-thumbnails-link" href="(.+?)"><img src="(.+?)" alt=.+? title="(.+?)"', re.DOTALL).findall(html)
-                for movieUrl, img, name in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png') 
-                addon.add_directory({'mode': 'GetTitles22', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
-        setView('tvshows', 'tvshows-view')  
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+#def GetTitles22(section, url, startPage= '1', numOfPages= '1'): 
+
 
 #-------------------------------------------------------------------------------#
 
@@ -915,7 +898,7 @@ def RadioMenu():   #radio
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
         url = 'http://176.31.239.83:9136/'
-        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Deja Classic [/B][/COLOR] >>         [COLOR lime](Urban, RnB, HipHop)[/COLOR]', iconImage='http://s2.postimg.org/eg7k51z3t/icon.png')
+        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Deja Classic [/B][/COLOR] >>         [COLOR lime](oldskool, UK Garage, RnB, HipHop)[/COLOR]', iconImage='http://s2.postimg.org/eg7k51z3t/icon.png')
         li.setProperty('fanart_image', 'http://s18.postimg.org/fnbfwgw3d/fanart.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
@@ -929,13 +912,18 @@ def RadioMenu():   #radio
         li.setProperty('fanart_image', 'http://www.strictlyhousefm.co.uk/wp-content/uploads/2012/10/strictly-house-6.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
+        url = 'http://shine879.internetdomainservices.com:8204/'
+        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Shine879 [/B][/COLOR] >>          [COLOR lime](Drum n Bass, House, UK Garage)[/COLOR]', iconImage='https://lh4.ggpht.com/0rdHZ2GOZYeiDfo1jyuWzbiFa9VIHNulX8qvTgXG3bHWMxO28mrxxUrT2VYWeQgaU4k=w300')
+        li.setProperty('fanart_image', 'http://dnbvideo.ru/wp-content/uploads/2013/09/antinox-liquid-drum-n-bass-4-1080p-hq.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
         url = 'http://178.32.222.61:8080/'
         li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Flames radio [/B][/COLOR] >>          [COLOR lime](Funk, Reggae, RnB, Soul)[/COLOR]', iconImage='http://i1.sndcdn.com/artworks-000069969699-cvl43d-original.jpg?a0633e8')
-        li.setProperty('fanart_image', 'http://www.flamesradio.co.uk/wp-content/uploads/2013/01/banner1.jpg')
+        li.setProperty('fanart_image', 'http://www.disclosurenewsonline.com/wp-content/uploads/2014/01/burning-flames-yellow-fire1.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
         url = 'http://typhoon.exequo.org:8000/rinseradio'
-        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Rince fm [/B][/COLOR] >>             [COLOR lime](Urban, RnB, HipHop)[/COLOR]', iconImage='http://s16.postimg.org/kdlyi29j9/icon.png')
+        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Rinse fm [/B][/COLOR] >>             [COLOR lime](Urban, RnB, HipHop)[/COLOR]', iconImage='http://s16.postimg.org/kdlyi29j9/icon.png')
         li.setProperty('fanart_image', 'http://s7.postimg.org/u3877stpn/fanart.png')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
@@ -946,7 +934,7 @@ def RadioMenu():   #radio
 
         url = 'http://tx.whatson.com/icecast.php?i=kiss100.mp3.m3u'
         li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Kiss 100[/B][/COLOR] >>           [COLOR lime](Dance, RnB, HipHop)[/COLOR]', iconImage='http://images.clubtickets.com/image/200sq/c/kiss-100-wob-400.jpg')
-        li.setProperty('fanart_image', 'http://oktoberfest.co.ke/wp-content/uploads/2013/08/Kiss-100-Logo.jpg')
+        li.setProperty('fanart_image', 'http://336fcc281d9fb3480f2a-0af712088f38ef5910226b2ecb408482.r82.cf2.rackcdn.com/img-230-3-1366642376.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
         url = 'mms://wma.sharp-stream.com/moswma'
@@ -967,6 +955,26 @@ def RadioMenu():   #radio
         url = 'http://209.105.250.73:8206'
         li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Zmix 97[/B][/COLOR] >>        [COLOR yellow](US)[/COLOR] [COLOR lime](old school, HipHop, funk)[/COLOR]', iconImage='http://media-cache-ec0.pinimg.com/236x/d8/be/0b/d8be0ba53a350149e97eb0e643f5fd1f.jpg')
         li.setProperty('fanart_image', 'http://prettyriveracademy.com/wp-content/uploads/2013/08/hiphop6.jpg.png')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://s9.myradiostream.com:4418'
+        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Urban hitz radio[/B][/COLOR] >>        [COLOR yellow](US)[/COLOR] [COLOR lime](RnB, HipHop)[/COLOR]', iconImage='https://pbs.twimg.com/profile_images/3424721247/d1111dabf5fd05d86d7fadde2be2e956.png')
+        li.setProperty('fanart_image', 'http://upload.wikimedia.org/wikipedia/commons/8/87/The_official_Urban_Hitz_Radio_Logo_for_2013!.png')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://hot108jamz.hot108.com:4020'
+        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Hot 108 jamz[/B][/COLOR] >>        [COLOR yellow](US)[/COLOR] [COLOR lime](HipHop)[/COLOR]', iconImage='http://i1.ytimg.com/i/DvfgG9q0DPIrVCfy6C-sFA/mq1.jpg?v=dbb2c7')
+        li.setProperty('fanart_image', 'http://i1.sndcdn.com/artworks-000006705654-aw46p2-original.jpg?435a760')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://war.str3am.com:7550/'
+        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Power 106 FM[/B][/COLOR] >>        [COLOR yellow](Jamaican)[/COLOR] [COLOR lime](Reggae)[/COLOR]', iconImage='http://i.img.co/radio/62/27/2762_290.png')
+        li.setProperty('fanart_image', 'http://th03.deviantart.net/fs70/PRE/f/2010/344/3/6/rasta_wallpaper_by_ipwnpt-d34luim.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://war.str3am.com:7970'
+        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Ragga Kings[/B][/COLOR] >>        [COLOR yellow](Jamaican)[/COLOR] [COLOR lime](Reggae, Dancehall)[/COLOR]', iconImage='http://static.rad.io/images/broadcasts/33/32/1922/w175.png')
+        li.setProperty('fanart_image', 'http://dubmarine.org/wp-content/uploads/2011/11/RaggakingsPodcast1111-INFRA.png')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
         xbmcplugin.endOfDirectory(addon_handle)
@@ -1040,8 +1048,7 @@ def RgMenu():   #yify  #mvl rg #HD zone
 
 #---------------------------------------------------#
 
-def WtMenu():   #Moviesall4u  #all4youz #world4ufree #cinemadivx
-        #addon.add_directory({'mode': 'CineMenu'}, {'title':  '[COLOR cornflowerblue][B](Spanish) Movie Genre[/B][/COLOR] [COLOR orangered](Cinemadivx) [/COLOR]>>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
+def WtMenu():   #Moviesall4u  #all4youz #world4ufree
         addon.add_directory({'mode': 'GetTitles20', 'section': 'ALL', 'url': BASE_URL20 + '/category/trailers/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Trailers [/B][/COLOR] [COLOR darkorchid](World4UFree) [/COLOR]>>'}, img=IconPath + 'w4u.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles23', 'section': 'ALL', 'url': BASE_URL23 + '/category/hollywood-movie/english-movie-dual-audio/',
@@ -1090,48 +1097,6 @@ def WtMenu():   #Moviesall4u  #all4youz #world4ufree #cinemadivx
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Telugu [/B][/COLOR] [COLOR lawngreen](movies2k.eu) [/COLOR]>>'}, img=IconPath + '2k.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#---------------------------------------------------#
-
-def CineMenu():  #cinemadivx
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Pagina principal[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/estrenos/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Estrenos[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/clasicas/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Clasicas[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/accion/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Accion[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/cine/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Cine[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/latino/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Latino[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/musical/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Musical[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/animacion/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Animacion[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/aventura/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Aventura[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/ciencia-ficcion/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Ciencia Ficcion[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/thriller/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Thriller[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/terror/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Terror[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/subtitulos/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Subtitulos[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/comedia/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Comedia[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/espanol/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Espanol[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/drama/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Drama[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/fantastico/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Fantastico[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/romance/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Romance[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/sin-categoria/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orangered]Sin Categoria[/COLOR] >>'}, img=IconPath + 'cin.png', fanart=FanartPath + 'fanart.png')
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #---------------------------------------------------#
 
@@ -2291,8 +2256,6 @@ elif mode == 'Tzm2Menu':
         Tzm2Menu()
 elif mode == 'Tzm3Menu':
         Tzm3Menu()
-elif mode == 'CineMenu':
-        CineMenu()
 elif mode == 'PutMenu':
         PutMenu()
 elif mode == 'Put1Menu':
