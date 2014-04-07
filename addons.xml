@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
+	<addon
+        id="plugin.audio.koollondon"
+        name="kool London"
+        version="0.0.4"
+        provider-name="@TheYid009">
+		<requires>
+			<import addon="xbmc.python"             	version="2.1.0"/>
+			<import addon="xbmc.addon"              	version="12.1.0"/>
+		</requires>
+		<extension point="xbmc.python.pluginsource" library="default.py">
+			<provides>audio</provides>
+		</extension>
+		<extension point="xbmc.addon.metadata">
+			<summary lang="en">koollondon</summary>
+			<description lang="en">Listen to Kool london 94.6 fm 22 years and still going drum n bass jungle old skool</description>
+			<disclaimer lang="en">All streams and content is owned by koollondon... Addon code provided by atb a member from xbmchub forum and reworked by TheYid's REPO</disclaimer>
+			<platform>all</platform>
+			<license>GNU GENERAL PUBLIC LICENSE. Version 3, June 2007</license>
+			<language>en</language>
+			<forum>www.xbmchub.com</forum>
+			<website>www.koollondon.com</website>
+			<email>@ThYid009</email>
+			<source>www.koollondon.com</source>
+		</extension>
+	</addon>
+
 <addon id="plugin.video.1-linkmovies" version="0.1.5" name="1-link movies" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
@@ -34,7 +60,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.allinone" version="0.5.6" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.allinone" version="0.6.0" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -45,8 +71,11 @@
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary>All in one [COLOR lime]SUPER ADDON[/COLOR] for all you movies tv shows sports and music video lovers free on demand streaming 720p 1080p HD SD MP4 MKV AVI</summary>
-        <description>Play a wide selection of scene release movies and Tv shows from OneClickWatch OneClickMoviz WatchTheTapes Viooz Ultra-vid WtbVideo WatchTvShows Zmovies Movie-Kingdom DDLvally MyVideoLinks and loads more in this [COLOR lime]SUPER ADDON[/COLOR] 1000's and 1000's of movies and tv shows all free.... best hosts are putlocker vidto billionuploads vidbull 180upload movreel vidxden vidbux and many many more...NOW WITH RADIO STREAMING (UK, US, Jam)..... Best for HOLLYWOOD BOLLYWOOD HINDIE TAMIL INDIAN BANGLA MOVIES and DUAL AUDIO</description>
+        <description>Play a wide selection of scene release movies and Tv shows from OneClickWatch OneClickMoviz WatchTheTapes Viooz Ultra-vid flixanity WatchTvShows Zmovies Movie-Kingdom DDLvally MyVideoLinks and loads more in this [COLOR lime]SUPER ADDON[/COLOR] 1000's and 1000's of movies and tv shows all free.... best hosts are putlocker vidto billionuploads vidbull 180upload movreel vidxden vidbux and many many more...NOW WITH RADIO STREAMING (UK, US, Jam)..... Best for HOLLYWOOD BOLLYWOOD HINDIE TAMIL INDIAN BANGLA MOVIES and DUAL AUDIO</description>
         <platform>all</platform>
+	 <website>http://www.xbmchub.com/</website>
+        <forum>http://www.xbmchub.com/forums/forums/146-THEYID-REPO</forum>
+	 <email>Twitter @TheYid009</email>
         <disclaimer lang="en">[COLOR red][B][I] @TheYid009 [/B][/I][/COLOR] [COLOR dodgerblue][B]xbmchub.com[/B][/COLOR]</disclaimer>
     </extension>
 </addon>
