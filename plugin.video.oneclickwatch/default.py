@@ -37,7 +37,6 @@ listitem = addon.queries.get('listitem', None)
 urlList = addon.queries.get('urlList', None)
 section = addon.queries.get('section', None)
 
-
 ################################################################################# Titles #################################################################################
 
 def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie & tv show Titles
@@ -59,9 +58,9 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie & tv s
                 addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png', fanart=FanartPath + 'fanart.png')
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-############################################################################### links #############################################################################################
+############################################################################### Get links #############################################################################################
 
-def GetLinks(section, url): # Get Links
+def GetLinks(section, url):
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
@@ -70,27 +69,16 @@ def GetLinks(section, url): # Get Links
         listitem = GetMediaInfo(content)
         for url in match:
                 host = GetDomain(url)
-                if 'Unknown' in host:
-                                continue
-                print '*****************************' + host + ' : ' + url
                 if urlresolver.HostedMediaFile(url= url):
-                        print 'in GetLinks if loop'
-                        title = url.rpartition('/')
-                        title = title[2].replace('.html', '')
-                        title = title.replace('.htm', '')
-                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'icon.png', fanart=FanartPath + 'fanart.png')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-############################################################################# PlayVideo #####################################################################################
-
+############################################################################# Play Video #####################################################################################
 
 def PlayVideo(url, listitem):
         print 'in PlayVideo %s' % url
         stream_url = urlresolver.HostedMediaFile(url).resolve()
         xbmc.Player().play(stream_url)
-
-
-############################################################################################################################################################################
 
 def GetDomain(url):
         tmp = re.compile('//(.+?)/').findall(url)
@@ -98,7 +86,6 @@ def GetDomain(url):
         if len(tmp) > 0 :
             domain = tmp[0].replace('www.', '')
         return domain
-
 
 def GetMediaInfo(html):
         listitem = xbmcgui.ListItem()
@@ -110,7 +97,6 @@ def GetMediaInfo(html):
 
 ###################################################################### menus ####################################################################################################
 
-
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]OCW Latest Movies[/B] [/COLOR]>>'}, img=IconPath + 'movies.png', fanart=FanartPath + 'fanart.png')
@@ -118,10 +104,15 @@ def MainMenu():    #homescreen
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]OCW Latest Tv episodes[/B] [/COLOR]>>'}, img=IconPath + 'tv.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green][B]OCW[/B] Search[/COLOR]'}, img=IconPath + 'search.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'theyid.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR pink][B]PLEASE CLICK HERE FOR INFO ON TheYids REPO[/B][/COLOR] >>'}, img=IconPath + 'help1.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR gold][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR aqua][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'theyid.png', fanart=FanartPath + 'fanart.png') 
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
+def HelpMenu():   
+        dialog = xbmcgui.Dialog()
+        dialog.ok("TheYid's REPO", "I now have a donation button setup at xbmcHUB", "please help keep TheYid's REPO alive more info @","http://www.xbmchub.com/forums/")
 
 ######################################################################## search #################################################################################################
 
@@ -137,9 +128,7 @@ def GetSearchQuery():
                 addon.save_data('search',query)
                 Search(query)
 	else:
-                return
-
-        
+                return  
 def Search(query):
         url = 'http://www.google.com/search?q=site:oneclickwatch.org ' + query
         url = url.replace(' ', '+')
@@ -151,11 +140,12 @@ def Search(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-
 #################################################################################################################################################################################
 
 if mode == 'main': 
 	MainMenu()
+elif mode == 'HelpMenu':
+        HelpMenu()
 elif mode == 'GetTitles': 
 	GetTitles(section, url, startPage, numOfPages)
 elif mode == 'GetLinks':
