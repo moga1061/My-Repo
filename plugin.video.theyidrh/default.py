@@ -1,3 +1,4 @@
+#v-0.4.0
 import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 import urllib, urllib2
 import re, string, sys, os
@@ -70,7 +71,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'):   # Release Center
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
-                match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
+                match = re.compile('<h2 class="post-title"><a href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')        
@@ -154,7 +155,7 @@ def GetTitles5(section, url, startPage= '1', numOfPages= '1'): #300mbmovies4u
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
-                match = re.compile('cover.+?href="(.+?)".+?.+?<img src="(.+?)".+?alt="(.+?)"', re.DOTALL).findall(html)
+                match = re.compile('<div class="cover"><a href="(.+?)".+?.+?<img src="(.+?)".+?alt="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, img, name in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles5', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
@@ -208,11 +209,20 @@ def GetTitles7(section, url, startPage= '1', numOfPages= '1'): # Sceper
 def GetTitles8(section, url, startPage= '1', numOfPages= '1'): # rls-tv
         print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + '/index.php?page=' + startPage + '/'
+        print pageUrl
         html = net.http_GET(pageUrl).content
-        match = re.compile("<td width=.+? style=.+?><a href='(.+?)'>(.+?)</a></td><td", re.DOTALL).findall(html)
-        for movieUrl, name in match:
-                addon.add_directory({'mode': 'GetLinks1', 'section': section, 'url': 'http://tv-release.net/' + movieUrl}, {'title':  name.strip()}, img=IconPath + 'rlstv.png', fanart=FanartPath + 'fanart.png')
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+        start = int(startPage)
+        end = start + int(numOfPages)
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + '/index.php?page=' + str(page) + '/'
+                        html = net.http_GET(pageUrl).content
+                match = re.compile("<td width=.+? style=.+?><a href='(.+?)'>(.+?)</a></td><td", re.DOTALL).findall(html)
+                for movieUrl, name in match:
+                        addon.add_directory({'mode': 'GetLinks1', 'section': section, 'url': 'http://tv-release.net/' + movieUrl}, {'title':  name.strip()}, img=IconPath + 'rlstv.png', fanart=FanartPath + 'fanart.png')
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -234,6 +244,7 @@ def GetTitles9(section, url, startPage= '1', numOfPages= '1'): #wrzko
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles9', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -324,11 +335,21 @@ def GetTitles12(section, url, startPage= '1', numOfPages= '1'): #rbb
 def GetTitles13(section, url, startPage= '1', numOfPages= '1'):  #rbb2
         print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
-        html = net.http_GET(pageUrl).content                      
-        match = re.compile('postTitle.+?href="(.+?)".+?>(.+?)<.+?src=.+?src="(.+?)"', re.DOTALL).findall(html)
-        for movieUrl, name, img in match:
-                addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                               
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+        if int(startPage)> 1:
+                pageUrl = url + 'page/' + startPage + ''
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        start = int(startPage)
+        end = start + int(numOfPages)
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + 'page/' + str(page) + ''
+                        html = net.http_GET(pageUrl).content                      
+                match = re.compile('postTitle.+?href="(.+?)".+?>(.+?)<.+?src=.+?src="(.+?)"', re.DOTALL).findall(html)
+                for movieUrl, name, img in match:
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
+                addon.add_directory({'mode': 'GetTitles13', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue]Come back soon[/COLOR]'}, img=IconPath + '', fanart=FanartPath + 'fanart.png')        
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -399,11 +420,21 @@ def GetTitles17(section, url, startPage= '1', numOfPages= '1'): # Fight-BB
 def GetTitles18(section, url, startPage= '1', numOfPages= '1'): #house
         print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + 'page/' + startPage + '/'
+        print pageUrl
         html = net.http_GET(pageUrl).content
-        match = re.compile('width=100%><a href="(.+?)" class=.+? ><.+?>(.+?)</font>(.+?)</a></td>', re.DOTALL).findall(html)
-        for movieUrl, name, name in match:
-                addon.add_directory({'mode': 'GetLinks2', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'tm.png', fanart=FanartPath + 'fanart.png') 
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+        start = int(startPage)
+        end = start + int(numOfPages)
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + 'page/' + str(page) + '/'
+                        html = net.http_GET(pageUrl).content
+                match = re.compile('width=100%><a href="(.+?)" class=.+? ><.+?>(.+?)</font>(.+?)</a></td>', re.DOTALL).findall(html)
+                for movieUrl, name, name in match:
+                        addon.add_directory({'mode': 'GetLinks2', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'tm.png', fanart=FanartPath + 'fanart.png') 
+        
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -423,26 +454,42 @@ def GetTitles19(section, url, startPage= '1', numOfPages= '1'): # freshremix
                 match = re.compile('<h2.+?href="(.+?)">(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+
                 addon.add_directory({'mode': 'GetTitles19', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
+        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #################################################################################getlinks###############################################################################################
 
-def GetLinks(section, url): # rlsbb
+def GetLinks(section, url): # Get Links
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
         content = html
+        r = re.search('<strong>Links.*</strong>', html)
+        if r:
+                content = html[r.end():]
+
+        r = re.search('commentblock', content)
+        if r:
+                content = content[:r.start()]
+                
         match = re.compile('href="(.+?)"').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
                 host = GetDomain(url)
+
                 if 'Unknown' in host:
                                 continue
+                        
+                # ignore .rar files
                 r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
                 if r:
                         continue
+
                 if urlresolver.HostedMediaFile(url= url):
+                        print 'in GetLinks if loop'
+                        title = url.rpartition('/')
                         title = title[2].replace('.html', '')
                         title = title.replace('.htm', '')
                         title = title.replace('.rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
@@ -469,6 +516,31 @@ def GetLinks(section, url): # rlsbb
                         host = host.replace('k2s.cc','[COLOR red]Unsupported Link[/COLOR]')
                         host = host.replace('ryushare.com','[COLOR red]Unsupported Link[/COLOR]')
                         addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host + ' [COLOR gold]:[/COLOR] ' + title}, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
+
+        find = re.search('commentblock', html)
+        if find:
+                print 'in comments if'
+                html = html[find.end():]
+                match = re.compile('<a href="(.+?)" rel="nofollow"', re.DOTALL).findall(html)
+                print len(match)
+                for url in match:
+                        host = GetDomain(url)
+                        if 'Unknown' in host:
+                                continue
+                        
+                        # ignore .rar files
+                        r = re.search('\.rar[(?:\.html|\.htm)]*', url, re.IGNORECASE)
+                        if r:
+                                continue
+                        try:
+                                if urlresolver.HostedMediaFile(url= url):
+                                        print 'in GetLinks if loop'
+                                        title = url.rpartition('/')
+                                        title = title[2].replace('.html', '')
+                                        title = title.replace('.htm', '')
+                                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host + ' : ' + title}, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
+                        except:
+                                continue
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -528,7 +600,7 @@ def GetLinks2(section, url): # #house
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
-def GetLinks3(section, url): # ddlvalley
+def GetLinks3(section, url): # Get Links ddlvalley
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(str(url)).content
         sources = []
@@ -551,7 +623,17 @@ def GetLinks3(section, url): # ddlvalley
                 title = title.replace('.htm', '')
                 title = title.replace('.rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
                 title = title.replace('DDLValley.net_', ' ')
-                title = title.replace('480p','[COLOR coral][B][I]480p[/B][/I][/COLOR]')
+                title = title.replace('www.', '')
+                title = title.replace ('-','')
+                title = title.replace('_',' ')
+                title = title.replace('gaz','')
+                title = title.replace('NTb','')
+                title = title.replace('part1','')
+                title = title.replace('part2','')
+                title = title.replace('part3','')
+                title = title.replace('part4','')
+                title = title.replace('part5','')
+                title = title.replace('.',' ')
                 title = title.replace('720p','[COLOR gold][B][I]720p[/B][/I][/COLOR]')
                 title = title.replace('1080p','[COLOR orange][B][I]1080p[/B][/I][/COLOR]')
                 title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
