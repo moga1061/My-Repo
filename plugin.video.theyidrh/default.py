@@ -650,9 +650,14 @@ def GetLinks3(section, url): # Get Links ddlvalley
 ############################################################################# PlayVideo #################################################################################
 
 def PlayVideo(url, listitem):
+    try:
         print 'in PlayVideo %s' % url
         stream_url = urlresolver.HostedMediaFile(url).resolve()
         xbmc.Player().play(stream_url)
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry Link may have been removed ![/B][/COLOR],[COLOR lime][B]Or the host is down on Real-debird or alldebird !![/B][/COLOR],7000,"")")
+
+#---------------------------------------------------------------------------------------------------------------#
 
 def GetDomain(url):
         tmp = re.compile('//(.+?)/').findall(url)

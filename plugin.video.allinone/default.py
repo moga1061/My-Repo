@@ -588,7 +588,7 @@ def GetLinks(section, url): #300mbmovies4u #oneclickmoviez #movies2k.eu
 
 #---------------------------------------------------------------------------------#
 
-def GetLinks1(section, url): #flixanity #freemovies #series-cravings
+def GetLinks1(section, url): #flixanity #freemovies #shows4u
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
@@ -687,16 +687,23 @@ def GetLinks8(section, url):   #shows4u
 ############################################################################# PlayVideo #####################################################################################
 
 def PlayVideo(url, listitem):
+    try:
         print 'in PlayVideo %s' % url
         stream_url = urlresolver.HostedMediaFile(url).resolve()
         xbmc.Player().play(stream_url)
- 
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry Link may have been removed ![/B][/COLOR],[COLOR lime][B]Please try a different link/host !![/B][/COLOR],7000,"")")
+
+#--------------------------------------------------------------------------------------------------#
+
 def GetDomain(url):
         tmp = re.compile('//(.+?)/').findall(url)
         domain = 'Unknown'
         if len(tmp) > 0 :
             domain = tmp[0].replace('www.', '')
         return domain
+
+#--------------------------------------------------------------------------------------------------#
 
 def GetMediaInfo(html):
         listitem = xbmcgui.ListItem()
@@ -2247,3 +2254,4 @@ elif mode == 'Tsu2Menu':
         Tsu2Menu()
 elif mode == 'Tsu3Menu':
         Tsu3Menu()
+xbmc.executebuiltin( 'UpdateLocalAddons' )
