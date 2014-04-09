@@ -794,7 +794,7 @@ def RadioMenu():   #radio
         li.setProperty('fanart_image', 'http://londonist.com/wp-content/uploads/2013/11/Capital-XTRA.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
-        url = 'mms://wma.sharp-stream.com/moswma'
+        url = 'http://193.27.42.226:8192/mosdir.mp3'
         li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Ministry of Sound Radio[/B][/COLOR] >>           [COLOR lime](Dance, House, Drum n Bass)[/COLOR]', iconImage='http://i1.sndcdn.com/artworks-000070064884-tec6ir-original.jpg?f775e59')
         li.setProperty('fanart_image', 'http://1.bp.blogspot.com/-pXdClkxvZu8/TleccVYC3EI/AAAAAAAAAic/A7aV-CrKcaU/s1600/Ministry-of-Sound.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
