@@ -1,19 +1,9 @@
-###v-0.5.1
 import xbmc, xbmcgui, xbmcaddon, xbmcplugin
-import urllib, urllib2
 import re, string, sys, os
 import urlresolver
 import HTMLParser
 from TheYid.common.addon import Addon
 from TheYid.common.net import Net
-from htmlentitydefs import name2codepoint as n2cp
-
-try:
-	from sqlite3 import dbapi2 as sqlite
-	print "Loading sqlite3 as DB engine"
-except:
-	from pysqlite2 import dbapi2 as sqlite
-	print "Loading pysqlite2 as DB engine"
 
 addon_id = 'plugin.video.myvideolinks'
 plugin = xbmcaddon.Addon(id=addon_id)
@@ -96,6 +86,7 @@ def PlayVideo(url, listitem):
         print 'in PlayVideo %s' % url
         stream_url = urlresolver.HostedMediaFile(url).resolve()
         xbmc.Player().play(stream_url)
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR slategray][B]^ Press back ^[/B] [/COLOR]'},'','')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry Link may have been removed ![/B][/COLOR],[COLOR lime][B]Please try a different link/host !![/B][/COLOR],7000,"")")
 
@@ -252,3 +243,5 @@ elif mode == 'ResolverSettings':
         urlresolver.display_settings()
 elif mode == 'Categories':
         Categories(section)
+
+xbmcplugin.endOfDirectory(int(sys.argv[1]))

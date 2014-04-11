@@ -1,19 +1,9 @@
-#v-0.4.0
 import xbmc, xbmcgui, xbmcaddon, xbmcplugin
-import urllib, urllib2
 import re, string, sys, os
 import urlresolver
 from TheYid.common.addon import Addon
 from TheYid.common.net import Net
-from htmlentitydefs import name2codepoint as n2cp
 import HTMLParser
-
-try:
-	from sqlite3 import dbapi2 as sqlite
-	print "Loading sqlite3 as DB engine"
-except:
-	from pysqlite2 import dbapi2 as sqlite
-	print "Loading pysqlite2 as DB engine"
 
 addon_id = 'plugin.video.theyidrh'
 plugin = xbmcaddon.Addon(id=addon_id)
@@ -546,6 +536,7 @@ def GetLinks(section, url): # Get Links
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 def GetLinks1(section, url): #RLStv
+    try:
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(str(url)).content
         sources = []
@@ -582,6 +573,9 @@ def GetLinks1(section, url): #RLStv
         if source: stream_url = source.resolve()
         else: stream_url = ''
         xbmc.Player().play(stream_url)
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR slategray][B]^^^ Press back ^^^[/B] [/COLOR]'},'','')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry Link may have been removed ![/B][/COLOR],[COLOR lime][B]Please try a different link/host !![/B][/COLOR],7000,"")")
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -601,6 +595,7 @@ def GetLinks2(section, url): # #house
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 def GetLinks3(section, url): # Get Links ddlvalley
+    try:
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(str(url)).content
         sources = []
@@ -646,6 +641,9 @@ def GetLinks3(section, url): # Get Links ddlvalley
         if source: stream_url = source.resolve()
         else: stream_url = ''
         xbmc.Player().play(stream_url)
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR slategray][B]^^^ Press back ^^^[/B] [/COLOR]'},'','')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry Link may have been removed ![/B][/COLOR],[COLOR lime][B]Please try a different link/host !![/B][/COLOR],7000,"")")
 
 ############################################################################# PlayVideo #################################################################################
 
@@ -654,8 +652,9 @@ def PlayVideo(url, listitem):
         print 'in PlayVideo %s' % url
         stream_url = urlresolver.HostedMediaFile(url).resolve()
         xbmc.Player().play(stream_url)
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR slategray][B]^^^ Press back ^^^[/B] [/COLOR]'},'','')
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry Link may have been removed ![/B][/COLOR],[COLOR lime][B]Or the host is down on Real-debird or alldebird !![/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry Link may have been removed ![/B][/COLOR],[COLOR lime][B]Please try a different link/host !![/B][/COLOR],7000,"")")
 
 #---------------------------------------------------------------------------------------------------------------#
 
@@ -1261,3 +1260,5 @@ if mode == 'menu12':
        Menu12()
 if mode == 'menu13':
        Menu13()
+
+xbmcplugin.endOfDirectory(int(sys.argv[1]))

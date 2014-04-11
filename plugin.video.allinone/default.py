@@ -1,18 +1,9 @@
 import xbmc, xbmcgui, xbmcaddon, xbmcplugin
-import urllib, urllib2
 import re, string, sys, os
 import urlresolver
 from TheYid.common.addon import Addon
 from TheYid.common.net import Net
-from htmlentitydefs import name2codepoint as n2cp
 import HTMLParser
-
-try:
-	from sqlite3 import dbapi2 as sqlite
-	print "Loading sqlite3 as DB engine"
-except:
-	from pysqlite2 import dbapi2 as sqlite
-	print "Loading pysqlite2 as DB engine"
 
 addon_id = 'plugin.video.allinone'
 plugin = xbmcaddon.Addon(id=addon_id)
@@ -606,6 +597,7 @@ def GetLinks1(section, url): #flixanity #freemovies #shows4u
 #-------------------------------------------------------------------------------#
 
 def GetLinks3(section, url): # ddlvalley
+    try:
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(str(url)).content
         sources = []
@@ -628,6 +620,22 @@ def GetLinks3(section, url): # ddlvalley
                 title = title.replace('.htm', '')
                 title = title.replace('.rar', '[COLOR red][B][I]RAR no streaming[/B][/I][/COLOR]')
                 title = title.replace('DDLValley.net_', ' ')
+                title = title.replace('www.', '')
+                title = title.replace ('-','')
+                title = title.replace('_',' ')
+                title = title.replace('gaz','')
+                title = title.replace('NTb','')
+                title = title.replace('part1','')
+                title = title.replace('part2','')
+                title = title.replace('part3','')
+                title = title.replace('part4','')
+                title = title.replace('part5','')
+                title = title.replace('.',' ')
+                title = title.replace('720p','[COLOR gold][B][I]720p[/B][/I][/COLOR]')
+                title = title.replace('1080p','[COLOR orange][B][I]1080p[/B][/I][/COLOR]')
+                title = title.replace('mkv','[COLOR gold][B][I]MKV[/B][/I][/COLOR] ')
+                title = title.replace('avi','[COLOR pink][B][I]AVI[/B][/I][/COLOR] ')
+                title = title.replace('mp4','[COLOR purple][B][I]MP4[/B][/I][/COLOR] ')
                 name = host+'-'+title
                 hosted_media = urlresolver.HostedMediaFile(url=url, title=name)
                 sources.append(hosted_media)
@@ -635,6 +643,10 @@ def GetLinks3(section, url): # ddlvalley
         if source: stream_url = source.resolve()
         else: stream_url = ''
         xbmc.Player().play(stream_url)
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR slategray][B]^^^ Press back ^^^[/B] [/COLOR]'},'','')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry Link may have been removed ![/B][/COLOR],[COLOR lime][B]Please try a different link/host !![/B][/COLOR],7000,"")")
+
 
 #-----------------------------------------------------------------------#
 
@@ -691,6 +703,7 @@ def PlayVideo(url, listitem):
         print 'in PlayVideo %s' % url
         stream_url = urlresolver.HostedMediaFile(url).resolve()
         xbmc.Player().play(stream_url)
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR slategray][B]^ Press back ^[/B] [/COLOR]'},'','')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry Link may have been removed ![/B][/COLOR],[COLOR lime][B]Please try a different link/host !![/B][/COLOR],7000,"")")
 
@@ -2274,4 +2287,7 @@ elif mode == 'Tsu2Menu':
         Tsu2Menu()
 elif mode == 'Tsu3Menu':
         Tsu3Menu()
+
 xbmc.executebuiltin( 'UpdateLocalAddons' )
+
+xbmcplugin.endOfDirectory(int(sys.argv[1]))
