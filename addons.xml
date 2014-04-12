@@ -26,7 +26,7 @@
 		</extension>
 	</addon>
 
-<addon id="plugin.audio.ts5" version="0.0.3" name="TS5 player" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.audio.ts5" version="0.1.0" name="TS5 player (Capital XTRA)" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.t0mm0.common" version="2.1.1"/>

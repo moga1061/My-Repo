@@ -9,7 +9,6 @@ DB = os.path.join(xbmc.translatePath("special://database"), 'ts5.db')
 BASE_URL = 'http://www.ts5.com/'
 net = Net()
 addon = Addon('plugin.audio.ts5', sys.argv)
-
 mode = addon.queries['mode']
 url = addon.queries.get('url', None)
 content = addon.queries.get('content', None)
