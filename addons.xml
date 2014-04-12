@@ -26,21 +26,31 @@
 		</extension>
 	</addon>
 
-<addon id="plugin.audio.ts5" version="0.1.0" name="TS5 player (Capital XTRA)" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
-    <requires>
-        <import addon="xbmc.python" version="2.1.0"/>
-        <import addon="script.module.t0mm0.common" version="2.1.1"/>
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>audio</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>streaming live & on demand TS5 (Craig David) & Capital XTRA</summary>
-        <description>Craig David PRESENTS TS5 LIVE FROM MIAMI EVERY FRIDAY AT 10PM ONLY ON CAPITAL XTRA</description>
-        <platform>all</platform>
-        <disclaimer lang="en">All streams and content is owned by Capital XTRA & Craig David...</disclaimer>
-    </extension>
-</addon>
+	<addon
+        id="plugin.audio.plugin.audio.ts5player"
+        name="TS5 player (Capital XTRA)"
+        version="1.0.0"
+        provider-name="@TheYid009">
+		<requires>
+			<import addon="xbmc.python"             	version="2.1.0"/>
+			<import addon="xbmc.addon"              	version="12.1.0"/>
+		</requires>
+		<extension point="xbmc.python.pluginsource" library="default.py">
+			<provides>audio</provides>
+		</extension>
+		<extension point="xbmc.addon.metadata">
+			<summary lang="en">TS5 player</summary>
+			<description lang="en">Craig David PRESENTS TS5 LIVE FROM MIAMI EVERY FRIDAY AT 10PM ONLY ON CAPITAL XTRA live and on demand</description>
+			<disclaimer lang="en">All streams and content is owned by Capital XTRA...</disclaimer>
+			<platform>all</platform>
+			<license>GNU GENERAL PUBLIC LICENSE. Version 3, June 2007</license>
+			<language>en</language>
+			<forum>www.xbmchub.com</forum>
+			<website>http://www.capitalxtra.com/</website>
+			<email>@ThYid009</email>
+			<source>http://www.capitalxtra.com/</source>
+		</extension>
+	</addon>
 
 <addon id="plugin.video.1-linkmovies" version="0.1.5" name="1-link movies" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>

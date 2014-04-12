@@ -3,12 +3,12 @@ import re, string, sys, os
 from t0mm0.common.addon import Addon
 from t0mm0.common.net import Net
 
-addon_id = 'plugin.audio.ts5'
+addon_id = 'plugin.audio.ts5player'
 plugin = xbmcaddon.Addon(id=addon_id)
-DB = os.path.join(xbmc.translatePath("special://database"), 'ts5.db')
+DB = os.path.join(xbmc.translatePath("special://database"), 'ts5player.db')
 BASE_URL = 'http://www.ts5.com/'
 net = Net()
-addon = Addon('plugin.audio.ts5', sys.argv)
+addon = Addon('plugin.audio.ts5player', sys.argv)
 mode = addon.queries['mode']
 url = addon.queries.get('url', None)
 content = addon.queries.get('content', None)
