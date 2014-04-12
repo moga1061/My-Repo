@@ -1,2 +1,2 @@
-[B]Version 1.0.0[/B]
+[B]Version 1.1.1[/B]
 - Initial version of TS5 Capital XTRA plugin 
