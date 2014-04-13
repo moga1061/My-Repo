@@ -2,7 +2,7 @@
 	<addon
         id="plugin.audio.rinsefmplayer" 
         name="Rinse FM" 
-        version="0.0.1" 
+        version="0.0.2" 
         provider-name="@TheYid009">
 		<requires>
 			<import addon="xbmc.python"             	version="2.1.0"/>
@@ -12,9 +12,9 @@
 			<provides>audio</provides>
 		</extension>
 		<extension point="xbmc.addon.metadata">
-			<summary lang="en">Rinse FM</summary>
-			<description lang="en">Rinse has dominated London’s radio airwaves for over a decade as a hub of the capital’s thriving urban music community. From Dubstep to Grime to House and everything in between, Rinse has championed London’s diverse cultural needs, reaching massively under-represented communities with grass roots music. </description>
-			<disclaimer lang="en">All streams and content is owned by rinse fm...</disclaimer>
+			<summary lang="en">Rinse FM player</summary>
+			<description lang="en">Rinse has dominated Londons radio airwaves for over a decade as a hub of the capitals thriving urban music community From Dubstep to Grime to House and everything in between Rinse has championed Londons diverse cultural needs reaching massively under represented communities with grass roots music</description>
+			<disclaimer lang="en">All streams and content is owned by Rinse FM...</disclaimer>
 			<platform>all</platform>
 			<license>GNU GENERAL PUBLIC LICENSE. Version 3, June 2007</license>
 			<language>en</language>
