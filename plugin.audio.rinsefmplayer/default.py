@@ -59,6 +59,27 @@ def MainMenu():
 
         addon.add_directory({'mode': 'GetLinks', '': '', 'url': BASE_URL + '/podcasts/',
                              '': '', '': ''}, {'title':  '[COLOR dodgerblue][B]Latest shows (Music Player)[/B] [/COLOR]>>'}, img = 'http://s16.postimg.org/kdlyi29j9/icon.png', fanart = 'http://s29.postimg.org/rsd7ep7gn/fanart.jpg')
+
+        addon.add_directory({'mode': 'GetLinks', '': '', 'url': BASE_URL + '/podcasts/?showID=265',
+                             '': '', '': ''}, {'title':  '[COLOR cadetblue][B]Uncle Dugs (shows)[/B] [/COLOR]>>'}, img = 'http://rinse.fm/wp-content/uploads/2012/09/artistprofile_uncledugs.jpg', fanart = 'http://s29.postimg.org/rsd7ep7gn/fanart.jpg')
+        addon.add_directory({'mode': 'GetLinks', '': '', 'url': BASE_URL + '/podcasts/?showID=187',
+                             '': '', '': ''}, {'title':  '[COLOR cadetblue][B]Dappa (shows)[/B] [/COLOR]>>'}, img = 'http://rinse.fm/wp-content/uploads/2012/09/artistprofile_dappa2.jpg', fanart = 'http://s29.postimg.org/rsd7ep7gn/fanart.jpg')
+        addon.add_directory({'mode': 'GetLinks', '': '', 'url': BASE_URL + '/podcasts/?showID=11361',
+                             '': '', '': ''}, {'title':  '[COLOR cadetblue][B]Flight (shows)[/B] [/COLOR]>>'}, img = 'https://pbs.twimg.com/profile_images/378800000033780049/8585048820bc918b88594175e528d057.jpeg', fanart = 'http://s29.postimg.org/rsd7ep7gn/fanart.jpg')
+        addon.add_directory({'mode': 'GetLinks', '': '', 'url': BASE_URL + '/podcasts/?showID=249',
+                             '': '', '': ''}, {'title':  '[COLOR cadetblue][B]Marcus Nasty (shows)[/B] [/COLOR]>>'}, img = 'http://rinse.fm/wp-content/uploads/2012/09/artistprofile_marcusnasty3.jpg', fanart = 'http://s29.postimg.org/rsd7ep7gn/fanart.jpg')
+        addon.add_directory({'mode': 'GetLinks', '': '', 'url': BASE_URL + '/podcasts/?showID=5661',
+                             '': '', '': ''}, {'title':  '[COLOR cadetblue][B]Metalheadz (shows)[/B] [/COLOR]>>'}, img = 'http://rinse.fm/wp-content/uploads/2013/04/artistprofile_metalheadz_1-460x508.jpg', fanart = 'http://s29.postimg.org/rsd7ep7gn/fanart.jpg')
+        addon.add_directory({'mode': 'GetLinks', '': '', 'url': BASE_URL + '/podcasts/?showID=272',
+                             '': '', '': ''}, {'title':  '[COLOR cadetblue][B]Mark Radford (shows)[/B] [/COLOR]>>'}, img = 'http://rinse.fm/wp-content/uploads/2012/09/artistprofile_markradford1.jpg', fanart = 'http://s29.postimg.org/rsd7ep7gn/fanart.jpg')
+        addon.add_directory({'mode': 'GetLinks', '': '', 'url': BASE_URL + '/podcasts/?showID=224',
+                             '': '', '': ''}, {'title':  '[COLOR cadetblue][B]Sam Supplier (shows)[/B] [/COLOR]>>'}, img = 'http://rinse.fm/wp-content/uploads/2012/09/artistprofile_supplier2.jpg', fanart = 'http://s29.postimg.org/rsd7ep7gn/fanart.jpg')
+        addon.add_directory({'mode': 'GetLinks', '': '', 'url': BASE_URL + '/podcasts/?showID=166',
+                             '': '', '': ''}, {'title':  '[COLOR cadetblue][B]Zinc (shows)[/B] [/COLOR]>>'}, img = 'http://rinse.fm/wp-content/uploads/2012/09/artistprofile_zincv3-460x508.jpg', fanart = 'http://s29.postimg.org/rsd7ep7gn/fanart.jpg')
+        addon.add_directory({'mode': 'GetLinks', '': '', 'url': BASE_URL + '/podcasts/?showID=2853',
+                             '': '', '': ''}, {'title':  '[COLOR cadetblue][B]The Garage Hour (shows)[/B] [/COLOR]>>'}, img = 'http://s16.postimg.org/kdlyi29j9/icon.png', fanart = 'http://s29.postimg.org/rsd7ep7gn/fanart.jpg')
+        addon.add_directory({'mode': 'GetLinks', '': '', 'url': BASE_URL + '/podcasts/?showID=7592',
+                             '': '', '': ''}, {'title':  '[COLOR cadetblue][B]The Grime Show (shows)[/B] [/COLOR]>>'}, img = 'http://s16.postimg.org/kdlyi29j9/icon.png', fanart = 'http://s29.postimg.org/rsd7ep7gn/fanart.jpg')
         xbmcplugin.endOfDirectory(addon_handle)
 
 ################################################################################# mode #########################################################################################
