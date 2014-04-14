@@ -53,6 +53,33 @@
 	</addon>
 
 	<addon
+        id="plugin.audio.raveplayer"
+        name="Rave player (BETA)"
+        version="0.0.1b"
+        provider-name="@TheYid009">
+		<requires>
+			<import addon="xbmc.python"             	version="2.1.0"/>
+			<import addon="xbmc.addon"              	version="12.1.0"/>
+                     <import addon="script.module.t0mm0.common" version="2.1.1"/>
+		</requires>
+		<extension point="xbmc.python.pluginsource" library="default.py">
+			<provides>audio</provides>
+		</extension>
+		<extension point="xbmc.addon.metadata">
+			<summary lang="en">rave player</summary>
+			<description lang="en">oldskool rave tape packs (BETA)</description>
+			<disclaimer lang="en">rave player (BETA)</disclaimer>
+			<platform>all</platform>
+			<license>GNU GENERAL PUBLIC LICENSE. Version 3, June 2007</license>
+			<language>en</language>
+			<forum>www.xbmchub.com</forum>
+			<website>raveplayer</website>
+			<email>@ThYid009</email>
+			<source>raveplayer</source>
+		</extension>
+	</addon>
+
+	<addon
         id="plugin.audio.rinsefmplayer"
         name="Rinse FM"
         version="0.0.3"
