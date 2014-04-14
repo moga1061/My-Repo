@@ -117,10 +117,12 @@ def GetLinks4b(url):                                             #deepinsidetheo
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
         content = html
-        match = re.compile('<a href="(.+?)">.+?<').findall(content)
+        match = re.compile(' <a href="(.+?)">.+?<').findall(content)
+        if not match:
+            match = re.compile('<a href="(.+?)">.+?<',re.DOTALL).findall(html)
         listitem = GetMediaInfo(content)
         for url in match:
-                addon.add_directory({'mode': 'PlayVideo', 'url':  url, 'listitem': listitem},  {'title':  '[COLOR slategray][B]play[/B] [/COLOR]'}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
+                addon.add_directory({'mode': 'PlayVideo', 'url':  url, 'listitem': listitem},  {'title':  '[COLOR slategray][B]GET STREAM >>>[/B][/COLOR]>>>'}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
