@@ -1,24 +1,33 @@
 import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 import urllib, urllib2
 import re, string, sys, os
-import HTMLParser
+import urlresolver
 from TheYid.common.addon import Addon
 from TheYid.common.net import Net
 from htmlentitydefs import name2codepoint as n2cp
+import HTMLParser
 
 addon_id = 'plugin.audio.raveplayer'
 plugin = xbmcaddon.Addon(id=addon_id)
 DB = os.path.join(xbmc.translatePath("special://database"), 'raveplayer.db')
+
 BASE_URL = 'http://www.oneinthejungle.co.uk/'
 BASE_URL2 = 'http://20bensons.com/'
 BASE_URL3 = 'http://www.ravetapepacks.com/'
 BASE_URL4 = 'http://deepinsidetheoldskool.blogspot.co.uk/'
+BASE_URL5 = 'http://www.rave-archive.com/'
+
 net = Net()
 addon = Addon('plugin.audio.raveplayer', sys.argv)
 mode = addon.queries['mode']
 url = addon.queries.get('url', None)
 content = addon.queries.get('content', None)
+query = addon.queries.get('query', None)
+startPage = addon.queries.get('startPage', None)
+numOfPages = addon.queries.get('numOfPages', None)
 listitem = addon.queries.get('listitem', None)
+urlList = addon.queries.get('urlList', None)
+section = addon.queries.get('section', None)
 
 ############################################################################### Get links #############################################################################################
 
@@ -122,9 +131,45 @@ def GetLinks4b(url):                                             #deepinsidetheo
             match = re.compile('<a href="(.+?)">.+?<',re.DOTALL).findall(html)
         listitem = GetMediaInfo(content)
         for url in match:
-                addon.add_directory({'mode': 'PlayVideo', 'url':  url, 'listitem': listitem},  {'title':  '[COLOR slategray][B]GET STREAM >>>[/B][/COLOR]>>>'}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
+                addon.add_directory({'mode': 'PlayVideo', 'url':  url, 'listitem': listitem},  {'title':  url}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+
+#--------------------------------------------------------------------------------------------------------------------------------------#
+
+
+def GetTitles(section, url, startPage= '1', numOfPages= '1'):    #rave-archive
+        print 'raveplayer get Movie Titles Menu %s' % url
+        pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + 'page/' + startPage + '/'
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        CLEAN(html)
+        start = int(startPage)
+        end = start + int(numOfPages)
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + 'page/' + str(page) + '/'
+                        html = net.http_GET(pageUrl).content
+                        CLEAN(html)
+                match = re.compile('img-wrapper.+?href="(.+?)" rel="bookmark" title="(.+?)" class="img-bevel video">', re.DOTALL).findall(html)
+                for movieUrl, name in match:
+                        addon.add_directory({'mode': 'GetLinks5', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
+                #addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img = 'http://www.cloudforge.com/sites/default/files/codesion/images/com-next.jpg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def GetLinks5(url):                                             #rave-archive
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('<a href="(.+?)">Download</a></p>').findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match:
+                addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  url}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ######################################################################### clean ###########################################################################################
 
@@ -174,11 +219,32 @@ def MainMenu():    #homescreen
         li.setProperty('fanart_image', 'http://s12.postimg.org/rkd8gen7h/fanart.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
+        xbmcplugin.setContent(addon_handle, 'audio')
+        url = 'http://www.livegigstream.co.uk:8040/'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Oldskool Anthemz Radio[/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', iconImage='http://www.oldskoolanthemz.com/images/cms/osafacebookconnect.jpg')
+        li.setProperty('fanart_image', 'http://s12.postimg.org/rkd8gen7h/fanart.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        xbmcplugin.setContent(addon_handle, 'audio')
+        url = 'http://178.33.237.151:8004'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Only Oldskool Radio[/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', iconImage='http://i1.sndcdn.com/artworks-000074359327-1jmjy6-original.jpg?435a760')
+        li.setProperty('fanart_image', 'http://s12.postimg.org/rkd8gen7h/fanart.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
         addon.add_directory({'mode': 'GetLinks', 'url': BASE_URL + '/'}, {'title':  '[COLOR green][B]One In The Jungle [/COLOR][COLOR palegreen]Archive[/B] [/COLOR]>>'}, img = 'http://www.oneinthejungle.net/images/home/fb.png', fanart = 'http://img193.imageshack.us/img193/4990/dsc09956tx.jpg')
         addon.add_directory({'mode': 'GetLinks3', 'url': BASE_URL3 + '/'}, {'title':  '[COLOR green][B]Rave tape packs [/COLOR][COLOR palegreen]Archive[/B] [/COLOR]>>'}, img = 'http://fc09.deviantart.net/fs25/f/2008/111/a/8/Cassette_tape_by_Quick_Stop.png', fanart = 'http://img200.imageshack.us/img200/9097/dsc007484.jpg')
         addon.add_directory({'mode': 'GetLinks2', 'url': BASE_URL2 + '/soundmanager2/demo/page-player/20bensons.html'}, {'title':  '[COLOR green][B]20bensons rave [/COLOR][COLOR palegreen]Archive[/B] [/COLOR]>>'}, img = 'http://www.zigsam.at/l07/B_Cig/BensonHedgesSpeciaF-20fJP197.jpg', fanart = 'http://torontoravemixtapearchive.com/images/promo/DavidRyanTapes.jpg')
         addon.add_directory({'mode': 'GetLinks4', 'url': BASE_URL4 + '/'}, {'title':  '[COLOR green][B]Oldskool [/COLOR][COLOR palegreen]Archive[/B] [/COLOR]>>'}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
-
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL5 + '/desire/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]Desire [/COLOR][COLOR palegreen]Archive[/B] [/COLOR]>>'}, img = 'http://i712.photobucket.com/albums/ww126/wigsoldskool/scan0127-1.jpg?t=1253343015', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL5 + '/stevie-hyper-d-sets/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]Stevie Hyper D [/COLOR][COLOR palegreen]Archive[/B] [/COLOR]>>'}, img = 'http://i1.ytimg.com/vi/kfHcSw8cw4Y/hqdefault.jpg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL5 + '/awol/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]AWOL [/COLOR][COLOR palegreen]Archive[/B] [/COLOR]>>'}, img = 'http://i1.sndcdn.com/artworks-000021177481-q21i03-crop.jpg?77d7a69', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL5 + '/kool-london/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]Kool fm [/COLOR][COLOR palegreen]Archive[/B] [/COLOR]>>'}, img = 'http://i5.photobucket.com/albums/y158/Paul_M_86/98af59b4.jpg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL5 + '/jungle-fever/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]Jungle Fever [/COLOR][COLOR palegreen]Archive[/B] [/COLOR]>>'}, img = 'http://phatmedia.co.uk/media/assets/large/dde6ba0896a9a772805e17098b414f5d657c3b0b.jpg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
         xbmcplugin.endOfDirectory(addon_handle)
 
 ################################################################################# mode #########################################################################################
@@ -201,5 +267,9 @@ elif mode == 'GetLinks4a':
 	GetLinks4a(url)
 elif mode == 'GetLinks4b':
 	GetLinks4b(url)
+elif mode == 'GetTitles': 
+	GetTitles(section, url, startPage, numOfPages)
+elif mode == 'GetLinks5':
+	GetLinks5(url)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	

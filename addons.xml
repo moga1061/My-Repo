@@ -55,7 +55,7 @@
 	<addon
         id="plugin.audio.raveplayer"
         name="Rave player (BETA)"
-        version="0.0.2b"
+        version="0.0.4b"
         provider-name="@TheYid009">
 		<requires>
 			<import addon="xbmc.python"             	version="2.1.0"/>
