@@ -44,16 +44,6 @@ def GetLinks2(url):
                 addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://2.bp.blogspot.com/-0enPTd9lXMY/TePPr-IU1xI/AAAAAAAABoo/ZL8QxQSk96w/s400/RINSE.png', fanart = 'http://welikemusic.info/wp-content/uploads/2013/06/amit-dj-krust-rinse-fm-podcast-13-02-2013.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-############################################################################# Play Video #####################################################################################
-
-def PlayVideo(url, listitem):
-        addon_handle = int(sys.argv[1])
-        xbmcplugin.setContent(addon_handle, 'audio')
-        li = xbmcgui.ListItem('[COLOR dodgerblue][B]PLAY STREAM[/B][/COLOR]  [COLOR powderblue][B] >>[/B][/COLOR] >> ', iconImage='http://2.bp.blogspot.com/-0enPTd9lXMY/TePPr-IU1xI/AAAAAAAABoo/ZL8QxQSk96w/s400/RINSE.png')
-        li.setProperty('fanart_image', 'http://fc00.deviantart.net/fs71/f/2013/091/6/7/my_forest_of_contrast_topped_of_by_a_rinse_fm_logo_by_cyrax_apex-d602ggy.jpg')
-        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
-        xbmcplugin.endOfDirectory(addon_handle)
-
 ################################################################################ ListItem #################################################################################
 
 def GetMediaInfo(html):
@@ -70,10 +60,20 @@ def MainMenu():
         addon_handle = int(sys.argv[1]) 
         xbmcplugin.setContent(addon_handle, 'audio')
         url = 'http://podcast.dgen.net/rinsefm'
-        li = xbmcgui.ListItem('[COLOR powderblue][B]Rinse FM[/B][/COLOR] [COLOR lime] (((LIVE))) [/COLOR] >>', iconImage='http://s16.postimg.org/kdlyi29j9/icon.png')
+        li = xbmcgui.ListItem('[COLOR powderblue][B]Rinse FM[/B][/COLOR] [COLOR lime] (((LIVE))) [/COLOR] >>', iconImage='http://s16.postimg.org/kdlyi29j9/icon.png', thumbnailImage= 'http://s16.postimg.org/kdlyi29j9/icon.png')
         li.setProperty('fanart_image', 'http://s29.postimg.org/rsd7ep7gn/fanart.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
         addon.add_directory({'mode': 'GetLinks', 'url': BASE_URL + '/podcasts/'}, {'title':  '[COLOR powderblue][B]Past Shows & Podcasts[/B][/COLOR]'}, img = 'http://s16.postimg.org/kdlyi29j9/icon.png', fanart = 'http://s29.postimg.org/rsd7ep7gn/fanart.jpg')
+        xbmcplugin.endOfDirectory(addon_handle)
+
+############################################################################# Play Video #####################################################################################
+
+def PlayVideo(url, listitem):
+        addon_handle = int(sys.argv[1])
+        xbmcplugin.setContent(addon_handle, 'audio')
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]PLAY STREAM[/B][/COLOR]  [COLOR powderblue][B] >>[/B][/COLOR] >> ', iconImage='http://2.bp.blogspot.com/-0enPTd9lXMY/TePPr-IU1xI/AAAAAAAABoo/ZL8QxQSk96w/s400/RINSE.png', thumbnailImage= 'http://2.bp.blogspot.com/-0enPTd9lXMY/TePPr-IU1xI/AAAAAAAABoo/ZL8QxQSk96w/s400/RINSE.png')
+        li.setProperty('fanart_image', 'http://fc00.deviantart.net/fs71/f/2013/091/6/7/my_forest_of_contrast_topped_of_by_a_rinse_fm_logo_by_cyrax_apex-d602ggy.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
         xbmcplugin.endOfDirectory(addon_handle)
 
 ################################################################################# mode #########################################################################################
