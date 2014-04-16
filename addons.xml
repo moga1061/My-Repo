@@ -55,12 +55,12 @@
 	<addon
         id="plugin.audio.raveplayer"
         name="Rave player (BETA)"
-        version="0.0.5b"
+        version="0.0.6b"
         provider-name="@TheYid009">
 		<requires>
 			<import addon="xbmc.python"             	version="2.1.0"/>
 			<import addon="xbmc.addon"              	version="12.1.0"/>
-                     <import addon="script.module.TheYid.common" version="2.1.1"/>
+                     <import addon="script.module.TheYid.common" version="0.1.1"/>
 		</requires>
 		<extension point="xbmc.python.pluginsource" library="default.py">
 			<provides>audio</provides>
