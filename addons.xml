@@ -54,8 +54,8 @@
 
 	<addon
         id="plugin.audio.raveplayer"
-        name="Rave player (BETA)"
-        version="0.0.6b"
+        name="Rave player"
+        version="0.0.7b"
         provider-name="@TheYid009">
 		<requires>
 			<import addon="xbmc.python"             	version="2.1.0"/>
@@ -82,7 +82,7 @@
 	<addon
         id="plugin.audio.rinsefmplayer"
         name="Rinse FM"
-        version="1.0.1"
+        version="1.0.2"
         provider-name="@TheYid009">
 		<requires>
 			<import addon="xbmc.python"             	version="2.1.0"/>

@@ -59,8 +59,8 @@ def GetMediaInfo(html):
 def MainMenu():   
         addon_handle = int(sys.argv[1]) 
         xbmcplugin.setContent(addon_handle, 'audio')
-        url = 'http://podcast.dgen.net/rinsefm'
-        li = xbmcgui.ListItem('[COLOR powderblue][B]Rinse FM[/B][/COLOR] [COLOR lime] (((LIVE))) [/COLOR] >>', iconImage='http://s16.postimg.org/kdlyi29j9/icon.png', thumbnailImage= 'http://s16.postimg.org/kdlyi29j9/icon.png')
+        url = 'http://typhoon.exequo.org:8000/rinseradio'
+        li = xbmcgui.ListItem('[COLOR powderblue][B]Rinse FM[/B][/COLOR] [COLOR lime] (((LIVE))) [/COLOR]', iconImage='http://s16.postimg.org/kdlyi29j9/icon.png', thumbnailImage= 'http://s16.postimg.org/kdlyi29j9/icon.png')
         li.setProperty('fanart_image', 'http://s29.postimg.org/rsd7ep7gn/fanart.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
         addon.add_directory({'mode': 'GetLinks', 'url': BASE_URL + '/podcasts/'}, {'title':  '[COLOR powderblue][B]Past Shows & Podcasts[/B][/COLOR]'}, img = 'http://s16.postimg.org/kdlyi29j9/icon.png', fanart = 'http://s29.postimg.org/rsd7ep7gn/fanart.jpg')

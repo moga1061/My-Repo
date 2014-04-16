@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 	<addon
         id="plugin.audio.raveplayer" 
-        name="Rave player (BETA)" 
-        version="0.0.6b" 
+        name="Rave player" 
+        version="0.0.7b" 
         provider-name="@TheYid009">
 		<requires>
 			<import addon="xbmc.python"             	version="2.1.0"/>
