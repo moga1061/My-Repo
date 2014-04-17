@@ -21,6 +21,7 @@ BASE_URL8 = 'http://oldskool.podomatic.com/'
 BASE_URL9 = 'http://mikusmusik.blogspot.co.uk/'
 BASE_URL10 = 'http://drumandbass.ch/'
 BASE_URL11 = 'http://mixtapes.demodulated.com/'
+BASE_URL12 = 'http://www.shitmixtapes.com/'
 
 net = Net()
 addon = Addon('plugin.audio.raveplayer', sys.argv)
@@ -163,10 +164,10 @@ def GetLinks5(url):                                             #rave-archive
         listitem = GetMediaInfo(html)
         CLEAN(html)
         content = html
-        match = re.compile('<a href="(.+?)">Download</a></p>').findall(content)
+        match = re.compile('<a href="http://ravearchive.mediafire.com/file/(.+?)" target="_blank">Download</a>').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
-                addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  url}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
+                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://ravearchive.mediafire.com/file/' + url, 'listitem': listitem}, {'title':  url}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -272,6 +273,32 @@ def GetLinks11b(url):                                            #demodulated
                 addon.add_directory({'mode': 'PlayVideo', 'url': 'http://www.demodulated.com/music/mixsets/' + url, 'listitem': listitem}, {'title':  url}, img = 'http://urbanlegendkampala.com/wp-content/uploads/2013/11/Mixtape-Image.jpg', fanart = 'http://img.wallpaperstock.net:81/vintage-cassette-retro-player-wallpapers_36465_1920x1080.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
+def GetLinks12(url):                                            #
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('<li><a href="(.+?)">(.+?)</a></li>').findall(content)
+        listitem = GetMediaInfo(content)
+        for url, name in match:
+                addon.add_directory({'mode': 'GetLinks12a', 'url': 'http://www.shitmixtapes.com/' + url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.shitmixtapes.com/storage/shitmixtapes1024x600_netbook.jpg?__SQUARESPACE_CACHEVERSION=1310509037820', fanart = 'http://www.keepingtheravealive.com/images/KEEPING-THE-RAVE-ALIVE_01.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def GetLinks12a(url):                                            #
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('href="(.+?)" target="_blank">(.+?)<').findall(content)
+        listitem = GetMediaInfo(content)
+        for url, name in match:
+                addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.shitmixtapes.com/storage/shitmixtapes1024x600_netbook.jpg?__SQUARESPACE_CACHEVERSION=1310509037820', fanart = 'http://www.keepingtheravealive.com/images/KEEPING-THE-RAVE-ALIVE_01.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 ######################################################################### clean ###########################################################################################
 
 def CLEAN(string):
@@ -339,18 +366,19 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetLinks7', 'url': BASE_URL7 + '/category_Event_Mixes_1.htm'}, {'title':  '[COLOR green][B]UK raves [/COLOR](Archive)[/B]'}, img = 'https://pbs.twimg.com/profile_images/3337802286/571a3ecdec1efb53e30cf19c00f45212.jpeg', fanart = 'http://www.fantazia.org.uk/Event%20info/Pics/11fantaziasummertime.jpg')
         addon.add_directory({'mode': 'GetLinks11', 'url': BASE_URL11 + '/'}, {'title':  '[COLOR green][B]Demodulated mixtapes [/COLOR](Archive)[/B]'}, img = 'http://urbanlegendkampala.com/wp-content/uploads/2013/11/Mixtape-Image.jpg', fanart = 'http://bigghostlimited.com/wp-content/uploads/2013/09/MIxtape.gif')
         addon.add_directory({'mode': 'GetLinks9', 'url': BASE_URL9 + '/2010/10/dusty-tapes-london-pirates-1991-1995.html'}, {'title':  '[COLOR green][B]Oldskool Pirate radio [/COLOR](Archive)[/B]'}, img = 'http://3.bp.blogspot.com/-iDTTgsZBiBA/TwHRQBfrEKI/AAAAAAAAATs/8lTy5Va4_is/s1600/MIKUS.gif', fanart = 'http://s23.postimg.org/4sn8qcp8b/fanart.jpg')
+        addon.add_directory({'mode': 'GetLinks12', 'url': BASE_URL12 + '/'}, {'title':  '[COLOR green][B]Shitmixtapes [/COLOR](Archive)[/B]'}, img = 'http://www.shitmixtapes.com/storage/shitmixtapes-white.jpg?__SQUARESPACE_CACHEVERSION=1310920306487', fanart = 'http://farm3.staticflickr.com/2814/11285947406_690a1a7a92_z.jpg')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL5 + '/desire/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]Desire [/COLOR](Archive)[/B]'}, img = 'http://i712.photobucket.com/albums/ww126/wigsoldskool/scan0127-1.jpg?t=1253343015', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]Desire [/COLOR](Rave-archive)[/B]'}, img = 'http://i712.photobucket.com/albums/ww126/wigsoldskool/scan0127-1.jpg?t=1253343015', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL5 + '/stevie-hyper-d-sets/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]Stevie Hyper D [/COLOR](Archive)[/B]'}, img = 'http://i1.ytimg.com/vi/kfHcSw8cw4Y/hqdefault.jpg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]Stevie Hyper D [/COLOR](Rave-archive)[/B]'}, img = 'http://i1.ytimg.com/vi/kfHcSw8cw4Y/hqdefault.jpg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL5 + '/awol/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]AWOL [/COLOR](Archive)[/B]'}, img = 'http://i1.sndcdn.com/artworks-000021177481-q21i03-crop.jpg?77d7a69', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]AWOL [/COLOR](Rave-archive)[/B]'}, img = 'http://i1.sndcdn.com/artworks-000021177481-q21i03-crop.jpg?77d7a69', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL5 + '/kool-london/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]Kool fm [/COLOR](Archive)[/B]'}, img = 'http://i5.photobucket.com/albums/y158/Paul_M_86/98af59b4.jpg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]Kool fm [/COLOR](Rave-archive)[/B]'}, img = 'http://i5.photobucket.com/albums/y158/Paul_M_86/98af59b4.jpg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL5 + '/jungle-fever/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]Jungle Fever [/COLOR](Archive)[/B]'}, img = 'http://phatmedia.co.uk/media/assets/large/dde6ba0896a9a772805e17098b414f5d657c3b0b.jpg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
-        addon.add_directory({'mode': 'GetLinks6', 'url': BASE_URL6 + '/'}, {'title':  '[COLOR chartreuse][B]RatPack [/COLOR](Podcasts)[/B]'}, img = 'http://strictlyoldskool.net/wp-content/gallery/ratpack/ratpack-pic-1.jpg', fanart = 'http://static.inlog.org/wp-content/uploads/2013/04/front-590x390.jpg')
-        addon.add_directory({'mode': 'GetLinks10', 'url': BASE_URL10 + '/showthread.php?3752-mal-was-anderes-oldskool-history-of-edm-mix'}, {'title':  '[COLOR chartreuse][B]In the beginning there was Jack[/COLOR] (podcast)[/B]'}, img = 'http://sd.keepcalm-o-matic.co.uk/i/in-the-beginning-there-was-jack-9.png', fanart = 'http://galiofficial.com/wp-content/uploads/2013/03/house-music-design-nation.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]Jungle Fever [/COLOR](Rave-archive)[/B]'}, img = 'http://phatmedia.co.uk/media/assets/large/dde6ba0896a9a772805e17098b414f5d657c3b0b.jpg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
+        addon.add_directory({'mode': 'GetLinks6', 'url': BASE_URL6 + '/'}, {'title':  '[COLOR mediumseagreen][B]RatPack [/COLOR](Podcasts)[/B]'}, img = 'http://strictlyoldskool.net/wp-content/gallery/ratpack/ratpack-pic-1.jpg', fanart = 'http://static.inlog.org/wp-content/uploads/2013/04/front-590x390.jpg')
+        addon.add_directory({'mode': 'GetLinks10', 'url': BASE_URL10 + '/showthread.php?3752-mal-was-anderes-oldskool-history-of-edm-mix'}, {'title':  '[COLOR mediumseagreen][B]In the beginning there was Jack[/COLOR] (podcast)[/B]'}, img = 'http://sd.keepcalm-o-matic.co.uk/i/in-the-beginning-there-was-jack-9.png', fanart = 'http://galiofficial.com/wp-content/uploads/2013/03/house-music-design-nation.jpg')
         xbmcplugin.endOfDirectory(addon_handle)
 
 ################################################################################# mode #########################################################################################
@@ -395,5 +423,9 @@ elif mode == 'GetLinks11a':
 	GetLinks11a(url)
 elif mode == 'GetLinks11b':
 	GetLinks11b(url)
+elif mode == 'GetLinks12':
+	GetLinks12(url)
+elif mode == 'GetLinks12a':
+	GetLinks12a(url)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
