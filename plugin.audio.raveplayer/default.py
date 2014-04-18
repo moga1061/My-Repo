@@ -112,9 +112,12 @@ def GetLinks3b(url):
         listitem = GetMediaInfo(html)
         content = html
         match = re.compile('<p style="text-align: left;"><a href="(.+?)">(.+?)</a></p>').findall(content)
+        match2 = re.compile('<p><a href="http://www.ravetapepacks.com/music/(.+?)">(.+?)</a></p>').findall(content)
         listitem = GetMediaInfo(content)
         for url, name in match:
                 addon.add_directory({'mode': 'PlayVideo', 'url':  url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://fc09.deviantart.net/fs25/f/2008/111/a/8/Cassette_tape_by_Quick_Stop.png', fanart = 'http://24.media.tumblr.com/tumblr_md33y3uDzM1qkcj9ro4_1280.jpg')
+        for url, name in match2:
+                addon.add_directory({'mode': 'PlayVideo', 'url':  'http://www.ravetapepacks.com/music/' + url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://fc09.deviantart.net/fs25/f/2008/111/a/8/Cassette_tape_by_Quick_Stop.png', fanart = 'http://24.media.tumblr.com/tumblr_md33y3uDzM1qkcj9ro4_1280.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------ deepinsidetheoldskool -------------------------------------------------------------------------------------#
