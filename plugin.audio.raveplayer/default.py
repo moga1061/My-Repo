@@ -1,3 +1,22 @@
+'''
+    Rave player XBMC Addon
+    Copyright (C) 2014 tcz009 @TheYid009 TheYid's REPO
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+'''
+#############################################################-Rave player-########################################################################################
+
 import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 import urllib, urllib2
 import re, string, sys, os
@@ -288,17 +307,36 @@ def GetLinks13a(url):
                 addon.add_directory({'mode': 'GetLinks13b', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://wallpapersus.com/wp-content/uploads/2012/02/music-animals-audio-jungle.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-def GetLinks13b(url):                                            
+def GetLinks13b(url):                                           
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
         CLEAN(html)
         content = html
-        match = re.compile('<a href="http://ravearchive.mediafire.com/file/(.+?)" target="_blank">Download</a>').findall(content)
+        match = re.compile('<a href="http://ravearchive.mediafire.com/file/(.+?)" target="_blank">.+?</a>').findall(content)
+        match2 = re.compile('<p style="text-align: center;"><a href="http://ravearchive.mediafire.com/listen/(.+?)" target="_blank">.+?</a></p>').findall(content)
+        match3 = re.compile('<a href="http://ravearchive.mediafire.com/file/(.+?)">.+?</a>').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
                 addon.add_directory({'mode': 'PlayVideo', 'url': 'http://ravearchive.mediafire.com/file/' + url, 'listitem': listitem}, {'title':  url}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://aerosoul.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/j/u/junglist_logo_on_dark_navy_jm_hoodie.png')
+        for url in match2:
+                addon.add_directory({'mode': 'GetLinks13c', 'url': 'http://ravearchive.mediafire.com/listen/' + url, 'listitem': listitem}, {'title':  url}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://aerosoul.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/j/u/junglist_logo_on_dark_navy_jm_hoodie.png')
+        for url in match3:
+                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://ravearchive.mediafire.com/file/' + url, 'listitem': listitem}, {'title':  url}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://aerosoul.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/j/u/junglist_logo_on_dark_navy_jm_hoodie.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def GetLinks13c(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('id="audioControlGroup">   <a href="(.+?)" target="_blank"><div').findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match:
+                addon.add_directory({'mode': 'PlayVideo', 'url': 'https://www.mediafire.com/' + url, 'listitem': listitem}, {'title':  '[COLOR blue][B]LOAD STREAM[/B][/COLOR] ' + url}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://junglejunglesound.files.wordpress.com/2013/04/jungle_logo_net.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 
 ######################################################################### clean ###########################################################################################
 
@@ -425,5 +463,7 @@ elif mode == 'GetLinks13a':
 	GetLinks13a(url)
 elif mode == 'GetLinks13b':
 	GetLinks13b(url)
+elif mode == 'GetLinks13c':
+	GetLinks13c(url)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
