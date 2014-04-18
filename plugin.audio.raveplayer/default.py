@@ -14,7 +14,7 @@ BASE_URL = 'http://www.oneinthejungle.co.uk/'
 BASE_URL2 = 'http://20bensons.com/'
 BASE_URL3 = 'http://www.ravetapepacks.com/'
 BASE_URL4 = 'http://deepinsidetheoldskool.blogspot.co.uk/'
-BASE_URL5 = 'http://www.rave-archive.com/'
+BASE_URL5 = ''
 BASE_URL6 = 'http://ratpack.podomatic.com/'
 BASE_URL7 = 'http://www.ukraves.co.uk/'
 BASE_URL8 = 'http://oldskool.podomatic.com/'
@@ -22,6 +22,7 @@ BASE_URL9 = 'http://mikusmusik.blogspot.co.uk/'
 BASE_URL10 = 'http://drumandbass.ch/'
 BASE_URL11 = 'http://mixtapes.demodulated.com/'
 BASE_URL12 = 'http://www.shitmixtapes.com/'
+BASE_URL13 = 'http://www.rave-archive.com/'
 
 net = Net()
 addon = Addon('plugin.audio.raveplayer', sys.argv)
@@ -48,9 +49,9 @@ def GetLinks(url):                                             #oneinthejungle
                 addon.add_directory({'mode': 'PlayVideo', 'url': 'http://www.oneinthejungle.co.uk/' + url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.oneinthejungle.net/images/home/fb.png', fanart = 'http://www.allcrew.co.uk/pages/cartgifs/party.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------ 20bensons ----------------------------------------------------------------------------#
 
-def GetLinks2(url):                                            #20bensons
+def GetLinks2(url):                                           
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
@@ -61,9 +62,9 @@ def GetLinks2(url):                                            #20bensons
                 addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.zigsam.at/l07/B_Cig/BensonHedgesSpeciaF-20fJP197.jpg', fanart = 'http://cs11180.vk.me/u19162043/47140284/x_977c8c97.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------- ravetapepacks -------------------------------------------------------------------------------------#
 
-def GetLinks3(url):                                             #ravetapepacks1
+def GetLinks3(url):                                            
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
@@ -74,19 +75,19 @@ def GetLinks3(url):                                             #ravetapepacks1
                 addon.add_directory({'mode': 'GetLinks3a', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://fc09.deviantart.net/fs25/f/2008/111/a/8/Cassette_tape_by_Quick_Stop.png', fanart = 'http://24.media.tumblr.com/tumblr_md33y3uDzM1qkcj9ro4_1280.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-def GetLinks3a(url):                                             #ravetapepacks1a
+def GetLinks3a(url):                                           
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
         CLEAN(html)
         content = html
-        match = re.compile('<a href="(.+?)" rel="bookmark">(.+?)</a>').findall(content)
+        match = re.compile('<h1 class="entry-title">\n\t\t\t\t<a href="(.+?)" rel="bookmark">(.+?)</a>').findall(content)
         listitem = GetMediaInfo(content)
         for url, name in match:
                 addon.add_directory({'mode': 'GetLinks3b', 'url':  url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://fc09.deviantart.net/fs25/f/2008/111/a/8/Cassette_tape_by_Quick_Stop.png', fanart = 'http://24.media.tumblr.com/tumblr_md33y3uDzM1qkcj9ro4_1280.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-def GetLinks3b(url):                                             #ravetapepacks2a
+def GetLinks3b(url):                                            
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
@@ -97,9 +98,9 @@ def GetLinks3b(url):                                             #ravetapepacks2
                 addon.add_directory({'mode': 'PlayVideo', 'url':  url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://fc09.deviantart.net/fs25/f/2008/111/a/8/Cassette_tape_by_Quick_Stop.png', fanart = 'http://24.media.tumblr.com/tumblr_md33y3uDzM1qkcj9ro4_1280.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#------------------------------------------------------------------------ deepinsidetheoldskool -------------------------------------------------------------------------------------#
 
-def GetLinks4(url):                                             #deepinsidetheoldskool1
+def GetLinks4(url):                                          
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
@@ -110,69 +111,31 @@ def GetLinks4(url):                                             #deepinsidetheol
                 addon.add_directory({'mode': 'GetLinks4a', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-def GetLinks4a(url):                                             #deepinsidetheoldskoola
+def GetLinks4a(url):                                             
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
         content = html
-        match = re.compile("<a href='(.+?)'>(.+?-)").findall(content)
+        match = re.compile("<h3 class='post-title entry-title' itemprop='.+?'>\s*?<a href='(.+?)'>(.+?)</a>").findall(content)
         listitem = GetMediaInfo(content)
         for url, name in match:
                 addon.add_directory({'mode': 'GetLinks4b', 'url':  url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-
-def GetLinks4b(url):                                             #deepinsidetheoldskoola
+def GetLinks4b(url):                                             
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
         content = html
-        match = re.compile(' <a href="(.+?)">.+?<').findall(content)
-        if not match:
-            match = re.compile('<a href="(.+?)">.+?<',re.DOTALL).findall(html)
+        match = re.compile('<a href="http://deepinside.demodulated.com/(.+?)">.+?</a>').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
-                addon.add_directory({'mode': 'PlayVideo', 'url':  url, 'listitem': listitem},  {'title':  url}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
+                addon.add_directory({'mode': 'PlayVideo', 'url':  'http://deepinside.demodulated.com/' + url, 'listitem': listitem},  {'title':  url}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#--------------------------------------------------------------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------ ratpack ---------------------------------------------------------------------------------#
 
-def GetTitles(section, url, startPage= '1', numOfPages= '1'):    #rave-archive
-        print 'raveplayer get Movie Titles Menu %s' % url
-        pageUrl = url
-        if int(startPage)> 1:
-                pageUrl = url + 'page/' + startPage + '/'
-        print pageUrl
-        html = net.http_GET(pageUrl).content
-        CLEAN(html)
-        start = int(startPage)
-        end = start + int(numOfPages)
-        for page in range( start, end):
-                if ( page != start):
-                        pageUrl = url + 'page/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content
-                        CLEAN(html)
-                match = re.compile('img-wrapper.+?href="(.+?)" rel="bookmark" title="(.+?)" class="img-bevel video">', re.DOTALL).findall(html)
-                for movieUrl, name in match:
-                        addon.add_directory({'mode': 'GetLinks5', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
-                #addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img = 'http://www.cloudforge.com/sites/default/files/codesion/images/com-next.jpg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
-def GetLinks5(url):                                             #rave-archive
-        print 'GETLINKS FROM URL: '+url
-        html = net.http_GET(url).content
-        listitem = GetMediaInfo(html)
-        CLEAN(html)
-        content = html
-        match = re.compile('<a href="http://ravearchive.mediafire.com/file/(.+?)" target="_blank">Download</a>').findall(content)
-        listitem = GetMediaInfo(content)
-        for url in match:
-                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://ravearchive.mediafire.com/file/' + url, 'listitem': listitem}, {'title':  url}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
-
-def GetLinks6(url):                                            #ratpack
+def GetLinks6(url):                                            
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
@@ -183,7 +146,7 @@ def GetLinks6(url):                                            #ratpack
                 addon.add_directory({'mode': 'GetLinks6a', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://media.ents24network.com/image/000/000/527/942171df2ccf89033bf2454012f1cb47b817fa9d.jpg', fanart = 'http://www.mixmag.net/sites/default/files/u10/sun2.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-def GetLinks6a(url):                                            #ratpack
+def GetLinks6a(url):                                            
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
@@ -194,9 +157,9 @@ def GetLinks6a(url):                                            #ratpack
                 addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  url}, img = 'http://media.ents24network.com/image/000/000/527/942171df2ccf89033bf2454012f1cb47b817fa9d.jpg', fanart = 'http://hardcorewillneverdie.com/eswe/pagez/flyerz/helter2.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#--------------------------------------------------------------------------- oldskool -------------------------------------------------------------------------------------#
 
-def GetLinks7(url):                                            #oldskool
+def GetLinks7(url):                                            
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
@@ -207,9 +170,9 @@ def GetLinks7(url):                                            #oldskool
                 addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://image.spreadshirt.com/image-server/v1/compositions/19412958/views/1,width=280,height=280,appearanceId=1.png/ecstasy-pill-dove-generation-t-shirt_design.png', fanart = 'http://i383.photobucket.com/albums/oo273/Senbonzakura_8/takeecstesyyoumaydiebutitllbefunalo.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#----------------------------------------------------------------------------- mikusmusik ----------------------------------------------------------------------------------#
 
-def GetLinks9(url):                                            #mikusmusik
+def GetLinks9(url):                                            
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
@@ -221,9 +184,9 @@ def GetLinks9(url):                                            #mikusmusik
                 addon.add_directory({'mode': 'PlayVideo', 'url': 'http://www.terraincognita.co.uk/pirate_radio/' + url, 'listitem': listitem}, {'title':  url}, img = 'http://static.tvtropes.org/pmwiki/pub/images/Pirate_radio_station_5417.jpg', fanart = 'http://s29.postimg.org/xwiy1he6f/fanart.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------ drumandbass --------------------------------------------------------------------------------#
 
-def GetLinks10(url):                                            #mikusmusik
+def GetLinks10(url):                                           
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
@@ -235,9 +198,9 @@ def GetLinks10(url):                                            #mikusmusik
                 addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://whatishousemusic.co.uk/wp-content/uploads/2013/10/History_of_house.jpg', fanart = 'http://www.mixmag.net/sites/default/files/imagecache/article/images/Foot_shuffling.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#--------------------------------------------------------------------------------- demodulated -----------------------------------------------------------------------------#
 
-def GetLinks11(url):                                            #demodulated
+def GetLinks11(url):                                            
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
@@ -249,7 +212,7 @@ def GetLinks11(url):                                            #demodulated
                 addon.add_directory({'mode': 'GetLinks11a', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://urbanlegendkampala.com/wp-content/uploads/2013/11/Mixtape-Image.jpg', fanart = 'https://chronicle-vitae-production.s3.amazonaws.com/uploads/user_article/photo/133/full_11112013-mixtapes.gif')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-def GetLinks11a(url):                                            #
+def GetLinks11a(url):                                            
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
@@ -261,7 +224,7 @@ def GetLinks11a(url):                                            #
                 addon.add_directory({'mode': 'GetLinks11b', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://urbanlegendkampala.com/wp-content/uploads/2013/11/Mixtape-Image.jpg', fanart = 'http://img.wallpaperstock.net:81/vintage-cassette-retro-player-wallpapers_36465_1920x1080.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-def GetLinks11b(url):                                            #demodulated
+def GetLinks11b(url):                                          
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
@@ -273,9 +236,9 @@ def GetLinks11b(url):                                            #demodulated
                 addon.add_directory({'mode': 'PlayVideo', 'url': 'http://www.demodulated.com/music/mixsets/' + url, 'listitem': listitem}, {'title':  url}, img = 'http://urbanlegendkampala.com/wp-content/uploads/2013/11/Mixtape-Image.jpg', fanart = 'http://img.wallpaperstock.net:81/vintage-cassette-retro-player-wallpapers_36465_1920x1080.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------- shitmixtapes ---------------------------------------------------------------------------------------#
 
-def GetLinks12(url):                                            #
+def GetLinks12(url):                                            
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
@@ -284,10 +247,10 @@ def GetLinks12(url):                                            #
         match = re.compile('<li><a href="(.+?)">(.+?)</a></li>').findall(content)
         listitem = GetMediaInfo(content)
         for url, name in match:
-                addon.add_directory({'mode': 'GetLinks12a', 'url': 'http://www.shitmixtapes.com/' + url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.shitmixtapes.com/storage/shitmixtapes1024x600_netbook.jpg?__SQUARESPACE_CACHEVERSION=1310509037820', fanart = 'http://www.keepingtheravealive.com/images/KEEPING-THE-RAVE-ALIVE_01.jpg')
+                addon.add_directory({'mode': 'GetLinks12a', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.shitmixtapes.com/storage/shitmixtapes1024x600_netbook.jpg?__SQUARESPACE_CACHEVERSION=1310509037820', fanart = 'http://www.keepingtheravealive.com/images/KEEPING-THE-RAVE-ALIVE_01.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-def GetLinks12a(url):                                            #
+def GetLinks12a(url):                                            
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
@@ -297,6 +260,44 @@ def GetLinks12a(url):                                            #
         listitem = GetMediaInfo(content)
         for url, name in match:
                 addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.shitmixtapes.com/storage/shitmixtapes1024x600_netbook.jpg?__SQUARESPACE_CACHEVERSION=1310509037820', fanart = 'http://www.keepingtheravealive.com/images/KEEPING-THE-RAVE-ALIVE_01.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#------------------------------------------------------------------------- rave-archive ---------------------------------------------------------------------------------#
+
+def GetLinks13(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile("<a href='(.+?)' class='.+?' title='.+?' style='.+?'>(.+?)</a>").findall(content)
+        listitem = GetMediaInfo(content)
+        for url, name in match:
+                addon.add_directory({'mode': 'GetLinks13a', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://junglejunglesound.files.wordpress.com/2013/04/jungle_logo_net.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def GetLinks13a(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('<h2><a href="(.+?)" title=".+?">(.+?)</a></h2>').findall(content)
+        listitem = GetMediaInfo(content)
+        for url, name in match:
+                addon.add_directory({'mode': 'GetLinks13b', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://wallpapersus.com/wp-content/uploads/2012/02/music-animals-audio-jungle.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def GetLinks13b(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('<a href="http://ravearchive.mediafire.com/file/(.+?)" target="_blank">Download</a>').findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match:
+                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://ravearchive.mediafire.com/file/' + url, 'listitem': listitem}, {'title':  url}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://aerosoul.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/j/u/junglist_logo_on_dark_navy_jm_hoodie.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ######################################################################### clean ###########################################################################################
@@ -361,22 +362,13 @@ def MainMenu():    #homescreen
 
         addon.add_directory({'mode': 'GetLinks', 'url': BASE_URL + '/'}, {'title':  '[COLOR green][B]One In The Jungle [/COLOR](Archive)[/B]'}, img = 'http://www.oneinthejungle.net/images/home/fb.png', fanart = 'http://img193.imageshack.us/img193/4990/dsc09956tx.jpg')
         addon.add_directory({'mode': 'GetLinks3', 'url': BASE_URL3 + '/'}, {'title':  '[COLOR green][B]Rave tape packs [/COLOR](Archive)[/B]'}, img = 'http://fc09.deviantart.net/fs25/f/2008/111/a/8/Cassette_tape_by_Quick_Stop.png', fanart = 'http://s27.postimg.org/3qdp1snnn/hhhgggg.jpg')
+        addon.add_directory({'mode': 'GetLinks4', 'url': BASE_URL4 + '/'}, {'title':  '[COLOR green][B]Deepinside the oldskool [/COLOR](Archive)[/B]'}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
+        addon.add_directory({'mode': 'GetLinks13', 'url': BASE_URL13 + '/'}, {'title':  '[COLOR green][B]Rave-archive [/COLOR](Archive)[/B]'}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://s11.postimg.org/vhd2897k3/fanart.jpg')
         addon.add_directory({'mode': 'GetLinks2', 'url': BASE_URL2 + '/soundmanager2/demo/page-player/20bensons.html'}, {'title':  '[COLOR green][B]20bensons rave [/COLOR](Archive)[/B]'}, img = 'http://www.zigsam.at/l07/B_Cig/BensonHedgesSpeciaF-20fJP197.jpg', fanart = 'http://torontoravemixtapearchive.com/images/promo/DavidRyanTapes.jpg')
-        addon.add_directory({'mode': 'GetLinks4', 'url': BASE_URL4 + '/'}, {'title':  '[COLOR green][B]Oldskool [/COLOR](Archive)[/B]'}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
         addon.add_directory({'mode': 'GetLinks7', 'url': BASE_URL7 + '/category_Event_Mixes_1.htm'}, {'title':  '[COLOR green][B]UK raves [/COLOR](Archive)[/B]'}, img = 'https://pbs.twimg.com/profile_images/3337802286/571a3ecdec1efb53e30cf19c00f45212.jpeg', fanart = 'http://www.fantazia.org.uk/Event%20info/Pics/11fantaziasummertime.jpg')
         addon.add_directory({'mode': 'GetLinks11', 'url': BASE_URL11 + '/'}, {'title':  '[COLOR green][B]Demodulated mixtapes [/COLOR](Archive)[/B]'}, img = 'http://urbanlegendkampala.com/wp-content/uploads/2013/11/Mixtape-Image.jpg', fanart = 'http://bigghostlimited.com/wp-content/uploads/2013/09/MIxtape.gif')
         addon.add_directory({'mode': 'GetLinks9', 'url': BASE_URL9 + '/2010/10/dusty-tapes-london-pirates-1991-1995.html'}, {'title':  '[COLOR green][B]Oldskool Pirate radio [/COLOR](Archive)[/B]'}, img = 'http://3.bp.blogspot.com/-iDTTgsZBiBA/TwHRQBfrEKI/AAAAAAAAATs/8lTy5Va4_is/s1600/MIKUS.gif', fanart = 'http://s23.postimg.org/4sn8qcp8b/fanart.jpg')
         addon.add_directory({'mode': 'GetLinks12', 'url': BASE_URL12 + '/'}, {'title':  '[COLOR green][B]Shitmixtapes [/COLOR](Archive)[/B]'}, img = 'http://www.shitmixtapes.com/storage/shitmixtapes-white.jpg?__SQUARESPACE_CACHEVERSION=1310920306487', fanart = 'http://farm3.staticflickr.com/2814/11285947406_690a1a7a92_z.jpg')
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL5 + '/desire/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]Desire [/COLOR](Rave-archive)[/B]'}, img = 'http://i712.photobucket.com/albums/ww126/wigsoldskool/scan0127-1.jpg?t=1253343015', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL5 + '/stevie-hyper-d-sets/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]Stevie Hyper D [/COLOR](Rave-archive)[/B]'}, img = 'http://i1.ytimg.com/vi/kfHcSw8cw4Y/hqdefault.jpg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL5 + '/awol/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]AWOL [/COLOR](Rave-archive)[/B]'}, img = 'http://i1.sndcdn.com/artworks-000021177481-q21i03-crop.jpg?77d7a69', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL5 + '/kool-london/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]Kool fm [/COLOR](Rave-archive)[/B]'}, img = 'http://i5.photobucket.com/albums/y158/Paul_M_86/98af59b4.jpg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
-        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL5 + '/jungle-fever/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR chartreuse][B]Jungle Fever [/COLOR](Rave-archive)[/B]'}, img = 'http://phatmedia.co.uk/media/assets/large/dde6ba0896a9a772805e17098b414f5d657c3b0b.jpg', fanart = 'http://img820.imageshack.us/img820/3836/flyercollage.jpg')
         addon.add_directory({'mode': 'GetLinks6', 'url': BASE_URL6 + '/'}, {'title':  '[COLOR mediumseagreen][B]RatPack [/COLOR](Podcasts)[/B]'}, img = 'http://strictlyoldskool.net/wp-content/gallery/ratpack/ratpack-pic-1.jpg', fanart = 'http://static.inlog.org/wp-content/uploads/2013/04/front-590x390.jpg')
         addon.add_directory({'mode': 'GetLinks10', 'url': BASE_URL10 + '/showthread.php?3752-mal-was-anderes-oldskool-history-of-edm-mix'}, {'title':  '[COLOR mediumseagreen][B]In the beginning there was Jack[/COLOR] (podcast)[/B]'}, img = 'http://sd.keepcalm-o-matic.co.uk/i/in-the-beginning-there-was-jack-9.png', fanart = 'http://galiofficial.com/wp-content/uploads/2013/03/house-music-design-nation.jpg')
         xbmcplugin.endOfDirectory(addon_handle)
@@ -427,5 +419,11 @@ elif mode == 'GetLinks12':
 	GetLinks12(url)
 elif mode == 'GetLinks12a':
 	GetLinks12a(url)
+elif mode == 'GetLinks13':
+	GetLinks13(url)
+elif mode == 'GetLinks13a':
+	GetLinks13a(url)
+elif mode == 'GetLinks13b':
+	GetLinks13b(url)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	

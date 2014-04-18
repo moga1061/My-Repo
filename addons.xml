@@ -55,7 +55,7 @@
 	<addon
         id="plugin.audio.raveplayer"
         name="Rave player"
-        version="0.1.0b"
+        version="1.0.1"
         provider-name="@TheYid009">
 		<requires>
 			<import addon="xbmc.python"             	version="2.1.0"/>
@@ -66,16 +66,16 @@
 			<provides>audio</provides>
 		</extension>
 		<extension point="xbmc.addon.metadata">
-			<summary lang="en">rave player</summary>
-			<description lang="en">oldskool rave tape packs (BETA)</description>
-			<disclaimer lang="en">rave player (BETA)</disclaimer>
+			<summary lang="en">Stream rave music</summary>
+			<description lang="en">Stream oldskool rave tape packs oldskool pirate radio sets podcasts mixtapes live oldskool radio acid house hardcore jungle drum n bass and more</description>
+			<disclaimer lang="en">The author does not host or distribute any of the content displayed by this addon</disclaimer>
 			<platform>all</platform>
 			<license>GNU GENERAL PUBLIC LICENSE. Version 3, June 2007</license>
 			<language>en</language>
 			<forum>www.xbmchub.com</forum>
 			<website>raveplayer</website>
 			<email>@ThYid009</email>
-			<source>raveplayer</source>
+			<source>TheYidsREPO</source>
 		</extension>
 	</addon>
 
@@ -109,7 +109,7 @@
 	<addon
         id="plugin.audio.ts5player"
         name="TS5 player (Capital XTRA)"
-        version="1.1.4"
+        version="1.1.5"
         provider-name="@TheYid009">
 		<requires>
 			<import addon="xbmc.python"             	version="2.1.0"/>
