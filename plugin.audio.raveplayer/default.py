@@ -33,7 +33,7 @@ BASE_URL = 'http://www.oneinthejungle.co.uk/'
 BASE_URL2 = 'http://20bensons.com/'
 BASE_URL3 = 'http://www.ravetapepacks.com/'
 BASE_URL4 = 'http://deepinsidetheoldskool.blogspot.co.uk/'
-BASE_URL5 = ''
+BASE_URL5 = 'http://www.thebeatsanctuary.co.uk/'
 BASE_URL6 = 'http://ratpack.podomatic.com/'
 BASE_URL7 = 'http://www.ukraves.co.uk/'
 BASE_URL8 = 'http://oldskool.podomatic.com/'
@@ -42,6 +42,7 @@ BASE_URL10 = 'http://drumandbass.ch/'
 BASE_URL11 = 'http://mixtapes.demodulated.com/'
 BASE_URL12 = 'http://www.shitmixtapes.com/'
 BASE_URL13 = 'http://www.rave-archive.com/'
+BASE_URL14 = 'http://www.thewire.co.uk/'
 
 net = Net()
 addon = Addon('plugin.audio.raveplayer', sys.argv)
@@ -341,6 +342,46 @@ def GetLinks13c(url):
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
+#------------------------------------------------------------------------------- h & G -------------------------------------------------------------------------------------#
+
+def GetLinks5(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        content = html
+        match = re.compile('href="(.+?)" class="level2 item.+?"><span>(.+?)</span>').findall(content)
+        match2 = re.compile('href="(.+?)" class="level3 item.+?"><span>(.+?)</span>').findall(content)
+        listitem = GetMediaInfo(content)
+        for url, name in match + match2:
+                addon.add_directory({'mode': 'GetLinks5a', 'url': 'http://www.thebeatsanctuary.co.uk/' + url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://i2.wp.com/musicyouneed.net/wp-content/uploads/2013/03/MYN-The-Underground.jpg?resize=290%2C290', fanart = 'https://googledrive.com/host/0B99lcOwdwe5MUDRsdkgyWS1Kems/dj-bass-music-wallpaper.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def GetLinks5a(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        content = html
+        match = re.compile('<a target=".+?" href="https://dl.dropboxusercontent.com/u/(.+?)">').findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match:
+                addon.add_directory({'mode': 'PlayVideo', 'url': 'https://dl.dropboxusercontent.com/u/' + url, 'listitem': listitem}, {'title':  url}, img = 'http://i2.wp.com/musicyouneed.net/wp-content/uploads/2013/03/MYN-The-Underground.jpg?resize=290%2C290', fanart = 'https://lh6.ggpht.com/clu-N-hZ_xyCgGm5JwtVLRXX59eSMfl59RXf9MQd23lZVvQgoa2aQNdGHU-eEfaYZMeO=h900')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#------------------------------------------------------------------------------- ez -------------------------------------------------------------------------------------#
+
+def GetLinks14(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('<a href=".+?" data-file="(.+?)" class=".+?" title=".+?" rel="nofollow">(.+?)</a>').findall(content)
+        listitem = GetMediaInfo(content)
+        for url, name in match:
+                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://www.thewire.co.uk/' + url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.hcmf.co.uk/uploads/images/197wirelogoblockurlcopy.jpg?1253097636', fanart = 'http://alicepettey.com/wp-content/uploads/2012/03/The_Wire_Logo.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
 ######################################################################### clean ###########################################################################################
 
 def CLEAN(string):
@@ -412,6 +453,8 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetLinks12', 'url': BASE_URL12 + '/'}, {'title':  '[COLOR green][B]Shitmixtapes [/COLOR](Archive)[/B]'}, img = 'http://www.shitmixtapes.com/storage/shitmixtapes-white.jpg?__SQUARESPACE_CACHEVERSION=1310920306487', fanart = 'http://farm3.staticflickr.com/2814/11285947406_690a1a7a92_z.jpg')
         addon.add_directory({'mode': 'GetLinks6', 'url': BASE_URL6 + '/'}, {'title':  '[COLOR mediumseagreen][B]RatPack [/COLOR](Podcasts)[/B]'}, img = 'http://strictlyoldskool.net/wp-content/gallery/ratpack/ratpack-pic-1.jpg', fanart = 'http://static.inlog.org/wp-content/uploads/2013/04/front-590x390.jpg')
         addon.add_directory({'mode': 'GetLinks10', 'url': BASE_URL10 + '/showthread.php?3752-mal-was-anderes-oldskool-history-of-edm-mix'}, {'title':  '[COLOR mediumseagreen][B]In the beginning there was Jack[/COLOR] (podcast)[/B]'}, img = 'http://sd.keepcalm-o-matic.co.uk/i/in-the-beginning-there-was-jack-9.png', fanart = 'http://galiofficial.com/wp-content/uploads/2013/03/house-music-design-nation.jpg')
+        addon.add_directory({'mode': 'GetLinks5', 'url': BASE_URL5 + '/'}, {'title':  '[COLOR turquoise][B]The beat sanctuary [/COLOR] (oldskool H&G)[/B]   [COLOR red] *[/COLOR]'}, img = 'http://i2.wp.com/musicyouneed.net/wp-content/uploads/2013/03/MYN-The-Underground.jpg?resize=290%2C290', fanart = 'http://www.crownbc.com/wp-content/uploads/2013/06/Bunker-Rave.jpg')
+        addon.add_directory({'mode': 'GetLinks14', 'url': BASE_URL14 + 'audio/tracks/a-brief-history-of-grime-tapes'}, {'title':  '[COLOR turquoise][B]The wire [/COLOR] (oldskool H&G)[/B]'}, img = 'http://www.hcmf.co.uk/uploads/images/197wirelogoblockurlcopy.jpg?1253097636', fanart = 'http://alicepettey.com/wp-content/uploads/2012/03/The_Wire_Logo.jpg')
         xbmcplugin.endOfDirectory(addon_handle)
 
 ################################################################################# mode #########################################################################################
@@ -434,10 +477,10 @@ elif mode == 'GetLinks4a':
 	GetLinks4a(url)
 elif mode == 'GetLinks4b':
 	GetLinks4b(url)
-elif mode == 'GetTitles': 
-	GetTitles(section, url, startPage, numOfPages)
 elif mode == 'GetLinks5':
 	GetLinks5(url)
+elif mode == 'GetLinks5a':
+	GetLinks5a(url)
 elif mode == 'GetLinks6':
 	GetLinks6(url)
 elif mode == 'GetLinks6a':
@@ -468,5 +511,7 @@ elif mode == 'GetLinks13b':
 	GetLinks13b(url)
 elif mode == 'GetLinks13c':
 	GetLinks13c(url)
+elif mode == 'GetLinks14':
+	GetLinks14(url)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
