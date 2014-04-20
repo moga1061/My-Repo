@@ -1,6 +1,5 @@
 import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 import re, string, sys, os
-import urlresolver
 import HTMLParser
 from TheYid.common.addon import Addon
 from TheYid.common.net import Net
@@ -55,40 +54,37 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
 
 ############################################################################## Get Links ###############################################################################
 
-def GetLinks(section, url): # Get Links
+def GetLinks(url):                                            
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
         content = html
-        match = re.compile('<li><a href="(.+?)">.+?</a></li>').findall(content)
+        match = re.compile("Watch=window.+?'(.+?)'").findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
-                host = GetDomain(url)
-                if 'Unknown' in host:
-                                continue
-                print '*****************************' + host + ' : ' + url
-                if urlresolver.HostedMediaFile(url= url):
-                        print 'in GetLinks if loop'
-                        title = url.rpartition('/')
-                        title = title[2].replace('.html', '')
-                        title = title.replace('.htm', '')
-                        host = host.replace('youtube.com','[COLOR lime]Movie Trailer[/COLOR]')
-                        host = host.replace('youtu.be','[COLOR lime]Movie Trailer[/COLOR]')
-                        host = host.replace('.net','')
-                        host = host.replace('.com','')
-                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetLinks2', 'url': url, 'listitem': listitem}, {'title':  'V-vids.com'}, img=IconPath + 'vids.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def GetLinks2(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        content = html
+        match = re.compile('onclick=".+?" href="(.+?)" title=".+?"').findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match:
+                addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  'load stream'}, img=IconPath + 'watch.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ############################################################################## PlayVideo ###############################################################################
 
 def PlayVideo(url, listitem):
-    try:
-        print 'in PlayVideo %s' % url
-        stream_url = urlresolver.HostedMediaFile(url).resolve()
-        xbmc.Player().play(stream_url)
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR slategray][B]^ Press back ^[/B] [/COLOR]'},'','')
-    except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry Link may have been removed ![/B][/COLOR],[COLOR lime][B]Please try a different link/host !![/B][/COLOR],7000,"")")
+        addon_handle = int(sys.argv[1])
+        xbmcplugin.setContent(addon_handle, 'video')
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]PLAY STREAM[/B][/COLOR]  >> ', iconImage='https://lh5.googleusercontent.com/-p2h0tx7Trgs/Uzu-3kxzKuI/AAAAAAAAOsU/sVJKqxSMY-4/s319/watch2.jpg', thumbnailImage= 'http://s29.postimg.org/8z8jd5x5j/logo1.png')
+        li.setProperty('fanart_image', '')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+        xbmcplugin.endOfDirectory(addon_handle)
 
 ########################################################################################################################################################################
 
@@ -134,7 +130,6 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/3-d-movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lime]Latest 3D movies [/COLOR]>>'}, img=IconPath + '3d1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetSearchQuery9'},  {'title':  '[COLOR green]Search[/COLOR]'}, img=IconPath + 'searchse.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolvere.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR pink][B]PLEASE CLICK HERE FOR INFO ON TheYids REPO[/B][/COLOR] >>'}, img=IconPath + 'helps.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR gold][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR aqua][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'he.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -232,7 +227,9 @@ elif mode == 'GenreMenu':
 elif mode == 'GetTitles': 
 	GetTitles(section, url, startPage, numOfPages)
 elif mode == 'GetLinks':
-	GetLinks(section, url)
+	GetLinks(url)
+elif mode == 'GetLinks2':
+	GetLinks2(url)
 elif mode == 'GetSearchQuery9':
 	GetSearchQuery9()
 elif mode == 'Search9':
