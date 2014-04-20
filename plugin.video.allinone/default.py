@@ -192,7 +192,7 @@ def GetTitles9(section, url, startPage= '1', numOfPages= '1'): #oneclickmoviez
                         html = net.http_GET(pageUrl).content                     
                 match = re.compile('<img class="img-preview spec-border"  src="http://www.oneclickmoviez.ag/templates/svarog/timthumb.php\?src=(.+?)&amp;.+?" alt=" ".+?<a class="link" href="(.+?)" title="(.+?)">',re.DOTALL).findall(html)
                 if not match:
-                    match = re.compile('<img class="img-preview spec-border show-thumbnail"  src="http://www.oneclickmoviez.ag/templates/svarog/timthumb.php\?src=(.+?)&amp;.+?" alt=" ".+?<a class="link" href="(.+?)" title="(.+?)">',re.DOTALL).findall(html)
+                    match = re.compile('<div class="subtitle borderbottom"><h4 class="(.+?)">(.+?)</h4>',re.DOTALL).findall(html)
                 for img, movieUrl, name in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
                 addon.add_directory({'mode': 'GetTitles9', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png') 
@@ -671,13 +671,27 @@ def GetLinks7(section, url): # mvl
         listitem = GetMediaInfo(html)
         content = html
         match = re.compile('<li><a href="(.+?)">.+?</a></li>').findall(content)
+        match1 = re.compile("Watch=window.+?'(.+?)'").findall(content)
         listitem = GetMediaInfo(content)
+        for url in match1:
+                addon.add_directory({'mode': 'GetLinks9', 'url': url, 'listitem': listitem}, {'title':  'V-vids.com'}, img=IconPath + 'vids.png', fanart=FanartPath + 'fanart.png')
         for url in match:
                 host = GetDomain(url)
                 if urlresolver.HostedMediaFile(url= url):
                         host = host.replace('youtube.com','[COLOR lime]Movie Trailer[/COLOR]')
                         host = host.replace('youtu.be','[COLOR lime]Movie Trailer[/COLOR]')
                         addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def GetLinks9(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        content = html
+        match = re.compile('onclick=".+?" href="(.+?)" title=".+?"').findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match:
+                addon.add_directory({'mode': 'PlayVideo1', 'url': url, 'listitem': listitem}, {'title':  'load stream'}, img=IconPath + 'watch.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #--------------------------------------------------------------------------#
@@ -706,6 +720,16 @@ def PlayVideo(url, listitem):
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR slategray][B]^ Press back ^[/B] [/COLOR]'},'','')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry Link may have been removed ![/B][/COLOR],[COLOR lime][B]Please try a different link/host !![/B][/COLOR],7000,"")")
+
+#-------myvideolinks------------#
+
+def PlayVideo1(url, listitem):
+        addon_handle = int(sys.argv[1])
+        xbmcplugin.setContent(addon_handle, 'video')
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]PLAY STREAM[/B][/COLOR]  >> ', iconImage='https://lh5.googleusercontent.com/-p2h0tx7Trgs/Uzu-3kxzKuI/AAAAAAAAOsU/sVJKqxSMY-4/s319/watch2.jpg', thumbnailImage= 'http://s29.postimg.org/8z8jd5x5j/logo1.png')
+        li.setProperty('fanart_image', '')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+        xbmcplugin.endOfDirectory(addon_handle)
 
 #--------------------------------------------------------------------------------------------------#
 
@@ -2183,6 +2207,8 @@ elif mode == 'GetLinks7':
 	GetLinks7(section, url)
 elif mode == 'GetLinks8':
 	GetLinks8(section, url)
+elif mode == 'GetLinks9':
+	GetLinks9(url)
 elif mode == 'GetSearchQuery9':
 	GetSearchQuery9()
 elif mode == 'Search9':
@@ -2212,7 +2238,9 @@ elif mode == 'GetSearchQuery6':
 elif mode == 'Search6':
 	Search6(query)
 elif mode == 'PlayVideo':
-	PlayVideo(url, listitem)	
+	PlayVideo(url, listitem)
+elif mode == 'PlayVideo1':
+	PlayVideo1(url, listitem)	
 elif mode == 'ResolverSettings':
         urlresolver.display_settings()
 elif mode == 'SearchMenu':
