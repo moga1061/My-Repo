@@ -44,6 +44,8 @@ BASE_URL12 = 'http://www.shitmixtapes.com/'
 BASE_URL13 = 'http://www.rave-archive.com/'
 BASE_URL14 = 'http://www.thewire.co.uk/'
 BASE_URL15 = 'https://raw.githubusercontent.com/TheYid/yidpics/master'
+BASE_URL17 = 'https://archive.org/'
+BASE_URL18 = 'http://torontoravemixtapearchive.com/'
 
 net = Net()
 addon = Addon('plugin.audio.raveplayer', sys.argv)
@@ -154,7 +156,7 @@ def GetLinks4b(url):
         match = re.compile('<a href="http://deepinside.demodulated.com/(.+?)">.+?</a>').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
-                addon.add_directory({'mode': 'PlayVideo', 'url':  'http://deepinside.demodulated.com/' + url, 'listitem': listitem},  {'title':  url}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
+                addon.add_directory({'mode': 'PlayVideo', 'url':  'http://deepinside.demodulated.com/' + url, 'listitem': listitem},  {'title':  url.replace('%20', ' ').replace('_', ' ')}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------------ ratpack ---------------------------------------------------------------------------------#
@@ -205,7 +207,7 @@ def GetLinks9(url):
         match = re.compile('<a href="http://www.terraincognita.co.uk/pirate_radio/(.+?)">.+?<').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
-                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://www.terraincognita.co.uk/pirate_radio/' + url, 'listitem': listitem}, {'title':  url}, img = 'http://static.tvtropes.org/pmwiki/pub/images/Pirate_radio_station_5417.jpg', fanart = 'http://s29.postimg.org/xwiy1he6f/fanart.jpg')
+                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://www.terraincognita.co.uk/pirate_radio/' + url, 'listitem': listitem}, {'title':  url.replace('%20', ' ').replace('_', ' ')}, img = 'http://static.tvtropes.org/pmwiki/pub/images/Pirate_radio_station_5417.jpg', fanart = 'http://s29.postimg.org/xwiy1he6f/fanart.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------------ drumandbass --------------------------------------------------------------------------------#
@@ -271,7 +273,7 @@ def GetLinks12(url):
         match = re.compile('<li><a href="(.+?)">(.+?)</a></li>').findall(content)
         listitem = GetMediaInfo(content)
         for url, name in match:
-                addon.add_directory({'mode': 'GetLinks12a', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.shitmixtapes.com/storage/shitmixtapes1024x600_netbook.jpg?__SQUARESPACE_CACHEVERSION=1310509037820', fanart = 'http://www.keepingtheravealive.com/images/KEEPING-THE-RAVE-ALIVE_01.jpg')
+                addon.add_directory({'mode': 'GetLinks12a', 'url': 'http://www.shitmixtapes.com/' + url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.shitmixtapes.com/storage/shitmixtapes1024x600_netbook.jpg?__SQUARESPACE_CACHEVERSION=1310509037820', fanart = 'http://www.keepingtheravealive.com/images/KEEPING-THE-RAVE-ALIVE_01.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def GetLinks12a(url):                                            
@@ -280,9 +282,10 @@ def GetLinks12a(url):
         listitem = GetMediaInfo(html)
         CLEAN(html)
         content = html
-        match = re.compile('href="(.+?)" target="_blank">(.+?)<').findall(content)
+        match = re.compile('<a href="(.+?)" target="_blank">(.+?)</a></strong></p>').findall(content)
+        match1 = re.compile('<p style="text-align: center;"><a href="(.+?)" target="_blank"><strong>(.+?)</strong></a').findall(content)
         listitem = GetMediaInfo(content)
-        for url, name in match:
+        for url, name in match + match1:
                 addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.shitmixtapes.com/storage/shitmixtapes1024x600_netbook.jpg?__SQUARESPACE_CACHEVERSION=1310509037820', fanart = 'http://www.keepingtheravealive.com/images/KEEPING-THE-RAVE-ALIVE_01.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -323,11 +326,11 @@ def GetLinks13b(url):
         match3 = re.compile('<a href="http://ravearchive.mediafire.com/file/(.+?)">.+?</a>').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
-                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://ravearchive.mediafire.com/file/' + url, 'listitem': listitem}, {'title':  url}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://aerosoul.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/j/u/junglist_logo_on_dark_navy_jm_hoodie.png')
+                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://ravearchive.mediafire.com/file/' + url, 'listitem': listitem}, {'title':  url.replace('_', ' ').replace('/', ' ').replace('%26', ' ')}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://aerosoul.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/j/u/junglist_logo_on_dark_navy_jm_hoodie.png')
         for url in match2:
-                addon.add_directory({'mode': 'GetLinks13c', 'url': 'http://ravearchive.mediafire.com/listen/' + url, 'listitem': listitem}, {'title':  url}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://aerosoul.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/j/u/junglist_logo_on_dark_navy_jm_hoodie.png')
+                addon.add_directory({'mode': 'GetLinks13c', 'url': 'http://ravearchive.mediafire.com/listen/' + url, 'listitem': listitem}, {'title':  url.replace('_', ' ').replace('/', ' ').replace('%26', ' ')}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://aerosoul.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/j/u/junglist_logo_on_dark_navy_jm_hoodie.png')
         for url in match3:
-                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://ravearchive.mediafire.com/file/' + url, 'listitem': listitem}, {'title':  url}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://aerosoul.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/j/u/junglist_logo_on_dark_navy_jm_hoodie.png')
+                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://ravearchive.mediafire.com/file/' + url, 'listitem': listitem}, {'title':  url.replace('_', ' ').replace('/', ' ').replace('%26', ' ')}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://aerosoul.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/j/u/junglist_logo_on_dark_navy_jm_hoodie.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def GetLinks13c(url):                                            
@@ -341,7 +344,6 @@ def GetLinks13c(url):
         for url in match:
                 addon.add_directory({'mode': 'PlayVideo', 'url': 'https://www.mediafire.com/' + url, 'listitem': listitem}, {'title':  '[COLOR blue][B]LOAD STREAM[/B][/COLOR] ' + url}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://junglejunglesound.files.wordpress.com/2013/04/jungle_logo_net.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
 
 #------------------------------------------------------------------------------- h & G -------------------------------------------------------------------------------------#
 
@@ -408,6 +410,55 @@ def GetLinks16(url):
                 addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://hackneyhistory.files.wordpress.com/2013/01/piratees.jpg' , fanart = 'http://s29.postimg.org/ipshtqvx3/fanart.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+#------------------------------------------------------------------------------- tjBukemMixtapesCollection -------------------------------------------------------------------------------------#
+
+def GetLinks17(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('<a href="/download/175bpm.plLtjBukemMixtapesCollection/(.+?)mp3">').findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match:
+                addon.add_directory({'mode': 'PlayVideo', 'url': 'https://archive.org/download/175bpm.plLtjBukemMixtapesCollection/' + url + 'mp3', 'listitem': listitem}, {'title':  url}, img = 'http://www.djsets.co.uk/Compilations/ltjbukem/ltj-bukem.jpg', fanart = 'http://musicwithsubstance.files.wordpress.com/2009/12/goodlooking.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#------------------------------------------------------------------------------- mix -------------------------------------------------------------------------------------#
+
+def GetLinks18(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('<li><a href="(.+?)"><span>(Jungle / Hardcore)</span></a></li>').findall(content)
+        match1 = re.compile('<li><a href="(.+?)"><span>(House / Techno)</span></a></li>').findall(content)
+        match2 = re.compile('<li><a href="(.+?)"><span>(Studio)</span></a></li>').findall(content)
+        match3 = re.compile('<li><a href="(.+?)"><span>(X-Static)</span></a></li>').findall(content)
+        listitem = GetMediaInfo(content)
+        for url, name in match + match1 + match2 + match3:
+                addon.add_directory({'mode': 'GetLinks18a', 'url': 'http://torontoravemixtapearchive.com/' + url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.torontoravemixtapearchive.com/images/promo/trma.jpg', fanart = 'http://dropthebeatz.com/wp-content/uploads/2013/08/EDMcrowd.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def GetLinks18a(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('>.+?<a href="http://www.torontoravemixtapearchive.com/files/(.+?)">').findall(content)
+        match1 = re.compile('>.+?-.+?- <a href="http://www.torontoravemixtapearchive.com/files/(.+?)">').findall(content)
+        match2 = re.compile('>Download </a><br />\s*?<a href="http://www.torontoravemixtapearchive.com/files/(.+?)">').findall(content)
+        match4 = re.compile('N.+?<a href="http://www.torontoravemixtapearchive.com/files/(.+?)">').findall(content)
+        match3 = re.compile('Andy.+?<a href="http://www.torontoravemixtapearchive.com/files/(.+?)">').findall(content)
+        match5 = re.compile('k.+?<a href="http://www.torontoravemixtapearchive.com/files/(.+?)">').findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match + match1 + match2 + match3 + match4 + match5:
+                url = url.replace(' ','%20')
+                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://www.torontoravemixtapearchive.com/files/' + url, 'listitem': listitem}, {'title': url.replace('%20', ' ').replace('mixtapes/', ' ').replace('%', ' ').replace('x-static/', ' ')}, img = 'http://www.torontoravemixtapearchive.com/images/promo/trma.jpg', fanart = 'http://b.vimeocdn.com/ts/437/750/437750726_1280.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 ######################################################################### clean ###########################################################################################
 
 def CLEAN(string):
@@ -468,21 +519,24 @@ def MainMenu():    #homescreen
         li.setProperty('fanart_image', 'http://s12.postimg.org/rkd8gen7h/fanart.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
-        addon.add_directory({'mode': 'GetLinks15', 'url': BASE_URL15 + '/dnb.txt'}, {'title':  '[COLOR gold][B]Rave player Specials [/COLOR] (Just jungle)[/B]'}, img = 'http://s28.postimg.org/uwfyuzepp/cassettetdk.jpg', fanart = 'http://amgroup.com/news/wp-content/uploads/2013/04/IMG_4470-Custom.jpg')
+        addon.add_directory({'mode': 'GetLinks15', 'url': BASE_URL15 + '/dnb.txt'}, {'title':  '[COLOR gold][B]Rave player Specials [/COLOR] (Rave Dj Sets)[/B]'}, img = 'http://s28.postimg.org/uwfyuzepp/cassettetdk.jpg', fanart = 'http://amgroup.com/news/wp-content/uploads/2013/04/IMG_4470-Custom.jpg')
         addon.add_directory({'mode': 'GetLinks16', 'url': BASE_URL15 + '/radioshows.txt'}, {'title':  '[COLOR gold][B]Rave player Specials [/COLOR] (the lost tapes)[/B]'}, img = 'http://s12.postimg.org/3szbuobot/icon.png', fanart = 'http://4.bp.blogspot.com/_8V97VYqI3Po/S7Md-Sd5OcI/AAAAAAAABGk/haepgezjFqw/s1600/24897_410278471302_133985331302_5619646_2569052_n.jpg')
         addon.add_directory({'mode': 'GetLinks', 'url': BASE_URL + '/'}, {'title':  '[COLOR green][B]One In The Jungle [/COLOR](Archive)[/B]'}, img = 'http://www.oneinthejungle.net/images/home/fb.png', fanart = 'http://img193.imageshack.us/img193/4990/dsc09956tx.jpg')
         addon.add_directory({'mode': 'GetLinks3', 'url': BASE_URL3 + '/'}, {'title':  '[COLOR green][B]Rave tape packs [/COLOR](Archive)[/B]'}, img = 'http://fc09.deviantart.net/fs25/f/2008/111/a/8/Cassette_tape_by_Quick_Stop.png', fanart = 'http://s27.postimg.org/3qdp1snnn/hhhgggg.jpg')
         addon.add_directory({'mode': 'GetLinks4', 'url': BASE_URL4 + '/'}, {'title':  '[COLOR green][B]Deepinside the oldskool [/COLOR](Archive)[/B]'}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
         addon.add_directory({'mode': 'GetLinks13', 'url': BASE_URL13 + '/'}, {'title':  '[COLOR green][B]Rave-archive [/COLOR](Archive)[/B]'}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://s11.postimg.org/vhd2897k3/fanart.jpg')
-        addon.add_directory({'mode': 'GetLinks2', 'url': BASE_URL2 + '/soundmanager2/demo/page-player/20bensons.html'}, {'title':  '[COLOR green][B]20bensons rave [/COLOR](Archive)[/B]'}, img = 'http://www.zigsam.at/l07/B_Cig/BensonHedgesSpeciaF-20fJP197.jpg', fanart = 'http://torontoravemixtapearchive.com/images/promo/DavidRyanTapes.jpg')
+        addon.add_directory({'mode': 'GetLinks18', 'url': BASE_URL18 + '/'}, {'title':  '[COLOR green][B]Toronto rave mixtape [/COLOR](Archive)[/B]   [COLOR red] *[/COLOR]'}, img = 'http://www.torontoravemixtapearchive.com/images/promo/trma.jpg', fanart = 'http://torontoravemixtapearchive.com/images/promo/DavidRyanTapes.jpg')
+        addon.add_directory({'mode': 'GetLinks2', 'url': BASE_URL2 + '/soundmanager2/demo/page-player/20bensons.html'}, {'title':  '[COLOR green][B]20bensons rave [/COLOR](Archive)[/B]'}, img = 'http://www.zigsam.at/l07/B_Cig/BensonHedgesSpeciaF-20fJP197.jpg', fanart = 'http://bigghostlimited.com/wp-content/uploads/2013/09/MIxtape.gif')
         addon.add_directory({'mode': 'GetLinks7', 'url': BASE_URL7 + '/category_Event_Mixes_1.htm'}, {'title':  '[COLOR green][B]UK raves [/COLOR](Archive)[/B]'}, img = 'https://pbs.twimg.com/profile_images/3337802286/571a3ecdec1efb53e30cf19c00f45212.jpeg', fanart = 'http://www.fantazia.org.uk/Event%20info/Pics/11fantaziasummertime.jpg')
         addon.add_directory({'mode': 'GetLinks11', 'url': BASE_URL11 + '/'}, {'title':  '[COLOR green][B]Demodulated mixtapes [/COLOR](Archive)[/B]'}, img = 'http://urbanlegendkampala.com/wp-content/uploads/2013/11/Mixtape-Image.jpg', fanart = 'http://bigghostlimited.com/wp-content/uploads/2013/09/MIxtape.gif')
         addon.add_directory({'mode': 'GetLinks9', 'url': BASE_URL9 + '/2010/10/dusty-tapes-london-pirates-1991-1995.html'}, {'title':  '[COLOR green][B]Oldskool Pirate radio [/COLOR](Archive)[/B]'}, img = 'http://3.bp.blogspot.com/-iDTTgsZBiBA/TwHRQBfrEKI/AAAAAAAAATs/8lTy5Va4_is/s1600/MIKUS.gif', fanart = 'http://s23.postimg.org/4sn8qcp8b/fanart.jpg')
         addon.add_directory({'mode': 'GetLinks12', 'url': BASE_URL12 + '/'}, {'title':  '[COLOR green][B]Shitmixtapes [/COLOR](Archive)[/B]'}, img = 'http://www.shitmixtapes.com/storage/shitmixtapes-white.jpg?__SQUARESPACE_CACHEVERSION=1310920306487', fanart = 'http://farm3.staticflickr.com/2814/11285947406_690a1a7a92_z.jpg')
+        addon.add_directory({'mode': 'GetLinks17', 'url': BASE_URL17 + '/details/175bpm.plLtjBukemMixtapesCollection'}, {'title':  '[COLOR mediumseagreen][B]L T J Bukem [/COLOR](Mixtapes Collection)[/B]'}, img = 'http://i1.wp.com/www.mostlyjunkfood.com/treats/2013/05/image002.jpg', fanart = 'http://www.htbackdrops.org/v2/albums/userpics/10257/orig_LTJ_Bukem.jpg')
         addon.add_directory({'mode': 'GetLinks6', 'url': BASE_URL6 + '/'}, {'title':  '[COLOR mediumseagreen][B]RatPack [/COLOR](Podcasts)[/B]'}, img = 'http://strictlyoldskool.net/wp-content/gallery/ratpack/ratpack-pic-1.jpg', fanart = 'http://static.inlog.org/wp-content/uploads/2013/04/front-590x390.jpg')
         addon.add_directory({'mode': 'GetLinks10', 'url': BASE_URL10 + '/showthread.php?3752-mal-was-anderes-oldskool-history-of-edm-mix'}, {'title':  '[COLOR mediumseagreen][B]In the beginning there was Jack[/COLOR] (podcast)[/B]'}, img = 'http://sd.keepcalm-o-matic.co.uk/i/in-the-beginning-there-was-jack-9.png', fanart = 'http://galiofficial.com/wp-content/uploads/2013/03/house-music-design-nation.jpg')
         addon.add_directory({'mode': 'GetLinks5', 'url': BASE_URL5 + '/'}, {'title':  '[COLOR turquoise][B]The beat sanctuary [/COLOR] (oldskool H&G)[/B]   [COLOR red] *[/COLOR]'}, img = 'http://i2.wp.com/musicyouneed.net/wp-content/uploads/2013/03/MYN-The-Underground.jpg?resize=290%2C290', fanart = 'http://www.crownbc.com/wp-content/uploads/2013/06/Bunker-Rave.jpg')
         addon.add_directory({'mode': 'GetLinks14', 'url': BASE_URL14 + 'audio/tracks/a-brief-history-of-grime-tapes'}, {'title':  '[COLOR turquoise][B]The wire [/COLOR] (oldskool H&G)[/B]'}, img = 'http://www.hcmf.co.uk/uploads/images/197wirelogoblockurlcopy.jpg?1253097636', fanart = 'http://alicepettey.com/wp-content/uploads/2012/03/The_Wire_Logo.jpg')
+        #addon.add_directory({'mode': 'GetLinks19', 'url': BASE_URL19 + ''}, {'title':  '[COLOR green][B] [/COLOR]()[/B]'}, img = '', fanart = '')
         xbmcplugin.endOfDirectory(addon_handle)
 
 ################################################################################# mode #########################################################################################
@@ -545,5 +599,11 @@ elif mode == 'GetLinks15':
 	GetLinks15(url)
 elif mode == 'GetLinks16':
 	GetLinks16(url)
+elif mode == 'GetLinks17':
+	GetLinks17(url)
+elif mode == 'GetLinks18':
+	GetLinks18(url)
+elif mode == 'GetLinks18a':
+	GetLinks18a(url)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
