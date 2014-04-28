@@ -55,7 +55,7 @@
 	<addon
         id="plugin.audio.raveplayer"
         name="Rave player"
-        version="1.1.4"
+        version="1.1.5"
         provider-name="@TheYid009">
 		<requires>
 			<import addon="xbmc.python"             	version="2.1.0"/>
@@ -67,7 +67,7 @@
 		</extension>
 		<extension point="xbmc.addon.metadata">
 			<summary lang="en">Stream 1000s and 1000s of Dj sets, mixtapes and ravepacks in one place so OiOi lets get xbmc raving to the sound of the oldskool</summary>
-			<description lang="en">Stream oldskool rave tape packs oldskool pirate radio sets podcasts mixtapes live oldskool radio,[CR] Acid house, house, hardcore, jungle and drum n bass and much more for your raving needs. [CR][COLOR red] * [/COLOR]= work still to be done. [CR] This [COLOR lime]SUPER ADDON[/COLOR] is brought to you by [COLOR blue]TheYids REPO[/COLOR]</description>
+			<description lang="en">Stream oldskool rave tape packs oldskool pirate radio sets podcasts mixtapes and live oldskool radio,[CR] Acid house, house, hardcore, jungle and drum n bass and much more for your raving needs. [CR][COLOR red] * [/COLOR]= work still to be done. [CR] This [COLOR lime]SUPER ADDON[/COLOR] is brought to you by [COLOR blue]TheYids REPO[/COLOR]</description>
 			<disclaimer lang="en">The author does not host or distribute any of the content displayed by this addon</disclaimer>
 			<platform>all</platform>
 			<license>GNU GENERAL PUBLIC LICENSE. Version 3, June 2007</license>
