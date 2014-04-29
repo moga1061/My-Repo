@@ -55,7 +55,7 @@
 	<addon
         id="plugin.audio.raveplayer"
         name="Rave player"
-        version="1.1.5"
+        version="1.1.6"
         provider-name="@TheYid009">
 		<requires>
 			<import addon="xbmc.python"             	version="2.1.0"/>
@@ -264,7 +264,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.oneclickwatch" version="0.5.5" name="One Click Watch" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.oneclickwatch" version="0.5.6" name="One Click Watch" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.t0mm0.common" version="2.1.1"/>
@@ -281,7 +281,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.releaseBB" version="0.4.4" name="Release[COLOR orange][B]BB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.releaseBB" version="0.4.5" name="Release[COLOR orange][B]BB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.t0mm0.common" version="2.1.1"/>

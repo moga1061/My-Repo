@@ -76,9 +76,15 @@ def GetLinks(section, url):
 ############################################################################# Play Video #####################################################################################
 
 def PlayVideo(url, listitem):
+    try:
         print 'in PlayVideo %s' % url
         stream_url = urlresolver.HostedMediaFile(url).resolve()
         xbmc.Player().play(stream_url)
+        xbmc.sleep(500)
+        addon.add_directory({'mode': 'GetLinks'}, {'title':  '[COLOR slategray][B]^^^ Press back ^^^[/B] [/COLOR]'},'','')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry Link may have been removed ![/B][/COLOR],[COLOR lime][B]Please try a different link/host !![/B][/COLOR],7000,"")")
+
 
 def GetDomain(url):
         tmp = re.compile('//(.+?)/').findall(url)
@@ -158,3 +164,4 @@ elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)	
 elif mode == 'ResolverSettings':
         urlresolver.display_settings()
+xbmcplugin.endOfDirectory(int(sys.argv[1]))

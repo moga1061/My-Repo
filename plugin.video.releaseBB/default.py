@@ -57,11 +57,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                 for movieUrl, name, img in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR orange]Next...[/COLOR]'}, img=IconPath + 'next.png')
-        
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
-
-
 
 def GetLinks(section, url): # Get Links
         print 'GETLINKS FROM URL: '+url
@@ -135,10 +131,14 @@ def GetLinks(section, url): # Get Links
 
 
 def PlayVideo(url, listitem):
+    try:
         print 'in PlayVideo %s' % url
         stream_url = urlresolver.HostedMediaFile(url).resolve()
         xbmc.Player().play(stream_url)
-
+        xbmc.sleep(250)
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR slategray][B]^^^ Press back ^^^[/B] [/COLOR]'},'','')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry Link may have been removed ![/B][/COLOR],[COLOR lime][B]Please try a different link/host !![/B][/COLOR],7000,"")")
 
 def GetDomain(url):
         tmp = re.compile('//(.+?)/').findall(url)
@@ -146,7 +146,6 @@ def GetDomain(url):
         if len(tmp) > 0 :
             domain = tmp[0].replace('www.', '')
         return domain
-
 
 def GetMediaInfo(html):
         listitem = xbmcgui.ListItem()
@@ -221,3 +220,4 @@ elif mode == 'ResolverSettings':
         urlresolver.display_settings()
 elif mode == 'Categories':
         Categories(section)
+xbmcplugin.endOfDirectory(int(sys.argv[1]))

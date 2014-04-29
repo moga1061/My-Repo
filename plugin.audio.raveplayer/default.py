@@ -49,6 +49,9 @@ BASE_URL18 = 'http://torontoravemixtapearchive.com/'
 BASE_URL19 = 'http://jungletechno.tumblr.com/'
 BASE_URL20 = 'http://www.dj-jedi.com/'
 BASE_URL21 = 'http://175bpm.pl/'
+BASE_URL22 = 'http://www.john-b.com/'
+BASE_URL23 = 'http://dnbforum.com/showthread.php/'
+BASE_URL24 = 'http://djtrudos.podomatic.com/'
 
 net = Net()
 addon = Addon('plugin.audio.raveplayer', sys.argv)
@@ -501,7 +504,7 @@ def GetLinks19a(url):
         content = html
         match = re.compile('kNO = "http://download(.+?)"').findall(content)
         for url in match:
-                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://download' + url, 'listitem': listitem}, {'title':  url.replace('_', ' ')}, img = 'https://pbs.twimg.com/profile_images/1430963248/Hardcore_Jungle_Techno_-_001.jpg', fanart = 'http://i1.ytimg.com/vi/Busq9tROYlo/maxresdefault.jpg')
+                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://download' + url, 'listitem': listitem}, {'title':  url.replace('_', ' ')}, img = 'http://wallpoper.com/images/00/06/93/69/turntable_00069369.jpg', fanart = 'http://i1.ytimg.com/vi/Busq9tROYlo/maxresdefault.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------------- dj jedi -------------------------------------------------------------------------------------#
@@ -552,6 +555,54 @@ def GetLinks21b(url):
         for url, name in match:
                 addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://i1.sndcdn.com/artworks-000040491089-ibo2zb-crop.jpg?164b459', fanart = 'http://i1.ytimg.com/vi/eY2ceXfW1FU/maxresdefault.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#------------------------------------------------------------------------------- john-b -------------------------------------------------------------------------------------#
+
+def GetLinks22(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        content = html
+        match = re.compile('<p>LINK FOR DIRECT DOWNLOAD OF MP3: <a href="http://podcast.johnbpodcast.com/content/(.+?)"').findall(content)
+        for url in match:
+                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://podcast.johnbpodcast.com/content/' + url, 'listitem': listitem}, {'title':  url}, img = 'http://beta-recordings.com/images/Blog.jpg', fanart = 'http://img.nnov.org/data/myupload/1/75/1075294/4724778-img-6211.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#------------------------------------------------------------------------------- dj ez -------------------------------------------------------------------------------------#
+
+def GetLinks23(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('(.+?)<br />\s*?<a href="(.+?)" target="_blank">.+?</a><br />').findall(content)
+        for name, url in match:
+                addon.add_directory({'mode': 'GetLinks19a', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://3.bp.blogspot.com/-jRPq1Szx0Js/TjaX0R0DFTI/AAAAAAAAANE/6ds6AbbuD2s/s320/dj+ez+photo', fanart = 'http://turksandunderdog.com/wp-content/uploads/2014/02/DJ-EZ-turks-and-underdog.jpeg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#------------------------------------------------------------------------------- hng -------------------------------------------------------------------------------------#
+
+def GetLinks24(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        content = html
+        match = re.compile('<a href="(.+?)" class="podcast-title header2" target="_blank" title="Play (.+?)</a>').findall(content)
+        for url, name in match:
+                addon.add_directory({'mode': 'GetLinks24a', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://assets.podomatic.net/ts/cf/4b/3d/djtrudos/1400x1400_9185047.jpg', fanart = 'http://i1.ytimg.com/vi/LxXDk61hrcY/hqdefault.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def GetLinks24a(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        content = html
+        match = re.compile('<a href="(.+?)">Download episode</a>').findall(content)
+        for url in match:
+                addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  url}, img = 'http://assets.podomatic.net/ts/cf/4b/3d/djtrudos/1400x1400_9185047.jpg', fanart = 'http://i1.ytimg.com/vi/LxXDk61hrcY/hqdefault.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 
 ######################################################################### clean ###########################################################################################
 
@@ -631,10 +682,12 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetLinks17a', 'url': BASE_URL17 + '/details/175bpm.pl-HelterSkelterCollection'}, {'title':  '[COLOR mediumseagreen][B]Helter Skelter [/COLOR] (Mixtapes Collection)[/B]'}, img = 'http://rave.space.net.au/graphics/hskelter.jpg', fanart = 'http://www.fantazia.org.uk/flyerlibrary/images/HelterSkelter_170993_f.jpg')
         addon.add_directory({'mode': 'GetLinks20', 'url': BASE_URL20 + 'dj_jedi_audio.php'}, {'title':  '[COLOR mediumseagreen][B]Dj jedi [/COLOR](Mixtapes Collection)[/B]'}, img = 'http://www.dj-jedi.com/images/dj_jedi_logo.gif', fanart = 'http://archive-media.nyafuu.org/wg/image/1367/08/1367087842578.png')
         addon.add_directory({'mode': 'GetLinks6', 'url': BASE_URL6 + '/'}, {'title':  '[COLOR chartreuse][B]RatPack [/COLOR](Podcasts)[/B]'}, img = 'http://strictlyoldskool.net/wp-content/gallery/ratpack/ratpack-pic-1.jpg', fanart = 'http://static.inlog.org/wp-content/uploads/2013/04/front-590x390.jpg')
+        addon.add_directory({'mode': 'GetLinks22', 'url': BASE_URL22 + 'site/category/podcast/'}, {'title':  '[COLOR chartreuse][B]John B [/COLOR] (Podcasts)[/B]'}, img = 'http://beta-recordings.com/images/Blog.jpg', fanart = 'http://i1.sndcdn.com/artworks-000028058053-5vxdam-original.jpg?77d7a69')
         addon.add_directory({'mode': 'GetLinks10', 'url': BASE_URL10 + '/showthread.php?3752-mal-was-anderes-oldskool-history-of-edm-mix'}, {'title':  '[COLOR chartreuse][B]In the beginning there was Jack[/COLOR] (podcast)[/B]'}, img = 'http://sd.keepcalm-o-matic.co.uk/i/in-the-beginning-there-was-jack-9.png', fanart = 'http://galiofficial.com/wp-content/uploads/2013/03/house-music-design-nation.jpg')
         addon.add_directory({'mode': 'GetLinks5', 'url': BASE_URL5 + '/'}, {'title':  '[COLOR turquoise][B]The beat sanctuary [/COLOR] (oldskool H&G)[/B]'}, img = 'http://i2.wp.com/musicyouneed.net/wp-content/uploads/2013/03/MYN-The-Underground.jpg?resize=290%2C290', fanart = 'http://www.crownbc.com/wp-content/uploads/2013/06/Bunker-Rave.jpg')
         addon.add_directory({'mode': 'GetLinks14', 'url': BASE_URL14 + 'audio/tracks/a-brief-history-of-grime-tapes'}, {'title':  '[COLOR turquoise][B]The wire [/COLOR] (oldskool H&G)[/B]'}, img = 'http://www.hcmf.co.uk/uploads/images/197wirelogoblockurlcopy.jpg?1253097636', fanart = 'http://alicepettey.com/wp-content/uploads/2012/03/The_Wire_Logo.jpg')
-        #addon.add_directory({'mode': 'GetLinks', 'url': BASE_URL + ''}, {'title':  '[COLOR mediumseagreen][B] [/COLOR] ()[/B]'}, img = '', fanart = '')
+        addon.add_directory({'mode': 'GetLinks23', 'url': BASE_URL23 + '43637-EZ-Old-Skool-Garage-Sets/page2'}, {'title':  '[COLOR mediumseagreen][B]DJ EZ [/COLOR] (Mixtapes Collection)[/B]   [COLOR red] *[/COLOR]'}, img = 'http://3.bp.blogspot.com/-jRPq1Szx0Js/TjaX0R0DFTI/AAAAAAAAANE/6ds6AbbuD2s/s320/dj+ez+photo', fanart = 'http://www.sotonight.net/wp-content/uploads/2013/10/dj-ez-garden-party-3-large.jpg')
+        addon.add_directory({'mode': 'GetLinks24', 'url': BASE_URL24 + '/'}, {'title':  '[COLOR chartreuse][B]Official Sidewinder UK Garage [/COLOR] (Podcasts)[/B]'}, img = 'http://assets.podomatic.net/ts/cf/4b/3d/djtrudos/1400x1400_9185047.jpg', fanart = 'http://i.ytimg.com/vi/7oK6CY9GG2k/0.jpg')
         xbmcplugin.endOfDirectory(addon_handle)
 
 ################################################################################# mode #########################################################################################
@@ -721,5 +774,13 @@ elif mode == 'GetLinks21a':
 	GetLinks21a(url)
 elif mode == 'GetLinks21b':
 	GetLinks21b(url)
+elif mode == 'GetLinks22':
+	GetLinks22(url)
+elif mode == 'GetLinks23':
+	GetLinks23(url)
+elif mode == 'GetLinks24':
+	GetLinks24(url)
+elif mode == 'GetLinks24a':
+	GetLinks24a(url)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)
