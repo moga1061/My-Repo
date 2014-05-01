@@ -52,6 +52,7 @@ BASE_URL21 = 'http://175bpm.pl/'
 BASE_URL22 = 'http://www.john-b.com/'
 BASE_URL23 = 'http://dnbforum.com/showthread.php/'
 BASE_URL24 = 'http://djtrudos.podomatic.com/'
+BASE_URL25 = 'http://forum.breakbeat.co.uk/'
 
 net = Net()
 addon = Addon('plugin.audio.raveplayer', sys.argv)
@@ -603,6 +604,19 @@ def GetLinks24a(url):
                 addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  url}, img = 'http://assets.podomatic.net/ts/cf/4b/3d/djtrudos/1400x1400_9185047.jpg', fanart = 'http://i1.ytimg.com/vi/LxXDk61hrcY/hqdefault.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+#------------------------------------------------------------------------------- 98hng -------------------------------------------------------------------------------------#
+
+def GetLinks25(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('(.+?)<br> <a href="(.+?)" target="_blank">.+?</a>').findall(content)
+        for name, url in match:
+                addon.add_directory({'mode': 'GetLinks19a', 'url': url, 'listitem': listitem}, {'title':  name.strip().replace('<br>', '')}, img = 'http://www.bbc.co.uk/radio1/ayianapa2001/images/2001/dt_beach_djdesk1.jpg', fanart = 'http://d367bw38uuflgc.cloudfront.net/2014/03/31/13/26/18/961/24763_1344311541894_1654434888_873943_2888863_n.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 
 ######################################################################### clean ###########################################################################################
 
@@ -671,7 +685,7 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetLinks4', 'url': BASE_URL4 + '/'}, {'title':  '[COLOR green][B]Deepinside the oldskool [/COLOR](Archive)[/B]'}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
         addon.add_directory({'mode': 'GetLinks13', 'url': BASE_URL13 + '/'}, {'title':  '[COLOR green][B]Rave-archive [/COLOR](Archive)[/B]'}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://s11.postimg.org/vhd2897k3/fanart.jpg')
         addon.add_directory({'mode': 'GetLinks18', 'url': BASE_URL18 + '/'}, {'title':  '[COLOR green][B]Toronto rave mixtape [/COLOR](Archive)[/B]   [COLOR red] *[/COLOR]'}, img = 'http://www.torontoravemixtapearchive.com/images/promo/trma.jpg', fanart = 'http://torontoravemixtapearchive.com/images/promo/DavidRyanTapes.jpg')
-        addon.add_directory({'mode': 'GetLinks19', 'url': BASE_URL19 + ''}, {'title':  '[COLOR green][B]jungletechno [/COLOR](Archive)[/B][COLOR red]   *[/COLOR]'}, img = 'https://pbs.twimg.com/profile_images/1430963248/Hardcore_Jungle_Techno_-_001.jpg', fanart = 'http://thebowlerfirm.com/wp-content/uploads/2012/05/stevie.jpg')
+        addon.add_directory({'mode': 'GetLinks19', 'url': BASE_URL19 + ''}, {'title':  '[COLOR green][B]jungletechno [/COLOR](Archive)[/B][COLOR red]   *[/COLOR][COLOR blue] **[/COLOR]'}, img = 'https://pbs.twimg.com/profile_images/1430963248/Hardcore_Jungle_Techno_-_001.jpg', fanart = 'http://thebowlerfirm.com/wp-content/uploads/2012/05/stevie.jpg')
         addon.add_directory({'mode': 'GetLinks2', 'url': BASE_URL2 + '/soundmanager2/demo/page-player/20bensons.html'}, {'title':  '[COLOR green][B]20bensons rave [/COLOR](Archive)[/B]'}, img = 'http://www.zigsam.at/l07/B_Cig/BensonHedgesSpeciaF-20fJP197.jpg', fanart = 'http://bigghostlimited.com/wp-content/uploads/2013/09/MIxtape.gif')
         addon.add_directory({'mode': 'GetLinks7', 'url': BASE_URL7 + '/category_Event_Mixes_1.htm'}, {'title':  '[COLOR green][B]UK raves [/COLOR](Archive)[/B]'}, img = 'https://pbs.twimg.com/profile_images/3337802286/571a3ecdec1efb53e30cf19c00f45212.jpeg', fanart = 'http://www.fantazia.org.uk/Event%20info/Pics/11fantaziasummertime.jpg')
         addon.add_directory({'mode': 'GetLinks11', 'url': BASE_URL11 + '/'}, {'title':  '[COLOR green][B]Demodulated mixtapes [/COLOR](Archive)[/B]'}, img = 'http://urbanlegendkampala.com/wp-content/uploads/2013/11/Mixtape-Image.jpg', fanart = 'http://bigghostlimited.com/wp-content/uploads/2013/09/MIxtape.gif')
@@ -686,8 +700,9 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetLinks10', 'url': BASE_URL10 + '/showthread.php?3752-mal-was-anderes-oldskool-history-of-edm-mix'}, {'title':  '[COLOR chartreuse][B]In the beginning there was Jack[/COLOR] (podcast)[/B]'}, img = 'http://sd.keepcalm-o-matic.co.uk/i/in-the-beginning-there-was-jack-9.png', fanart = 'http://galiofficial.com/wp-content/uploads/2013/03/house-music-design-nation.jpg')
         addon.add_directory({'mode': 'GetLinks5', 'url': BASE_URL5 + '/'}, {'title':  '[COLOR turquoise][B]The beat sanctuary [/COLOR] (oldskool H&G)[/B]'}, img = 'http://i2.wp.com/musicyouneed.net/wp-content/uploads/2013/03/MYN-The-Underground.jpg?resize=290%2C290', fanart = 'http://www.crownbc.com/wp-content/uploads/2013/06/Bunker-Rave.jpg')
         addon.add_directory({'mode': 'GetLinks14', 'url': BASE_URL14 + 'audio/tracks/a-brief-history-of-grime-tapes'}, {'title':  '[COLOR turquoise][B]The wire [/COLOR] (oldskool H&G)[/B]'}, img = 'http://www.hcmf.co.uk/uploads/images/197wirelogoblockurlcopy.jpg?1253097636', fanart = 'http://alicepettey.com/wp-content/uploads/2012/03/The_Wire_Logo.jpg')
-        addon.add_directory({'mode': 'GetLinks23', 'url': BASE_URL23 + '43637-EZ-Old-Skool-Garage-Sets/page2'}, {'title':  '[COLOR mediumseagreen][B]DJ EZ [/COLOR] (Mixtapes Collection)[/B]   [COLOR red] *[/COLOR]'}, img = 'http://3.bp.blogspot.com/-jRPq1Szx0Js/TjaX0R0DFTI/AAAAAAAAANE/6ds6AbbuD2s/s320/dj+ez+photo', fanart = 'http://www.sotonight.net/wp-content/uploads/2013/10/dj-ez-garden-party-3-large.jpg')
-        addon.add_directory({'mode': 'GetLinks24', 'url': BASE_URL24 + '/'}, {'title':  '[COLOR chartreuse][B]Official Sidewinder UK Garage [/COLOR] (Podcasts)[/B]'}, img = 'http://assets.podomatic.net/ts/cf/4b/3d/djtrudos/1400x1400_9185047.jpg', fanart = 'http://i.ytimg.com/vi/7oK6CY9GG2k/0.jpg')
+        addon.add_directory({'mode': 'GetLinks23', 'url': BASE_URL23 + '43637-EZ-Old-Skool-Garage-Sets/page2'}, {'title':  '[COLOR mediumseagreen][B]DJ EZ [/COLOR] (Mixtapes Collection)[/B]   [COLOR blue] **[/COLOR]'}, img = 'http://3.bp.blogspot.com/-jRPq1Szx0Js/TjaX0R0DFTI/AAAAAAAAANE/6ds6AbbuD2s/s320/dj+ez+photo', fanart = 'http://www.sotonight.net/wp-content/uploads/2013/10/dj-ez-garden-party-3-large.jpg')
+        addon.add_directory({'mode': 'GetLinks25', 'url': BASE_URL25 + 'tm.aspx?m=1970908037'}, {'title':  '[COLOR mediumseagreen][B]Oldskool Garage [/COLOR] (Mixtapes Collection)[/B]   [COLOR blue] **[/COLOR]'}, img = 'http://i1.sndcdn.com/artworks-000008096876-l7s4hz-original.jpg?164b459', fanart = 'http://i1.ytimg.com/vi/3CB28nzsrTY/maxresdefault.jpg')
+        addon.add_directory({'mode': 'GetLinks24', 'url': BASE_URL24 + '/'}, {'title':  '[COLOR chartreuse][B]Official Sidewinder UK Garage [/COLOR] (Podcasts)[/B]'}, img = 'http://assets.podomatic.net/ts/cf/4b/3d/djtrudos/1400x1400_9185047.jpg', fanart = '')
         xbmcplugin.endOfDirectory(addon_handle)
 
 ################################################################################# mode #########################################################################################
@@ -782,5 +797,7 @@ elif mode == 'GetLinks24':
 	GetLinks24(url)
 elif mode == 'GetLinks24a':
 	GetLinks24a(url)
+elif mode == 'GetLinks25':
+	GetLinks25(url)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)
