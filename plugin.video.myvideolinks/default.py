@@ -62,10 +62,11 @@ def GetLinks(section, url): # Get Links
         content = html
         match = re.compile('<li><a href="(.+?)">.+?</a></li>').findall(content)
         match1 = re.compile("Watch=window.+?'(.+?)'").findall(content)
+        match2 = re.compile("Watch=window.+?'(.+?)'").findall(content)
         listitem = GetMediaInfo(content)
         for url in match1:
-                addon.add_directory({'mode': 'GetLinks1', 'url': url, 'listitem': listitem}, {'title':  'V-vids.com'}, img=IconPath + 'vids.png', fanart=FanartPath + 'fanart.png')
-        for url in match:
+                addon.add_directory({'mode': 'GetLinks1', 'url': url, 'listitem': listitem}, {'title':  'V-Vids'}, img=IconPath + 'vids.png', fanart=FanartPath + 'fanart.png')
+        for url in match + match2:
                 host = GetDomain(url)
                 if 'Unknown' in host:
                                 continue
