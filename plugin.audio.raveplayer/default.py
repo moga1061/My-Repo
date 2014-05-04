@@ -28,6 +28,17 @@ import HTMLParser
 addon_id = 'plugin.audio.raveplayer'
 plugin = xbmcaddon.Addon(id=addon_id)
 DB = os.path.join(xbmc.translatePath("special://database"), 'raveplayer.db')
+net = Net()
+addon = Addon('plugin.audio.raveplayer', sys.argv)
+mode = addon.queries['mode']
+url = addon.queries.get('url', None)
+content = addon.queries.get('content', None)
+query = addon.queries.get('query', None)
+startPage = addon.queries.get('startPage', None)
+numOfPages = addon.queries.get('numOfPages', None)
+listitem = addon.queries.get('listitem', None)
+urlList = addon.queries.get('urlList', None)
+section = addon.queries.get('section', None)
 
 BASE_URL = 'http://www.oneinthejungle.co.uk/'
 BASE_URL2 = 'http://20bensons.com/'
@@ -54,18 +65,6 @@ BASE_URL23 = 'http://dnbforum.com/showthread.php/'
 BASE_URL24 = 'http://djtrudos.podomatic.com/'
 BASE_URL25 = 'http://forum.breakbeat.co.uk/'
 BASE_URL26 = 'http://archive.nu-rave.com/'
-
-net = Net()
-addon = Addon('plugin.audio.raveplayer', sys.argv)
-mode = addon.queries['mode']
-url = addon.queries.get('url', None)
-content = addon.queries.get('content', None)
-query = addon.queries.get('query', None)
-startPage = addon.queries.get('startPage', None)
-numOfPages = addon.queries.get('numOfPages', None)
-listitem = addon.queries.get('listitem', None)
-urlList = addon.queries.get('urlList', None)
-section = addon.queries.get('section', None)
 
 ############################################################################### Get links #############################################################################################
 
@@ -522,7 +521,6 @@ def GetLinks20(url):
                 addon.add_directory({'mode': 'PlayVideo', 'url': 'http://www.dj-jedi.com/' + url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.dj-jedi.com/images/dj_jedi_logo.gif', fanart = 'http://andberlin.com/wp-content/uploads/2013/05/Lights-at-Berlin-Summer-Rave-2013.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-
 #------------------------------------------------------------------------------- 180 -------------------------------------------------------------------------------------#
 
 def GetLinks21(url):                                            
@@ -671,71 +669,169 @@ def GetMediaInfo(html):
 
 ################################################################################# menus ####################################################################################################
 
-def MainMenu():    #homescreen 
-        addon_handle = int(sys.argv[1]) 
+#------------------------------------------------------------------------------------------ MainMenu ----------------------------------------------------------------------------#
 
-        xbmcplugin.setContent(addon_handle, 'audio')
-        url = 'http://192.99.11.97:8000'
-        li = xbmcgui.ListItem('[COLOR blue][B]Rave Tape Radio[/B][/COLOR] [COLOR lime] (((LIVE))) [/COLOR] >>', thumbnailImage= 'http://d1i6vahw24eb07.cloudfront.net/s182965d.png')
-        li.setProperty('fanart_image', 'http://s12.postimg.org/rkd8gen7h/fanart.jpg')
-        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+def MainMenu():    #homescreen
+        addon.add_directory({'mode': 'RadioMenu'}, {'title':  '[COLOR orchid][B]Live Radio [/COLOR](Streaming)[/B]'}, img = 'http://radio.aljalia.tv/images/on_air.png', fanart = 'http://tamtam.mao-jp.com/wp-content/uploads/2014/04/news12112012-4c.png')
+        addon.add_directory({'mode': 'ArchiveMenu'}, {'title':  '[COLOR green][B]Rave Tape packs & oldskool Dj sets [/COLOR](Archives)[/B]'}, img = 'http://www.missiongiant.com/navBar/Cassette-Tape.jpg', fanart = 'http://2.bp.blogspot.com/-1stPxBQVgrk/TyHnBXUxYCI/AAAAAAAAAhU/uOQNvSSRr8c/s1600/1218_bg.jpg')
+        addon.add_directory({'mode': 'PodMenu'}, {'title':  '[COLOR chartreuse][B]Podcasts [/COLOR](Archives)[/B]'}, img = 'http://www.digitaldjhub.com/wp-content/uploads/podcast-logo.png', fanart = 'http://p1.pichost.me/i/37/1597754.jpg')
+        addon.add_directory({'mode': 'HngMenu'}, {'title':  '[COLOR coral][B]Oldskool House & Garage [/COLOR](Archives)[/B]'}, img = 'http://i2.wp.com/musicyouneed.net/wp-content/uploads/2013/03/MYN-The-Underground.jpg?resize=290%2C290', fanart = 'http://eswalls.com/wp-content/uploads/2013/12/Download-Hd-Dj-Music-Dance-Composer.jpg')
+        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR gold][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR aqua][B][I]@TheYid009 [/B][/I][/COLOR] '}, img = 'http://s12.postimg.org/wghv4h2h9/icon.png', fanart = 'http://s30.postimg.org/elc1pa6qp/fanart.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-        xbmcplugin.setContent(addon_handle, 'audio')
-        url = 'http://www.livegigstream.co.uk:8040/'
-        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Oldskool Anthemz Radio[/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://www.oldskoolanthemz.com/images/cms/osafacebookconnect.jpg')
-        li.setProperty('fanart_image', 'http://s12.postimg.org/rkd8gen7h/fanart.jpg')
-        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
-        xbmcplugin.setContent(addon_handle, 'audio')
-        url = 'http://178.33.237.151:8004'
-        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Only Oldskool Radio[/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://i1.sndcdn.com/artworks-000074359327-1jmjy6-original.jpg?435a760')
-        li.setProperty('fanart_image', 'http://s12.postimg.org/rkd8gen7h/fanart.jpg')
-        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+def HelpMenu():   
+        dialog = xbmcgui.Dialog()
+        dialog.ok("TheYid's REPO", "I now have a donation button setup at xbmcHUB", "please help keep TheYid's REPO alive more info @","http://www.xbmchub.com/forums/")
 
-        xbmcplugin.setContent(addon_handle, 'audio')
-        url = 'http://www.nu-rave.com:8000/nurave-live'
-        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Nu-Rave Radio[/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://static.house-mixes.com/s3/webmixes-images/accounts-430903/artwork/4375333d-7acd-44a7-8ea8-474368bd20e3.jpg/360/45/true')
-        li.setProperty('fanart_image', 'http://s12.postimg.org/rkd8gen7h/fanart.jpg')
-        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
-        xbmcplugin.setContent(addon_handle, 'audio')
-        url = 'http://server2.unitystreams.com:8008'
-        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Play Back uk Radio[/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://www.playbackuk.com/downloads/playbackukcom_3DPicture.jpg')
-        li.setProperty('fanart_image', 'http://s12.postimg.org/rkd8gen7h/fanart.jpg')
-        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+#------------------------------------------------------------------------------------------ HngMenu ----------------------------------------------------------------------------#
 
-        addon.add_directory({'mode': 'GetLinks15', 'url': BASE_URL15 + '/dnb.txt'}, {'title':  '[COLOR gold][B]Rave player Specials [/COLOR] (Rave Dj Sets)[/B]'}, img = 'http://s28.postimg.org/uwfyuzepp/cassettetdk.jpg', fanart = 'http://amgroup.com/news/wp-content/uploads/2013/04/IMG_4470-Custom.jpg')
-        addon.add_directory({'mode': 'GetLinks16', 'url': BASE_URL15 + '/radioshows.txt'}, {'title':  '[COLOR gold][B]Rave player Specials [/COLOR] (the lost tapes)[/B]'}, img = 'http://s12.postimg.org/3szbuobot/icon.png', fanart = 'http://4.bp.blogspot.com/_8V97VYqI3Po/S7Md-Sd5OcI/AAAAAAAABGk/haepgezjFqw/s1600/24897_410278471302_133985331302_5619646_2569052_n.jpg')
-        addon.add_directory({'mode': 'GetLinks', 'url': BASE_URL + '/'}, {'title':  '[COLOR green][B]One In The Jungle [/COLOR](Archive)[/B]'}, img = 'http://www.oneinthejungle.net/images/home/fb.png', fanart = 'http://img193.imageshack.us/img193/4990/dsc09956tx.jpg')
-        addon.add_directory({'mode': 'GetLinks3', 'url': BASE_URL3 + '/'}, {'title':  '[COLOR green][B]Rave tape packs [/COLOR](Archive)[/B]'}, img = 'http://fc09.deviantart.net/fs25/f/2008/111/a/8/Cassette_tape_by_Quick_Stop.png', fanart = 'http://s27.postimg.org/3qdp1snnn/hhhgggg.jpg')
-        addon.add_directory({'mode': 'GetLinks4', 'url': BASE_URL4 + '/'}, {'title':  '[COLOR green][B]Deepinside the oldskool [/COLOR](Archive)[/B]'}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
-        addon.add_directory({'mode': 'GetLinks13', 'url': BASE_URL13 + '/'}, {'title':  '[COLOR green][B]Rave-archive [/COLOR](Archive)[/B]'}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://s11.postimg.org/vhd2897k3/fanart.jpg')
-        addon.add_directory({'mode': 'GetLinks18', 'url': BASE_URL18 + '/'}, {'title':  '[COLOR green][B]Toronto rave mixtape [/COLOR](Archive)[/B]   [COLOR red] *[/COLOR]'}, img = 'http://www.torontoravemixtapearchive.com/images/promo/trma.jpg', fanart = 'http://torontoravemixtapearchive.com/images/promo/DavidRyanTapes.jpg')
-        addon.add_directory({'mode': 'GetLinks19', 'url': BASE_URL19 + ''}, {'title':  '[COLOR green][B]jungletechno [/COLOR](Archive)[/B][COLOR red]   *[/COLOR][COLOR blue] **[/COLOR]'}, img = 'https://pbs.twimg.com/profile_images/1430963248/Hardcore_Jungle_Techno_-_001.jpg', fanart = 'http://thebowlerfirm.com/wp-content/uploads/2012/05/stevie.jpg')
-        addon.add_directory({'mode': 'GetLinks2', 'url': BASE_URL2 + '/soundmanager2/demo/page-player/20bensons.html'}, {'title':  '[COLOR green][B]20bensons rave [/COLOR](Archive)[/B]'}, img = 'http://www.zigsam.at/l07/B_Cig/BensonHedgesSpeciaF-20fJP197.jpg', fanart = 'http://bigghostlimited.com/wp-content/uploads/2013/09/MIxtape.gif')
-        addon.add_directory({'mode': 'GetLinks7', 'url': BASE_URL7 + '/category_Event_Mixes_1.htm'}, {'title':  '[COLOR green][B]UK raves [/COLOR](Archive)[/B]'}, img = 'https://pbs.twimg.com/profile_images/3337802286/571a3ecdec1efb53e30cf19c00f45212.jpeg', fanart = 'http://www.fantazia.org.uk/Event%20info/Pics/11fantaziasummertime.jpg')
-        addon.add_directory({'mode': 'GetLinks26', 'url': BASE_URL26 + '/'}, {'title':  '[COLOR green][B]Nu-Rave Radio [/COLOR](Archive)[/B]'}, img = 'http://fc06.deviantart.net/fs29/i/2008/101/e/1/nu_rave_com_logo_by_simonduffy.jpg', fanart = 'http://www.hydramag.com/wp-content/uploads/2011/07/Flyers-1.jpg')
-        addon.add_directory({'mode': 'GetLinks11', 'url': BASE_URL11 + '/'}, {'title':  '[COLOR green][B]Demodulated mixtapes [/COLOR](Archive)[/B]'}, img = 'http://urbanlegendkampala.com/wp-content/uploads/2013/11/Mixtape-Image.jpg', fanart = 'http://bigghostlimited.com/wp-content/uploads/2013/09/MIxtape.gif')
-        addon.add_directory({'mode': 'GetLinks9a', 'url': BASE_URL9 + '/'}, {'title':  '[COLOR green][B]mikus Musik [/COLOR](Archive)[/B]'}, img = 'http://3.bp.blogspot.com/-iDTTgsZBiBA/TwHRQBfrEKI/AAAAAAAAATs/8lTy5Va4_is/s1600/MIKUS.gif', fanart = 'http://s23.postimg.org/4sn8qcp8b/fanart.jpg')
-        addon.add_directory({'mode': 'GetLinks12', 'url': BASE_URL12 + '/'}, {'title':  '[COLOR green][B]Shitmixtapes [/COLOR](Archive)[/B]'}, img = 'http://www.shitmixtapes.com/storage/shitmixtapes-white.jpg?__SQUARESPACE_CACHEVERSION=1310920306487', fanart = 'http://farm3.staticflickr.com/2814/11285947406_690a1a7a92_z.jpg')
-        #addon.add_directory({'mode': 'GetLinks21', 'url': BASE_URL21 + '/'}, {'title':  '[COLOR green][B]175BPM [/COLOR] (Archive)[/B]   [COLOR red] *[/COLOR]'}, img = 'http://i1.sndcdn.com/artworks-000040491089-ibo2zb-crop.jpg?164b459', fanart = 'http://i1.ytimg.com/vi/eY2ceXfW1FU/maxresdefault.jpg')
-        addon.add_directory({'mode': 'GetLinks17', 'url': BASE_URL17 + '/details/175bpm.plLtjBukemMixtapesCollection'}, {'title':  '[COLOR mediumseagreen][B]L T J Bukem [/COLOR](Mixtapes Collection)[/B]'}, img = 'http://i1.wp.com/www.mostlyjunkfood.com/treats/2013/05/image002.jpg', fanart = 'http://www.htbackdrops.org/v2/albums/userpics/10257/orig_LTJ_Bukem.jpg')
-        addon.add_directory({'mode': 'GetLinks17a', 'url': BASE_URL17 + '/details/175bpm.pl-HelterSkelterCollection'}, {'title':  '[COLOR mediumseagreen][B]Helter Skelter [/COLOR] (Mixtapes Collection)[/B]'}, img = 'http://rave.space.net.au/graphics/hskelter.jpg', fanart = 'http://www.fantazia.org.uk/flyerlibrary/images/HelterSkelter_170993_f.jpg')
-        addon.add_directory({'mode': 'GetLinks20', 'url': BASE_URL20 + 'dj_jedi_audio.php'}, {'title':  '[COLOR mediumseagreen][B]Dj jedi [/COLOR](Mixtapes Collection)[/B]'}, img = 'http://www.dj-jedi.com/images/dj_jedi_logo.gif', fanart = 'http://archive-media.nyafuu.org/wg/image/1367/08/1367087842578.png')
-        addon.add_directory({'mode': 'GetLinks6', 'url': BASE_URL6 + '/'}, {'title':  '[COLOR chartreuse][B]RatPack [/COLOR](Podcasts)[/B]'}, img = 'http://strictlyoldskool.net/wp-content/gallery/ratpack/ratpack-pic-1.jpg', fanart = 'http://static.inlog.org/wp-content/uploads/2013/04/front-590x390.jpg')
-        addon.add_directory({'mode': 'GetLinks22', 'url': BASE_URL22 + 'site/category/podcast/'}, {'title':  '[COLOR chartreuse][B]John B [/COLOR] (Podcasts)[/B]'}, img = 'http://beta-recordings.com/images/Blog.jpg', fanart = 'http://i1.sndcdn.com/artworks-000028058053-5vxdam-original.jpg?77d7a69')
-        addon.add_directory({'mode': 'GetLinks10', 'url': BASE_URL10 + '/showthread.php?3752-mal-was-anderes-oldskool-history-of-edm-mix'}, {'title':  '[COLOR chartreuse][B]In the beginning there was Jack[/COLOR] (podcast)[/B]'}, img = 'http://sd.keepcalm-o-matic.co.uk/i/in-the-beginning-there-was-jack-9.png', fanart = 'http://galiofficial.com/wp-content/uploads/2013/03/house-music-design-nation.jpg')
+def HngMenu():
         addon.add_directory({'mode': 'GetLinks5', 'url': BASE_URL5 + '/'}, {'title':  '[COLOR turquoise][B]The beat sanctuary [/COLOR] (oldskool H&G)[/B]'}, img = 'http://i2.wp.com/musicyouneed.net/wp-content/uploads/2013/03/MYN-The-Underground.jpg?resize=290%2C290', fanart = 'http://www.crownbc.com/wp-content/uploads/2013/06/Bunker-Rave.jpg')
         addon.add_directory({'mode': 'GetLinks14', 'url': BASE_URL14 + 'audio/tracks/a-brief-history-of-grime-tapes'}, {'title':  '[COLOR turquoise][B]The wire [/COLOR] (oldskool H&G)[/B]'}, img = 'http://www.hcmf.co.uk/uploads/images/197wirelogoblockurlcopy.jpg?1253097636', fanart = 'http://alicepettey.com/wp-content/uploads/2012/03/The_Wire_Logo.jpg')
         addon.add_directory({'mode': 'GetLinks23', 'url': BASE_URL23 + '43637-EZ-Old-Skool-Garage-Sets/page2'}, {'title':  '[COLOR mediumseagreen][B]DJ EZ [/COLOR] (Mixtapes Collection)[/B]   [COLOR blue] **[/COLOR]'}, img = 'http://3.bp.blogspot.com/-jRPq1Szx0Js/TjaX0R0DFTI/AAAAAAAAANE/6ds6AbbuD2s/s320/dj+ez+photo', fanart = 'http://www.sotonight.net/wp-content/uploads/2013/10/dj-ez-garden-party-3-large.jpg')
         addon.add_directory({'mode': 'GetLinks25', 'url': BASE_URL25 + 'tm.aspx?m=1970908037'}, {'title':  '[COLOR mediumseagreen][B]Oldskool Garage [/COLOR] (Mixtapes Collection)[/B]   [COLOR blue] **[/COLOR]'}, img = 'http://i1.sndcdn.com/artworks-000008096876-l7s4hz-original.jpg?164b459', fanart = 'http://i1.ytimg.com/vi/3CB28nzsrTY/maxresdefault.jpg')
         addon.add_directory({'mode': 'GetLinks24', 'url': BASE_URL24 + '/'}, {'title':  '[COLOR chartreuse][B]Official Sidewinder UK Garage [/COLOR] (Podcasts)[/B]'}, img = 'http://assets.podomatic.net/ts/cf/4b/3d/djtrudos/1400x1400_9185047.jpg', fanart = 'http://cdn.shopify.com/s/files/1/0236/1879/files/SunCity_Crowd2_large.jpg?1396')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#------------------------------------------------------------------------------------------ PodMenu ----------------------------------------------------------------------------#
+
+def PodMenu(): 
+        addon.add_directory({'mode': 'GetLinks10', 'url': BASE_URL10 + '/showthread.php?3752-mal-was-anderes-oldskool-history-of-edm-mix'}, {'title':  '[COLOR chartreuse][B]In the beginning there was Jack[/COLOR] (podcast)[/B]'}, img = 'http://sd.keepcalm-o-matic.co.uk/i/in-the-beginning-there-was-jack-9.png', fanart = 'http://galiofficial.com/wp-content/uploads/2013/03/house-music-design-nation.jpg')
+        addon.add_directory({'mode': 'GetLinks20', 'url': BASE_URL20 + 'dj_jedi_audio.php'}, {'title':  '[COLOR chartreuse][B]Dj jedi [/COLOR](Podcasts)[/B]'}, img = 'http://www.dj-jedi.com/images/dj_jedi_logo.gif', fanart = 'http://archive-media.nyafuu.org/wg/image/1367/08/1367087842578.png')
+        addon.add_directory({'mode': 'GetLinks6', 'url': BASE_URL6 + '/'}, {'title':  '[COLOR chartreuse][B]RatPack [/COLOR](Podcasts)[/B]'}, img = 'http://strictlyoldskool.net/wp-content/gallery/ratpack/ratpack-pic-1.jpg', fanart = 'http://static.inlog.org/wp-content/uploads/2013/04/front-590x390.jpg')
+        addon.add_directory({'mode': 'GetLinks22', 'url': BASE_URL22 + 'site/category/podcast/'}, {'title':  '[COLOR chartreuse][B]John B [/COLOR] (Podcasts)[/B]'}, img = 'http://beta-recordings.com/images/Blog.jpg', fanart = 'http://i1.sndcdn.com/artworks-000028058053-5vxdam-original.jpg?77d7a69')
+        addon.add_directory({'mode': 'GetLinks12', 'url': BASE_URL12 + '/'}, {'title':  '[COLOR chartreuse][B]Dj kutski [/COLOR](Podcasts)[/B]'}, img = 'http://www.shitmixtapes.com/storage/shitmixtapes-white.jpg?__SQUARESPACE_CACHEVERSION=1310920306487', fanart = 'http://farm3.staticflickr.com/2814/11285947406_690a1a7a92_z.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#------------------------------------------------------------------------------------------ ArchiveMenu ----------------------------------------------------------------------------#
+
+def ArchiveMenu(): 
+        addon.add_directory({'mode': 'GetLinks16', 'url': BASE_URL15 + '/radioshows.txt'}, {'title':  '[COLOR gold][B]Oldskool Radio Specials [/COLOR] (the lost tapes)[/B]'}, img = 'http://s12.postimg.org/3szbuobot/icon.png', fanart = 'http://4.bp.blogspot.com/_8V97VYqI3Po/S7Md-Sd5OcI/AAAAAAAABGk/haepgezjFqw/s1600/24897_410278471302_133985331302_5619646_2569052_n.jpg')
+        addon.add_directory({'mode': 'GetLinks15', 'url': BASE_URL15 + '/dnb.txt'}, {'title':  '[COLOR gold][B]Rave player Specials [/COLOR] (Rave Dj Sets)[/B]'}, img = 'http://s28.postimg.org/uwfyuzepp/cassettetdk.jpg', fanart = 'http://amgroup.com/news/wp-content/uploads/2013/04/IMG_4470-Custom.jpg')
+        addon.add_directory({'mode': 'GetLinks', 'url': BASE_URL + '/'}, {'title':  '[COLOR green][B]One In The Jungle [/COLOR](Archive)[/B]'}, img = 'http://www.oneinthejungle.net/images/home/fb.png', fanart = 'http://img193.imageshack.us/img193/4990/dsc09956tx.jpg')
+        addon.add_directory({'mode': 'GetLinks3', 'url': BASE_URL3 + '/'}, {'title':  '[COLOR green][B]Rave tape packs [/COLOR](Archive)[/B]'}, img = 'http://fc09.deviantart.net/fs25/f/2008/111/a/8/Cassette_tape_by_Quick_Stop.png', fanart = 'http://s27.postimg.org/3qdp1snnn/hhhgggg.jpg')
+        addon.add_directory({'mode': 'GetLinks4', 'url': BASE_URL4 + '/'}, {'title':  '[COLOR green][B]Deepinside the oldskool [/COLOR](Archive)[/B]'}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
+        addon.add_directory({'mode': 'GetLinks13', 'url': BASE_URL13 + '/'}, {'title':  '[COLOR green][B]Rave-archive [/COLOR](Archive)[/B]'}, img = 'https://pbs.twimg.com/profile_images/3335360596/3d9ebe5623ae5be2bab14a54625a2537.jpeg', fanart = 'http://s11.postimg.org/vhd2897k3/fanart.jpg')
+        addon.add_directory({'mode': 'GetLinks18', 'url': BASE_URL18 + '/'}, {'title':  '[COLOR green][B]Toronto rave mixtape [/COLOR](Archive)[/B]   [COLOR red] *[/COLOR]'}, img = 'http://www.torontoravemixtapearchive.com/images/promo/trma.jpg', fanart = 'http://torontoravemixtapearchive.com/images/promo/DavidRyanTapes.jpg')
+        addon.add_directory({'mode': 'GetLinks2', 'url': BASE_URL2 + '/soundmanager2/demo/page-player/20bensons.html'}, {'title':  '[COLOR green][B]20bensons rave [/COLOR](Archive)[/B]'}, img = 'http://www.zigsam.at/l07/B_Cig/BensonHedgesSpeciaF-20fJP197.jpg', fanart = 'http://bigghostlimited.com/wp-content/uploads/2013/09/MIxtape.gif')
+        addon.add_directory({'mode': 'GetLinks19', 'url': BASE_URL19 + ''}, {'title':  '[COLOR green][B]jungletechno [/COLOR](Archive)[/B][COLOR red]   *[/COLOR][COLOR blue] **[/COLOR]'}, img = 'https://pbs.twimg.com/profile_images/1430963248/Hardcore_Jungle_Techno_-_001.jpg', fanart = 'http://thebowlerfirm.com/wp-content/uploads/2012/05/stevie.jpg')
+        addon.add_directory({'mode': 'GetLinks7', 'url': BASE_URL7 + '/category_Event_Mixes_1.htm'}, {'title':  '[COLOR green][B]UK raves [/COLOR](Archive)[/B]'}, img = 'https://pbs.twimg.com/profile_images/3337802286/571a3ecdec1efb53e30cf19c00f45212.jpeg', fanart = 'http://www.fantazia.org.uk/Event%20info/Pics/11fantaziasummertime.jpg')
+        addon.add_directory({'mode': 'GetLinks26', 'url': BASE_URL26 + '/'}, {'title':  '[COLOR green][B]Nu-Rave Radio [/COLOR](Archive)[/B]'}, img = 'http://fc06.deviantart.net/fs29/i/2008/101/e/1/nu_rave_com_logo_by_simonduffy.jpg', fanart = 'http://www.hydramag.com/wp-content/uploads/2011/07/Flyers-1.jpg')
+        addon.add_directory({'mode': 'GetLinks11', 'url': BASE_URL11 + '/'}, {'title':  '[COLOR green][B]Demodulated mixtapes [/COLOR](Archive)[/B]'}, img = 'http://urbanlegendkampala.com/wp-content/uploads/2013/11/Mixtape-Image.jpg', fanart = 'http://bigghostlimited.com/wp-content/uploads/2013/09/MIxtape.gif')
+        addon.add_directory({'mode': 'GetLinks9a', 'url': BASE_URL9 + '/'}, {'title':  '[COLOR green][B]mikus Musik [/COLOR](Archive)[/B]'}, img = 'http://3.bp.blogspot.com/-iDTTgsZBiBA/TwHRQBfrEKI/AAAAAAAAATs/8lTy5Va4_is/s1600/MIKUS.gif', fanart = 'http://s23.postimg.org/4sn8qcp8b/fanart.jpg')
+        addon.add_directory({'mode': 'GetLinks17', 'url': BASE_URL17 + '/details/175bpm.plLtjBukemMixtapesCollection'}, {'title':  '[COLOR green][B]L T J Bukem [/COLOR](Archive)[/B]'}, img = 'http://i1.wp.com/www.mostlyjunkfood.com/treats/2013/05/image002.jpg', fanart = 'http://www.htbackdrops.org/v2/albums/userpics/10257/orig_LTJ_Bukem.jpg')
+        addon.add_directory({'mode': 'GetLinks17a', 'url': BASE_URL17 + '/details/175bpm.pl-HelterSkelterCollection'}, {'title':  '[COLOR green][B]Helter Skelter [/COLOR] (Archive)[/B]'}, img = 'http://rave.space.net.au/graphics/hskelter.jpg', fanart = 'http://www.fantazia.org.uk/flyerlibrary/images/HelterSkelter_170993_f.jpg')
+        #addon.add_directory({'mode': 'GetLinks21', 'url': BASE_URL21 + '/'}, {'title':  '[COLOR green][B]175BPM [/COLOR] (Archive)[/B]   [COLOR red] *[/COLOR]'}, img = 'http://i1.sndcdn.com/artworks-000040491089-ibo2zb-crop.jpg?164b459', fanart = 'http://i1.ytimg.com/vi/eY2ceXfW1FU/maxresdefault.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1])) 
+
+#------------------------------------------------------------------------------------------ RadioMenu ----------------------------------------------------------------------------#
+
+def RadioMenu():  
+        addon_handle = int(sys.argv[1]) 
+        xbmcplugin.setContent(addon_handle, 'audio')
+
+        url = 'http://192.99.11.97:8000'
+        li = xbmcgui.ListItem('[COLOR blue][B]Rave Tape Radio[/B][/COLOR] [COLOR lime] (((LIVE))) [/COLOR] >>', thumbnailImage= 'http://d1i6vahw24eb07.cloudfront.net/s182965d.png')
+        li.setProperty('fanart_image', 'http://s12.postimg.org/rkd8gen7h/fanart.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://www.livegigstream.co.uk:8040/'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Oldskool Anthemz Radio[/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://www.oldskoolanthemz.com/images/cms/osafacebookconnect.jpg')
+        li.setProperty('fanart_image', 'http://s12.postimg.org/rkd8gen7h/fanart.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://178.33.237.151:8004'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Only Oldskool Radio[/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://i1.sndcdn.com/artworks-000074359327-1jmjy6-original.jpg?435a760')
+        li.setProperty('fanart_image', 'http://s12.postimg.org/rkd8gen7h/fanart.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://www.nu-rave.com:8000/nurave-live'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Nu-Rave Radio[/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://static.house-mixes.com/s3/webmixes-images/accounts-430903/artwork/4375333d-7acd-44a7-8ea8-474368bd20e3.jpg/360/45/true')
+        li.setProperty('fanart_image', 'http://s12.postimg.org/rkd8gen7h/fanart.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://server2.unitystreams.com:8008'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Play Back uk Radio (H&G)[/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://www.playbackuk.com/downloads/playbackukcom_3DPicture.jpg')
+        li.setProperty('fanart_image', 'http://s12.postimg.org/rkd8gen7h/fanart.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://tx.whatson.com/icecast.php?i=kisstorylow.aac.m3u'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]kisstory [/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://www.getmemedia.com/public/ideas/Opp/6857/Kisstory.jpg')
+        li.setProperty('fanart_image', 'http://336fcc281d9fb3480f2a-0af712088f38ef5910226b2ecb408482.r82.cf2.rackcdn.com/img-230-3-1366642376.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://78.129.228.187:8008/;stream/1'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]House fm [/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://i1.sndcdn.com/artworks-000049756393-x4gokq-crop.jpg?435a760')
+        li.setProperty('fanart_image', 'http://www.strictlyhousefm.co.uk/wp-content/uploads/2012/10/strictly-house-6.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://shine879.internetdomainservices.com:8204/'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Shine879 [/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'https://lh4.ggpht.com/0rdHZ2GOZYeiDfo1jyuWzbiFa9VIHNulX8qvTgXG3bHWMxO28mrxxUrT2VYWeQgaU4k=w300')
+        li.setProperty('fanart_image', 'http://dnbvideo.ru/wp-content/uploads/2013/09/antinox-liquid-drum-n-bass-4-1080p-hq.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://stream.dnsgb.net:8046/listen.pls'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Passion fm [/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'https://d2uykijsw1jrmd.cloudfront.net/media/cache/d3/4c/d34cdd381be73a94e7d762afeef97ec7.jpg')
+        li.setProperty('fanart_image', 'http://i1.sndcdn.com/artworks-000028046982-dxmeig-original.jpg?164b459')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://193.27.42.226:8192/mosdir.mp3'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Ministry of Sound Radio[/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://i1.sndcdn.com/artworks-000070064884-tec6ir-original.jpg?f775e59')
+        li.setProperty('fanart_image', 'http://1.bp.blogspot.com/-pXdClkxvZu8/TleccVYC3EI/AAAAAAAAAic/A7aV-CrKcaU/s1600/Ministry-of-Sound.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://uk1-pn.webcast-server.net:8698'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Kool London[/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://s30.postimg.org/5r870dash/icon.png')
+        li.setProperty('fanart_image', 'http://koollondon.com/images/stories/kool-timetable-march-2014.png')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://78.129.228.187:8034/listen.pls'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Rude fm [/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://surroundsoundrecordings.co.uk/wp-content/uploads/2011/09/rudelogo.jpg')
+        li.setProperty('fanart_image', 'http://s3.amazonaws.com/quietus_production/images/articles/14317/rude_fm_1390324837_crop_550x388.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://stream1.jungletrain.net:8000/'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Jungle Train [/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://i1.sndcdn.com/artworks-000000487986-yhoaa3-crop.jpg?164b459')
+        li.setProperty('fanart_image', 'http://jungletrain.net/images/logo_final_003_bw.svg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://shouthost.com.18.streams.bassdrive.com:8398'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Bass Drive [/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://i1.sndcdn.com/avatars-000019466696-vv1udx-crop.jpg?164b459')
+        li.setProperty('fanart_image', 'http://www.wallsave.com/wallpapers/1920x1200/drum-and-bass/398404/drum-and-bass-bassdrive-view-topic-398404.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://bassjunkees.com/m3u'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Bass Junkees [/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://static.rad.io/images/broadcasts/bf/40/4993/w175.png')
+        li.setProperty('fanart_image', 'http://i1.sndcdn.com/artworks-000032545848-tw4hg5-original.jpg?77d7a69')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://213.229.108.96/RTB'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Rough Tempo [/B][/COLOR]  [COLOR red](Video Stream)[/COLOR]  [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://www.roughtempo.com/fbimage.jpg')
+        li.setProperty('fanart_image', 'http://s18.postimg.org/wxt9kuvpl/maxresdefault.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        addon.add_directory({'mode': 'RadioMenu', '': '', '': '',
+                             '': '', '': ''}, {'title':  '[COLOR mediumvioletred]~[/COLOR][COLOR aqua][B]Report broken links to @TheYid009 on twitter[/B][/COLOR][COLOR mediumvioletred]~[/COLOR]'}, img = 'http://www.systemslibrarian.co.za/images/Broken%20links.jpg', fanart = 'http://s30.postimg.org/elc1pa6qp/fanart.jpg')
+
         xbmcplugin.endOfDirectory(addon_handle)
 
 ################################################################################# mode #########################################################################################
 
 if mode == 'main': 
 	MainMenu()
+elif mode == 'RadioMenu':
+        RadioMenu()
+elif mode == 'ArchiveMenu':
+        ArchiveMenu()
+elif mode == 'PodMenu':
+        PodMenu()
+elif mode == 'HngMenu':
+        HngMenu()
+elif mode == 'HelpMenu':
+        HelpMenu()
 elif mode == 'GetLinks':
 	GetLinks(url)
 elif mode == 'GetLinks2':
@@ -830,3 +926,5 @@ elif mode == 'GetLinks26':
 	GetLinks26(url)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)
+
+xbmcplugin.endOfDirectory(int(sys.argv[1]))
