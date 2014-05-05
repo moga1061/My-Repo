@@ -34,11 +34,7 @@ mode = addon.queries['mode']
 url = addon.queries.get('url', None)
 content = addon.queries.get('content', None)
 query = addon.queries.get('query', None)
-startPage = addon.queries.get('startPage', None)
-numOfPages = addon.queries.get('numOfPages', None)
 listitem = addon.queries.get('listitem', None)
-urlList = addon.queries.get('urlList', None)
-section = addon.queries.get('section', None)
 
 BASE_URL = 'http://www.oneinthejungle.co.uk/'
 BASE_URL2 = 'http://20bensons.com/'
@@ -68,8 +64,7 @@ BASE_URL26 = 'http://archive.nu-rave.com/'
 BASE_URL27 = 'http://hardcorehighlights.com/'
 BASE_URL28 = 'http://podcast.grimedigital.com/'
 BASE_URL29 = 'http://www.radionecks.com/'
-#BASE_URL30 = ''
-
+BASE_URL30 = 'http://www.fabriclondon.com/'
 
 ############################################################################### Get links #############################################################################################
 
@@ -717,6 +712,19 @@ def GetLinks29(url):
                 addon.add_directory({'mode': 'GetLinks19a', 'url': 'http://www.mediafire.com/' + url, 'listitem': listitem}, {'title':  name.strip() + host}, img = 'http://i.imgur.com/U1uk5.jpg?1', fanart = 'https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-ash3/s720x720/527918_10151027721918672_1736787895_n.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+#------------------------------------------------------------------------------- fabric -------------------------------------------------------------------------------------#
+
+def GetLinks30(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('<a class="download" href="http://www.fabriclondon.com/pcast/(.+?)">').findall(content)
+        for url in match:
+                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://www.fabriclondon.com/pcast/' + url, 'listitem': listitem}, {'title':  url.replace('_', ' ').replace('.', ' ')}, img = 'http://www.fabriclondon.com/images/fblogo.jpg', fanart = 'http://www.anonlabel.com/wp-content/uploads/2013/04/fabric.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 ######################################################################### clean ###########################################################################################
 
 def CLEAN(string):
@@ -777,7 +785,8 @@ def HelpMenu():
 #------------------------------------------------------------------------------------------ HngMenu ----------------------------------------------------------------------------#
 
 def HngMenu():
-        addon.add_directory({'mode': 'GetLinks16a', 'url': BASE_URL15 + '/radioshows2.txt'}, {'title':  '[COLOR gold][B]Oldskool Specials [/COLOR] (rave sets)[/B]'}, img = 'http://www.ubuzz.net/photos/albums/powerhouse_unders/Middlesbrough/07_12_06/normal_100_4534.JPG', fanart = 'http://www.fantazia.org.uk/flyerlibrary/images/GarageCity_020601_f.jpg')
+        addon.add_directory({'mode': 'GetLinks16a', 'url': BASE_URL15 + '/radioshows2.txt'}, {'title':  '[COLOR gold][B]Rave player Specials [/COLOR] (rave sets)[/B]'}, img = 'http://www.ubuzz.net/photos/albums/powerhouse_unders/Middlesbrough/07_12_06/normal_100_4534.JPG', fanart = 'http://www.fantazia.org.uk/flyerlibrary/images/GarageCity_020601_f.jpg')
+        addon.add_directory({'mode': 'GetLinks16a', 'url': BASE_URL15 + '/vids.txt'}, {'title':  '[COLOR gold][B]Rave player Specials [/COLOR] (video rave sets)[/B]'}, img = 'http://www.ubuzz.net/photos/albums/powerhouse_unders/Middlesbrough/07_12_06/normal_100_4534.JPG', fanart = 'http://www.fantazia.org.uk/flyerlibrary/images/GarageCity_020601_f.jpg')
         addon.add_directory({'mode': 'GetLinks5', 'url': BASE_URL5 + '/'}, {'title':  '[COLOR turquoise][B]The beat sanctuary [/COLOR] (oldskool H&G)[/B]'}, img = 'http://i2.wp.com/musicyouneed.net/wp-content/uploads/2013/03/MYN-The-Underground.jpg?resize=290%2C290', fanart = 'http://www.crownbc.com/wp-content/uploads/2013/06/Bunker-Rave.jpg')
         addon.add_directory({'mode': 'GetLinks14', 'url': BASE_URL14 + 'audio/tracks/a-brief-history-of-grime-tapes'}, {'title':  '[COLOR turquoise][B]The wire [/COLOR] (oldskool H&G)[/B]'}, img = 'http://www.hcmf.co.uk/uploads/images/197wirelogoblockurlcopy.jpg?1253097636', fanart = 'http://alicepettey.com/wp-content/uploads/2012/03/The_Wire_Logo.jpg')
         addon.add_directory({'mode': 'GetLinks23', 'url': BASE_URL23 + '43637-EZ-Old-Skool-Garage-Sets/page2'}, {'title':  '[COLOR mediumseagreen][B]DJ EZ [/COLOR] (Mixtapes Collection)[/B]   [COLOR blue] **[/COLOR]'}, img = 'http://3.bp.blogspot.com/-jRPq1Szx0Js/TjaX0R0DFTI/AAAAAAAAANE/6ds6AbbuD2s/s320/dj+ez+photo', fanart = 'http://www.sotonight.net/wp-content/uploads/2013/10/dj-ez-garden-party-3-large.jpg')
@@ -795,6 +804,7 @@ def PodMenu():
         addon.add_directory({'mode': 'GetLinks6', 'url': BASE_URL6 + '/'}, {'title':  '[COLOR chartreuse][B]RatPack [/COLOR](Podcasts)[/B]'}, img = 'http://strictlyoldskool.net/wp-content/gallery/ratpack/ratpack-pic-1.jpg', fanart = 'http://static.inlog.org/wp-content/uploads/2013/04/front-590x390.jpg')
         addon.add_directory({'mode': 'GetLinks22', 'url': BASE_URL22 + 'site/category/podcast/'}, {'title':  '[COLOR chartreuse][B]John B [/COLOR] (Podcasts)[/B]'}, img = 'http://beta-recordings.com/images/Blog.jpg', fanart = 'http://i1.sndcdn.com/artworks-000028058053-5vxdam-original.jpg?77d7a69')
         addon.add_directory({'mode': 'GetLinks12', 'url': BASE_URL12 + '/'}, {'title':  '[COLOR chartreuse][B]Dj kutski [/COLOR](Podcasts)[/B]'}, img = 'http://www.shitmixtapes.com/storage/shitmixtapes-white.jpg?__SQUARESPACE_CACHEVERSION=1310920306487', fanart = 'http://farm3.staticflickr.com/2814/11285947406_690a1a7a92_z.jpg')
+        addon.add_directory({'mode': 'GetLinks30', 'url': BASE_URL30 + '/podcast'}, {'title':  '[COLOR chartreuse][B]Fabric london [/COLOR](Podcasts)[/B]'}, img = 'http://www.djsets.co.uk/compilations/fabric/fabric_logo_2.jpg', fanart = 'http://cdn.ltstatic.com/2008/January/GZ673439_942long.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------------------------ ArchiveMenu ----------------------------------------------------------------------------#
@@ -1070,6 +1080,8 @@ elif mode == 'GetLinks28c':
 	GetLinks28c(url)
 elif mode == 'GetLinks29':
 	GetLinks29(url)
+elif mode == 'GetLinks30':
+	GetLinks30(url)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)
 
