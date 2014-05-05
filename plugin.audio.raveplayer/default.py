@@ -66,7 +66,9 @@ BASE_URL24 = 'http://djtrudos.podomatic.com/'
 BASE_URL25 = 'http://forum.breakbeat.co.uk/'
 BASE_URL26 = 'http://archive.nu-rave.com/'
 BASE_URL27 = 'http://hardcorehighlights.com/'
-BASE_URL28 = 'http://mixing.dj/'
+BASE_URL28 = 'http://podcast.grimedigital.com/'
+BASE_URL29 = 'http://www.radionecks.com/'
+
 
 ############################################################################### Get links #############################################################################################
 
@@ -644,6 +646,65 @@ def GetLinks27(url):
                 addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://s28.postimg.org/qvbsfp7v1/Hardcore_Highlights_Small.png', fanart = 'http://wallpoper.com/images/00/41/10/87/abstract-hardcore_00411087.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+#------------------------------------------------------------------------------- DnB -------------------------------------------------------------------------------------#
+
+def GetLinks28(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('<li><a href="(.+?)" title=".+?">(.+?)</a>').findall(content)
+        for url, name in match:
+                addon.add_directory({'mode': 'GetLinks28a', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.grimeforum.com/wp-content/uploads/2013/06/00-Grime-300x3001.jpg', fanart = 'http://fc07.deviantart.net/fs70/i/2010/012/0/8/A_Life_Of_Grime_by_Jackdatboi.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def GetLinks28a(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('<h2 id=".+?"><a href="(.+?)" rel="bookmark" title=".+?">(.+?)</a></h3>').findall(content)
+        for url, name in match:
+                addon.add_directory({'mode': 'GetLinks28b', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://img.podbean.com/itunes-logo/99544/itunes-1200px.jpg', fanart = 'http://tmagicworld.com/downloads/grime.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def GetLinks28b(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('href="http://www.podbean.com/site/UserDownload/(.+?)" target=".+?">.+?</a><span class="divider">.+?</span><a class=".+?"').findall(content)
+        for url in match:
+                addon.add_directory({'mode': 'GetLinks28c', 'url': 'http://www.podbean.com/site/UserDownload/' + url, 'listitem': listitem}, {'title':  'Get Stream'}, img = 'http://img.podbean.com/itunes-logo/99544/itunes-1200px.jpg', fanart = 'http://payload.cargocollective.com/1/3/105419/1864993/SWgoatWALLPAPER.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def GetLinks28c(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('<a href="http://grimedigital.podbean.com/mf/web/(.+?)"  class="pull-right btn-download"><img src=".+?"><br />').findall(content)
+        for url in match:
+                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://grimedigital.podbean.com/mf/web/' + url, 'listitem': listitem}, {'title':  url.replace('_', ' ').replace('/', '. ').replace('.', ' ') + ' [COLOR orchid]Load stream[/COLOR]'}, img = 'http://i.imgur.com/q3pmESj.jpg', fanart = 'http://www.scenicreflections.com/files/grime_Wallpaper_dctfi.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#------------------------------------------------------------------------------- radio shows -------------------------------------------------------------------------------------#
+
+def GetLinks29(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('>-(.+?) <span style=".+?"><a href="http://www.mediafire.com/(.+?)" class="postlink">(Mediafire)</a>').findall(content)
+        for name, url, host in match:
+                addon.add_directory({'mode': 'GetLinks19a', 'url': 'http://www.mediafire.com/' + url, 'listitem': listitem}, {'title':  name.strip() + host}, img = 'http://i.imgur.com/U1uk5.jpg?1', fanart = 'https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-ash3/s720x720/527918_10151027721918672_1736787895_n.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 ######################################################################### clean ###########################################################################################
 
 def CLEAN(string):
@@ -688,7 +749,6 @@ def GetMediaInfo(html):
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'RadioMenu'}, {'title':  '[COLOR orchid][B]Live Radio [/COLOR](Streaming)[/B]'}, img = 'http://radio.aljalia.tv/images/on_air.png', fanart = 'http://tamtam.mao-jp.com/wp-content/uploads/2014/04/news12112012-4c.png')
         addon.add_directory({'mode': 'VRadioMenu'}, {'title':  '[COLOR orchid][B]Live Radio [/COLOR](Video Streaming)[/B]'}, img = 'http://radio.aljalia.tv/images/on_air.png', fanart = 'http://tamtam.mao-jp.com/wp-content/uploads/2014/04/news12112012-4c.png')
-
         addon.add_directory({'mode': 'ArchiveMenu'}, {'title':  '[COLOR green][B]Rave Tape packs & oldskool Dj sets [/COLOR](Archives)[/B]'}, img = 'http://www.missiongiant.com/navBar/Cassette-Tape.jpg', fanart = 'http://2.bp.blogspot.com/-1stPxBQVgrk/TyHnBXUxYCI/AAAAAAAAAhU/uOQNvSSRr8c/s1600/1218_bg.jpg')
         addon.add_directory({'mode': 'PodMenu'}, {'title':  '[COLOR chartreuse][B]Podcasts [/COLOR](Archives)[/B]'}, img = 'http://www.digitaldjhub.com/wp-content/uploads/podcast-logo.png', fanart = 'http://p1.pichost.me/i/37/1597754.jpg')
         addon.add_directory({'mode': 'HngMenu'}, {'title':  '[COLOR coral][B]Oldskool House & Garage [/COLOR](Archives)[/B]'}, img = 'http://i2.wp.com/musicyouneed.net/wp-content/uploads/2013/03/MYN-The-Underground.jpg?resize=290%2C290', fanart = 'http://eswalls.com/wp-content/uploads/2013/12/Download-Hd-Dj-Music-Dance-Composer.jpg')
@@ -710,6 +770,8 @@ def HngMenu():
         addon.add_directory({'mode': 'GetLinks23', 'url': BASE_URL23 + '43637-EZ-Old-Skool-Garage-Sets/page2'}, {'title':  '[COLOR mediumseagreen][B]DJ EZ [/COLOR] (Mixtapes Collection)[/B]   [COLOR blue] **[/COLOR]'}, img = 'http://3.bp.blogspot.com/-jRPq1Szx0Js/TjaX0R0DFTI/AAAAAAAAANE/6ds6AbbuD2s/s320/dj+ez+photo', fanart = 'http://www.sotonight.net/wp-content/uploads/2013/10/dj-ez-garden-party-3-large.jpg')
         addon.add_directory({'mode': 'GetLinks25', 'url': BASE_URL25 + 'tm.aspx?m=1970908037'}, {'title':  '[COLOR mediumseagreen][B]Oldskool Garage [/COLOR] (Mixtapes Collection)[/B]   [COLOR blue] **[/COLOR]'}, img = 'http://i1.sndcdn.com/artworks-000008096876-l7s4hz-original.jpg?164b459', fanart = 'http://i1.ytimg.com/vi/3CB28nzsrTY/maxresdefault.jpg')
         addon.add_directory({'mode': 'GetLinks24', 'url': BASE_URL24 + '/'}, {'title':  '[COLOR chartreuse][B]Official Sidewinder UK Garage [/COLOR] (Podcasts)[/B]'}, img = 'http://assets.podomatic.net/ts/cf/4b/3d/djtrudos/1400x1400_9185047.jpg', fanart = 'http://cdn.shopify.com/s/files/1/0236/1879/files/SunCity_Crowd2_large.jpg?1396')
+        addon.add_directory({'mode': 'GetLinks28', 'url': BASE_URL28 + '/'}, {'title':  '[COLOR firebrick][B]Grime [/COLOR] (Podcast)[/B]'}, img = 'http://www.grimeforum.com/wp-content/uploads/2013/06/1abb-300x225.jpg', fanart = 'http://3.bp.blogspot.com/_IYjvbF1SbPc/S_-x5X088lI/AAAAAAAAAJc/qYjcZl3eZf0/s1600/Grime+graf.JPG')
+        addon.add_directory({'mode': 'GetLinks29', 'url': BASE_URL29 + 'viewtopic.php?f=20&t=313'}, {'title':  '[COLOR green][B]Radio Necks [/COLOR] (Pirate Radio Recordings)[/B][COLOR red]   *[/COLOR][COLOR blue] **[/COLOR]'}, img = 'http://i.imgur.com/U1uk5.jpg?1', fanart = 'http://oi41.tinypic.com/2uo03f6.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------------------------ PodMenu ----------------------------------------------------------------------------#
@@ -741,7 +803,7 @@ def ArchiveMenu():
         addon.add_directory({'mode': 'GetLinks17a', 'url': BASE_URL17 + '/details/175bpm.pl-HelterSkelterCollection'}, {'title':  '[COLOR green][B]Helter Skelter [/COLOR] (Archive)[/B]'}, img = 'http://rave.space.net.au/graphics/hskelter.jpg', fanart = 'http://www.fantazia.org.uk/flyerlibrary/images/HelterSkelter_170993_f.jpg')
         #addon.add_directory({'mode': 'GetLinks21', 'url': BASE_URL21 + '/'}, {'title':  '[COLOR green][B]175BPM [/COLOR] (Archive)[/B]   [COLOR red] *[/COLOR]'}, img = 'http://i1.sndcdn.com/artworks-000040491089-ibo2zb-crop.jpg?164b459', fanart = 'http://i1.ytimg.com/vi/eY2ceXfW1FU/maxresdefault.jpg')
         addon.add_directory({'mode': 'GetLinks27', 'url': BASE_URL27 + '/mix-archive/live-sets/'}, {'title':  '[COLOR green][B]Hardcore Highlights [/COLOR] (Archive)[/B]'}, img = 'http://s28.postimg.org/qvbsfp7v1/Hardcore_Highlights_Small.png', fanart = 'http://wallpoper.com/images/00/41/10/87/abstract-hardcore_00411087.jpg')
-        #addon.add_directory({'mode': 'GetLinks28', 'url': BASE_URL28 + ''}, {'title':  '[COLOR green][B] [/COLOR] (Archive)[/B]'}, img = '', fanart = '')
+        addon.add_directory({'mode': 'GetLinks29', 'url': BASE_URL29 + 'viewtopic.php?f=20&t=313'}, {'title':  '[COLOR green][B]Radio Necks [/COLOR] (Pirate Radio Recordings)[/B][COLOR red]   *[/COLOR][COLOR blue] **[/COLOR]'}, img = 'http://i.imgur.com/U1uk5.jpg?1', fanart = 'http://oi41.tinypic.com/2uo03f6.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1])) 
 
 #------------------------------------------------------------------------------------------ RadioMenu ----------------------------------------------------------------------------#
@@ -801,7 +863,7 @@ def RadioMenu():
         li.setProperty('fanart_image', 'http://1.bp.blogspot.com/-pXdClkxvZu8/TleccVYC3EI/AAAAAAAAAic/A7aV-CrKcaU/s1600/Ministry-of-Sound.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
-        url = 'http://uk1-pn.webcast-server.net:8698'
+        url = 'http://uk1-pn.mixstream.net/8698.m3u'
         li = xbmcgui.ListItem('[COLOR dodgerblue][B]Kool London[/B][/COLOR] [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://s30.postimg.org/5r870dash/icon.png')
         li.setProperty('fanart_image', 'http://koollondon.com/images/stories/kool-timetable-march-2014.png')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
@@ -847,14 +909,19 @@ def VRadioMenu():
         addon_handle = int(sys.argv[1]) 
         xbmcplugin.setContent(addon_handle, 'audio')
 
+        url = 'http://xfreekfmx.api.channel.livestream.com/3.0/playlist.m3u8'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Freek fm [/B][/COLOR]  [COLOR red](Video Stream)[/COLOR]  [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://i1.sndcdn.com/artworks-000054361433-rp4x3h-original.png?671e660')
+        li.setProperty('fanart_image', 'http://www.freekfmlive.com/images/freek/sontron-drum-mics-460-801.gif')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
         url = 'http://213.229.108.96/RTB'
         li = xbmcgui.ListItem('[COLOR dodgerblue][B]Rough Tempo [/B][/COLOR]  [COLOR red](Video Stream)[/COLOR]  [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://www.roughtempo.com/fbimage.jpg')
         li.setProperty('fanart_image', 'http://s18.postimg.org/wxt9kuvpl/maxresdefault.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
-        url = 'http://xfreekfmx.api.channel.livestream.com/3.0/playlist.m3u8'
-        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Freek fm [/B][/COLOR]  [COLOR red](Video Stream)[/COLOR]  [COLOR lime](((Live)))[/COLOR] >>', thumbnailImage= 'http://i1.sndcdn.com/artworks-000054361433-rp4x3h-original.png?671e660')
-        li.setProperty('fanart_image', 'http://www.freekfmlive.com/images/freek/sontron-drum-mics-460-801.gif')
+        url = 'http://213.229.108.96/RAVETV'
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]Rave:TV [/B][/COLOR]  [COLOR red](Video Stream)[/COLOR]  [COLOR gold](((NOT 24/7 check site to see when live)))[/COLOR]', iconImage='https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash3/t1.0-1/c28.28.345.345/s160x160/562599_139408172908462_1152825309_n.jpg', thumbnailImage= 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash3/t1.0-1/c28.28.345.345/s160x160/562599_139408172908462_1152825309_n.jpg')
+        li.setProperty('fanart_image', 'http://archive-media.nyafuu.org/wg/image/1367/08/1367087842578.png')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
         addon.add_directory({'mode': 'RadioMenu', '': '', '': '',
@@ -972,6 +1039,16 @@ elif mode == 'GetLinks26':
 	GetLinks26(url)
 elif mode == 'GetLinks27':
 	GetLinks27(url)
+elif mode == 'GetLinks28':
+	GetLinks28(url)
+elif mode == 'GetLinks28a':
+	GetLinks28a(url)
+elif mode == 'GetLinks28b':
+	GetLinks28b(url)
+elif mode == 'GetLinks28c':
+	GetLinks28c(url)
+elif mode == 'GetLinks29':
+	GetLinks29(url)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)
 
