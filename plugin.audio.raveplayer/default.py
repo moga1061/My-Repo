@@ -822,7 +822,7 @@ def HelpMenu():
 def RaMenu(): 
         addon.add_directory({'mode': 'GetLinks15a', 'url': BASE_URL15 + '/vids.txt'}, {'title':  '[COLOR deeppink][B]***Rave player Specials*** [/COLOR] (History videos)[/B]'}, img = 'https://blog52.files.wordpress.com/2008/04/lpfm.jpg', fanart = 'http://non-fiction.eu/wp-content/uploads/2013/04/pirate_radio_2.jpg')
         addon.add_directory({'mode': 'GetLinks16', 'url': BASE_URL15 + '/radioshows.txt'}, {'title':  '[COLOR gold][B]Oldskool Radio Specials [/COLOR] (the lost tapes)[/B]'}, img = 'http://s12.postimg.org/3szbuobot/icon.png', fanart = 'http://4.bp.blogspot.com/_8V97VYqI3Po/S7Md-Sd5OcI/AAAAAAAABGk/haepgezjFqw/s1600/24897_410278471302_133985331302_5619646_2569052_n.jpg')
-        addon.add_directory({'mode': 'ArMenu'}, {'title':  '[COLOR thistle][B]The Pirate Archive [/COLOR](All Genres)[/B]'}, img = 'http://www.jgenvironmental.co.uk/wp-content/uploads/2013/03/radio-waves-hi.png', fanart = 'http://upload.wikimedia.org/wikipedia/commons/9/93/Video_tape_archive_storage_(6498637005).jpg')
+        addon.add_directory({'mode': 'ArMenu'}, {'title':  '[COLOR thistle][B]The Pirate Archive [/COLOR](All Genres)[/B]'}, img = 'https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-ash2/t1.0-9/528664_327210837349374_53918821_n.jpg', fanart = 'http://oi60.tinypic.com/30a8c3n.jpg')
         addon.add_directory({'mode': 'GetLinks', 'url': BASE_URL + '/'}, {'title':  '[COLOR green][B]One In The Jungle [/COLOR](BBC Radio 1)[/B]'}, img = 'http://www.oneinthejungle.net/images/home/fb.png', fanart = 'http://img193.imageshack.us/img193/4990/dsc09956tx.jpg')
         addon.add_directory({'mode': 'GetLinks9a', 'url': BASE_URL9 + '/'}, {'title':  '[COLOR green][B]mikus Musik [/COLOR](All Genres)[/B]'}, img = 'http://3.bp.blogspot.com/-iDTTgsZBiBA/TwHRQBfrEKI/AAAAAAAAATs/8lTy5Va4_is/s1600/MIKUS.gif', fanart = 'http://s23.postimg.org/4sn8qcp8b/fanart.jpg')
         addon.add_directory({'mode': 'GetLinks29', 'url': BASE_URL29 + 'viewtopic.php?f=20&t=313'}, {'title':  '[COLOR green][B]Radio Necks [/COLOR] (Pirate Radio Recordings)[/B][COLOR red]   *[/COLOR][COLOR blue] **[/COLOR]'}, img = 'http://i.imgur.com/U1uk5.jpg?1', fanart = 'http://oi41.tinypic.com/2uo03f6.jpg')
@@ -838,6 +838,10 @@ def ArMenu():
         addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + 'kiss-ldn/'}, {'title':  '[COLOR green][B]kiss FM - London [/COLOR] (oldskool dj sets)[/B]'}, img = 'http://www.thepiratearchive.net/wordpress/wp-content/uploads/2013/01/KissFM-London-DONE1.jpg', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
         addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + 'fresh/'}, {'title':  '[COLOR green][B]Fresh FM - Leicester[/COLOR] (oldskool dj sets)[/B]'}, img = 'http://www.thepiratearchive.net/wordpress/wp-content/uploads/2013/04/FreshLogo1.jpg', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
         addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + 'dream/'}, {'title':  '[COLOR green][B]Dream FM - Leeds [/COLOR] (oldskool dj sets)[/B]'}, img = 'http://www.thepiratearchive.net/wordpress/wp-content/uploads/2013/04/DreamLogo2.jpg', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
+        addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + 'dbc/'}, {'title':  '[COLOR green][B]DBC - London [/COLOR] (oldskool dj sets)[/B]'}, img = 'http://www.thepiratearchive.net/wordpress/wp-content/uploads/2013/01/dbc20logohj7-300x267.gif', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
+        addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + 'passion-bristol/'}, {'title':  '[COLOR green][B]Passion FM - Bristol [/COLOR] (oldskool dj sets)[/B]'}, img = 'https://fbexternal-a.akamaihd.net/safe_image.php?d=AQByp4lgCMD2CWHd&w=377&h=197&url=http%3A%2F%2Fwww.passionrb.com%2Fwp-content%2Fuploads%2F2013%2F09%2FRefreshWebsiteBANNER2.jpg&cfs=1', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
+        addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + 'ragga/'}, {'title':  '[COLOR green][B]Ragga FM - Bristol [/COLOR] (oldskool dj sets)[/B]'}, img = 'http://www.raggafm.co.uk/images/logo_big.jpg', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
+        addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + 'spec/'}, {'title':  '[COLOR green][B]S.P.E.C. Radio - Bristol [/COLOR] (oldskool dj sets)[/B]'}, img = 'http://www.thepiratearchive.net/wordpress/wp-content/uploads/2013/04/SPECLogo.jpg', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
         addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + 'northwest-misc-stations/'}, {'title':  '[COLOR green][B]North West Misc Station Audio [/COLOR] (oldskool dj sets)[/B]'}, img = 'http://www.niemanlab.org/images/on-air-radio-microphone-cc.jpg', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
         addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + 'london-misc/'}, {'title':  '[COLOR green][B]London Misc Station Audio [/COLOR] (oldskool dj sets)[/B]'}, img = 'http://www.niemanlab.org/images/on-air-radio-microphone-cc.jpg', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
         addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + 'sw-misc/'}, {'title':  '[COLOR green][B]Bristol & South West Misc Station Audio [/COLOR] (oldskool dj sets)[/B]'}, img = 'http://www.niemanlab.org/images/on-air-radio-microphone-cc.jpg', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
@@ -946,6 +950,11 @@ def RadioMenu():
         li.setProperty('fanart_image', 'http://i1.sndcdn.com/artworks-000028046982-dxmeig-original.jpg?164b459')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
+        url = 'http://198.144.148.12:9002/listen.pls'
+        li = xbmcgui.ListItem('[COLOR mediumaquamarine][B]Point Blank fm [/B][/COLOR] [COLOR lime](((Live)))[/COLOR]  (House + more)', thumbnailImage= 'http://i1.sndcdn.com/artworks-000050041757-a1ox54-original.jpg?164b459')
+        li.setProperty('fanart_image', 'https://pbs.twimg.com/profile_images/1351770720/PB_Logo_Small.png')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
         url = 'http://50.7.158.42:8066/'
         li = xbmcgui.ListItem('[COLOR mediumaquamarine][B]Reaction Radio  [/B][/COLOR] [COLOR lime](((Live)))[/COLOR]  (House + more)', thumbnailImage= 'http://www.reactionradio.co.uk/data/ckeditor/click_here_-_listen_live_-_new_version.jpg')
         li.setProperty('fanart_image', 'http://wordpress.mediatel.co.uk/wp-content/uploads/2013/10/Radio-Rajar.jpg')
@@ -954,6 +963,11 @@ def RadioMenu():
         url = 'http://193.27.42.226:8192/mosdir.mp3'
         li = xbmcgui.ListItem('[COLOR mediumaquamarine][B]Ministry of Sound Radio[/B][/COLOR] [COLOR lime](((Live)))[/COLOR]  (House + more)', thumbnailImage= 'http://i1.sndcdn.com/artworks-000070064884-tec6ir-original.jpg?f775e59')
         li.setProperty('fanart_image', 'http://1.bp.blogspot.com/-pXdClkxvZu8/TleccVYC3EI/AAAAAAAAAic/A7aV-CrKcaU/s1600/Ministry-of-Sound.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://65.60.52.122:8220/listen.pls'
+        li = xbmcgui.ListItem('[COLOR mediumaquamarine][B]Flex fm [/B][/COLOR] [COLOR lime](((Live)))[/COLOR]  (House + more)', thumbnailImage= 'http://images-mix.netdna-ssl.com/w/300/h/300/q/85/upload/images/extaudio/69a90686-6d2f-4fbe-9a61-b7f90c955cc7.jpg')
+        li.setProperty('fanart_image', 'http://photos-h.ak.fbcdn.net/hphotos-ak-frc3/t1.0-0/c13.0.935.623/s720x720/428247_523439234355303_19226475_n.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
         addon.add_directory({'mode': 'RadioMenu', '': '', '': '',
