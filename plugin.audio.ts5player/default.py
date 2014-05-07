@@ -6,7 +6,7 @@ from t0mm0.common.net import Net
 addon_id = 'plugin.audio.ts5player'
 plugin = xbmcaddon.Addon(id=addon_id)
 DB = os.path.join(xbmc.translatePath("special://database"), 'ts5player.db')
-BASE_URL = 'http://www.ts5.com/'
+BASE_URL = 'https://raw.githubusercontent.com/TheYid/yidpics/master'
 net = Net()
 addon = Addon('plugin.audio.ts5player', sys.argv)
 mode = addon.queries['mode']
@@ -56,8 +56,7 @@ def MainMenu():    #homescreen
         li = xbmcgui.ListItem('[COLOR blue][B]Capital Xtra[/B][/COLOR] [COLOR lime] (((LIVE))) [/COLOR]', iconImage='http://www.musicweek.com/cimages/a6ff7aa07ec100c4cc84ab4148817d44.jpg', thumbnailImage= 'http://www.musicweek.com/cimages/a6ff7aa07ec100c4cc84ab4148817d44.jpg')
         li.setProperty('fanart_image', 'http://s12.postimg.org/igt3akj5p/xtra_channel_art_template.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
-
-        addon.add_directory({'mode': 'GetLinks', 'url': BASE_URL + '/'}, {'title':  '[COLOR darkorchid][B]TS5 Music Player[/B] [/COLOR]'}, img = 'http://img.youtube.com/vi/MExnrzr7Pa8/0.jpg', fanart = 'http://s7.postimg.org/41ab2ep17/fanart.jpg')
+        addon.add_directory({'mode': 'GetLinks', 'url': BASE_URL + '/ts5.txt'}, {'title':  '[COLOR darkorchid][B]TS5 Music Player[/B] [/COLOR]'}, img = 'http://img.youtube.com/vi/MExnrzr7Pa8/0.jpg', fanart = 'http://s7.postimg.org/41ab2ep17/fanart.jpg')
         xbmcplugin.endOfDirectory(addon_handle)
 
 
