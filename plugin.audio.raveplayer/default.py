@@ -55,7 +55,7 @@ BASE_URL17 = 'https://archive.org/'
 BASE_URL18 = 'http://torontoravemixtapearchive.com/'
 BASE_URL19 = 'http://jungletechno.tumblr.com/'
 BASE_URL20 = 'http://www.dj-jedi.com/'
-#BASE_URL21 = ''
+BASE_URL21 = 'http://www.djliondub.com/'
 BASE_URL22 = 'http://www.john-b.com/'
 BASE_URL23 = 'http://dnbforum.com/showthread.php/'
 BASE_URL24 = 'http://djtrudos.podomatic.com/'
@@ -548,7 +548,16 @@ def GetLinks20(url):
 
 #------------------------------------------------------------------------------- #21 -------------------------------------------------------------------------------------#
 
-#def GetLinks21(url):                                            
+def GetLinks21(url):  
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('<a href="http://www.djliondub.com/(.+?)" target="_blank">(.+?)</a>').findall(content)
+        for url, name in match:
+                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://www.djliondub.com/' + url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.djliondub.com/LIONDUB_B+W_LOGO.jpg', fanart = 'http://blog.dubspot.com/files/2011/03/ldlabe.jpeg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))                                          
 
 #------------------------------------------------------------------------------- john-b -------------------------------------------------------------------------------------#
 
@@ -827,6 +836,7 @@ def RaMenu():
         addon.add_directory({'mode': 'GetLinks9a', 'url': BASE_URL9 + '/'}, {'title':  '[COLOR green][B]mikus Musik [/COLOR](All Genres)[/B]'}, img = 'http://3.bp.blogspot.com/-iDTTgsZBiBA/TwHRQBfrEKI/AAAAAAAAATs/8lTy5Va4_is/s1600/MIKUS.gif', fanart = 'http://s23.postimg.org/4sn8qcp8b/fanart.jpg')
         addon.add_directory({'mode': 'GetLinks29', 'url': BASE_URL29 + 'viewtopic.php?f=20&t=313'}, {'title':  '[COLOR green][B]Radio Necks [/COLOR] (Pirate Radio Recordings)[/B][COLOR red]   *[/COLOR][COLOR blue] **[/COLOR]'}, img = 'http://i.imgur.com/U1uk5.jpg?1', fanart = 'http://oi41.tinypic.com/2uo03f6.jpg')
         addon.add_directory({'mode': 'GetLinks26', 'url': BASE_URL26 + '/'}, {'title':  '[COLOR green][B]Nu-Rave Radio [/COLOR](Archive)[/B]'}, img = 'http://fc06.deviantart.net/fs29/i/2008/101/e/1/nu_rave_com_logo_by_simonduffy.jpg', fanart = 'http://www.hydramag.com/wp-content/uploads/2011/07/Flyers-1.jpg')
+        #addon.add_directory({'mode': 'GetLinks21', 'url': BASE_URL21 + 'version.html'}, {'title':  '[COLOR green][B]  [/COLOR]()[/B]'}, img = 'http://www.djliondub.com/LIONDUB_B+W_LOGO.jpg', fanart = 'http://www.zona6.org/site/images/slide_liondub.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def ArMenu(): 
@@ -866,12 +876,12 @@ def HngMenu():
 #------------------------------------------------------------------------------------------ PodMenu ----------------------------------------------------------------------------#
 
 def PodMenu(): 
-        addon.add_directory({'mode': 'GetLinks10', 'url': BASE_URL10 + '/showthread.php?3752-mal-was-anderes-oldskool-history-of-edm-mix'}, {'title':  '[COLOR chartreuse][B]In the beginning there was Jack[/COLOR] (podcast)[/B]'}, img = 'http://sd.keepcalm-o-matic.co.uk/i/in-the-beginning-there-was-jack-9.png', fanart = 'http://galiofficial.com/wp-content/uploads/2013/03/house-music-design-nation.jpg')
-        addon.add_directory({'mode': 'GetLinks20', 'url': BASE_URL20 + 'dj_jedi_audio.php'}, {'title':  '[COLOR chartreuse][B]Dj jedi [/COLOR](Podcasts)[/B]'}, img = 'http://www.dj-jedi.com/images/dj_jedi_logo.gif', fanart = 'http://archive-media.nyafuu.org/wg/image/1367/08/1367087842578.png')
-        addon.add_directory({'mode': 'GetLinks6', 'url': BASE_URL6 + '/'}, {'title':  '[COLOR chartreuse][B]RatPack [/COLOR](Podcasts)[/B]'}, img = 'http://strictlyoldskool.net/wp-content/gallery/ratpack/ratpack-pic-1.jpg', fanart = 'http://static.inlog.org/wp-content/uploads/2013/04/front-590x390.jpg')
-        addon.add_directory({'mode': 'GetLinks22', 'url': BASE_URL22 + 'site/category/podcast/'}, {'title':  '[COLOR chartreuse][B]John B [/COLOR] (Podcasts)[/B]'}, img = 'http://beta-recordings.com/images/Blog.jpg', fanart = 'http://i1.sndcdn.com/artworks-000028058053-5vxdam-original.jpg?77d7a69')
-        addon.add_directory({'mode': 'GetLinks12', 'url': BASE_URL12 + '/'}, {'title':  '[COLOR chartreuse][B]Dj kutski [/COLOR](Podcasts)[/B]'}, img = 'http://www.shitmixtapes.com/storage/shitmixtapes-white.jpg?__SQUARESPACE_CACHEVERSION=1310920306487', fanart = 'http://farm3.staticflickr.com/2814/11285947406_690a1a7a92_z.jpg')
-        addon.add_directory({'mode': 'GetLinks30', 'url': BASE_URL30 + '/podcast'}, {'title':  '[COLOR chartreuse][B]Fabric london [/COLOR](Podcasts)[/B]'}, img = 'http://www.djsets.co.uk/compilations/fabric/fabric_logo_2.jpg', fanart = 'http://cdn.ltstatic.com/2008/January/GZ673439_942long.jpg')
+        addon.add_directory({'mode': 'GetLinks10', 'url': BASE_URL10 + '/showthread.php?3752-mal-was-anderes-oldskool-history-of-edm-mix'}, {'title':  '[COLOR chartreuse][B]In the beginning there was Jack[/COLOR] (House)[/B]'}, img = 'http://sd.keepcalm-o-matic.co.uk/i/in-the-beginning-there-was-jack-9.png', fanart = 'http://galiofficial.com/wp-content/uploads/2013/03/house-music-design-nation.jpg')
+        addon.add_directory({'mode': 'GetLinks20', 'url': BASE_URL20 + 'dj_jedi_audio.php'}, {'title':  '[COLOR chartreuse][B]Dj jedi [/COLOR](Olskool, Hardcore)[/B]'}, img = 'http://www.dj-jedi.com/images/dj_jedi_logo.gif', fanart = 'http://archive-media.nyafuu.org/wg/image/1367/08/1367087842578.png')
+        addon.add_directory({'mode': 'GetLinks6', 'url': BASE_URL6 + '/'}, {'title':  '[COLOR chartreuse][B]RatPack [/COLOR](Oldskool)[/B]'}, img = 'http://strictlyoldskool.net/wp-content/gallery/ratpack/ratpack-pic-1.jpg', fanart = 'http://static.inlog.org/wp-content/uploads/2013/04/front-590x390.jpg')
+        addon.add_directory({'mode': 'GetLinks22', 'url': BASE_URL22 + 'site/category/podcast/'}, {'title':  '[COLOR chartreuse][B]John B [/COLOR] (Drum & Bass)[/B]'}, img = 'http://beta-recordings.com/images/Blog.jpg', fanart = 'http://i1.sndcdn.com/artworks-000028058053-5vxdam-original.jpg?77d7a69')
+        addon.add_directory({'mode': 'GetLinks12', 'url': BASE_URL12 + '/'}, {'title':  '[COLOR chartreuse][B]Dj kutski [/COLOR](House)[/B]'}, img = 'http://www.shitmixtapes.com/storage/shitmixtapes-white.jpg?__SQUARESPACE_CACHEVERSION=1310920306487', fanart = 'http://farm3.staticflickr.com/2814/11285947406_690a1a7a92_z.jpg')
+        addon.add_directory({'mode': 'GetLinks30', 'url': BASE_URL30 + '/podcast'}, {'title':  '[COLOR chartreuse][B]Fabric london [/COLOR](House)[/B]'}, img = 'http://www.djsets.co.uk/compilations/fabric/fabric_logo_2.jpg', fanart = 'http://cdn.ltstatic.com/2008/January/GZ673439_942long.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------------------------ ArchiveMenu ----------------------------------------------------------------------------#
@@ -884,6 +894,7 @@ def ArchiveMenu():
         addon.add_directory({'mode': 'GetLinks11', 'url': BASE_URL11 + '/'}, {'title':  '[COLOR green][B]Demodulated mixtapes [/COLOR](Archive)[/B]'}, img = 'http://urbanlegendkampala.com/wp-content/uploads/2013/11/Mixtape-Image.jpg', fanart = 'http://bigghostlimited.com/wp-content/uploads/2013/09/MIxtape.gif')
         addon.add_directory({'mode': 'GetLinks18', 'url': BASE_URL18 + '/'}, {'title':  '[COLOR green][B]Toronto rave mixtape [/COLOR](Archive)[/B]   [COLOR red] *[/COLOR]'}, img = 'http://www.torontoravemixtapearchive.com/images/promo/trma.jpg', fanart = 'http://torontoravemixtapearchive.com/images/promo/DavidRyanTapes.jpg')
         addon.add_directory({'mode': 'GetLinks17', 'url': BASE_URL17 + '/details/175bpm.plLtjBukemMixtapesCollection'}, {'title':  '[COLOR greenyellow][B]L T J Bukem [/COLOR](Tape Collection)[/B]'}, img = 'http://i1.wp.com/www.mostlyjunkfood.com/treats/2013/05/image002.jpg', fanart = 'http://www.htbackdrops.org/v2/albums/userpics/10257/orig_LTJ_Bukem.jpg')
+        addon.add_directory({'mode': 'GetLinks21', 'url': BASE_URL21 + 'version.html'}, {'title':  '[COLOR greenyellow][B]LionDub  [/COLOR](Tape Collection)[/B]'}, img = 'http://www.djliondub.com/LIONDUB_B+W_LOGO.jpg', fanart = 'http://www.zona6.org/site/images/slide_liondub.jpg')
         addon.add_directory({'mode': 'GetLinks17a', 'url': BASE_URL17 + '/details/175bpm.pl-HelterSkelterCollection'}, {'title':  '[COLOR greenyellow][B]Helter Skelter [/COLOR] (Tape Collection)[/B]'}, img = 'http://rave.space.net.au/graphics/hskelter.jpg', fanart = 'http://www.fantazia.org.uk/flyerlibrary/images/HelterSkelter_170993_f.jpg')
         addon.add_directory({'mode': 'GetLinks2', 'url': BASE_URL2 + '/soundmanager2/demo/page-player/20bensons.html'}, {'title':  '[COLOR greenyellow][B]20bensons rave [/COLOR](Tape Collection)[/B]'}, img = 'http://www.zigsam.at/l07/B_Cig/BensonHedgesSpeciaF-20fJP197.jpg', fanart = 'http://bigghostlimited.com/wp-content/uploads/2013/09/MIxtape.gif')
         addon.add_directory({'mode': 'GetLinks19', 'url': BASE_URL19 + ''}, {'title':  '[COLOR greenyellow][B]jungletechno [/COLOR](Tape Collection)[/B][COLOR red]   *[/COLOR][COLOR blue] **[/COLOR]'}, img = 'https://pbs.twimg.com/profile_images/1430963248/Hardcore_Jungle_Techno_-_001.jpg', fanart = 'http://thebowlerfirm.com/wp-content/uploads/2012/05/stevie.jpg')
@@ -1154,8 +1165,8 @@ elif mode == 'GetLinks19a':
 	GetLinks19a(url)
 elif mode == 'GetLinks20':
 	GetLinks20(url)
-#elif mode == 'GetLinks21':
-#	GetLinks21(url)
+elif mode == 'GetLinks21':
+	GetLinks21(url)
 elif mode == 'GetLinks22':
 	GetLinks22(url)
 elif mode == 'GetLinks23':
