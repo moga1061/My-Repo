@@ -24,6 +24,7 @@ from TheYid.common.addon import Addon
 from TheYid.common.net import Net
 from htmlentitydefs import name2codepoint as n2cp
 import HTMLParser
+import urlresolver
 
 addon_id = 'plugin.audio.raveplayer'
 plugin = xbmcaddon.Addon(id=addon_id)
@@ -447,6 +448,30 @@ def GetLinks16a(url):
         for name, url in match:
                 addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://phatmedia.co.uk/media/assets/large/e780268f7916b5318a655aecfbd6cd4116559fe0.jpg' , fanart = 'http://assets.vice.com/content-images/contentimage/no-slug/351c29bc232d36f6efc5d7c970eea935.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#------------------------------------------------------------------------------- vids ----------------------------------------------------------------------------------------#
+
+def GetLinksvids(url):
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('<>title="(.+?)" href="(.+?)" /><').findall(content)
+        for name, url in match:
+                if urlresolver.HostedMediaFile(url= url):
+                        addon.add_directory({'mode': 'PlayVideo1', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img= 'http://www.londonpirates.co.uk/PBVid.jpg' , fanart = 'http://fc04.deviantart.net/fs70/i/2011/326/4/5/pirate_radio_wallpaper_by_pastorgavin-d4gz73g.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def PlayVideo1(url, listitem):
+    try:
+        print 'in PlayVideo %s' % url
+        stream_url = urlresolver.HostedMediaFile(url).resolve()
+        xbmc.Player().play(stream_url)
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR slategray][B]^^^ Press back ^^^[/B] [/COLOR]'},'','')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry Link may have been removed ![/B][/COLOR],[COLOR lime][B]Please try a different link/host !![/B][/COLOR],7000,"")")
+
 
 #------------------------------------------------------------------------------- ltj Bukem Mixtapes Collection -------------------------------------------------------------------------------------#
 
@@ -887,6 +912,7 @@ def PodMenu():
 #------------------------------------------------------------------------------------------ ArchiveMenu ----------------------------------------------------------------------------#
 
 def ArchiveMenu():
+        addon.add_directory({'mode': 'GetLinksvids', 'url': BASE_URL15 + '/vids2.txt'}, {'title':  '[COLOR palevioletred][B]***Rave player Specials*** [/COLOR] (Utube Documentaries)[/B]'}, img = 'http://cdn.gizmocrazed.com/wp-content/uploads/2012/02/documentary-genre.jpg', fanart = 'http://cdn.7boom.mx/content/boom-img/8630e9b6.jpeg')
         addon.add_directory({'mode': 'GetLinks15', 'url': BASE_URL15 + '/dnb.txt'}, {'title':  '[COLOR gold][B]Rave player Specials [/COLOR] (Rave Dj Sets)[/B]'}, img = 'http://s28.postimg.org/uwfyuzepp/cassettetdk.jpg', fanart = 'http://amgroup.com/news/wp-content/uploads/2013/04/IMG_4470-Custom.jpg') 
         addon.add_directory({'mode': 'GetLinks3', 'url': BASE_URL3 + '/'}, {'title':  '[COLOR green][B]Rave tape packs [/COLOR](Archive)[/B]'}, img = 'http://fc09.deviantart.net/fs25/f/2008/111/a/8/Cassette_tape_by_Quick_Stop.png', fanart = 'http://s27.postimg.org/3qdp1snnn/hhhgggg.jpg')
         addon.add_directory({'mode': 'GetLinks4', 'url': BASE_URL4 + '/'}, {'title':  '[COLOR green][B]Deepinside the oldskool [/COLOR](Archive)[/B]'}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
@@ -1201,7 +1227,11 @@ elif mode == 'GetLinks32a':
 	GetLinks32a(url)
 elif mode == 'GetLinks33':
 	GetLinks33(url)
+elif mode == 'GetLinksvids':
+	GetLinksvids(url)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)
+elif mode == 'PlayVideo1':
+	PlayVideo1(url, listitem)
 
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
