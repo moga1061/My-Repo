@@ -20,5 +20,11 @@ url = 'http://uk1-pn.mixstream.net/8698.m3u'
 li = xbmcgui.ListItem('[COLOR dodgerblue][B]Kool London[/B][/COLOR] [COLOR red][B][I](Live)[/B][/I][/COLOR]  [COLOR yellow][B] >>[/B][/COLOR] >>    [COLOR lime](Stream 2)[/COLOR]', iconImage='http://s30.postimg.org/5r870dash/icon.png', thumbnailImage= 'http://s30.postimg.org/5r870dash/icon.png')
 li.setProperty('fanart_image', 'http://s2.postimg.org/4jtfmw5qx/fanart2.jpg')
 xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+xbmcplugin.setContent(addon_handle, 'audio')
+url = 'http://uk1-pn.mixstream.net/8698.asx'
+li = xbmcgui.ListItem('Text: 07943 813 011. Twitter: @koollondon. KoolLondon.com  Internet Radio Station The Mecca of Drum n Bass, Jungle & Hardcore, 11 times winner of Drum & Bass Awards', iconImage='http://s30.postimg.org/5r870dash/icon.png', thumbnailImage= 'http://s30.postimg.org/5r870dash/icon.png')
+li.setProperty('fanart_image', 'http://s2.postimg.org/4jtfmw5qx/fanart2.jpg')
+xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 xbmcplugin.endOfDirectory(addon_handle)
 

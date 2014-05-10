@@ -69,6 +69,7 @@ BASE_URL30 = 'http://www.fabriclondon.com/'
 BASE_URL31 = 'http://www.thepiratearchive.net/'
 BASE_URL32 = 'http://grimetapes.tumblr.com/'
 BASE_URL33 = 'http://torontojungle.com/'
+BASE_URL34 = 'http://koolfm.org.uk/'
 
 ############################################################################### Get links #############################################################################################
 
@@ -760,6 +761,20 @@ def GetLinks33(url):
                 addon.add_directory({'mode': 'GetLinks19a', 'url': 'http://www.mediafire.com/' + url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.mixmag.net/sites/default/files/imagecache/article/images/skrillzmiddle.jpg', fanart = 'http://www.pulsarmedia.eu/data/media/24/Music%20in%20Pictures%20(63).jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+#------------------------------------------------------------------------------- kool -------------------------------------------------------------------------------------#
+
+def GetLinks34(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('width="65%"bgcolor="#.+?">(.+?)</td><td width="15%"bgcolor="#.+?" align="center">.+?<small>.+?</small></td><td width="10%"bgcolor="#.+?" align="center"><a href="(.+?)"><img src="play.gif" width=".+?" height=".+?" border="0"></a></td><td width="10%"bgcolor="#.+?" align="center"><a href=".+?"><img').findall(content)
+        for name, url in match:
+                addon.add_directory({'mode': 'PlayVideo', 'url': 'http://koolfm.org.uk/' + url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://i192.photobucket.com/albums/z274/thedjguy/raveSp.jpg', fanart = 'http://www.pulsarmedia.eu/data/media/24/Music%20in%20Pictures%20(63).jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+##.replace('< hre', ' ')###
 ######################################################################### clean ###########################################################################################
 
 def CLEAN(string):
@@ -833,6 +848,7 @@ def ArMenu():
         addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + 'girls-fm-london/'}, {'title':  '[COLOR green][B]Girls FM - London [/COLOR] (oldskool dj sets)[/B]'}, img = 'http://www.subulahanews.com/wp-content/uploads/2013/09/fm-logo-red.png', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
         addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + 'premier-fm-essex/'}, {'title':  '[COLOR green][B]Premier FM - essex [/COLOR] (oldskool dj sets)[/B]'}, img = 'http://www.thepiratearchive.net/wordpress/wp-content/uploads/2014/02/StationLogo-300x42.jpg', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
         addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + 'kool-fm-birmingham/'}, {'title':  '[COLOR green][B]Kool FM - birmingham [/COLOR] (oldskool dj sets)[/B]'}, img = 'http://koolfm.org.uk/koolfmlogo.gif', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
+        addon.add_directory({'mode': 'GetLinks34', 'url': BASE_URL34 + 'play.php?folder=mp3'}, {'title':  '[COLOR green][B]Kool FM - birmingham (2)[/COLOR] (oldskool dj sets)[/B]'}, img = 'http://koolfm.org.uk/koolfmlogo.gif', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
         addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + 'centreforce-radio-london/'}, {'title':  '[COLOR green][B]Centreforce FM - London [/COLOR] (oldskool dj sets)[/B]'}, img = 'http://i.ytimg.com/vi/ujOon-c2T-4/0.jpg', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
         addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + 'fantasy-fm-london/'}, {'title':  '[COLOR green][B]Fantasy FM - London [/COLOR] (oldskool dj sets)[/B]'}, img = 'http://www.thepiratearchive.net/wordpress/wp-content/uploads/2013/07/FantasyFM-London-Logo-300x198.jpg', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
         addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + 'kiss-ldn/'}, {'title':  '[COLOR green][B]kiss FM - London [/COLOR] (oldskool dj sets)[/B]'}, img = 'http://www.thepiratearchive.net/wordpress/wp-content/uploads/2013/01/KissFM-London-DONE1.jpg', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
@@ -879,6 +895,7 @@ def PodMenu():
 
 def ArchiveMenu():
         addon.add_directory({'mode': 'GetLinksvids', 'url': BASE_URL15 + '/vids2.txt'}, {'title':  '[COLOR palevioletred][B]***Rave player Specials*** [/COLOR] (Utube Rave Documentaries)[/B]'}, img = 'http://cdn.gizmocrazed.com/wp-content/uploads/2012/02/documentary-genre.jpg', fanart = 'http://cdn.7boom.mx/content/boom-img/8630e9b6.jpeg')
+        addon.add_directory({'mode': 'GetLinksvids', 'url': BASE_URL15 + '/vids3.txt'}, {'title':  '[COLOR deeppink][B]***Rave player Specials*** [/COLOR] (Rave Reminiscing)[/B]'}, img = 'http://s28.postimg.org/xjrgkbmd9/image.jpg', fanart = 'http://s27.postimg.org/xvs5paxyb/fanart.jpg')
         addon.add_directory({'mode': 'GetLinks15', 'url': BASE_URL15 + '/dnb.txt'}, {'title':  '[COLOR gold][B]Rave player Specials [/COLOR] (Rave Dj Sets)[/B]'}, img = 'http://s28.postimg.org/uwfyuzepp/cassettetdk.jpg', fanart = 'http://amgroup.com/news/wp-content/uploads/2013/04/IMG_4470-Custom.jpg') 
         addon.add_directory({'mode': 'GetLinks3', 'url': BASE_URL3 + '/'}, {'title':  '[COLOR green][B]Rave tape packs [/COLOR](Archive)[/B]'}, img = 'http://fc09.deviantart.net/fs25/f/2008/111/a/8/Cassette_tape_by_Quick_Stop.png', fanart = 'http://s27.postimg.org/3qdp1snnn/hhhgggg.jpg')
         addon.add_directory({'mode': 'GetLinks4', 'url': BASE_URL4 + '/'}, {'title':  '[COLOR green][B]Deepinside the oldskool [/COLOR](Archive)[/B]'}, img = 'http://www.djsoundhire.co.uk/stock-photos/22-1289478980.jpg', fanart = 'https://phaven-prod.s3.amazonaws.com/files/image_part/asset/376411/zJiIP2IgvAoFrWjDxG6FfyZosnE/medium_abbfabb_03.jpg')
@@ -1186,6 +1203,8 @@ elif mode == 'GetLinks32a':
 	GetLinks32a(url)
 elif mode == 'GetLinks33':
 	GetLinks33(url)
+elif mode == 'GetLinks34':
+	GetLinks34(url)
 elif mode == 'GetLinksvids':
 	GetLinksvids(url)
 elif mode == 'PlayVideo':

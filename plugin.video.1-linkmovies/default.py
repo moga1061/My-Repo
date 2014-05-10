@@ -126,7 +126,29 @@ def GetMediaInfo(html):
 
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Movies >>[/COLOR] [COLOR red] (Movies with[/COLOR] BRRIP 720p[COLOR red] at the end have no links)[/COLOR]'}, img=IconPath + '99.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue]Latest Movies [/COLOR]>> [COLOR red] (Movies with[/COLOR] BRRIP 720p[COLOR red] at the end have no links)[/COLOR]'}, img=IconPath + '99.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GMenu'}, {'title':  '[COLOR blue]Categories[/COLOR] >>'}, img=IconPath + '99.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search 1-linkmovies[/COLOR]'}, img=IconPath + 'search.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR]'}, img=IconPath + 'theyid.png', fanart=FanartPath + 'fanart.png')
+
+        addon_handle = int(sys.argv[1])
+        xbmcplugin.setContent(addon_handle, 'audio')
+        url = 'http://www.'
+        li = xbmcgui.ListItem('[B][COLOR gold]Please download Entertainment HUB from TheYids REPO[/COLOR][/B]', thumbnailImage= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/icon.png')
+        li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        addon_handle = int(sys.argv[1])
+        xbmcplugin.setContent(addon_handle, 'audio')
+        url = 'http://www.'
+        li = xbmcgui.ListItem('[B][COLOR gold]Or if you like rave music download Rave player from TheYids REPO[/COLOR][/B]', thumbnailImage= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.audio.raveplayer/icon.png')
+        li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.audio.raveplayer/fanart.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+        xbmcplugin.endOfDirectory(addon_handle)
+
+def GMenu():    #G
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/categories/movies',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Movies >>'}, img=IconPath + '99.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/categories/action',
@@ -163,11 +185,8 @@ def MainMenu():    #homescreen
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Disney >>'}, img=IconPath + '99.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/categories/cartoons',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'cartoons >>'}, img=IconPath + '99.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Search 1-linkmovies[/COLOR]'}, img=IconPath + 'search.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'settings.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR pink]FOR HELP ON THIS ADDON PLEASE GOTO...[/COLOR] [COLOR gold][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'help'}, {'title':  '[COLOR aqua][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR gold][B][I]@TheYid009 [/B][/I][/COLOR]'}, img=IconPath + 'theyid.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 
 
 
@@ -201,6 +220,8 @@ def Search(query):
 
 if mode == 'main': 
 	MainMenu()
+elif mode == 'GMenu':
+        GMenu()
 elif mode == 'GetTitles': 
 	GetTitles(section, url, startPage, numOfPages)
 elif mode == 'GetLinks':
