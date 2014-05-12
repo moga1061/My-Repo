@@ -7,13 +7,6 @@ from t0mm0.common.net import Net
 from htmlentitydefs import name2codepoint as n2cp
 import HTMLParser
 
-try:
-	from sqlite3 import dbapi2 as sqlite
-	print "Loading sqlite3 as DB engine"
-except:
-	from pysqlite2 import dbapi2 as sqlite
-	print "Loading pysqlite2 as DB engine"
-
 addon_id = 'plugin.video.oneclickwatch'
 plugin = xbmcaddon.Addon(id=addon_id)
 DB = os.path.join(xbmc.translatePath("special://database"), 'oneclickwatch.db')
@@ -63,7 +56,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie & tv s
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png') 
                 addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png', fanart=FanartPath + 'fanart.png')
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different addon[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please report to @theYid009[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ############################################################################### Get links #############################################################################################
@@ -81,7 +74,7 @@ def GetLinks(section, url):
                 if urlresolver.HostedMediaFile(url= url):
                         addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry no links [/B][/COLOR],[COLOR blue][B]Please try a different Link[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry no links [/B][/COLOR],[COLOR blue][B]Please try a different movie/tv show[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ############################################################################# Play Video #####################################################################################
@@ -120,8 +113,8 @@ def MainMenu():    #homescreen
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]OCW Latest Tv episodes[/B] [/COLOR]>>'}, img=IconPath + 'tv.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green][B]OCW[/B] Search[/COLOR]'}, img=IconPath + 'search.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR pink][B]PLEASE CLICK HERE FOR INFO ON TheYids REPO[/B][/COLOR] >>'}, img=IconPath + 'help1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR gold][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR aqua][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'theyid.png', fanart=FanartPath + 'fanart.png') 
+        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR gold][B]TheYids REPO NEWS[/B][/COLOR] >>'}, img=IconPath + 'help1.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR gold][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR aqua][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'theyid.png', fanart=FanartPath + 'fanart.png')  
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -129,6 +122,11 @@ def MainMenu():    #homescreen
 def HelpMenu():   
         dialog = xbmcgui.Dialog()
         dialog.ok("TheYid's REPO", "I now have a donation button setup at xbmcHUB", "please help keep TheYid's REPO alive more info @","http://www.xbmchub.com/forums/")
+        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[B][COLOR gold]If you like this addon[/COLOR][/B]'}, img=IconPath + 'help1.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[B][COLOR gold]Please install Entertainment HUB from TheYids REPO[/COLOR][/B]'}, img= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/icon.png', fanart= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
+        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[B][COLOR gold]Or if you like rave music download Rave player from TheYids REPO[/COLOR][/B]'}, img= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.audio.raveplayer/icon.png', fanart= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.audio.raveplayer/fanart.jpg')
+        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[B][COLOR blue]System/Add-ons/Get Add-ons/TheYids REPO[/COLOR][/B]'}, img= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/repository.TheYid/icon.png', fanart= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ######################################################################## search #################################################################################################
 

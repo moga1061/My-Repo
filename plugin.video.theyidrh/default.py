@@ -29,6 +29,7 @@ BASE_URL15 = 'http://www.fullmatches.net/'
 BASE_URL16 = 'http://tv-release.net/'
 BASE_URL17 = 'http://www.tribalmixes.com/'
 BASE_URL18 = 'http://www.freshremix.org/'
+BASE_URL20 = 'http://movie4download.com/'
 
 ###### PATHS #########
 AddonPath = addon.get_path()
@@ -502,6 +503,30 @@ def GetTitles19(section, url, startPage= '1', numOfPages= '1'): # freshremix
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+#-------------------------------------------------------------------------------------         -------------------------------------------------------------------------------#
+
+def GetTitles20(section, url, startPage= '1', numOfPages= '1'): #
+    try:
+        print 'theyidrh get Movie Titles Menu %s' % url
+        pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + '/page/' + startPage + '/'
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        start = int(startPage)
+        end = start + int(numOfPages)
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + '/page/' + str(page) + '/'
+                        html = net.http_GET(pageUrl).content
+                match = re.compile('excerpt-thumb.+?href="(.+?)" title=".+?" rel="bookmark">\s*?<img width="320" height="450" src="(.+?)" class="alignleft wp-post-image" alt="(.+?)" />', re.DOTALL).findall(html)
+                for movieUrl, img, name in match:
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetTitles20', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 #################################################################################getlinks###############################################################################################
 
 def GetLinks(section, url): # Get Links
@@ -737,8 +762,7 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'menu13'}, {'title':  '[COLOR cadetblue][B]Music >[/B][/COLOR] >'}, img=IconPath + 'music.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'menu5'}, {'title': '[COLOR green][B]Searches >>[/B] [/COLOR]>>'}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png') 
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR pink][B]PLEASE CLICK HERE FOR INFO ON TheYids REPO[/B][/COLOR] >>'}, img=IconPath + 'helphub.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR gold][B]FOLLOW ME ON TWITTER... [/B][/COLOR] [COLOR aqua][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'twit.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR gold][B]TheYids REPO NEWS >[/B][/COLOR] >'}, img=IconPath + 'twit.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -746,6 +770,11 @@ def MainMenu():    #homescreen
 def HelpMenu():   
         dialog = xbmcgui.Dialog()
         dialog.ok("TheYid's REPO", "I now have a donation button setup at xbmcHUB", "please help keep TheYid's REPO alive more info @","http://www.xbmchub.com/forums/")
+        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[B][COLOR gold]If you like this addon[/COLOR][/B]'}, img=IconPath + 'twit.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[B][COLOR gold]Please install Entertainment HUB from TheYids REPO[/COLOR][/B]'}, img= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/icon.png', fanart= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
+        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[B][COLOR gold]& if you like rave music install Rave player from TheYids REPO[/COLOR][/B]'}, img= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.audio.raveplayer/icon.png', fanart= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.audio.raveplayer/fanart.jpg')
+        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[B][COLOR blue]System/Add-ons/Get Add-ons/TheYids REPO[/COLOR][/B]'}, img= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/repository.TheYid/icon.png', fanart= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -780,6 +809,8 @@ def Menu2():   #movies
         addon.add_directory({'mode': 'GetTitles2', 'section': 'ALL', 'url': BASE_URL2 + '/movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR powderblue](SceneLog)[/COLOR] >>'}, img=IconPath + 'slm1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'menu9'}, {'title': '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR crimson](300mb movies4u)[/COLOR] >>'}, img=IconPath + 'm4u1.png', fanart=FanartPath + 'fanart.png') 
+        addon.add_directory({'mode': 'GetTitles20', 'section': 'ALL', 'url': BASE_URL20 + '/movie',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR magenta](Movie4download)[/COLOR] >>'}, img= 'http://images.cooltext.com/3742109.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'menu3'}, {'title': '[COLOR steelblue][B]YIFY Movies >>[/B] [/COLOR]>>'}, img=IconPath + 'yify.png', fanart=FanartPath + 'fanart.png') 
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -1241,6 +1272,8 @@ elif mode == 'GetTitles18':
 	GetTitles18(section, url, startPage, numOfPages)
 elif mode == 'GetTitles19': 
 	GetTitles19(section, url, startPage, numOfPages)
+elif mode == 'GetTitles20': 
+	GetTitles20(section, url, startPage, numOfPages)
 elif mode == 'GetLinks':
 	GetLinks(section, url)
 elif mode == 'GetLinks1':
