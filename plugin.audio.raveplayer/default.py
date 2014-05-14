@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
-#############################################################-Rave player-########################################################################################
+#####################################################################-Rave player-#########################################################################################
 
 import xbmc, xbmcgui, xbmcaddon, xbmcplugin
 import urllib, urllib2
@@ -70,6 +70,7 @@ BASE_URL31 = 'http://www.thepiratearchive.net/'
 BASE_URL32 = 'http://grimetapes.tumblr.com/'
 BASE_URL33 = 'http://torontojungle.com/'
 BASE_URL34 = 'http://koolfm.org.uk/'
+BASE_URL35 = 'http://www.braindamageradio.com/'
 
 ############################################################################### Get links #############################################################################################
 
@@ -774,6 +775,30 @@ def GetLinks34(url):
                 addon.add_directory({'mode': 'PlayVideo', 'url': 'http://koolfm.org.uk/' + url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://i192.photobucket.com/albums/z274/thedjguy/raveSp.jpg', fanart = 'http://www.pulsarmedia.eu/data/media/24/Music%20in%20Pictures%20(63).jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+#------------------------------------------------------------------------------- braindamage -------------------------------------------------------------------------------------#
+
+def GetLinks35(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('<span class="medium_text1"><a href="(.+?)" >(.+?)</a> </span>').findall(content)
+        for url, name in match:
+                addon.add_directory({'mode': 'GetLinks35a', 'url': 'http://www.braindamageradio.com/' + url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://www.braindamageradio.com/templates/skinnydesigns-base/images/logo.png', fanart = 'http://2.bp.blogspot.com/_WldfNndrX0k/TBTztaKCkAI/AAAAAAAABSI/uU1tq3XgRZg/s1600/BRAIN+DAMAGE+WALLPAPER+2.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def GetLinks35a(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        CLEAN(html)
+        content = html
+        match = re.compile('<span class="link_medium_text1"><a href="(.+?)">Download</a>').findall(content)
+        for url in match:
+                addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  'Load Stream'}, img = 'http://www.braindamageradio.com/templates/skinnydesigns-base/images/logo.png', fanart = 'http://2.bp.blogspot.com/_WldfNndrX0k/TBTztaKCkAI/AAAAAAAABSI/uU1tq3XgRZg/s1600/BRAIN+DAMAGE+WALLPAPER+2.jpg')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 ##.replace('< hre', ' ')###
 ######################################################################### clean ###########################################################################################
 
@@ -889,6 +914,7 @@ def PodMenu():
         addon.add_directory({'mode': 'GetLinks22', 'url': BASE_URL22 + 'site/category/podcast/'}, {'title':  '[COLOR chartreuse][B]John B [/COLOR] (Drum & Bass)[/B]'}, img = 'http://beta-recordings.com/images/Blog.jpg', fanart = 'http://i1.sndcdn.com/artworks-000028058053-5vxdam-original.jpg?77d7a69')
         addon.add_directory({'mode': 'GetLinks12', 'url': BASE_URL12 + '/'}, {'title':  '[COLOR chartreuse][B]Dj kutski [/COLOR](House)[/B]'}, img = 'http://www.shitmixtapes.com/storage/shitmixtapes-white.jpg?__SQUARESPACE_CACHEVERSION=1310920306487', fanart = 'http://farm3.staticflickr.com/2814/11285947406_690a1a7a92_z.jpg')
         addon.add_directory({'mode': 'GetLinks30', 'url': BASE_URL30 + '/podcast'}, {'title':  '[COLOR chartreuse][B]Fabric london [/COLOR](House)[/B]'}, img = 'http://www.djsets.co.uk/compilations/fabric/fabric_logo_2.jpg', fanart = 'http://cdn.ltstatic.com/2008/January/GZ673439_942long.jpg')
+        addon.add_directory({'mode': 'GetLinks35', 'url': BASE_URL35 + 'mixes/old-skool-hardcore-breaks-acid-house/menu/page:1/limit:200/'}, {'title':  '[COLOR chartreuse][B]Brain Damage Radio [/COLOR](Olskool, Hardcore +)[/B]'}, img = 'http://www.braindamageradio.com/templates/skinnydesigns-base/images/logo.png', fanart = 'http://2.bp.blogspot.com/_WldfNndrX0k/TBTztaKCkAI/AAAAAAAABSI/uU1tq3XgRZg/s1600/BRAIN+DAMAGE+WALLPAPER+2.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------------------------ ArchiveMenu ----------------------------------------------------------------------------#
@@ -994,7 +1020,7 @@ def RadioMenu():
                              '': '', '': ''}, {'title':  ''}, img = 'http://www.systemslibrarian.co.za/images/Broken%20links.jpg', fanart = 'http://s30.postimg.org/elc1pa6qp/fanart.jpg')
 
         url = 'http://uk1-pn.mixstream.net/8698.m3u'
-        li = xbmcgui.ListItem('[COLOR lightseagreen][B]Kool London[/B][/COLOR] [COLOR lime](((Live)))[/COLOR]  (Drum & Bass + more)', thumbnailImage= 'http://s30.postimg.org/5r870dash/icon.png')
+        li = xbmcgui.ListItem('[COLOR lightseagreen][B]Kool London[/B][/COLOR] [COLOR lime](((Live)))[/COLOR]  (Jungle, Drum & Bass + more)', thumbnailImage= 'http://s30.postimg.org/5r870dash/icon.png')
         li.setProperty('fanart_image', 'http://koollondon.com/images/stories/kool-timetable-march-2014.png')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
@@ -1205,6 +1231,10 @@ elif mode == 'GetLinks33':
 	GetLinks33(url)
 elif mode == 'GetLinks34':
 	GetLinks34(url)
+elif mode == 'GetLinks35':
+	GetLinks35(url)
+elif mode == 'GetLinks35a':
+	GetLinks35a(url)
 elif mode == 'GetLinksvids':
 	GetLinksvids(url)
 elif mode == 'PlayVideo':
