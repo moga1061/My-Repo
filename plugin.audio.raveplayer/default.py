@@ -1067,6 +1067,11 @@ def RadioMenu():
         li.setProperty('fanart_image', 'http://retrodjservice.com/yahoo_site_admin/assets/images/deejay-wallpapers_7051_1920x1200.42223626_std.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
+        url = 'http://37.187.90.201:2199/tunein/slipmatt.pls'
+        li = xbmcgui.ListItem('[COLOR lightseagreen][B]DJ Slipmatt Radio  [/B][/COLOR] [COLOR lime](((Live)))[/COLOR]  (Oldskool + Hardcore)', thumbnailImage= 'http://i1.sndcdn.com/avatars-000000911994-xt7goc-crop.jpg?30a2558')
+        li.setProperty('fanart_image', 'http://i1.ytimg.com/vi/sy9SV25ALII/maxresdefault.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
         addon.add_directory({'mode': 'RadioMenu', '': '', '': '',
                              '': '', '': ''}, {'title':  ''}, img = 'http://www.systemslibrarian.co.za/images/Broken%20links.jpg', fanart = 'http://s30.postimg.org/elc1pa6qp/fanart.jpg')
 
