@@ -288,9 +288,9 @@ def GetTitles12(section, url, startPage= '1', numOfPages= '1'): # flixanity
                 if ( page != start):
                         pageUrl = url + '/' + startPage + '/'
                         html = net.http_GET(pageUrl).content
-                match = re.compile('text-align:center.+?href="(.+?)".+?.+?src=".+?src=(.+?)&amp;.+?".+?<p><strong>(.+?)</strong></p>', re.DOTALL).findall(html)
-                for movieUrl, img, name in match:
-                        addon.add_directory({'mode': 'GetLinks1', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+                match = re.compile('<li>\s*?<a href=".+?" class="item" title=".+?">\s*?<img class="img-preview spec-border"  src=".+?src=(.+?)&amp;.+?" alt=".+?" style=".+?"/>\s*?</a>\s*?<div class=".+?">\s*?<div class=".+?">\s*?<p><strong>(.+?)</strong></p>\s*?<p>.+?</p>\s*?<div class="left">.+?<h4><a style=".+?">.+?</a></h4></div>\s*?<div style=".+?">.+?</div>\s*?<img src=".+?" style=".+?" />\s*?</div>\s*?<span class=".+?">\s*?<ul>\s*?<li><img src=".+?" class="left" /> <a href="(.+?)" class="left">.+?<', re.DOTALL).findall(html)
+                for img, name, movieUrl in match:
+                        addon.add_directory({'mode': 'GetLinks1a', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles12', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')  
     except:
@@ -749,7 +749,7 @@ def GetLinks(section, url): #300mbmovies4u #oneclickmoviez #movies2k.eu
 
 #---------------------------------------------------------------------------------#
 
-def GetLinks1(section, url): #flixanity #freemovies #shows4u
+def GetLinks1(section, url): #freemovies #shows4u
         print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
@@ -761,6 +761,28 @@ def GetLinks1(section, url): #flixanity #freemovies #shows4u
                 host = GetDomain(url)
                 if urlresolver.HostedMediaFile(url= url):
                         host = host.replace('embed.','')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#---------------------------------------------------------------------------------#
+
+def GetLinks1a(section, url): #flixanity
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        content = html
+        match = re.compile('src="(.+?)"').findall(content)
+        match1 = re.compile('<IFRAME SRC="http://www.flixanity.com/jwplayer/gkplugins/player.php?(.+?)" FRAMEBORDER="0" MARGINWIDTH="0" MARGINHEIGHT="0" SCROLLING="NO" WIDTH="870" HEIGHT="505"></IFRAME>').findall(content)
+        match2 = re.compile('player.php?(.+?)"').findall(content)
+        match3 = re.compile('SRC="(.+?)"').findall(content)
+        match4 = re.compile('href="(.+?)"').findall(content)
+        match5 = re.compile('onclick="window.open("(.+?)");"><p').findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match + match1 + match2 + match3 + match4 + match5 :
+                host = GetDomain(url)
+                if urlresolver.HostedMediaFile(url= url):
+                        host = host.replace('embed.','')
+                        host = host.replace('gdata','')
                         addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -1323,8 +1345,8 @@ def UvMenu():   #moviesUv
 def ZmMenu(): #flixanity
         addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movies/new',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR plum](flixanity) [/COLOR]>>'}, img=IconPath + 'fl1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/featuredmovies',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Box Office[/B][/COLOR] >>'}, img=IconPath + 'fl1.png', fanart=FanartPath + 'fanart.png')
+        #addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/featuredmovies',
+                             #'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Box Office[/B][/COLOR] >>'}, img=IconPath + 'fl1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movies/abc',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]movies[/B] [/COLOR][COLOR teal](a/z)[/COLOR] >>'}, img=IconPath + 'fl1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movies/imdb_rating',
@@ -2389,6 +2411,8 @@ elif mode == 'GetLinks':
 	GetLinks(section, url)
 elif mode == 'GetLinks1':
 	GetLinks1(section, url)
+elif mode == 'GetLinks1a':
+	GetLinks1a(section, url)
 elif mode == 'GetLinks3':
 	GetLinks3(section, url)
 elif mode == 'GetLinks5':

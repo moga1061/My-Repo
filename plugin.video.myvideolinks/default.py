@@ -91,8 +91,9 @@ def GetLinks1(url):
         listitem = GetMediaInfo(html)
         content = html
         match = re.compile('onclick=".+?" href="(.+?)" title=".+?"').findall(content)
+        match2 = re.compile('<embed type="video/divx" src="(.+?)"').findall(content)
         listitem = GetMediaInfo(content)
-        for url in match:
+        for url in match + match2:
                 addon.add_directory({'mode': 'PlayVideo1', 'url': url, 'listitem': listitem}, {'title':  'load stream'}, img=IconPath + 'watch.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
