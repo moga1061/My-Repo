@@ -5,3 +5,5 @@
    	<setting id="default-view" type="number" label="Default View" default="50" enable="!eq(-3,false)"/>
    </category>
 </settings>
+
+#
