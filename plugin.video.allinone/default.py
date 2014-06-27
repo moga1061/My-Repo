@@ -12,7 +12,6 @@ addon = Addon('plugin.video.allinone', sys.argv)
 DB = os.path.join(xbmc.translatePath("special://database"), 'allinone.db')
 BASE_URL = 'http://oneclickwatch.org/'
 BASE_URL1 = 'http://watchthetapes.com/'
-BASE_URL2 = 'http://www.watchtvshowz.org/'
 BASE_URL3 = 'http://viooz.pw/'
 BASE_URL4 = 'http://www.ultra-vid.com/'
 BASE_URL5 = 'http://moviesall4u.com/'
@@ -92,30 +91,6 @@ def GetTitles1(section, url, startPage= '1', numOfPages= '1'): #WTT
                 for img, movieUrl, name in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles1', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')        
-    except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
-#-------------------------------------------------------------------------------#
-
-def GetTitles2(section, url, startPage= '1', numOfPages= '1'): #WTShows
-    try:
-        print 'allinone get Movie Titles Menu %s' % url
-        pageUrl = url
-        if int(startPage)> 1:
-                pageUrl = url + 'page/' + startPage + '/'
-        print pageUrl
-        html = net.http_GET(pageUrl).content
-        start = int(startPage)
-        end = start + int(numOfPages)
-        for page in range( start, end):
-                if ( page != start):
-                        pageUrl = url + 'page/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content
-                match = re.compile('entry.+?href="(.+?)" .+?="(.+?)">.+?<.+?src="(.+?)"', re.DOTALL).findall(html)
-                for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
-                addon.add_directory({'mode': 'GetTitles2', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')        
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -348,9 +323,9 @@ def GetTitles27a(section, url, startPage= '1', numOfPages= '1'): #flixanity1st
                 if ( page != start):
                         pageUrl = url + '/' + startPage + '/'
                         html = net.http_GET(pageUrl).content
-                match = re.compile('img-preview spec-border.+?src=".+?src=(.+?)&amp;.+?".+?href="(.+?)".+?>(.+?)<.+?', re.DOTALL).findall(html)
-                for img, movieUrl, name in match:
-                        addon.add_directory({'mode': 'GetTitles27', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+                match = re.compile('img-preview spec-border.+?src=".+?src=(.+?)&amp;.+?".+?href="(.+?)".+?>.+?<.+?', re.DOTALL).findall(html)
+                for img, movieUrl in match:
+                        addon.add_directory({'mode': 'GetTitles27', 'section': section, 'url': movieUrl}, {'title':  movieUrl.replace('http://www.flixanity.com/show/', '').replace('-', ' ')}, img= img, fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')  
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
@@ -1896,8 +1871,6 @@ def TvMenu():       #tv
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR mediumblue](DDLvalley) [/COLOR]>>'}, img=IconPath + 'ddl1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles4', 'section': 'ALL', 'url': BASE_URL4 + '/category/tv',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR floralwhite](Ultra-Vid) [/COLOR]>>'}, img=IconPath + 'uv1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles2', 'section': 'ALL', 'url': BASE_URL2 + '/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR darkslateblue](WTS) [/COLOR]>>'}, img=IconPath + 'wts1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes list[/B][/COLOR] [COLOR tomato](ChannelCut) [/COLOR]>>'}, img=IconPath + 'cc.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles17', 'section': 'ALL', 'url': BASE_URL17 + '/category/shows/',
@@ -1960,7 +1933,7 @@ def Tvocm1Menu():
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 def TzmMenu():  #flixanitytv
-        addon.add_directory({'mode': 'GetTitles27a', 'section': 'ALL', 'url': BASE_URL12 + '/new-shows',
+        addon.add_directory({'mode': 'GetTitles27a', 'section': 'ALL', 'url': BASE_URL12 + '/tv-shows/date',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orange][B]Latest added[/B][/COLOR] >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles27a', 'section': 'ALL', 'url': BASE_URL12 + '/tv-shows/imdb_rating',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orange][B]Top IMDB[/B][/COLOR] >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
@@ -2704,8 +2677,6 @@ elif mode == 'GetTitles':
 	GetTitles(section, url, startPage, numOfPages)
 elif mode == 'GetTitles1': 
 	GetTitles1(section, url, startPage, numOfPages)
-elif mode == 'GetTitles2': 
-	GetTitles2(section, url, startPage, numOfPages)
 elif mode == 'GetTitles3': 
 	GetTitles3(section, url, startPage, numOfPages)
 elif mode == 'GetTitles4': 
