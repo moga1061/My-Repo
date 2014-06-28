@@ -1002,7 +1002,7 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR gold][B]TheYids REPO NEWS >[/B][/COLOR] >'}, img=IconPath + 'twit.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#-----------------------help---------------------------------------help-----------------------------help--------------------------help-------------------------------help-------#
 
 def HelpMenu():   
         dialog = xbmcgui.Dialog()
@@ -1011,14 +1011,15 @@ def HelpMenu():
         addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[B][COLOR gold]& you like rave music install Rave player from TheYids REPO[/COLOR][/B]'}, img= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.audio.raveplayer/icon.png', fanart= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.audio.raveplayer/fanart.jpg')
         addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[B][COLOR blue]System/Add-ons/Get Add-ons/TheYids REPO[/COLOR][/B]'}, img= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/repository.TheYid/icon.png', fanart= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
+#--------------------------------MusicVideos-----------------------------MusicVideos-------------------------------------MusicVideos---------------------------MusicVideos-----------#
 
 def MusicMenu():   #MusicVideos
         addon.add_directory({'mode': 'GetTitles25', 'section': 'ALL', 'url': BASE_URL25 + '/battles',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cadetblue][B]Rap Battle videos[/B][/COLOR] [COLOR springgreen](Rap Grid) [/COLOR]>>'}, img=IconPath + 'rg.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#----------------------------------radio----------------------------radio------------------------------radio-----------------------------radio------------------------------#
 
 def RadioMenu():   #radio
         #setView('radio', 'radio-view')
@@ -1150,7 +1151,7 @@ def RadioMenu():   #radio
 
         xbmcplugin.endOfDirectory(addon_handle)
 
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#----------------------------sport------------------------------sport----------------------sport---------------------------sport------------------------------sport--------#
 
 def SportMenu():   #sport
         addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/watch/ufc',
@@ -1186,7 +1187,7 @@ def MovieMenu():   #movies
         addon.add_directory({'mode': 'WtMenu'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR lightsteelblue][B]International Movies Zone[/B][/COLOR] >>'}, img=IconPath + 'iz.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'RgMenu'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR mediumturquoise][B]Full HD Zone[/B][/COLOR] >>'}, img=IconPath + 'fhz.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#--------------------------------------------------------------------------tvhq movies------------------------------------------------------------------------------------------------#
 
 def HqMenu():   #tvhq
         addon.add_directory({'mode': 'GetTitles32', 'section': 'ALL', 'url': BASE_URL32 + '/movies',
@@ -1336,7 +1337,7 @@ def Hq3Menu():   #tvhq
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Zombie  >>'}, img=IconPath + 'tvhq.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#----------------------------------------------------------------------------shows4u----------------------------------------------------------------------------------------------#
 
 def TvsMenu():   #shows4u
         addon.add_directory({'mode': 'GetTitles29', 'section': 'ALL', 'url': BASE_URL29 + '/movies',
@@ -1395,9 +1396,17 @@ def Tvs1Menu(): #shows4u
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#-------------------------------------------------------------------------yify -------------------------------------------------------------------------------------------------#
 
 def RgMenu():   #yify  #mvl rg #HD zone
+        addon.add_directory({'mode': 'GetTitles10', 'section': 'ALL', 'url': BASE_URL10 + '/category/movies/yify/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Movies by Yify[/B][/COLOR] [COLOR khaki](myvideolinks.eu) [/COLOR]>>'}, img=IconPath + 'mvl1.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles10', 'section': 'ALL', 'url': BASE_URL10 + '/category/movies/3-d-movies/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]3D Movies[/B][/COLOR] [COLOR khaki](myvideolinks.eu) [/COLOR]>>'}, img=IconPath + 'mvl1.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles10', 'section': 'ALL', 'url': BASE_URL10 + '/category/movies/ganool/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Movies by Ganool[/B][/COLOR] [COLOR khaki](myvideolinks.eu) [/COLOR]>>'}, img=IconPath + 'mvl1.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles10', 'section': 'ALL', 'url': BASE_URL10 + '/category/movies/judas/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Movies by Judas[/B][/COLOR] [COLOR khaki](myvideolinks.eu) [/COLOR]>>'}, img=IconPath + 'mvl1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles23', 'section': 'ALL', 'url': BASE_URL23 + '/category/hollywood-movie/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Hollywood[/B][/COLOR] [COLOR crimson](300mb movies4u) [/COLOR] >>'}, img=IconPath + 'm4u1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles23', 'section': 'ALL', 'url': BASE_URL23 + '/category/hollywood-movie/english-yify-movie/',
@@ -1410,7 +1419,7 @@ def RgMenu():   #yify  #mvl rg #HD zone
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Movies by Yify[/B][/COLOR] [COLOR mediumblue](DDLvalley) [/COLOR]>>'}, img=IconPath + 'ddl1.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#----------------------------------------------------------------------Moviesall4u-------------------------------------------------------------------------------------------------#
 
 def WtMenu():   #Moviesall4u  #all4youz #world4ufree
         addon.add_directory({'mode': 'GetTitles30', 'section': 'ALL', 'url': BASE_URL30 + '/',
@@ -1461,7 +1470,7 @@ def WtMenu():   #Moviesall4u  #all4youz #world4ufree
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Telugu [/B][/COLOR] [COLOR lawngreen](movies2k.eu) [/COLOR]>>'}, img=IconPath + '2k.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------moviesviooz----------------------------------------------------------------------------------#
 
 def MovMenu():   #moviesviooz
         addon.add_directory({'mode': 'GetTitles3', 'section': 'ALL', 'url': BASE_URL3 + '/',
@@ -1498,7 +1507,7 @@ def MovMenu():   #moviesviooz
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'War >>'}, img=IconPath + 'vu1.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#-------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------moviesUv----------------------------------------------------------------------------------------#
 
 def UvMenu():   #moviesUv
         addon.add_directory({'mode': 'GetTitles4', 'section': 'ALL', 'url': BASE_URL4 + '/category/movies',
@@ -1535,7 +1544,7 @@ def UvMenu():   #moviesUv
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Family >>'}, img=IconPath + 'uv1.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#-------------------------------------------------------------------------flixanity-----------------------------------------------------------------------------------------#
 
 def ZmMenu(): #flixanity
         addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movies/date',
@@ -1693,7 +1702,7 @@ def Zm3Menu(): #flixanity
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Wwf - Wwe (abc) >>'}, img=IconPath + 'fl1.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#----------------------------------------------------------------------------primeflicks------------------------------------------------------------------------------------#
 
 def PutMenu():          # primeflicks
         addon.add_directory({'mode': 'GetTitles15', 'section': 'ALL', 'url': BASE_URL15 + '/movies/date/',
@@ -1705,7 +1714,7 @@ def PutMenu():          # primeflicks
         addon.add_directory({'mode': 'GetSearchQuery9'},  {'title':  '[COLOR green][B]Search[/B][/COLOR] [COLOR royalblue](PrimeFlicks) [/COLOR] >> '}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#-------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------one click moviez----------------------------------------------------------------------------------#
 
 def OcmMenu():          #one click moviez
         addon.add_directory({'mode': 'GetTitles9', 'section': 'ALL', 'url': BASE_URL9 + '/movies',
@@ -1870,7 +1879,7 @@ def TvMenu():       #tv
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes list[/B][/COLOR] [COLOR sienna](Tv-Junky) [/COLOR]>>'}, img=IconPath + 'tvj.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#---------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#-----------------------------------------------------------------------------one click moviez----------------------------------------------------------------------------------------#
 
 def TvocmMenu():   #oneclickmoviez
         addon.add_directory({'mode': 'GetTitles18a', 'section': 'ALL', 'url': BASE_URL9 + '/tv-shows',
@@ -1923,7 +1932,7 @@ def Tvocm1Menu():
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Western >>'}, img=IconPath + '1cm.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#----------------------------------------------------------------------flixanitytv-------------------------------------------------------------------------------------------#
 
 def TzmMenu():  #flixanitytv
         addon.add_directory({'mode': 'GetTitles27a', 'section': 'ALL', 'url': BASE_URL12 + '/tv-shows/date',
@@ -2066,7 +2075,7 @@ def Tzm3Menu():
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Wwf - Wwe >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#---------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#------------------------------------------------------------------------tvshows4u---------------------------------------------------------------------------------------#
 
 def TsuMenu():  #tvshows4u
         addon.add_directory({'mode': 'GetTitles28a', 'section': 'ALL', 'url': BASE_URL29 + '/tv-shows',
@@ -2213,7 +2222,7 @@ def Tsu3Menu():
                              'startPage': '1', 'numOfPages': '1'}, {'title':  'Western >>'}, img=IconPath + 's4u.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#########################################################################primeflicks#######################################################################################
+###-------------------------------------------------------------------primeflicks----------------------------------------------------------------------------------------#
 
 def PuttvMenu():          # primeflicks tv
         addon.add_directory({'mode': 'GetTitles15b', 'section': 'ALL', 'url': BASE_URL15 + '/tv-shows/date/',
@@ -2333,7 +2342,7 @@ def Put3Menu():          # primeflicks tv abc
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
-######################################################################### TVHQ #######################################################################################
+#----------------------------------------------------------------------------TVHQ---------------------------------------------------------------------------------------#
 
 def Hq4Menu():          # tvhq tv
         addon.add_directory({'mode': 'GetTitles32b', 'section': 'ALL', 'url': BASE_URL32 + '/tv-shows/',
