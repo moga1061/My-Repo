@@ -386,7 +386,7 @@ def GetTitles15a(section, url, startPage= '1', numOfPages= '1'): #primeflicks-tv
         print 'allinone get Movie Titles Menu %s' % url
         pageUrl = url
         html = net.http_GET(pageUrl).content                     
-        match = re.compile('<a class="link" href="(.+?)">.+?<span class="tv_episode_name"> -(.+?)</span></a>',re.DOTALL).findall(html)
+        match = re.compile('<a class="link" href="(.+?)">.+?<span class="tv_episode_name"> - (.+?)</span></a>',re.DOTALL).findall(html)
         for movieUrl, name in match:
                 addon.add_directory({'mode': 'GetLinks1', 'section': section, 'url': movieUrl}, {'title':  name.strip()},img=IconPath + 'fm1.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -1163,8 +1163,8 @@ def SportMenu():   #sport
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest TNA list[/B][/COLOR] [COLOR tomato](ChannelCut) [/COLOR]>>'}, img=IconPath + 'cc.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/watch/fights',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest Fights list[/B][/COLOR] [COLOR tomato](ChannelCut) [/COLOR]>>'}, img=IconPath + 'cc.png', fanart=FanartPath + 'fanart.png')
-        #addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/wwf-wwe/imdb_rating',
-                             #'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Wwf - Wwe[/B][/COLOR]  [COLOR plum](flixanity) [/COLOR] >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles12', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/wwf-wwe/imdb_rating',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Wwf - Wwe[/B][/COLOR]  [COLOR plum](flixanity) [/COLOR] >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -1174,10 +1174,8 @@ def MovieMenu():   #movies
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR blue](OCW) [/COLOR]>>'}, img=IconPath + 'ocw.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles1', 'section': 'ALL', 'url': BASE_URL1 + '/category/movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR salmon](WTT) [/COLOR]>>'}, img=IconPath + 'wtt.png', fanart=FanartPath + 'fanart.png')
-
         addon.add_directory({'mode': 'GetTitles10', 'section': 'ALL', 'url': BASE_URL10 + '/category/movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR khaki](myvideolinks.eu) [/COLOR]>>'}, img=IconPath + 'mvl1.png', fanart=FanartPath + 'fanart.png')
-
         addon.add_directory({'mode': 'ZmMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR plum](flixanity) [/COLOR]>>'}, img=IconPath + 'fl1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'HqMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR royalblue](TV HQ) [/COLOR]>>'}, img=IconPath + 'tvhq.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'OcmMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR peru](OneClickMoviez) [/COLOR]>>'}, img=IconPath + '1cm.png', fanart=FanartPath + 'fanart.png')
@@ -1200,7 +1198,7 @@ def HqMenu():   #tvhq
         addon.add_directory({'mode': 'Hq1Menu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR teal](IMDB rating) [/COLOR]>>'}, img=IconPath + 'tvhq.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'Hq2Menu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR teal](abc) [/COLOR]>>'}, img=IconPath + 'tvhq.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'Hq3Menu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR teal](Newest) [/COLOR]>>'}, img=IconPath + 'tvhq.png', fanart=FanartPath + 'fanart.png')
-        #addon.add_directory({'mode': 'GetSearchQuery7'},  {'title':  '[COLOR green][B]Search[/B][/COLOR] [COLOR darkorange](shows4u) [/COLOR] >> '}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery8'},  {'title':  '[COLOR green][B]Search[/B][/COLOR] [COLOR royalblue](TV HQ) [/COLOR] >> '}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def Hq1Menu():   #tvhq
@@ -1710,6 +1708,7 @@ def PutMenu():          # primeflicks
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]ABC [/B][/COLOR] >>'}, img=IconPath + 'fm1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles15', 'section': 'ALL', 'url': BASE_URL15 + '/movies/imdb_rating/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Top IMDB [/B][/COLOR] >>'}, img=IconPath + 'fm1.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery9'},  {'title':  '[COLOR green][B]Search[/B][/COLOR] [COLOR royalblue](PrimeFlicks) [/COLOR] >> '}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -2223,11 +2222,11 @@ def Tsu3Menu():
 #########################################################################primeflicks#######################################################################################
 
 def PuttvMenu():          # primeflicks tv
-        addon.add_directory({'mode': 'GetTitles15', 'section': 'ALL', 'url': BASE_URL15 + '/tv-shows/',
+        addon.add_directory({'mode': 'GetTitles15b', 'section': 'ALL', 'url': BASE_URL15 + '/tv-shows/date/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest Added [/B][/COLOR] >>'}, img=IconPath + 'fm1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles15', 'section': 'ALL', 'url': BASE_URL15 + '/tv-shows/abc/',
+        addon.add_directory({'mode': 'GetTitles15b', 'section': 'ALL', 'url': BASE_URL15 + '/tv-shows/abc/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]ABC [/B][/COLOR] >>'}, img=IconPath + 'fm1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles15', 'section': 'ALL', 'url': BASE_URL15 + '/tv-shows/imdb_rating/',
+        addon.add_directory({'mode': 'GetTitles15b', 'section': 'ALL', 'url': BASE_URL15 + '/tv-shows/imdb_rating/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Top IMDB [/B][/COLOR] >>'}, img=IconPath + 'fm1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'Put1Menu'}, {'title':  '[COLOR deepskyblue][B]TV Shows Genre[/B][/COLOR] [COLOR teal](Latest added) [/COLOR]>>'}, img=IconPath + 'fm1.png', fanart=FanartPath + 'fanart.png') 
         addon.add_directory({'mode': 'Put2Menu'}, {'title':  '[COLOR deepskyblue][B]TV Shows Genre[/B][/COLOR] [COLOR teal](IMDB rating) [/COLOR]>>'}, img=IconPath + 'fm1.png', fanart=FanartPath + 'fanart.png') 
@@ -2651,6 +2650,56 @@ def Search6(query):
                 addon.add_directory({'mode': 'GetLinks1', 'url': url}, {'title':  title}, img=IconPath + 'fl1.png', fanart=FanartPath + 'fanart.png')
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+##---------------------------------------------------------------------------------------------------------------##
+
+def GetSearchQuery8():
+	last_search = addon.load_data('search')
+	if not last_search: last_search = ''
+	keyboard = xbmc.Keyboard()
+        keyboard.setHeading('[COLOR green]Search TVHQ[/COLOR]')
+	keyboard.setDefault(last_search)
+	keyboard.doModal()
+	if (keyboard.isConfirmed()):
+                query = keyboard.getText()
+                addon.save_data('search',query)
+                Search8(query)
+	else:
+                return
+def Search8(query):
+        url = 'http://www.tvhq.info/index.php?menu=search&query= ' + query 
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('img-preview spec-border.+?src=".+?src=(.+?)&amp;.+?".+?href="(.+?)".+?>(.+?)<.+?', re.DOTALL).findall(html)
+        for img, url, title in match:
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title}, img= img, fanart=FanartPath + 'fanart.png')
+	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+##---------------------------------------------------------------------------------------------------------------##
+
+def GetSearchQuery9():
+	last_search = addon.load_data('search')
+	if not last_search: last_search = ''
+	keyboard = xbmc.Keyboard()
+        keyboard.setHeading('[COLOR green]Search TVHQ[/COLOR]')
+	keyboard.setDefault(last_search)
+	keyboard.doModal()
+	if (keyboard.isConfirmed()):
+                query = keyboard.getText()
+                addon.save_data('search',query)
+                Search9(query)
+	else:
+                return
+def Search9(query):
+        url = 'http://primeflicks.me/index.php?menu=search&query= ' + query 
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('img-preview spec-border.+?src=".+?src=(.+?)&amp;.+?".+?href="(.+?)".+?>(.+?)<.+?', re.DOTALL).findall(html)
+        for img, url, title in match:
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title}, img= img, fanart=FanartPath + 'fanart.png')
+	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 ###################################################################################### setViews ##########################################################################
 
 def setView(content, viewType):
@@ -2793,6 +2842,14 @@ elif mode == 'GetSearchQuery6':
 	GetSearchQuery6()
 elif mode == 'Search6':
 	Search6(query)
+elif mode == 'GetSearchQuery8':
+	GetSearchQuery8()
+elif mode == 'Search8':
+	Search8(query)
+elif mode == 'GetSearchQuery9':
+	GetSearchQuery9()
+elif mode == 'Search9':
+	Search9(query)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)
 elif mode == 'PlayVideo1':
