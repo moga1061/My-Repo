@@ -1035,16 +1035,6 @@ def MusicMenu():   #MusicVideos
         addon_handle = int(sys.argv[1]) 
         xbmcplugin.setContent(addon_handle, 'audio')
 
-        url = 'rtmp://wos.cr1.streamzilla.xlcdn.com/live/_definst_/ playpath=sz=AATW=akanew?token=afce819db8d38d5beac6571b19765f5d&time=53b13dd9 swfUrl=http://www.aatw.com/player/mediaplayer.swf pageUrl=http://www.aatw.com/watch-live/?channel=aka'
-        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]AKA Tv[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', iconImage='http://s2.postimg.org/eg7k51z3t/icon.png', thumbnailImage= 'http://www.pro-shops.co.uk/marcusbronzy/wp-content/uploads/sites/11/2011/11/Screen-shot-2012-01-20-at-16.15.49.png')
-        li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
-        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
-
-        url = 'rtmp://wos.cr1.streamzilla.xlcdn.com/live/_definst_/ playpath=sz=AATW=clublandtv?token=aef0021502ef883b90d36b29cadc8ddf&time=53b13d3b swfUrl=http://www.aatw.com/player/mediaplayer.swf pageUrl=http://www.aatw.com/watch-live/?channel=clubland'
-        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Clubland Tv[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', iconImage='http://s2.postimg.org/eg7k51z3t/icon.png', thumbnailImage= 'http://lipglossproductions.files.wordpress.com/2010/10/0_285_427_http___offlinehbpl_hbpl_co_uk_news_wmx_035bf243-c18e-7281-a99bd4455acf732a.jpg')
-        li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
-        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
-
         url = 'http://91.240.87.34:4000/udp/224.200.202.47:1234'
         li = xbmcgui.ListItem('[COLOR lightsteelblue][B]MTV Dance[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', iconImage='http://s2.postimg.org/eg7k51z3t/icon.png', thumbnailImage= 'http://teve.ba/img/content/mtv-dance2.gif')
         li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
