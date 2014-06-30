@@ -30,6 +30,7 @@ BASE_URL25 = 'http://www.rapgrid.com/'
 BASE_URL29 = 'http://shows4u.info/'
 BASE_URL30 = 'http://www.tupeliculashd.com/'
 BASE_URL32 = 'http://www.tvhq.info/'
+BASE_URL33 = 'http://pastebin.com/'
 
 #### PATHS ##########
 AddonPath = addon.get_path()
@@ -775,6 +776,18 @@ def GetTitles32b(section, url, startPage= '1', numOfPages= '1'): #hqtv-1st
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+#--------------------------------------------------------------- live streams -------------------------------------------------------------------------------------------------#
+
+def GetTitles33(section, url, startPage= '1', numOfPages= '1'): 
+        print 'allinone get Movie Titles Menu %s' % url
+        pageUrl = url
+        html = net.http_GET(pageUrl).content 
+        match = re.compile('<message>(.+?)</message>\s*?<.+?>(.+?)</.+?>',re.DOTALL).findall(html)  
+        match1 = re.compile('<item>\s*?<title>(.+?)</title>\s*?<link>(.+?)</link>\s*?<thumbnail>dummy</thumbnail>',re.DOTALL).findall(html)                    
+        match2 = re.compile('<item>\s*?<title>(.+?)</title>\s*?<thumbnail>dummy</thumbnail>\s*?<fanart></fanart>\s*?<link>(.+?)</link>\s*?</item>',re.DOTALL).findall(html)
+        for name, movieUrl in match + match1 + match2:
+                addon.add_directory({'mode': 'PlayVideo1', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= 'https://pbs.twimg.com/profile_images/446607065910214656/W-H4UeHJ.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
 ##.replace('/', ' ')## \s*? ##
@@ -999,6 +1012,8 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'SearchMenu'}, {'title':  '[COLOR green][B]Searches [/B] [/COLOR]'}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR gold][B]TheYids REPO NEWS >[/B][/COLOR] >'}, img=IconPath + 'twit.png', fanart=FanartPath + 'fanart.png')
+        #addon.add_directory({'mode': 'GetTitles33', 'section': 'ALL', 'url': BASE_URL33 + '/raw.php?i=vDa9teHV',
+                             #'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Live Tv Streams >[/B][/COLOR]>'}, img= 'http://liquidsilver.org/wp-content/uploads/2008/12/live1.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-----------------------help---------------------------------------help-----------------------------help--------------------------help-------------------------------help-------#
@@ -1020,12 +1035,12 @@ def MusicMenu():   #MusicVideos
         addon_handle = int(sys.argv[1]) 
         xbmcplugin.setContent(addon_handle, 'audio')
 
-        url = 'rtmp://wos.cr2.streamzilla.xlcdn.com/live/_definst_/ playpath=sz=AATW=akanew?token=f2f28ff533a056e0cb4a0c2a54ae024d&time=53b07679 swfUrl=http://www.aatw.com/player/mediaplayer.swf pageUrl=http://www.aatw.com/watch-live/?channel=aka'
+        url = 'rtmp://wos.cr1.streamzilla.xlcdn.com/live/_definst_/ playpath=sz=AATW=akanew?token=afce819db8d38d5beac6571b19765f5d&time=53b13dd9 swfUrl=http://www.aatw.com/player/mediaplayer.swf pageUrl=http://www.aatw.com/watch-live/?channel=aka'
         li = xbmcgui.ListItem('[COLOR lightsteelblue][B]AKA Tv[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', iconImage='http://s2.postimg.org/eg7k51z3t/icon.png', thumbnailImage= 'http://www.pro-shops.co.uk/marcusbronzy/wp-content/uploads/sites/11/2011/11/Screen-shot-2012-01-20-at-16.15.49.png')
         li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
-        url = 'rtmp://wos.cr2.streamzilla.xlcdn.com/live/_definst_/ playpath=sz=AATW=clublandtv?token=f49579091902f6d22f6ddaf46f08bcf4&time=53b07880 swfUrl=http://www.aatw.com/player/mediaplayer.swf pageUrl=http://www.aatw.com/watch-live/?channel=clubland'
+        url = 'rtmp://wos.cr1.streamzilla.xlcdn.com/live/_definst_/ playpath=sz=AATW=clublandtv?token=aef0021502ef883b90d36b29cadc8ddf&time=53b13d3b swfUrl=http://www.aatw.com/player/mediaplayer.swf pageUrl=http://www.aatw.com/watch-live/?channel=clubland'
         li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Clubland Tv[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', iconImage='http://s2.postimg.org/eg7k51z3t/icon.png', thumbnailImage= 'http://lipglossproductions.files.wordpress.com/2010/10/0_285_427_http___offlinehbpl_hbpl_co_uk_news_wmx_035bf243-c18e-7281-a99bd4455acf732a.jpg')
         li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
@@ -2828,6 +2843,8 @@ elif mode == 'GetTitles32a':
 	GetTitles32a(section, url, startPage, numOfPages)
 elif mode == 'GetTitles32b': 
 	GetTitles32b(section, url, startPage, numOfPages)
+elif mode == 'GetTitles33': 
+	GetTitles33(section, url, startPage, numOfPages)
 elif mode == 'GetLinks':
 	GetLinks(section, url)
 elif mode == 'GetLinks1':
