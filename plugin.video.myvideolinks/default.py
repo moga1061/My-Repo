@@ -44,10 +44,8 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie Titles
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content                      
-                match = re.compile(' <img src="(.+?)"  title="(.+?)" class=".+?" alt=".+?" /></a>\r\n\t\t\r\n<h4><a href="(.+?)" rel=".+?"', re.DOTALL).findall(html)
-                if not match:
-                    match = re.compile(' <img src="(.+?)" title="(.+?)" class=".+?" alt=".+?" /></a>\r\n\t\t\r\n<h4><a href="(.+?)" rel=".+?"',re.DOTALL).findall(html)
-                for img, name, movieUrl in match:
+                match = re.compile('<a href=".+?" rel="bookmark" title=".+?"> <img src="(.+?)"  title=".+?" class="alignleft" alt=".+?" /></a>\s*?<h4><a href="(.+?)" rel="bookmark" title="(.+?)">.+?</a></h4>', re.DOTALL).findall(html)
+                for img, movieUrl, name in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')      
                 addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')        
