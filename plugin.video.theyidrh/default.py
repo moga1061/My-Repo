@@ -225,18 +225,18 @@ def GetTitles8(section, url, startPage= '1', numOfPages= '1'): # rls-tv
         print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
-                pageUrl = url + '/index.php?page=' + startPage + '/'
+                pageUrl = url + '/index.php?page=' + startPage + ''
         print pageUrl
         html = net.http_GET(pageUrl).content
         start = int(startPage)
         end = start + int(numOfPages)
         for page in range( start, end):
                 if ( page != start):
-                        pageUrl = url + '/index.php?page=' + str(page) + '/'
+                        pageUrl = url + '/index.php?page=' + str(page) + ''
                         html = net.http_GET(pageUrl).content
-                match = re.compile("<td width=.+? style=.+?><a href='(.+?)'>(.+?)</a></td><td", re.DOTALL).findall(html)
+                match = re.compile("width='60%' style='text-align:left; font-size:12px;font-weight:bold;'><a href='(.+?)'>(.+?)</a></td><td", re.DOTALL).findall(html)
                 for movieUrl, name in match:
-                        addon.add_directory({'mode': 'GetLinks1', 'section': section, 'url': 'http://tv-release.net/' + movieUrl}, {'title':  name.strip()}, img=IconPath + 'rlstv.png', fanart=FanartPath + 'fanart.png')
+                        addon.add_directory({'mode': 'GetLinks1', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'rlstv.png', fanart=FanartPath + 'fanart.png') 
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -434,7 +434,7 @@ def GetTitles16(section, url, startPage= '1', numOfPages= '1'): # fullmatch
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------- Fight-BB ----------------------------------------------------------------------------------------------------#
 
 def GetTitles17(section, url, startPage= '1', numOfPages= '1'): # Fight-BB
     try:
@@ -458,7 +458,7 @@ def GetTitles17(section, url, startPage= '1', numOfPages= '1'): # Fight-BB
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#-------------------------------------------------------------------------------house-------------------------------------------------------------------------------------------------#
 
 def GetTitles18(section, url, startPage= '1', numOfPages= '1'): #house
     try:
@@ -481,7 +481,7 @@ def GetTitles18(section, url, startPage= '1', numOfPages= '1'): #house
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#----------------------------------------------------------------------------freshremix----------------------------------------------------------------------------------------------------#
 
 def GetTitles19(section, url, startPage= '1', numOfPages= '1'): # freshremix
     try:
@@ -505,7 +505,7 @@ def GetTitles19(section, url, startPage= '1', numOfPages= '1'): # freshremix
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#-------------------------------------------------------------------------------------         -------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------------- Movie4download -------------------------------------------------------------------------------#
 
 def GetTitles20(section, url, startPage= '1', numOfPages= '1'): #
     try:
@@ -571,7 +571,7 @@ def GetTitles22(section, url, startPage= '1', numOfPages= '1'): #irweb-dl
                         html = net.http_GET(pageUrl).content                     
                 match = re.compile('<h1 class="entry-title"><a href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+                        addon.add_directory({'mode': 'GetLinks4', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles22', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')        
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
@@ -633,7 +633,7 @@ def GetLinks(section, url): # Get Links
                         host = host.replace('youtube.com','[COLOR lime]Movie Trailer[/COLOR]')
                         host = host.replace('k2s.cc','[COLOR red]Unsupported Link[/COLOR]')
                         host = host.replace('ryushare.com','[COLOR red]Unsupported Link[/COLOR]')
-                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host + ' [COLOR gold]:[/COLOR] ' + title}, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host + ' [COLOR gold]:[/COLOR] ' + title }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
 
         find = re.search('commentblock', html)
         if find:
@@ -772,6 +772,21 @@ def GetLinks3(section, url): # Get Links ddlvalley
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR slategray][B]^^^ Press back ^^^[/B] [/COLOR]'},'','')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry Link may have been removed ![/B][/COLOR],[COLOR lime][B]Please try a different link/host !![/B][/COLOR],7000,"")")
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
+def GetLinks4(section, url): #1080p720p
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        content = html
+        match = re.compile('href="(.+?)">(.+?)</a>').findall(content)
+        listitem = GetMediaInfo(content)
+        for url, name in match:
+                host = GetDomain(url)
+                if urlresolver.HostedMediaFile(url= url):
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host + ' [COLOR gold]:[/COLOR] ' + name}, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ############################################################################# PlayVideo #################################################################################
 
@@ -1346,6 +1361,8 @@ elif mode == 'GetLinks2':
 	GetLinks2(section, url)
 elif mode == 'GetLinks3':
 	GetLinks3(section, url)
+elif mode == 'GetLinks4':
+	GetLinks4(section, url)
 elif mode == 'GetSearchQuery':
 	GetSearchQuery()
 elif mode == 'Search':
