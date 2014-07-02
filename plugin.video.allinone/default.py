@@ -3,6 +3,7 @@ import re, string, sys, os
 import urlresolver
 from TheYid.common.addon import Addon
 from TheYid.common.net import Net
+from htmlentitydefs import name2codepoint as n2cp
 import HTMLParser
 
 addon_id = 'plugin.video.allinone'
@@ -30,8 +31,8 @@ BASE_URL25 = 'http://www.rapgrid.com/'
 BASE_URL29 = 'http://shows4u.info/'
 BASE_URL30 = 'http://www.tupeliculashd.com/'
 BASE_URL32 = 'http://www.tvhq.info/'
-BASE_URL33 = 'http://pastebin.com/'
 BASE_URL34 = 'http://binflix.com/'
+BASE_URL35 = 'https://raw.githubusercontent.com/TheYid/yidpics/master'
 
 #### PATHS ##########
 AddonPath = addon.get_path()
@@ -777,19 +778,6 @@ def GetTitles32b(section, url, startPage= '1', numOfPages= '1'): #hqtv-1st
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#--------------------------------------------------------------- live streams -------------------------------------------------------------------------------------------------#
-
-def GetTitles33(section, url, startPage= '1', numOfPages= '1'): 
-        print 'allinone get Movie Titles Menu %s' % url
-        pageUrl = url
-        html = net.http_GET(pageUrl).content 
-        match = re.compile('<message>(.+?)</message>\s*?<.+?>(.+?)</.+?>',re.DOTALL).findall(html)  
-        match1 = re.compile('<item>\s*?<title>(.+?)</title>\s*?<link>(.+?)</link>\s*?<thumbnail>dummy</thumbnail>',re.DOTALL).findall(html)                    
-        match2 = re.compile('<item>\s*?<title>(.+?)</title>\s*?<thumbnail>dummy</thumbnail>\s*?<fanart></fanart>\s*?<link>(.+?)</link>\s*?</item>',re.DOTALL).findall(html)
-        for name, movieUrl in match + match1 + match2:
-                addon.add_directory({'mode': 'PlayVideo1', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= 'https://pbs.twimg.com/profile_images/446607065910214656/W-H4UeHJ.png', fanart=FanartPath + 'fanart.png')
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
 #-------------------------------------------------------------------------- binflix --------------------------------------------------------------------------------------#
 
 def GetTitles34(section, url, startPage= '1', numOfPages= '1'): #binflix
@@ -813,6 +801,18 @@ def GetTitles34(section, url, startPage= '1', numOfPages= '1'): #binflix
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#------------------------------------------------------------------------------- github -------------------------------------------------------------------------------------#
+
+def GetTitles35(url):                                            
+        print 'GETLINKS FROM URL: '+url
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        content = html
+        match = re.compile('<>title="(.+?)" href="(.+?)" />< src="(.+?)"').findall(content)
+        for name, url, img in match:
+                addon.add_directory({'mode': 'PlayVideo1', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
 ##.replace('/', ' ')## \s*? ##
@@ -1037,8 +1037,7 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'SearchMenu'}, {'title':  '[COLOR green][B]Searches [/B] [/COLOR]'}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR gold][B]TheYids REPO NEWS >[/B][/COLOR] >'}, img=IconPath + 'twit.png', fanart=FanartPath + 'fanart.png')
-        #addon.add_directory({'mode': 'GetTitles33', 'section': 'ALL', 'url': BASE_URL33 + '/raw.php?i=vDa9teHV',
-                             #'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Live Tv Streams >[/B][/COLOR]>'}, img= 'http://liquidsilver.org/wp-content/uploads/2008/12/live1.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles35', 'url': BASE_URL35 + '/yellow.txt'}, {'title':  '[COLOR mediumorchid][B]MY Streams >[/COLOR][/B] >'}, img=IconPath + 'mys.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-----------------------help---------------------------------------help-----------------------------help--------------------------help-------------------------------help-------#
@@ -1060,13 +1059,38 @@ def MusicMenu():   #MusicVideos
         addon_handle = int(sys.argv[1]) 
         xbmcplugin.setContent(addon_handle, 'audio')
 
+        url = 'rtmp://live.drumandbasslines.com/DnBTV/ch1'
+        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Drum and Bass tv[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'http://cdn.desktopwallpapers4.me/wallpapers/music/1366x768/1/6742-drum-and-bass-1366x768-music-wallpaper.jpg')
+        li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://cdn.live.tvplayer.simplestream.com/coder6/coder.channels.channel2/hls/3/playlist.m3u8'
+        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]AKA[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'http://www.360-records.co.uk/UploadNews/Images/20102011040838.jpg')
+        li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://cdn.live.tvplayer.simplestream.com/coder5/coder.channels.channel14/hls/3/playlist.m3u8'
+        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]CLUBLAND[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'http://i2.bebo.com/042/7/mediuml/2008/03/21/11/647921526a7208306229ml.jpg')
+        li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://cdn.live.tvplayer.simplestream.com/coder2/coder.channels.channel13/hls/3/playlist.m3u8'
+        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Kiss tv[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'http://www.sigmahq.com/wp-content/uploads/2014/03/artworks-000059534914-n8td93-original-300x220.jpg')
+        li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://cdn.live.tvplayer.simplestream.com/coder1/coder.channels.channel11/hls/4/playlist.m3u8'
+        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]4 Music[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'http://www.designweek.co.uk/Pictures/web/x/k/z/0103124MusicE_467.jpg')
+        li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
         url = 'http://91.240.87.34:4000/udp/224.200.202.47:1234'
-        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]MTV Dance[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', iconImage='http://s2.postimg.org/eg7k51z3t/icon.png', thumbnailImage= 'http://teve.ba/img/content/mtv-dance2.gif')
+        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]MTV Dance[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'http://teve.ba/img/content/mtv-dance2.gif')
         li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
         url = 'http://vevoplaylist-live.hls.adaptive.level3.net/vevo/ch1/appleman.m3u8'
-        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]VEVO[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', iconImage='http://s2.postimg.org/eg7k51z3t/icon.png', thumbnailImage= 'https://lh5.ggpht.com/Ia_oK5aLlY98RT5IiM4NlHaptpQcl77_U7szlqo-hOSAoXtJhJGVdfQQDCfnP4g6BTN5=w300')
+        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]VEVO[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'https://lh5.ggpht.com/Ia_oK5aLlY98RT5IiM4NlHaptpQcl77_U7szlqo-hOSAoXtJhJGVdfQQDCfnP4g6BTN5=w300')
         li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
@@ -1211,7 +1235,12 @@ def SportMenu():   #sport
         xbmcplugin.setContent(addon_handle, 'audio')
 
         url = 'rtmp://37.220.32.50:443/liverepeater playpath=46 swfUrl=http://static.surk.tv/atdedead.swf live=1 pageUrl=http://filotv.pw/player2.php?id=47&width=640&height=460 token=#atd%#$ZH'
-        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]WWE 24/7[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', iconImage='http://s2.postimg.org/eg7k51z3t/icon.png', thumbnailImage= 'http://upload.wikimedia.org/wikipedia/en/9/95/OriginalWWE247.jpg')
+        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]WWE 24/7[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'http://upload.wikimedia.org/wikipedia/en/9/95/OriginalWWE247.jpg')
+        li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://vodp32.ustream.tv/0/1/48/48537/48537979/1_9485689_48537979.flv?e=1404317268&h=a6e37f4cd6a4be2ba8aebc2411af9113&tracking=e6c2d5_24_0_1_0'
+        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Billy Cs Hall of Fame Special[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'http://static-cdn2.ustream.tv/i/channel/picture/9/4/8/5/9485689/9485689,66x66,r:10.jpg')
         li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
@@ -2860,10 +2889,10 @@ elif mode == 'GetTitles32a':
 	GetTitles32a(section, url, startPage, numOfPages)
 elif mode == 'GetTitles32b': 
 	GetTitles32b(section, url, startPage, numOfPages)
-elif mode == 'GetTitles33': 
-	GetTitles33(section, url, startPage, numOfPages)
 elif mode == 'GetTitles34': 
 	GetTitles34(section, url, startPage, numOfPages)
+elif mode == 'GetTitles35': 
+	GetTitles35(url)
 elif mode == 'GetLinks':
 	GetLinks(section, url)
 elif mode == 'GetLinks1':
