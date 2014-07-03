@@ -34,6 +34,7 @@ BASE_URL32 = 'http://www.tvhq.info/'
 BASE_URL34 = 'http://binflix.com/'
 BASE_URL35 = 'https://raw.githubusercontent.com/TheYid/yidpics/master'
 BASE_URL36 = 'http://www.tfpdl.com/'
+BASE_URL37 = 'http://mmashare.16561.info/'
 
 #### PATHS ##########
 AddonPath = addon.get_path()
@@ -803,6 +804,38 @@ def GetTitles36(section, url, startPage= '1', numOfPages= '1'): #tfpdl
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+#-------------------------------------------------------------------------- mma --------------------------------------------------------------------------------------#
+
+def GetTitles37(section, url, startPage= '1', numOfPages= '1'): #mma
+    try:
+        pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + 'page/' + startPage + '/'
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        start = int(startPage)
+        end = start + int(numOfPages)
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + 'page/' + str(page) + '/'
+                        html = net.http_GET(pageUrl).content                       
+                match = re.compile('<a href="http://mmashare.com.2112112.net/serious-mma-videos-2-2-f35(.+?)">(.+?)</a><br', re.DOTALL).findall(html)
+                for movieUrl, name in match:
+                        addon.add_directory({'mode': 'GetTitles37a', 'section': section, 'url': 'http://mmashare.com.2112112.net/serious-mma-videos-2-2-f35' + movieUrl}, {'title':  name.strip()}, img= 'http://mmashare.com.2112112.net/images/new-mmashare.png', fanart=FanartPath + 'fanart.png')    
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def GetTitles37a(section, url, startPage= '1', numOfPages= '1'): #mma
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        content = html
+        match = re.compile('flashplayer: ".+?",file:"(.+?)",image').findall(content)
+        for url in match:
+                addon.add_directory({'mode': 'PlayVideo1', 'url': url, 'listitem': listitem}, {'title':  'Load Stream'}, img= 'http://mmashare.com.2112112.net/images/new-mmashare.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
 
 ##.replace('/', ' ')## \s*? ##
 ###############################################################################Getlinks#############################################################################################
@@ -1220,10 +1253,12 @@ def SportMenu():   #sport
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
         url = 'http://vodp32.ustream.tv/0/1/48/48537/48537979/1_9485689_48537979.flv?e=1404317268&h=a6e37f4cd6a4be2ba8aebc2411af9113&tracking=e6c2d5_24_0_1_0'
-        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Billy Cs Hall of Fame Special[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'http://static-cdn2.ustream.tv/i/channel/picture/9/4/8/5/9485689/9485689,66x66,r:10.jpg')
+        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Billy Cs Hall of Fame[/B][/COLOR] [COLOR lemonchiffon](Boxing) [/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'http://static-cdn2.ustream.tv/i/channel/picture/9/4/8/5/9485689/9485689,66x66,r:10.jpg')
         li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
+        addon.add_directory({'mode': 'GetTitles37', 'section': 'ALL', 'url': BASE_URL37 + '/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest MMA[/B][/COLOR] [COLOR red](mmashare) [/COLOR]>>'}, img= 'http://mmashare.com.2112112.net/images/new-mmashare.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/watch/ufc',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest UFC list[/B][/COLOR] [COLOR tomato](ChannelCut) [/COLOR]>>'}, img=IconPath + 'cc.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/watch/wwe',
@@ -2875,6 +2910,10 @@ elif mode == 'GetTitles35':
 	GetTitles35(url)
 elif mode == 'GetTitles36': 
 	GetTitles36(section, url, startPage, numOfPages)
+elif mode == 'GetTitles37': 
+	GetTitles37(section, url, startPage, numOfPages)
+elif mode == 'GetTitles37a': 
+	GetTitles37a(section, url, startPage, numOfPages)
 elif mode == 'GetLinks':
 	GetLinks(section, url)
 elif mode == 'GetLinks1':
