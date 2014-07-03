@@ -54,7 +54,6 @@ section = addon.queries.get('section', None)
 
 def GetTitles(section, url, startPage= '1', numOfPages= '1'):   # Release Center
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -78,7 +77,6 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'):   # Release Center
 
 def GetTitles2(section, url, startPage= '1', numOfPages= '1'): # scenelog
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -102,7 +100,6 @@ def GetTitles2(section, url, startPage= '1', numOfPages= '1'): # scenelog
 
 def GetTitles3(section, url, startPage= '1', numOfPages= '1'): #crazyhdsource
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + '/page/' + startPage + '/'
@@ -126,7 +123,6 @@ def GetTitles3(section, url, startPage= '1', numOfPages= '1'): #crazyhdsource
 
 def GetTitles4(section, url, startPage= '1', numOfPages= '1'): #com2dl
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + '/page/' + startPage + '/'
@@ -138,7 +134,7 @@ def GetTitles4(section, url, startPage= '1', numOfPages= '1'): #com2dl
                 if ( page != start):
                         pageUrl = url + '/page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content                      
-                match = re.compile('shstory-img.+?href="(.+?)"><img src="(.+?)" alt="(.+?)"', re.DOTALL).findall(html)
+                match = re.compile('shstory4-img.+?href="(.+?)"><img src="(.+?)" alt="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, img, name in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles4', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')       
@@ -150,7 +146,6 @@ def GetTitles4(section, url, startPage= '1', numOfPages= '1'): #com2dl
 
 def GetTitles5(section, url, startPage= '1', numOfPages= '1'): #300mbmovies4u
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -175,7 +170,6 @@ def GetTitles5(section, url, startPage= '1', numOfPages= '1'): #300mbmovies4u
 
 def GetTitles6(section, url, startPage= '1', numOfPages= '1'): #Scene down
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -199,7 +193,6 @@ def GetTitles6(section, url, startPage= '1', numOfPages= '1'): #Scene down
 
 def GetTitles7(section, url, startPage= '1', numOfPages= '1'): # Sceper
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + '/page/' + startPage + '/'
@@ -223,7 +216,6 @@ def GetTitles7(section, url, startPage= '1', numOfPages= '1'): # Sceper
 
 def GetTitles8(section, url, startPage= '1', numOfPages= '1'): # rls-tv
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + '/index.php?page=' + startPage + ''
@@ -246,7 +238,6 @@ def GetTitles8(section, url, startPage= '1', numOfPages= '1'): # rls-tv
 
 def GetTitles9(section, url, startPage= '1', numOfPages= '1'): #wrzko
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -271,7 +262,6 @@ def GetTitles9(section, url, startPage= '1', numOfPages= '1'): #wrzko
 
 def GetTitles1(section, url, startPage= '1', numOfPages= '1'): #scnsrc movies
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -295,7 +285,6 @@ def GetTitles1(section, url, startPage= '1', numOfPages= '1'): #scnsrc movies
 
 def GetTitles10(section, url, startPage= '1', numOfPages= '1'): #scnsrc tv
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -319,7 +308,6 @@ def GetTitles10(section, url, startPage= '1', numOfPages= '1'): #scnsrc tv
 
 def GetTitles11(section, url, startPage= '1', numOfPages= '1'): #ddlv
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -343,7 +331,6 @@ def GetTitles11(section, url, startPage= '1', numOfPages= '1'): #ddlv
 
 def GetTitles12(section, url, startPage= '1', numOfPages= '1'): #rbb
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -367,7 +354,6 @@ def GetTitles12(section, url, startPage= '1', numOfPages= '1'): #rbb
 
 def GetTitles13(section, url, startPage= '1', numOfPages= '1'):  #rbb2
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + ''
@@ -391,7 +377,6 @@ def GetTitles13(section, url, startPage= '1', numOfPages= '1'):  #rbb2
 
 def GetTitles14(section, url, startPage= '1', numOfPages= '1'): # Extopia
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -415,7 +400,6 @@ def GetTitles14(section, url, startPage= '1', numOfPages= '1'): # Extopia
 
 def GetTitles16(section, url, startPage= '1', numOfPages= '1'): # fullmatch
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -439,7 +423,6 @@ def GetTitles16(section, url, startPage= '1', numOfPages= '1'): # fullmatch
 
 def GetTitles17(section, url, startPage= '1', numOfPages= '1'): # Fight-BB
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -463,7 +446,6 @@ def GetTitles17(section, url, startPage= '1', numOfPages= '1'): # Fight-BB
 
 def GetTitles18(section, url, startPage= '1', numOfPages= '1'): #house
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -486,7 +468,6 @@ def GetTitles18(section, url, startPage= '1', numOfPages= '1'): #house
 
 def GetTitles19(section, url, startPage= '1', numOfPages= '1'): # freshremix
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + '/page/' + startPage + '/'
@@ -510,7 +491,6 @@ def GetTitles19(section, url, startPage= '1', numOfPages= '1'): # freshremix
 
 def GetTitles20(section, url, startPage= '1', numOfPages= '1'): #
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + '/page/' + startPage + '/'
@@ -534,7 +514,6 @@ def GetTitles20(section, url, startPage= '1', numOfPages= '1'): #
 
 def GetTitles21(section, url, startPage= '1', numOfPages= '1'): #rls1click
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -558,7 +537,6 @@ def GetTitles21(section, url, startPage= '1', numOfPages= '1'): #rls1click
 
 def GetTitles22(section, url, startPage= '1', numOfPages= '1'): #irweb-dl
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -582,7 +560,6 @@ def GetTitles22(section, url, startPage= '1', numOfPages= '1'): #irweb-dl
 
 def GetTitles23(section, url, startPage= '1', numOfPages= '1'): #binflix
     try:
-        print 'theyidrh get Movie Titles Menu %s' % url
         pageUrl = url
         if int(startPage)> 1:
                 pageUrl = url + 'page/' + startPage + '/'
@@ -593,11 +570,11 @@ def GetTitles23(section, url, startPage= '1', numOfPages= '1'): #binflix
         for page in range( start, end):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
-                        html = net.http_GET(pageUrl).content                       
+                        html = net.http_GET(pageUrl).content                         
                 match = re.compile('entry-title.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')    
-                addon.add_directory({'mode': 'GetTitles34', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetTitles23', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -605,7 +582,6 @@ def GetTitles23(section, url, startPage= '1', numOfPages= '1'): #binflix
 #################################################################################getlinks###############################################################################################
 
 def GetLinks(section, url): # Get Links
-        print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
         content = html
@@ -690,7 +666,6 @@ def GetLinks(section, url): # Get Links
 
 def GetLinks1(section, url): #RLStv
     try:
-        print 'GETLINKS FROM URL: '+url
         html = net.http_GET(str(url)).content
         sources = []
         listitem = GetMediaInfo(html)
@@ -733,7 +708,6 @@ def GetLinks1(section, url): #RLStv
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 def GetLinks2(section, url): # #house
-        print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
         content = html
@@ -749,7 +723,6 @@ def GetLinks2(section, url): # #house
 
 def GetLinks3(section, url): # Get Links ddlvalley
     try:
-        print 'GETLINKS FROM URL: '+url
         html = net.http_GET(str(url)).content
         sources = []
         listitem = GetMediaInfo(html)
@@ -801,7 +774,6 @@ def GetLinks3(section, url): # Get Links ddlvalley
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 def GetLinks4(section, url): #1080p720p
-        print 'GETLINKS FROM URL: '+url
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
         content = html
@@ -817,7 +789,6 @@ def GetLinks4(section, url): #1080p720p
 
 def PlayVideo(url, listitem):
     try:
-        print 'in PlayVideo %s' % url
         stream_url = urlresolver.HostedMediaFile(url).resolve()
         xbmc.Player().play(stream_url)
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR slategray][B]^^^ Press back ^^^[/B] [/COLOR]'},'','')
@@ -925,7 +896,7 @@ def Menu9():   #300mb movies4u
 
 def Menu3():   #yify
         addon.add_directory({'mode': 'GetTitles23', 'section': 'ALL', 'url': BASE_URL23 + '/category/movies/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Latest Movies[/B][/COLOR] [COLOR black](Binflix) [/COLOR]>>'}, img=IconPath + 'bf.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '2'}, {'title':  '[COLOR steelblue][B]Latest Movies[/B][/COLOR] [COLOR darkseagreen](Binflix) [/COLOR]>>'}, img=IconPath + 'bf.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Latest Movies[/B] [/COLOR] [COLOR blue](irweb-dl)[/COLOR] >>'}, img=IconPath + 'ir.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles5', 'section': 'ALL', 'url': BASE_URL12 + '/category/hollywood-movie/english-3d-movie/',
@@ -972,7 +943,7 @@ def Menu4():    #tv
 
 def Menu11():    #hd zone
         addon.add_directory({'mode': 'GetTitles23', 'section': 'ALL', 'url': BASE_URL23 + '/category/tv-shows/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes 1080p/720p[/B][/COLOR] [COLOR black](Binflix) [/COLOR]>>'}, img=IconPath + 'bf.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '2'}, {'title':  '[COLOR darkorange][B]Latest Episodes 1080p/720p[/B][/COLOR] [COLOR darkseagreen](Binflix) [/COLOR]>>'}, img=IconPath + 'bf.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/tv-shows/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Tv shows 1080p/720p[/B] [/COLOR] [COLOR blue](irweb-dl)[/COLOR] >>'}, img=IconPath + 'ir.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles3', 'section': 'ALL', 'url': BASE_URL3 + '/tv-show',
