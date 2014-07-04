@@ -1020,6 +1020,14 @@ def PlayVideo1(url, listitem):
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
         xbmcplugin.endOfDirectory(addon_handle)
 
+#-------mystreams------------#
+
+def PlayVideo3(url, listitem):
+        print 'in PlayVideo %s' % url
+	xbmc.Player().play(url, listitem)
+        addon.add_directory({'mode': 'help'}, {'title':  ''},'','')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 #--------------------------------------------------------------------------------------------------#
 
 def GetDomain(url):
@@ -1039,7 +1047,7 @@ def GetMediaInfo(html):
                 listitem.setInfo('video', {'Title': match.group(1), 'Year': int(match.group(2)) } )
         return listitem
 
-######################################################################menus####################################################################################################
+###################################################################### menus ####################################################################################################
 
 def MainMenu():    #homescreen
         addon.add_directory({'mode': 'MovieMenu'}, {'title':  '[COLOR cornflowerblue][B]Movies >[/B][/COLOR] >'}, img=IconPath + 'films.png', fanart=FanartPath + 'fanart.png')
@@ -1247,7 +1255,7 @@ def SportMenu():   #sport
         addon_handle = int(sys.argv[1]) 
         xbmcplugin.setContent(addon_handle, 'audio')
 
-        url = 'rtmp://37.220.32.50:443/liverepeater playpath=46 swfUrl=http://static.surk.tv/atdedead.swf live=1 pageUrl=http://filotv.pw/player2.php?id=47&width=640&height=460 token=#atd%#$ZH'
+        url = 'rtmp://93.174.93.67:443/liverepeater playpath=46 swfUrl=http://static.surk.tv/atdedead.swf live=1 pageUrl=http://filotv.pw/player3.php?id=46&width=640&height=460 token=#atd%#$ZH'
         li = xbmcgui.ListItem('[COLOR lightsteelblue][B]WWE 24/7[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'http://upload.wikimedia.org/wikipedia/en/9/95/OriginalWWE247.jpg')
         li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
@@ -1956,7 +1964,7 @@ def Ocm3Menu():          #one click watch abc
 
 def TvMenu():       #tv
         addon.add_directory({'mode': 'GetTitles34', 'section': 'ALL', 'url': BASE_URL34 + '/category/tv-shows/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR black](darkseagreen) [/COLOR]>>'}, img=IconPath + 'bf.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '2'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR darkseagreen](Binflix) [/COLOR]>>'}, img=IconPath + 'bf.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/tv-shows/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR blue](OCW) [/COLOR]>>'}, img=IconPath + 'ocw.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles1', 'section': 'ALL', 'url': BASE_URL1 + '/category/tvshows',
@@ -2969,7 +2977,9 @@ elif mode == 'Search10':
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)
 elif mode == 'PlayVideo1':
-	PlayVideo1(url, listitem)	
+	PlayVideo1(url, listitem)
+elif mode == 'PlayVideo3':
+	PlayVideo3(url, listitem)	
 elif mode == 'ResolverSettings':
         urlresolver.display_settings()
 elif mode == 'SearchMenu':
