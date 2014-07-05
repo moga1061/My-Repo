@@ -102,22 +102,22 @@ def GetTitles1(section, url, startPage= '1', numOfPages= '1'): #WTT
 
 #-----------------------------------------------------------------------------------#
 
-def GetTitles2(section, url, startPage= '1', numOfPages= '1'): #couchtuner
+def GetTitles2(url): #couchtuner
         pageUrl = url
         html = net.http_GET(pageUrl).content                     
         match = re.compile('<span class="tvbox">\s*?<a href="(.+?)" title=".+?" >\s*?<span style=".+?" class="episode"></span>(.+?)</a>',re.DOTALL).findall(html)
         for movieUrl, name in match:
-                addon.add_directory({'mode': 'GetTitles2a', 'section': section, 'url': movieUrl}, {'title':  name.strip().replace('<br />', ' - ')}, img=IconPath + 'ct.png', fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetTitles2a', 'url': movieUrl}, {'title':  name.strip().replace('<br />', ' - ')}, img=IconPath + 'ct.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #--------------#
 
-def GetTitles2a(section, url, startPage= '1', numOfPages= '1'): #couchtuner
+def GetTitles2a(url): #couchtuner
         pageUrl = url
         html = net.http_GET(pageUrl).content                     
         match = re.compile('</span><a href="(.+?)">(.+?)</a></strong></p>',re.DOTALL).findall(html)
         for movieUrl, name in match:
-                addon.add_directory({'mode': 'GetLinks1', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'ct.png', fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetLinks1', 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'ct.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-------------------------------------------------------------------------------#
@@ -772,7 +772,8 @@ def GetTitles34(section, url, startPage= '1', numOfPages= '1'): #binflix
 
 #------------------------------------------------------------------------------- github -------------------------------------------------------------------------------------#
 
-def GetTitles35(url):                                            
+def GetTitles35(url):   
+        addon.add_directory({'mode': 'GetSearchQuery11'},  {'title':  '[COLOR khaki][B]M[/COLOR][COLOR blue]E[/COLOR][COLOR salmon]G[/COLOR][COLOR darkseagreen]A[/COLOR] [COLOR green]SEARCH[/COLOR][/B] : Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR] Movies   [COLOR gold](BETA)[/COLOR]'}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')                                         
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
         content = html
@@ -1053,12 +1054,11 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'MovieMenu'}, {'title':  '[COLOR cornflowerblue][B]Movies >[/B][/COLOR] >'}, img=IconPath + 'films.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'TvMenu'}, {'title':  '[COLOR darkorange][B]Tv Shows >[/B][/COLOR] >'}, img=IconPath + 'tv2.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'SportMenu'}, {'title':  '[COLOR lemonchiffon][B]Sport >[/B][/COLOR] >'}, img=IconPath + 'sport1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'MusicMenu'}, {'title':  '[COLOR cadetblue][B]Music Videos >[/B][/COLOR] >'}, img=IconPath + 'music.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'RadioMenu'}, {'title':  '[COLOR lightsteelblue][B]Radio >[/B][/COLOR]>'}, img=IconPath + 'radio.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles35', 'url': BASE_URL35 + '/yellow.txt'}, {'title':  '[COLOR mediumorchid][B]Streams >[/COLOR][/B] >'}, img=IconPath + 'stream.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'MusicMenu'}, {'title':  '[COLOR cadetblue][B]Music >[/B][/COLOR] >'}, img=IconPath + 'music.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'SearchMenu'}, {'title':  '[COLOR green][B]Searches [/B] [/COLOR]'}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolver.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR gold][B]TheYids REPO NEWS >[/B][/COLOR] >'}, img=IconPath + 'twit.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles35', 'url': BASE_URL35 + '/yellow.txt'}, {'title':  '[COLOR mediumorchid][B]MY Streams >[/COLOR][/B] >'}, img=IconPath + 'mys.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-----------------------help---------------------------------------help-----------------------------help--------------------------help-------------------------------help-------#
@@ -1074,6 +1074,7 @@ def HelpMenu():
 #--------------------------------MusicVideos-----------------------------MusicVideos-------------------------------------MusicVideos---------------------------MusicVideos-----------#
 
 def MusicMenu():   #MusicVideos
+        addon.add_directory({'mode': 'RadioMenu'}, {'title':  '[COLOR lightsteelblue][B]Radio >[/B][/COLOR]>'}, img=IconPath + 'radio.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles25', 'section': 'ALL', 'url': BASE_URL25 + '/battles',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cadetblue][B]Rap Battle videos[/B][/COLOR] [COLOR springgreen](Rap Grid) [/COLOR]>>'}, img=IconPath + 'rg.png', fanart=FanartPath + 'fanart.png')
 
@@ -1984,8 +1985,7 @@ def TvMenu():       #tv
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes list[/B][/COLOR] [COLOR tomato](ChannelCut) [/COLOR]>>'}, img=IconPath + 'cc.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles17', 'section': 'ALL', 'url': BASE_URL17 + '/category/shows/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes list[/B][/COLOR] [COLOR sienna](Tv-Junky) [/COLOR]>>'}, img=IconPath + 'tvj.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles2', 'section': 'ALL', 'url': BASE_URL2 + 'new-releases/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes list[/B][/COLOR] [COLOR lightcyan](CouchTuner) [/COLOR]>>'}, img=IconPath + 'ct.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles2', 'url': BASE_URL2 + 'new-releases/'}, {'title':  '[COLOR darkorange][B]Latest Episodes list[/B][/COLOR] [COLOR lightcyan](CouchTuner) [/COLOR]>>'}, img=IconPath + 'ct.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-----------------------------------------------------------------------------one click moviez----------------------------------------------------------------------------------------#
@@ -2573,11 +2573,12 @@ def Hq7Menu():          # tvhq tv abc
 ################################################################################searchmenu###############################################################################################
 
 def SearchMenu():
-        addon.add_directory({'mode': 'GetSearchQuery10'},  {'title':  '[COLOR blue][B]OneClickWatch[/B][/COLOR] [COLOR green]Search[/COLOR]'}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetSearchQuery1'},  {'title':  '[COLOR salmon][B]WatchTvShows [/B][/COLOR] [COLOR green]Search[/COLOR]'}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR darkseagreen][B]BinFlix[/B][/COLOR] [COLOR green]Search Tv Shows[/COLOR] '}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetSearchQuery3'},  {'title':  '[COLOR coral][B]TV junky[/B][/COLOR] [COLOR green]Search Tv Shows[/COLOR] '}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetSearchQuery4'},  {'title':  '[COLOR tomato][B]ChannelCut[/B][/COLOR] [COLOR green]Search Tv Shows[/COLOR] '}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery10'},  {'title':  '[COLOR blue][B]OneClickWatch[/B][/COLOR] : [COLOR green]Search[/COLOR]'}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery1'},  {'title':  '[COLOR salmon][B]WatchTheTapes[/B][/COLOR] : [COLOR green]Search[/COLOR]'}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery2'},  {'title':  '[COLOR darkseagreen][B]BinFlix[/B][/COLOR] : [COLOR green]Search[/COLOR] '}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery3'},  {'title':  '[COLOR coral][B]TV junky[/B][/COLOR] : [COLOR green]Search Tv Shows[/COLOR] '}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery4'},  {'title':  '[COLOR tomato][B]ChannelCut[/B][/COLOR] : [COLOR green]Search Tv Shows[/COLOR] '}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetSearchQuery11'},  {'title':  '[COLOR khaki][B]M[/COLOR][COLOR blue]E[/COLOR][COLOR salmon]G[/COLOR][COLOR darkseagreen]A[/COLOR][/B] : [COLOR green]Search[/COLOR]   (BETA)'}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ########################################################################search#################################################################################################
@@ -2586,7 +2587,7 @@ def GetSearchQuery10():
 	last_search = addon.load_data('search')
 	if not last_search: last_search = ''
 	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]Search[/COLOR]')
+        keyboard.setHeading('[COLOR green]Search OCW[/COLOR]')
 	keyboard.setDefault(last_search)
 	keyboard.doModal()
 	if (keyboard.isConfirmed()):
@@ -2596,13 +2597,38 @@ def GetSearchQuery10():
 	else:
                 return  
 def Search10(query):
-        url = 'http://www.google.com/search?q=site:oneclickwatch.org ' + query
+        url = 'http://oneclickwatch.org/?s= ' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
+        for movieUrl, name, img in match:
+                addon.add_directory({'mode': 'GetLinks', 'url': movieUrl}, {'title':  name.strip() +' [COLOR blue](OCW)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
+	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+##---------------------------------------------------------------------------------------------------------------##
+
+def GetSearchQuery1():
+	last_search = addon.load_data('search')
+	if not last_search: last_search = ''
+	keyboard = xbmc.Keyboard()
+        keyboard.setHeading('[COLOR green]Search WTT[/COLOR]')
+	keyboard.setDefault(last_search)
+	keyboard.doModal()
+	if (keyboard.isConfirmed()):
+                query = keyboard.getText()
+                addon.save_data('search',query)
+                Search1(query)
+	else:
+                return
+def Search1(query):
+        url = 'http://www.google.com/search?q=site:watchthetapes.com ' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
         match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
         for url, title in match:
-                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
+                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '').replace('Watch', '')
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -2623,32 +2649,6 @@ def GetSearchQuery2():
                 return  
 def Search2(query):
         url = 'http://www.google.com/search?q=site:binflix.com ' + query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
-        for url, title in match:
-                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '').replace('Watch', '')
-                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
-	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
-##---------------------------------------------------------------------------------------------------------------##
-
-def GetSearchQuery1():
-	last_search = addon.load_data('search')
-	if not last_search: last_search = ''
-	keyboard = xbmc.Keyboard()
-        keyboard.setHeading('[COLOR green]Search[/COLOR]')
-	keyboard.setDefault(last_search)
-	keyboard.doModal()
-	if (keyboard.isConfirmed()):
-                query = keyboard.getText()
-                addon.save_data('search',query)
-                Search1(query)
-	else:
-                return
-def Search1(query):
-        url = 'http://www.google.com/search?q=site:watchthetapes.com ' + query 
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
@@ -2812,6 +2812,56 @@ def Search9(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title}, img= img, fanart=FanartPath + 'fanart.png')
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+##---------------------------------------------------------------------------------------------------------------##
+
+def GetSearchQuery11():
+	last_search = addon.load_data('search')
+	if not last_search: last_search = ''
+	keyboard = xbmc.Keyboard()
+        keyboard.setHeading('[COLOR green]Search[/COLOR]')
+	keyboard.setDefault(last_search)
+	keyboard.doModal()
+	if (keyboard.isConfirmed()):
+                query = keyboard.getText()
+                addon.save_data('search',query)
+                Search11(query)
+	else:
+                return
+def Search11(query):
+        url = 'http://www.google.com/search?q=site:oneclickwatch.org ' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
+        for url, title in match:
+                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR blue]...(OCW)[/COLOR]'})
+        url = 'http://www.google.com/search?q=site:watchthetapes.com ' + query 
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
+        for url, title in match:
+                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '').replace('Watch', '')
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR salmon]...(WTT)[/COLOR]'})
+        url = 'http://www.google.com/search?q=site:binflix.com ' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
+        for url, title in match:
+                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '').replace('Watch', '')
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR darkseagreen]...(Binflix)[/COLOR]'})
+        url = 'http://www.google.com/search?q=site:tfpdl.com ' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
+        for url, title in match:
+                title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '').replace('Watch', '').replace('Next:', '').replace('Downloaded', '').replace('Download', '').replace('Previous:', '')
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR green]...(tfpdl)[/COLOR]'})
+	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 ###################################################################################### setViews ##########################################################################
 
 def setView(content, viewType):
@@ -2839,9 +2889,9 @@ elif mode == 'GetTitles':
 elif mode == 'GetTitles1': 
 	GetTitles1(section, url, startPage, numOfPages)
 elif mode == 'GetTitles2': 
-	GetTitles2(section, url, startPage, numOfPages)
+	GetTitles2(url)
 elif mode == 'GetTitles2a': 
-	GetTitles2a(section, url, startPage, numOfPages)
+	GetTitles2a(url)
 elif mode == 'GetTitles3': 
 	GetTitles3(section, url, startPage, numOfPages)
 elif mode == 'GetTitles4': 
@@ -2974,6 +3024,12 @@ elif mode == 'GetSearchQuery10':
 	GetSearchQuery10()
 elif mode == 'Search10':
 	Search10(query)
+elif mode == 'GetSearchQuery11':
+	GetSearchQuery11()
+elif mode == 'Search11':
+	Search11(query)
+elif mode == 'Search12':
+	Search12(query)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)
 elif mode == 'PlayVideo1':
