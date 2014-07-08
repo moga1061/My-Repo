@@ -271,6 +271,7 @@
         <description>Stream a wide selection of scene release MMA  Boxing and Wrestling in 1080p 720p mp4 from fight-bb....a lot of the 720p stuff is in RAR [COLOR red][B][I]YOU will need a real-debrid or a alldebrid account[/B][/I][/COLOR]</description>
         <platform>all</platform>
         <disclaimer lang="en">[COLOR red][B][I]for more info or help on this addon and TheYid repo please goto XBMCHUB.com[/B][/I][/COLOR]</disclaimer>
+        <broken>SITE DOWN please use Release HUB </broken>
     </extension>
 </addon>
 
@@ -342,7 +343,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.theyidrh" version="1.0.8" name="Release [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.theyidrh" version="1.1.0" name="Release [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
