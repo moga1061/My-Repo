@@ -74,7 +74,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'):
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img, fanart=FanartPath + 'fanart.png')    
                 addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------------- WTT -----------------------------------------------------------------------------------------#
@@ -100,7 +100,7 @@ def GetTitles1(section, url, startPage= '1', numOfPages= '1'):
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img, fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles1', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')      
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-------------------------------------------------------------------------- couchtuner --------------------------------------------------------------------------------------#
@@ -147,7 +147,7 @@ def GetTitles3(section, url, startPage= '1', numOfPages= '1'):
                 addon.add_directory({'mode': 'GetTitles3', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')           
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #---------------------------------------------------------------------- Uv ------------------------------------------------------------------------------------------------------#
@@ -174,7 +174,7 @@ def GetTitles4(section, url, startPage= '1', numOfPages= '1'):
                 addon.add_directory({'mode': 'GetTitles4', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')       
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------ moviesall4u -------------------------------------------------------------------------------------------------#
@@ -201,7 +201,7 @@ def GetTitles5(section, url, startPage= '1', numOfPages= '1'):
                 addon.add_directory({'mode': 'GetTitles5', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')             
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #----------------------------------------------------------------------- oneclickmoviez --------------------------------------------------------------------------------------# 
@@ -230,7 +230,7 @@ def GetTitles9(section, url, startPage= '1', numOfPages= '1'):
                 addon.add_directory({'mode': 'GetTitles9', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png') 
         setView('tvshows', 'tvshows-view')          
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #----------------------------------------------------------------------- myvideolinks --------------------------------------------------------------------------------------#
@@ -258,7 +258,7 @@ def GetTitles10(section, url, startPage= '1', numOfPages= '1'):
                 addon.add_directory({'mode': 'GetTitles10', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')         
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------ ddlvalley ------------------------------------------------------------------------------------------#
@@ -284,7 +284,7 @@ def GetTitles11(section, url, startPage= '1', numOfPages= '1'):
                         addon.add_directory({'mode': 'GetLinks3', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img, fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles11', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')        
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #---------------------------------------------------------------------------- flixanity ----------------------------------------------------------------------------------------#
@@ -305,13 +305,13 @@ def GetTitles12(section, url, startPage= '1', numOfPages= '1'):
                 match = re.compile('<li>\s*?<a href=".+?" class="item" title="">\s*?<img class="img-preview spec-border"  src=".+?src=(.+?)&amp;.+?" alt=" " style=".+?"/>\s*?</a>\s*?<div class="rating-pod">\s*?<div class="left">\s*?<p><strong>(.+?)</strong></p>\s*?<p>.+?</p>\s*?<div class=".+?">.+?<h4><a style=".+?">.+?</a></h4></div>\s*?<div style=".+?">.+?</div>\s*?<img src=".+?" style=".+?" />\s*?</div>\s*?<span class=".+?">\s*?<ul>\s*?<li><img src=".+?" class="left" /> <a href="(.+?)" ', re.DOTALL).findall(html)
                 for img, name, movieUrl in match:
                         cm  = []
-                        runstring = 'XBMC.Container.Update(plugin://plugin.video.allinone/?mode=Search11&query=%s)' %(name.strip())
+                        runstring = 'XBMC.Container.Update(plugin://plugin.video.allinone/?mode=Search11&query=%s)' %(name.strip().replace('(', '').replace(')', ''))
         		cm.append(('[COLOR blue][B]E[/B][/COLOR]ntertainment [COLOR green]Search[/COLOR]', runstring))
                         addon.add_directory({'mode': 'GetLinks1a', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img, fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles12', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')  
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------#
@@ -335,7 +335,7 @@ def GetTitles31(section, url, startPage= '1', numOfPages= '1'): #flixanity movie
                 addon.add_directory({'mode': 'GetTitles31', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')  
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-----------------------------------tv--------------------------------------------#
@@ -365,13 +365,10 @@ def GetTitles27a(section, url, startPage= '1', numOfPages= '1'): #flixanity1st
                         html = net.http_GET(pageUrl).content
                 match = re.compile('img-preview spec-border.+?src=".+?src=(.+?)&amp;.+?".+?href="(.+?)".+?>.+?<.+?', re.DOTALL).findall(html)
                 for img, movieUrl in match:
-                        cm  = []
-                        runstring = 'XBMC.Container.Update(plugin://plugin.video.allinone/?mode=Search11&query=%s)' %(name.strip())
-        		cm.append(('[COLOR blue][B]E[/B][/COLOR]ntertainment [COLOR green]Search[/COLOR]', runstring))
-                        addon.add_directory({'mode': 'GetTitles27', 'section': section, 'url': movieUrl}, {'title':  movieUrl.replace('http://www.flixanity.com/show/', '').replace('-', ' ')}, contextmenu_items= cm, img= img, fanart=FanartPath + 'fanart.png')
+                        addon.add_directory({'mode': 'GetTitles27', 'section': section, 'url': movieUrl}, {'title':  movieUrl.replace('http://www.flixanity.com/show/', '').replace('-', ' ')}, img= img, fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')  
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------- channelcut -------------------------------------------------------------------------------------------#
@@ -397,7 +394,7 @@ def GetTitles14(section, url, startPage= '1', numOfPages= '1'):
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img=IconPath + 'cc.png', fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles14', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')        
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------ primeflicks -----------------------------------------------------------------------------------#
@@ -424,7 +421,7 @@ def GetTitles15(section, url, startPage= '1', numOfPages= '1'):
                 addon.add_directory({'mode': 'GetTitles15', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-------------------------------------------------------------------------------#
@@ -454,13 +451,10 @@ def GetTitles15b(section, url, startPage= '1', numOfPages= '1'): #primeflicks-1s
                         html = net.http_GET(pageUrl).content
                 match = re.compile('img-preview spec-border.+?src=".+?src=(.+?)&amp;.+?".+?href="(.+?)".+?>(.+?)<.+?', re.DOTALL).findall(html)
                 for img, movieUrl, name in match:
-                        cm  = []
-                        runstring = 'XBMC.Container.Update(plugin://plugin.video.allinone/?mode=Search11&query=%s)' %(name.strip())
-        		cm.append(('[COLOR blue][B]E[/B][/COLOR]ntertainment [COLOR green]Search[/COLOR]', runstring))
-                        addon.add_directory({'mode': 'GetTitles15a', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img, fanart=FanartPath + 'fanart.png')
+                        addon.add_directory({'mode': 'GetTitles15a', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')  
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------ Tv-junky ----------------------------------------------------------------------------------------#
@@ -486,7 +480,7 @@ def GetTitles17(section, url, startPage= '1', numOfPages= '1'):
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img=IconPath + 'tvj.png', fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles17', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-------------------------------------------------------------------------------#
@@ -518,14 +512,11 @@ def GetTitles18a(section, url, startPage= '1', numOfPages= '1'): # 1st list onec
                 if not match:
                     match = re.compile('<img class="img-preview spec-border show-thumbnail"  src="http://www.oneclickmoviez.ag/templates/svarog/timthumb.php\?src=(.+?)&amp;.+?" alt=" ".+?<a class="link" href="(.+?)" title="(.+?)">',re.DOTALL).findall(html)
                 for img, movieUrl, name in match:
-                        cm  = []
-                        runstring = 'XBMC.Container.Update(plugin://plugin.video.allinone/?mode=Search11&query=%s)' %(name.strip())
-        		cm.append(('[COLOR blue][B]E[/B][/COLOR]ntertainment [COLOR green]Search[/COLOR]', runstring))
-                        addon.add_directory({'mode': 'GetTitles18', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img, fanart=FanartPath + 'fanart.png')                        
+                        addon.add_directory({'mode': 'GetTitles18', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')                        
                 addon.add_directory({'mode': 'GetTitles18a', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png') 
         setView('tvshows', 'tvshows-view')          
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #----------------------------------------------------------------------- world4ufree -----------------------------------------------------------------------------------------#
@@ -552,7 +543,7 @@ def GetTitles20(section, url, startPage= '1', numOfPages= '1'):
                 addon.add_directory({'mode': 'GetTitles20', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png') 
         setView('tvshows', 'tvshows-view')        
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #---------------------------------------------------------------------- movies2k.eu ------------------------------------------------------------------------------------------#
@@ -579,7 +570,7 @@ def GetTitles21(section, url, startPage= '1', numOfPages= '1'):
                 addon.add_directory({'mode': 'GetTitles21', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png') 
         setView('tvshows', 'tvshows-view')  
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #---------------------------------------------------------------------- 300mbmovies4u ------------------------------------------------------------------------------------------#
@@ -606,7 +597,7 @@ def GetTitles23(section, url, startPage= '1', numOfPages= '1'):
                 addon.add_directory({'mode': 'GetTitles23', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view') 
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-------------------------------------------------------------------------- rapgrid ----------------------------------------------------------------------------------------#
@@ -632,7 +623,7 @@ def GetTitles25(section, url, startPage= '1', numOfPages= '1'): #rapgrid
                         addon.add_directory({'mode': 'GetLinks5', 'section': section, 'url': 'http://www.rapgrid.com/' + movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img, fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #--------------------------------------------------------------------------------- shows4u -----------------------------------------------------------------------------------#
@@ -664,43 +655,11 @@ def GetTitles28a(section, url, startPage= '1', numOfPages= '1'): #shows4u #tvsho
                 if not match:
                     match = re.compile('<img class="img-preview spec-border show-thumbnail"  src=".+?src=(.+?)&amp;.+?" alt=" ".+?<a class="link" href="(.+?)" title="(.+?)">',re.DOTALL).findall(html)
                 for img, movieUrl, name in match:
-                        cm  = []
-                        runstring = 'XBMC.Container.Update(plugin://plugin.video.allinone/?mode=Search11&query=%s)' %(name.strip())
-        		cm.append(('[COLOR blue][B]E[/B][/COLOR]ntertainment [COLOR green]Search[/COLOR]', runstring))
-                        addon.add_directory({'mode': 'GetTitles28', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img, fanart=FanartPath + 'fanart.png') 
+                        addon.add_directory({'mode': 'GetTitles28', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png') 
                 addon.add_directory({'mode': 'GetTitles28a', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
-#------------------------------------------------ movies -----------------------------#
-
-def GetTitles29(section, url, startPage= '1', numOfPages= '1'): #shows4u
-    try:
-        pageUrl = url
-        if int(startPage)> 1:
-                pageUrl = url + '/' + startPage + ''
-        print pageUrl
-        html = net.http_GET(pageUrl).content
-        start = int(startPage)
-        end = start + int(numOfPages)
-        for page in range( start, end):
-                if ( page != start):
-                        pageUrl = url + '/' + startPage + ''
-                        html = net.http_GET(pageUrl).content
-                match = re.compile('<img class="img-preview spec-border"  src=".+?src=(.+?)&amp;.+?" alt=" ".+?<a class="link" href="(.+?)" title="(.+?)">',re.DOTALL).findall(html)
-                if not match:
-                    match = re.compile('<img class="img-preview spec-border show-thumbnail"  src=".+?src=(.+?)&amp;.+?" alt=" ".+?<a class="link" href="(.+?)" title="(.+?)">',re.DOTALL).findall(html)
-                for img, movieUrl, name in match:
-                        cm  = []
-                        runstring = 'XBMC.Container.Update(plugin://plugin.video.allinone/?mode=Search11&query=%s)' %(name.strip())
-        		cm.append(('[COLOR blue][B]E[/B][/COLOR]ntertainment [COLOR green]Search[/COLOR]', runstring))
-                        addon.add_directory({'mode': 'GetLinks8', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img, fanart=FanartPath + 'fanart.png') 
-                addon.add_directory({'mode': 'GetTitles29', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
-        setView('tvshows', 'tvshows-view') 
-    except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------ tupeliculashd -----------------------------------------------------------------------------------------------------#
@@ -767,13 +726,13 @@ def GetTitles32(section, url, startPage= '1', numOfPages= '1'): #
                 match = re.compile('img-preview spec-border.+?src=".+?src=(.+?)&amp;.+?".+?href="(.+?)".+?>(.+?)<.+?', re.DOTALL).findall(html)
                 for img, movieUrl, name in match:
                         cm  = []
-                        runstring = 'XBMC.Container.Update(plugin://plugin.video.allinone/?mode=Search11&query=%s)' %(name.strip())
+                        runstring = 'XBMC.Container.Update(plugin://plugin.video.allinone/?mode=Search11&query=%s)' %(name.strip().replace('(', '').replace(')', ''))
         		cm.append(('[COLOR blue][B]E[/B][/COLOR]ntertainment [COLOR green]Search[/COLOR]', runstring))
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img, fanart=FanartPath + 'fanart.png') 
                 addon.add_directory({'mode': 'GetTitles32', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-------------------------------------------------------------------------------#
@@ -803,14 +762,11 @@ def GetTitles32b(section, url, startPage= '1', numOfPages= '1'): #hqtv-1st
                         html = net.http_GET(pageUrl).content
                 match = re.compile('img-preview spec-border.+?src=".+?src=(.+?)&amp;.+?".+?href="(.+?)".+?>(.+?)<.+?', re.DOTALL).findall(html)
                 for img, movieUrl, name in match:
-                        cm  = []
-                        runstring = 'XBMC.Container.Update(plugin://plugin.video.allinone/?mode=Search11&query=%s)' %(name.strip())
-        		cm.append(('[COLOR blue][B]E[/B][/COLOR]ntertainment [COLOR green]Search[/COLOR]', runstring))
-                        addon.add_directory({'mode': 'GetTitles32a', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img, fanart=FanartPath + 'fanart.png')
+                        addon.add_directory({'mode': 'GetTitles32a', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles32b', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')  
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #-------------------------------------------------------------------------- binflix --------------------------------------------------------------------------------------#
@@ -836,7 +792,7 @@ def GetTitles34(section, url, startPage= '1', numOfPages= '1'): #binflix
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= img, fanart=FanartPath + 'fanart.png')    
                 addon.add_directory({'mode': 'GetTitles34', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------------- github -------------------------------------------------------------------------------------#
@@ -874,7 +830,7 @@ def GetTitles36(section, url, startPage= '1', numOfPages= '1'): #tfpdl
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip().replace('Download', '')}, contextmenu_items= cm, img= img, fanart=FanartPath + 'fanart.png')    
                 addon.add_directory({'mode': 'GetTitles36', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ##.replace('/', ' ')## \s*? ##
@@ -2701,12 +2657,12 @@ def GetSearchQuery6():
 	else:
                 return
 def Search6(query):
-        url = 'http://www.flixanity.com/index.php?menu=search&query='+query
+        url = 'http://www.flixanity.com/index.php?menu=search&query=' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        match = re.compile('<li>\s*?<a href=".+?" class="item" title="">\s*?<img class="img-preview spec-border"  src=".+?src=(.+?)&amp;.+?" alt=" " style=".+?"/>\s*?</a>\s*?<div class="rating-pod">\s*?<div class="left">\s*?<p><strong>(.+?)</strong></p>\s*?<p>.+?</p>\s*?<div class=".+?">.+?<h4><a style=".+?">.+?</a></h4></div>\s*?<div style=".+?">.+?</div>\s*?<img src=".+?" style=".+?" />\s*?</div>\s*?<span class=".+?">\s*?<ul>\s*?<li><img src=".+?" class="left" /> <a href="(.+?)" ', re.DOTALL).findall(html)
-        for img, title, url in match:
+        match = re.compile('<div class="span-24">\s*?<h1>Movie results for:  "(.+?)"</h1>\s*?<div class="clear"></div>\s*?<ul class="span-24">\s*?<div class="span-6 inner-6 tt  view">\s*?<div class="item" style="text-align:center">\s*?<a href="(.+?)" class="spec-border-ie" title="">\s*?<img class="img-preview spec-border show-thumbnail"  src=".+?src=(.+?)&amp;.+?" alt=" " />', re.DOTALL).findall(html)
+        for title, url, img in match:
                 addon.add_directory({'mode': 'GetLinks1a', 'url': url}, {'title':  title}, img=img, fanart=FanartPath + 'fanart.png')
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -2751,6 +2707,7 @@ def GetSearchQuery11():
 	else:
                 return
 def Search11(query):
+    try:
         url = 'http://oneclickwatch.org/?s=' + query
         url = url.replace(' ', '+')
         print url
@@ -2758,7 +2715,10 @@ def Search11(query):
         match = re.compile('<h2 class="title"><a href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
         for url, title, img in match:
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR blue]...(OCW)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry OneClickWatch is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
 
+    try:
         url = 'http://binflix.com/?s=' + query
         url = url.replace(' ', '+')
         print url
@@ -2766,15 +2726,21 @@ def Search11(query):
         match = re.compile('<h1 class="entry-title"><a href="(.+?)" rel="bookmark">(.+?)</a></h1>', re.DOTALL).findall(html)
         for url, title in match:
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR darkseagreen](Binflix)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry binflix is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
 
+    try:
         url = 'http://watchthetapes.com/?s=' + query 
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
         match = re.compile('<h1 class="entry-title"><a href="(.+?)" rel="bookmark">(.+?)</a></h1').findall(html)
         for url, title in match:
-                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR salmon]...(WTT)[/COLOR]'}, img=IconPath + 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR salmon]...(WTT)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry watchthetapes is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
 
+    try:
         url = 'http://myvideolinks.eu/index.php?s=' + query
         url = url.replace(' ', '+')
         print url
@@ -2782,7 +2748,10 @@ def Search11(query):
         match = re.compile('<div class="archive">\s*?<a href="(.+?)" rel="bookmark" title=".+?"> <img src="(.+?)" title="(.+?)" class="alignleft" alt=".+?" /></a>', re.DOTALL).findall(html)
         for url, img, title in match:
                 addon.add_directory({'mode': 'GetLinks7', 'url': url}, {'title':  title + ' [COLOR gold]...(MVL)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry myvideolinks is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
 
+    try:
         url = 'http://300mbmovies4u.com/?s=' + query
         url = url.replace(' ', '+')
         print url
@@ -2790,7 +2759,10 @@ def Search11(query):
         match = re.compile('<div class="cover"><a href="(.+?)".+?.+?<img src="(.+?)".+?alt="(.+?)"', re.DOTALL).findall(html)
         for url, img, title in match:
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR crimson](300mb movies4u)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry OneClickWatch is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
 
+    try:
         url = 'http://www.tfpdl.com/?s=' + query 
         url = url.replace(' ', '+')
         print url
@@ -2799,15 +2771,10 @@ def Search11(query):
         for url, title, img in match:
                 title = title.replace('Download', '').replace('TFPDL', '')
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR green]...(tfpdl)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry tfpdl is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
 
-        url = 'http://ultra-vid.com/?s='+query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        match = re.compile('itemdets.+?href="(.+?)" title="(.+?)".+?.+?src="(.+?)".+?', re.DOTALL).findall(html)
-        for url, title, img in match:
-                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR darkseagreen]...(ultra-vid)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
-
+    try:
         url = 'http://primeflicks.me/index.php?menu=search&query='+query 
         url = url.replace(' ', '+')
         print url
@@ -2815,17 +2782,10 @@ def Search11(query):
         match = re.compile('img-preview spec-border.+?src=".+?src=(.+?)&amp;.+?".+?href="(.+?)".+?>(.+?)<.+?', re.DOTALL).findall(html)
         for img, url, title in match:
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR pink]...(primeflicks)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
-
-        url = 'http://www.flixanity.com/index.php?menu=search&query='+query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        match = re.compile('<li>\s*?<a href=".+?" class="item" title="">\s*?<img class="img-preview spec-border"  src=".+?src=(.+?)&amp;.+?" alt=" " style=".+?"/>\s*?</a>\s*?<div class="rating-pod">\s*?<div class="left">\s*?<p><strong>(.+?)</strong></p>\s*?<p>.+?</p>\s*?<div class=".+?">.+?<h4><a style=".+?">.+?</a></h4></div>\s*?<div style=".+?">.+?</div>\s*?<img src=".+?" style=".+?" />\s*?</div>\s*?<span class=".+?">\s*?<ul>\s*?<li><img src=".+?" class="left" /> <a href="(.+?)" ', re.DOTALL).findall(html)
-        for img, title, url in match:
-                addon.add_directory({'mode': 'GetLinks1a', 'url': url}, {'title':  title}, img=img, fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry primeflicks is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
 
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
 
 ###################################################################################### setViews ##########################################################################
 
@@ -2905,8 +2865,6 @@ elif mode == 'GetTitles28':
 	GetTitles28(section, url, startPage, numOfPages)
 elif mode == 'GetTitles28a': 
 	GetTitles28a(section, url, startPage, numOfPages)
-elif mode == 'GetTitles29': 
-	GetTitles29(section, url, startPage, numOfPages)
 elif mode == 'GetTitles30': 
 	GetTitles30(section, url, startPage, numOfPages)
 elif mode == 'GetTitles30a': 
