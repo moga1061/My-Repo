@@ -1,3 +1,6 @@
+[B]Version 1.1.8[/B]
+- tv show index search
+
 [B]Version 1.1.7[/B]
 - small fix
 

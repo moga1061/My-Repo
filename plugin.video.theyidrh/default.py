@@ -32,7 +32,7 @@ BASE_URL22 = 'http://irweb-dl.com/'
 BASE_URL23 = 'http://binflix.com/'
 BASE_URL24 = 'http://dx-tv.com/'
 BASE_URL25 = 'http://www.flixanity.com/'
-BASE_URL26 = 'http://www.ultra-vid.com/'
+BASE_URL26 = 'http://www.tvhq.info/'
 
 ###### PATHS #########
 AddonPath = addon.get_path()
@@ -633,6 +633,19 @@ def GetTitles25(query):
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+#---------------------------------------------------------------------------------- flixanity index TV -----------------------------------------------------------------------------------#
+
+def GetTitles25a(query):
+    try:
+        pageUrl = url
+        html = net.http_GET(pageUrl).content                     
+        match = re.compile('img-preview spec-border.+?src=".+?src=(.+?)&amp;.+?".+?href="(.+?)".+?>.+?<.+?',re.DOTALL).findall(html)
+        for img, query in match:
+                addon.add_directory({'mode': 'Search10', 'query': query.replace('http://www.flixanity.com/show/', '').replace('-', ' ') + ' s'}, {'title':  query.replace('http://www.flixanity.com/show/', '').replace('-', ' ')}, img= img, fanart=FanartPath + 'fanart3.png')
+        setView('tvshows', 'tvshows-view')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
 ##.replace('/', ' ')## \s*? ## 
@@ -1051,6 +1064,7 @@ def Menu4():
         addon.add_directory({'mode': 'GetTitles2', 'section': 'ALL', 'url': BASE_URL2 + '/tv-shows/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Tv shows[/B] [/COLOR] [COLOR powderblue](SceneLog)[/COLOR] >>'}, img=IconPath + 'slt1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'menu11'}, {'title': '[COLOR darkorange][B]Latest Added[/B] [/COLOR] [COLOR blue](1080p zone)[/COLOR] >>'}, img=IconPath + '1080.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles25a', 'url': BASE_URL25 + '/tv-shows/date'}, {'title':  '[COLOR orchid][B]TV Shows[/B] [/COLOR]: [COLOR green]Index Search[/COLOR]'}, img=IconPath + 'itvs.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------------------ hd zone tv --------------------------------------------------------------------------------------------#
@@ -1157,6 +1171,8 @@ def Menu7():
 #-------------------------------------------------------------------------------- search ------------------------------------------------------------------------------------------------#
 
 def Menu5():
+        #addon.add_directory({'mode': 'GetTitles25', 'url': BASE_URL26 + '/new-shows'}, {'title':  '[COLOR orchid][B]TV Shows[/B] [/COLOR]: [COLOR green]Index Search[/COLOR]'}, img=IconPath + 'itvs.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles25a', 'url': BASE_URL25 + '/tv-shows/date'}, {'title':  '[COLOR orchid][B]TV Shows[/B] [/COLOR]: [COLOR green]Index Search[/COLOR]'}, img=IconPath + 'itvs.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles25', 'url': BASE_URL25 + '/movies/favorites'}, {'title':  '[COLOR fuchsia][B]Featured[/B] [/COLOR]: [COLOR green]Index Search[/COLOR]'}, img=IconPath + 'inf.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles25', 'url': BASE_URL25 + '/featuredmovies'}, {'title':  '[COLOR fuchsia][B]Box office[/B] [/COLOR]: [COLOR green]Index Search[/COLOR]'}, img=IconPath + 'isbo.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetSearchQuery10'},  {'title':  '[COLOR khaki][B]M[/COLOR][COLOR blue]E[/COLOR][COLOR salmon]G[/COLOR][COLOR darkseagreen]A[/COLOR][/B] (Movies & tv episodes) : [COLOR green]Search[/COLOR]'}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
@@ -1495,6 +1511,10 @@ elif mode == 'GetTitles24':
 	GetTitles24(section, url, startPage, numOfPages)
 elif mode == 'GetTitles25': 
 	GetTitles25(query)
+elif mode == 'GetTitles25a': 
+	GetTitles25a(query)
+elif mode == 'GetTitles26': 
+	GetTitles26(query)
 elif mode == 'GetLinks':
 	GetLinks(section, url)
 elif mode == 'GetLinks1':
