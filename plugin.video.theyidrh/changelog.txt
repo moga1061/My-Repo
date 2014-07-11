@@ -1,3 +1,6 @@
+[B]Version 1.1.6[/B]
+- new box office index search
+
 [B]Version 1.1.5[/B]
 - fixes and addno clean up
 
