@@ -1,3 +1,6 @@
+[B]Version 1.1.7[/B]
+- small fix
+
 [B]Version 1.1.6[/B]
 - new box office index search
 
