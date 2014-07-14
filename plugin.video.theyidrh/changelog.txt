@@ -1,4 +1,10 @@
-[B]Version 1.1.8[/B]
+[B]Version 1.2.0[/B]
+- new help vids
+
+[B]Version 1.1.9[/B]
+- more work on the search
+
+B]Version 1.1.8[/B]
 - tv show index search
 
 [B]Version 1.1.7[/B]

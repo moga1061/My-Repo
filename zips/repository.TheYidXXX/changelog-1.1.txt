@@ -1,5 +1,0 @@
-[B]Version 1.0[/B]
-- Initial version of TheYid's XXX repo
-
-[B]Version 1.1[/B]
-- Initial version of TheYid's XXX repo
