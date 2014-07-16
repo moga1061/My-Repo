@@ -1,3 +1,13 @@
+[B]Version 4.0.0[/B]
+- added Release 1-Click to search
+- added wrestling rulez to sports *****(BETA/TESTING)******
+- new index new released movie search
+- big code clean up
+
+[B]Version 2.2.9[/B]
+- added 1-linkmovies to search
+- code clean up
+
 [B]Version 2.2.8[/B]
 - more work done on searches
 - new help section
