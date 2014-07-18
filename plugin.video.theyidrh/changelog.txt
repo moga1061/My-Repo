@@ -1,3 +1,8 @@
+[B]Version 1.2.1[/B]
+- more index searches added
+- more sites added to search
+- some new art work for searches
+
 [B]Version 1.2.0[/B]
 - new help vids
 
