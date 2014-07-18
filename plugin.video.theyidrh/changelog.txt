@@ -1,3 +1,6 @@
+[B]Version 1.2.2[/B]
+- clean up and fixes
+
 [B]Version 1.2.1[/B]
 - more index searches added
 - more sites added to search
