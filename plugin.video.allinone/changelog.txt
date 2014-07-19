@@ -1,3 +1,7 @@
+[B]Version 4.0.4[/B]
+- loads of code cleaning
+- uwatchfree category added in inter.. zone
+
 [B]Version 4.0.2[/B]
 - code clean up and some fixes
 
