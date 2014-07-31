@@ -1134,6 +1134,7 @@ def GetLinks9(section, url):
                                 continue
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+
 ############################################################################# PlayVideo #################################################################################
 
 def PlayVideo(url, listitem):
@@ -1633,6 +1634,17 @@ def Search10(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR lavender](moviesready)[/COLOR]'}, img= 'http://www.moviesready.com' + img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry moviesready search is down [/B][/COLOR],[COLOR olive][B]Please try later[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+    try:
+        url = 'http://www.filestube.to/query.html?q='+ query + '&select=mkv'
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('target="_blank" rel="nofollow" href=".+?"><span id="/video/(.+?)">.+?</span></a>', re.DOTALL).findall(html)
+        for url in match:
+                addon.add_directory({'mode': 'GetLinks', 'url': 'http://www.filestube.to/video/' + url}, {'title': url.replace('-', ' ').replace('.html', ' ') + ' [COLOR lavender](filetube)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry filetube search is down [/B][/COLOR],[COLOR olive][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
