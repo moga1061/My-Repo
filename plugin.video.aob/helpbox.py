@@ -6,7 +6,7 @@ import xbmcgui
 
 from t0mm0.common.addon import Addon
 
-pluginId = 'plugin.video.allinone'
+pluginId = 'plugin.video.aob'
 addon = Addon(pluginId, sys.argv)
 
 class HelpBox:
@@ -26,7 +26,7 @@ class HelpBox:
 
     def setControls(self):
         # set heading
-        heading = "Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR] v%s" % (addon.get_version())
+        heading = "Adult's Only [COLOR deeppink][B]HUB[/B][/COLOR] v%s" % (addon.get_version())
         self.win.getControl(self.CONTROL_LABEL).setLabel(heading)
         # set text
         root = addon.get_path()

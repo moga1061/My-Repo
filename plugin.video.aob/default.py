@@ -260,7 +260,7 @@ def GetTitles35(url):
         content = html
         match = re.compile('<>title="(.+?)" href="(.+?)" />< src="(.+?)"').findall(content)
         for name, url, img in match:
-                addon.add_directory({'mode': 'PlayVideo1', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'PlayVideo2', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #---------------------------------------------------------------------------------- github help -----------------------------------------------------------------------------------#
@@ -419,6 +419,16 @@ def PlayVideo(url, listitem):
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry Link may have been removed ![/B][/COLOR],[COLOR lime][B]Please try a different link/host !![/B][/COLOR],7000,"")")
 
+
+
+def PlayVideo2(url, listitem):
+        addon_handle = int(sys.argv[1])
+        xbmcplugin.setContent(addon_handle, 'video')
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]PLAY STREAM[/B][/COLOR]  >> ', iconImage='https://lh5.googleusercontent.com/-p2h0tx7Trgs/Uzu-3kxzKuI/AAAAAAAAOsU/sVJKqxSMY-4/s319/watch2.jpg', thumbnailImage= 'http://s29.postimg.org/8z8jd5x5j/logo1.png')
+        li.setProperty('fanart_image', '')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+        xbmcplugin.endOfDirectory(addon_handle)
+
 ############################################################################################################################################
 
 def GetDomain(url):
@@ -449,6 +459,9 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'Menu4'}, {'title':  '[COLOR hotpink][B]PornoRips >[/B][/COLOR] >'}, img=IconPath + 'pr1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'Menu7'}, {'title':  '[COLOR hotpink][B]Naked XXX >[/B][/COLOR] >'}, img=IconPath + 'ns.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'Menu8'}, {'title':  '[COLOR hotpink][B]webwarez >[/B][/COLOR] >'}, img=IconPath + 'ww.png', fanart=FanartPath + 'fanart.png')
+
+        addon.add_directory({'mode': 'GetTitles35', 'url': BASE_URL35 + '/black.txt'}, {'title':  '[COLOR hotpink][B]FREE Streams & V.O.D >[/COLOR][/B] >'}, img=IconPath + 'lsv.png', fanart=FanartPath + 'fanart.png')
+
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR] - [COLOR pink]real-debird & alldebird login[/COLOR]'}, img=IconPath + 'rset.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR red]FOR HELP PLEASE GOTO...[/COLOR] [COLOR blue][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help2.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR hotpink][B]News & Help  >[/B][/COLOR] >'}, img=IconPath + 'hn.png', fanart=FanartPath + 'fanart.png')
@@ -817,9 +830,9 @@ elif mode == 'GetTitles7':
 elif mode == 'GetTitles8': 
 	GetTitles8(section, url, startPage, numOfPages)
 elif mode == 'GetTitles35': 
-	GetTitles35(section, url, startPage, numOfPages)
+	GetTitles35(url)
 elif mode == 'GetTitles37': 
-	GetTitles37(section, url, startPage, numOfPages)
+	GetTitles37(url)
 elif mode == 'Categories':
         Categories(section)
 elif mode == 'Categories1':
@@ -856,6 +869,8 @@ elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)
 elif mode == 'PlayVideo1':
 	PlayVideo1(url, listitem)
+elif mode == 'PlayVideo2':
+	PlayVideo2(url, listitem)
 elif mode == 'GetSearchQuery':
 	GetSearchQuery()
 elif mode == 'Search':
