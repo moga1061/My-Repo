@@ -1,3 +1,6 @@
+[B]Version 4.1.0[/B]
+- added watchfullepisode to tv show search
+
 [B]Version 4.0.9[/B]
 - removed tfpdl
 
