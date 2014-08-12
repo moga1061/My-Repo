@@ -1,3 +1,6 @@
+[B]Version 4.1.1[/B]
+- new layout for streams
+
 [B]Version 4.1.0[/B]
 - added watchfullepisode to tv show search
 
