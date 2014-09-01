@@ -1246,10 +1246,10 @@ def Menu9():   #300mbmovies4u
 #--------------------------------------------------------------------------------- HD Zone movies ----------------------------------------------------------------------------------------------------------#
 
 def Menu3():
-        addon.add_directory({'mode': 'GetTitles23', 'section': 'ALL', 'url': BASE_URL23 + '/category/movies/',
-                             'startPage': '1', 'numOfPages': '2'}, {'title':  '[COLOR steelblue][B]Latest Movies[/B][/COLOR] [COLOR darkseagreen](Binflix) [/COLOR]>>'}, img=IconPath + 'bf.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/movies/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Latest Movies[/B] [/COLOR] [COLOR blue](irweb-dl)[/COLOR] >>'}, img=IconPath + 'ir.png', fanart=FanartPath + 'fanart.png')
+        #addon.add_directory({'mode': 'GetTitles23', 'section': 'ALL', 'url': BASE_URL23 + '/category/movies/',
+                             #'startPage': '1', 'numOfPages': '2'}, {'title':  '[COLOR steelblue][B]Latest Movies[/B][/COLOR] [COLOR darkseagreen](Binflix) [/COLOR]>>'}, img=IconPath + 'bf.png', fanart=FanartPath + 'fanart.png')
+        #addon.add_directory({'mode': 'GetTitles22', 'section': 'ALL', 'url': BASE_URL22 + '/category/movies/',
+                             #'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Latest Movies[/B] [/COLOR] [COLOR blue](irweb-dl)[/COLOR] >>'}, img=IconPath + 'ir.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles5', 'section': 'ALL', 'url': BASE_URL12 + '/category/hollywood-movie/english-3d-movie/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Latest 3D[/B][/COLOR] [COLOR crimson](300mb movies4u) [/COLOR] >>'}, img=IconPath + 'm4u1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles9', 'section': 'ALL', 'url': BASE_URL7 + '/movies/yify-brrip-1080p/',
@@ -1498,28 +1498,18 @@ def Search10(query):
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry rls1click search is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-    try:
-        url = 'http://binflix.com/?s=' + query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        match = re.compile('<h1 class="entry-title"><a href="(.+?)" rel="bookmark">(.+?)</a></h1>', re.DOTALL).findall(html)
-        for movieUrl, title in match:
-                addon.add_directory({'mode': 'GetLinks', 'url': movieUrl}, {'title':  title + ' [COLOR darkseagreen](Binflix)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
-    except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry binflix search is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-    try:
-        url = 'http://irweb-dl.com/?s=' + query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        match = re.compile('<h1 class="entry-title"><a href="(.+?)" title=".+?" rel="bookmark">(.+?)</a></h1>', re.DOTALL).findall(html)
-        for movieUrl, title in match:
-                addon.add_directory({'mode': 'GetLinks4', 'url': movieUrl}, {'title':  title + ' [COLOR blue](irweb-dl)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
-    except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry irweb-dl search is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+  #  try:
+  #      url = 'http://irweb-dl.com/?s=' + query
+  #      url = url.replace(' ', '+')
+ #       print url
+ #       html = net.http_GET(url).content
+ #       match = re.compile('<h1 class="entry-title"><a href="(.+?)" title=".+?" rel="bookmark">(.+?)</a></h1>', re.DOTALL).findall(html)
+ #       for movieUrl, title in match:
+ #               addon.add_directory({'mode': 'GetLinks4', 'url': movieUrl}, {'title':  title + ' [COLOR blue](irweb-dl)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
+  #  except:
+   #     xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry irweb-dl search is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+    #   	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://300mbmovies4u.com/?s=' + query
         url = url.replace(' ', '+')

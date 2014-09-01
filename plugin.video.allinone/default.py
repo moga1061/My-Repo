@@ -803,8 +803,8 @@ def GetTitles2(query):
     try:
         pageUrl = url
         html = net.http_GET(pageUrl).content                     
-        match = re.compile('<li>\s*?<a href="(.+?)" class="item" title="">\s*?<img class="img-preview spec-border"  src=".+?src=(.+?)&amp;.+?" alt=" " style=".+?"/>\s*?</a>\s*?<div class="rating-pod">\s*?<div class="left">\s*?<p><strong>(.+?)</strong></p>',re.DOTALL).findall(html)
-        for name, img, query in match:
+        match = re.compile('<img class="img-preview spec-border"  src=".+?src=(.+?)" alt=" " style=".+?"/>\s*?</a>\s*?<div id=".+?"></div>\s*?</div>\s*?<div class="back">\s*?<h3><a href=".+?">(.+?)</a></h3>"/>',re.DOTALL).findall(html)
+        for img, name, query in match:
                 addon.add_directory({'mode': 'Search11', 'query': query}, {'title':  query}, img= img, fanart=FanartPath + 'fanart3.png')
         setView('tvshows', 'tvshows-view')
     except:
@@ -1177,35 +1177,6 @@ def MusicMenu():   #MusicVideos
         li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
-        url = 'http://cdn.live.tvplayer.simplestream.com/coder6/coder.channels.channel2/hls/3/playlist.m3u8'
-        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]AKA[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'http://www.360-records.co.uk/UploadNews/Images/20102011040838.jpg')
-        li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
-        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
-
-        url = 'http://cdn.live.tvplayer.simplestream.com/coder5/coder.channels.channel14/hls/3/playlist.m3u8'
-        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]CLUBLAND[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'http://i2.bebo.com/042/7/mediuml/2008/03/21/11/647921526a7208306229ml.jpg')
-        li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
-        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
-
-        url = 'http://cdn.live.tvplayer.simplestream.com/coder2/coder.channels.channel13/hls/3/playlist.m3u8'
-        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]Kiss tv[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'http://www.sigmahq.com/wp-content/uploads/2014/03/artworks-000059534914-n8td93-original-300x220.jpg')
-        li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
-        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
-
-        url = 'http://cdn.live.tvplayer.simplestream.com/coder1/coder.channels.channel11/hls/4/playlist.m3u8'
-        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]4 Music[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'http://www.designweek.co.uk/Pictures/web/x/k/z/0103124MusicE_467.jpg')
-        li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
-        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
-
-        url = 'http://91.240.87.34:4000/udp/224.200.202.47:1234'
-        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]MTV Dance[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'http://teve.ba/img/content/mtv-dance2.gif')
-        li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
-        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
-
-        url = 'http://vevoplaylist-live.hls.adaptive.level3.net/vevo/ch1/appleman.m3u8'
-        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]VEVO[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'https://lh5.ggpht.com/Ia_oK5aLlY98RT5IiM4NlHaptpQcl77_U7szlqo-hOSAoXtJhJGVdfQQDCfnP4g6BTN5=w300')
-        li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
-        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
         xbmcplugin.endOfDirectory(addon_handle)
 
@@ -1344,17 +1315,8 @@ def RadioMenu():   #radio
 #----------------------------sport------------------------------sport----------------------sport---------------------------sport------------------------------sport--------#
 
 def SportMenu():   #sport
-        addon_handle = int(sys.argv[1]) 
-        xbmcplugin.setContent(addon_handle, 'audio')
-
-        url = 'rtmp://93.174.93.67:443/liverepeater playpath=46 swfUrl=http://static.surk.tv/atdedead.swf live=1 pageUrl=http://filotv.pw/player3.php?id=46&width=640&height=460 token=#atd%#$ZH'
-        li = xbmcgui.ListItem('[COLOR lightsteelblue][B]WWE 24/7[/B][/COLOR] >>  [COLOR lime](live)[/COLOR]', thumbnailImage= 'http://upload.wikimedia.org/wikipedia/en/9/95/OriginalWWE247.jpg')
-        li.setProperty('fanart_image', 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
-        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
-
         addon.add_directory({'mode': 'GetTitles39a', 'section': 'ALL', 'url': BASE_URL39 + '/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest Wrestling/MMA[/B] [/COLOR]: [COLOR greenyellow]Index Search[/COLOR]'}, img=IconPath + 'wma.png', fanart=FanartPath + 'fanart.png')
-
         addon.add_directory({'mode': 'GetTitles39', 'section': 'ALL', 'url': BASE_URL39 + 'category/weeklies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest WWE[/B][/COLOR]  [COLOR darkred](Wrestling Rulez) [/COLOR] >>'}, img=IconPath + 'wr1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles39', 'section': 'ALL', 'url': BASE_URL39 + '/category/tna-wrestling/',
@@ -1369,7 +1331,7 @@ def SportMenu():   #sport
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest PPV[/B][/COLOR]  [COLOR darkred](Wrestling Rulez) [/COLOR] >>'}, img=IconPath + 'wr1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles31', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/wwf-wwe',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Wwf/Wwe PPV[/B][/COLOR]  [COLOR plum](flixanity) [/COLOR] >>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
-        xbmcplugin.endOfDirectory(addon_handle)
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #----------------------movies ------------------------movies ---------------------------movies --------------------------movies -------------------------------movies -------#
 
@@ -2134,7 +2096,7 @@ def SearchMenu():
         addon.add_directory({'mode': 'GetTitles38', 'section': 'ALL', 'url': BASE_URL38 + '/category/hollywood-movie-2014/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]New Released[/B] [/COLOR]: [COLOR greenyellow]Index Search[/COLOR]'}, img=IconPath + 'reto.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles2', 'url': BASE_URL12 + '/movies/favorites'}, {'title':  '[COLOR cornflowerblue][B]Featured[/B] [/COLOR]: [COLOR greenyellow]Index Search[/COLOR]'}, img=IconPath + 'inf.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles2', 'url': BASE_URL12 + '/featuredmovies'}, {'title':  '[COLOR cornflowerblue][B]Box office[/B] [/COLOR]: [COLOR greenyellow]Index Search[/COLOR]'}, img=IconPath + 'isbo.png', fanart=FanartPath + 'fanart.png')
+        #addon.add_directory({'mode': 'GetTitles2', 'url': BASE_URL12 + '/featuredmovies'}, {'title':  '[COLOR cornflowerblue][B]Box office[/B] [/COLOR]: [COLOR greenyellow]Index Search[/COLOR]'}, img=IconPath + 'isbo.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetSearchQuery6'},  {'title':  '[COLOR plum][B]flixanity[/B][/COLOR] : (movie) [COLOR green]Search[/COLOR]'}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetSearchQuery5'},  {'title':  '[COLOR royalblue][B]TV HQ[/B][/COLOR] : (movie) [COLOR green]Search[/COLOR]'}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetSearchQuery9'},  {'title':  '[COLOR royalblue][B]PrimeFlicks[/B][/COLOR] : (movie) [COLOR green]Search[/COLOR]'}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png')
