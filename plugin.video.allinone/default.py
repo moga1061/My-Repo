@@ -689,18 +689,6 @@ def GetTitles34(section, url, startPage= '1', numOfPages= '1'):
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#------------------------------------------------------------------------------- github streams -------------------------------------------------------------------------------------#
-
-def GetTitles35(url):   
-        addon.add_directory({'mode': 'GetSearchQuery11'},  {'title':  '[COLOR khaki][B]M[/COLOR][COLOR blue]E[/COLOR][COLOR salmon]G[/COLOR][COLOR darkseagreen]A[/COLOR] [COLOR green]SEARCH[/COLOR][/B] : Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]'}, img=IconPath + 'searches.png', fanart=FanartPath + 'fanart.png') 
-        addon.add_directory({'mode': 'GetTitles35a', 'url': BASE_URL35 + '/yellow2.txt'}, {'title':  '[COLOR mediumorchid][B]MORE IPTV & VOD[/B][/COLOR]  >> >>'}, img=IconPath + 'stream.png', fanart=FanartPath + 'fanart.png')                                        
-        html = net.http_GET(url).content
-        listitem = GetMediaInfo(html)
-        content = html
-        match = re.compile('<>title="(.+?)" href="(.+?)" />< src="(.+?)"').findall(content)
-        for name, url, img in match:
-                addon.add_directory({'mode': 'PlayVideo2', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------------- github iptv -------------------------------------------------------------------------------------#
 
@@ -710,7 +698,7 @@ def GetTitles35a(url):
         content = html
         match = re.compile('<>title="(.+?)" href="(.+?)" />< src="(.+?)"').findall(content)
         for name, url, img in match:
-                addon.add_directory({'mode': 'PlayVideo5', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
+                addon.add_directory({'mode': 'PlayVideo5', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img=img, fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #---------------------------------------------------------------------------------- github help -----------------------------------------------------------------------------------#
@@ -1105,7 +1093,7 @@ def PlayVideo1(url, listitem):
         addon_handle = int(sys.argv[1])
         xbmcplugin.setContent(addon_handle, 'video')
         li = xbmcgui.ListItem('[COLOR dodgerblue][B]PLAY STREAM[/B][/COLOR]  >> ', iconImage='https://lh5.googleusercontent.com/-p2h0tx7Trgs/Uzu-3kxzKuI/AAAAAAAAOsU/sVJKqxSMY-4/s319/watch2.jpg', thumbnailImage= 'http://s29.postimg.org/8z8jd5x5j/logo1.png')
-        li.setProperty('fanart_image', '')
+        li.setProperty('fanart_image', 'http://littletechboy.com/downloads/sins/modding/LoadingSplash.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
         xbmcplugin.endOfDirectory(addon_handle)
 
@@ -1114,8 +1102,8 @@ def PlayVideo1(url, listitem):
 def PlayVideo5(url, listitem):
         addon_handle = int(sys.argv[1])
         xbmcplugin.setContent(addon_handle, 'video')
-        li = xbmcgui.ListItem('[COLOR dodgerblue][B]LOAD STREAM PLAYLIST[/B][/COLOR]  >> ', iconImage='https://lh5.googleusercontent.com/-p2h0tx7Trgs/Uzu-3kxzKuI/AAAAAAAAOsU/sVJKqxSMY-4/s319/watch2.jpg', thumbnailImage= 'http://s29.postimg.org/8z8jd5x5j/logo1.png')
-        li.setProperty('fanart_image', '')
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]LOAD STREAM PLAYLIST[/B][/COLOR]  >> ', iconImage='http://www.creation-spip.fr/IMG/arton37.png?1357155686', thumbnailImage= 'http://www.creation-spip.fr/IMG/arton37.png?1357155686')
+        li.setProperty('fanart_image', 'http://littletechboy.com/downloads/sins/modding/LoadingSplash.jpg') 
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
         xbmcplugin.endOfDirectory(addon_handle)
 
