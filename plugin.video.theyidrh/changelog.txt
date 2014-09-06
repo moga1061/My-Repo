@@ -1,3 +1,6 @@
+[B]Version 1.2.7[/B]
+- fixed irweb-dl.com
+
 [B]Version 1.2.6[/B]
 - small fix
 
