@@ -1,3 +1,6 @@
+[B]Version 1.2.8[/B]
+- removed www.wrzko.eu site got taken down
+
 [B]Version 1.2.7[/B]
 - fixed irweb-dl.com
 

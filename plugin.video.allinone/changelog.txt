@@ -1,3 +1,6 @@
+[B]Version 4.1.5[/B]
+- fixed searches : removed sites that have been taken down
+
 [B]Version 4.1.4[/B]
 - small fix 
 

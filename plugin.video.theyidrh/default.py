@@ -1206,8 +1206,8 @@ def Menu2():
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR plum](Scene down)[/COLOR] >>'}, img=IconPath + 'sdmovies.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR lime](Release Center)[/COLOR] >>'}, img=IconPath + 'rcmovies.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles9', 'section': 'ALL', 'url': BASE_URL7 + '/movies/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR deepskyblue](wrzKO)[/COLOR] >>'}, img=IconPath + 'wmovies.png', fanart=FanartPath + 'fanart.png')
+        #addon.add_directory({'mode': 'GetTitles9', 'section': 'ALL', 'url': BASE_URL7 + '/movies/',
+                             #'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR deepskyblue](wrzKO)[/COLOR] >>'}, img=IconPath + 'wmovies.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles21', 'section': 'ALL', 'url': BASE_URL21 + 'category/movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Movies[/B] [/COLOR] [COLOR chocolate](Release 1-Click)[/COLOR] >>'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/master/icons/r1movies.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL5 + '/category/movies/',
@@ -1252,10 +1252,10 @@ def Menu3():
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Latest Movies[/B] [/COLOR] [COLOR blue](irweb-dl)[/COLOR] >>'}, img=IconPath + 'ir.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles5', 'section': 'ALL', 'url': BASE_URL12 + '/category/hollywood-movie/english-3d-movie/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Latest 3D[/B][/COLOR] [COLOR crimson](300mb movies4u) [/COLOR] >>'}, img=IconPath + 'm4u1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles9', 'section': 'ALL', 'url': BASE_URL7 + '/movies/yify-brrip-1080p/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Latest 1080p YIFY[/B] [/COLOR] [COLOR deepskyblue](wrzKO)[/COLOR] >>'}, img=IconPath + 'wmovies.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles9', 'section': 'ALL', 'url': BASE_URL7 + '/movies/yify-brrip-720p/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Latest 720p YIFY[/B] [/COLOR] [COLOR deepskyblue](wrzKO)[/COLOR] >>'}, img=IconPath + 'wmovies.png', fanart=FanartPath + 'fanart.png')
+        #addon.add_directory({'mode': 'GetTitles9', 'section': 'ALL', 'url': BASE_URL7 + '/movies/yify-brrip-1080p/',
+                             #'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Latest 1080p YIFY[/B] [/COLOR] [COLOR deepskyblue](wrzKO)[/COLOR] >>'}, img=IconPath + 'wmovies.png', fanart=FanartPath + 'fanart.png')
+        #addon.add_directory({'mode': 'GetTitles9', 'section': 'ALL', 'url': BASE_URL7 + '/movies/yify-brrip-720p/',
+                             #'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Latest 720p YIFY[/B] [/COLOR] [COLOR deepskyblue](wrzKO)[/COLOR] >>'}, img=IconPath + 'wmovies.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles11', 'section': 'ALL', 'url': BASE_URL10 + '/category/movies/yify-rips/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR steelblue][B]Latest YIFY[/B] [/COLOR] [COLOR powderblue](DDLvalley)[/COLOR] >>'}, img=IconPath + 'ddlmo.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles21', 'section': 'ALL', 'url': BASE_URL21 + '/category/movies/yify-brrip/',
@@ -1281,8 +1281,8 @@ def Menu4():
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Tv Shows[/B] [/COLOR] [COLOR plum](Scene down)[/COLOR] >>'}, img=IconPath + 'sdtv.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/tv-shows/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Tv shows[/B] [/COLOR] [COLOR lime](Release Center) [/COLOR]>>'}, img=IconPath + 'rctv.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles9', 'section': 'ALL', 'url': BASE_URL7 + '/tv-shows/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Tv Shows[/B] [/COLOR] [COLOR deepskyblue](wrzKO)[/COLOR] >>'}, img=IconPath + 'wtv.png', fanart=FanartPath + 'fanart.png')
+        #addon.add_directory({'mode': 'GetTitles9', 'section': 'ALL', 'url': BASE_URL7 + '/tv-shows/',
+                             #'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Tv Shows[/B] [/COLOR] [COLOR deepskyblue](wrzKO)[/COLOR] >>'}, img=IconPath + 'wtv.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles10', 'section': 'ALL', 'url': BASE_URL1 + '/tv/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Tv Shows[/B] [/COLOR] [COLOR orangered](Scene Source)[/COLOR] >>'}, img=IconPath + 'sstv.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL5 + '/category/tvshow/',
@@ -1520,18 +1520,6 @@ def Search10(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': movieUrl}, {'title':  title + ' [COLOR crimson](300mb movies4u)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry 300mbmovies4u search is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-    try:
-        url = 'http://www.wrzko.eu/?s=' + query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        match = re.compile('maintitle.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
-        for movieUrl, title, img in match:
-                title = title.replace('.', ' ')
-                addon.add_directory({'mode': 'GetLinks', 'url': movieUrl}, {'title':  title + ' [COLOR deepskyblue](wrzKO)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
-    except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry wrzko search is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://rlssource.net/?s=' + query

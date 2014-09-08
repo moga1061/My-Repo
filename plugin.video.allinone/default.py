@@ -2239,17 +2239,6 @@ def Search11(query):
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry rlssource is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
-        url = 'http://moviezstream.com/?s='+query 
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        match = re.compile('<div class="tm_cat_image">\s*?<a href="(.+?)" title="(.+?)">\s*?<img width="373" height="450" src="(.+?)" class="attachment-full wp-post-image" alt=".+?" />', re.DOTALL).findall(html)
-        for url, title, img in match:
-                addon.add_directory({'mode': 'GetLinks11', 'url': url}, {'title':  title + ' [COLOR yellow]...(moviezstream)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
-    except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry moviezstream is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-    try:
         url = 'http://rls1click.com/?s=' + query
         url = url.replace(' ', '+')
         print url
@@ -2293,27 +2282,6 @@ def Search11(query):
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry srmovie is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-    try:
-        url = 'http://all-free-download-4u.com/?s='+query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        match = re.compile('<div class="cover"><a href="(.+?)" title="(.+?)"><img src="(.+?)" alt=".+?" class="Thumbnail thumbnail " width=".+?" height=".+?" /></a></div>', re.DOTALL).findall(html)
-        for url, title, img in match:
-                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR blue]...(AFD4U)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
-    except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry AFD4U is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-    try:
-        url = 'http://dlmoviegames.com/search/'+query
-        url = url.replace(' ', '-')
-        print url
-        html = net.http_GET(url).content
-        match = re.compile('<div class="entry clearfix">\s*?<a href="(.+?)" rel="bookmark" title=".+?">		<img class="thumbnail" src="(.+?)" alt=".+?" title="(.+?)" />', re.DOTALL).findall(html)
-        for url, img, title in match:
-                addon.add_directory({'mode': 'GetLinks14', 'url': url}, {'title':  title + ' [COLOR yellowgreen]...(dlmoviegames)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
-    except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry AFD4U is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
     try:
         url = 'http://www.filestube.to/query.html?q='+ query + '&select=mkv'
         url = url.replace(' ', '+')
@@ -2407,17 +2375,6 @@ def Search12(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR orange]...(CC)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry channelcut is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-    try:
-        url = 'http://www.tvshowzonline.com/?s=' + query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        match = re.compile('<h2 class="title"><a href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
-        for url, title, img in match:
-                addon.add_directory({'mode': 'GetLinks1', 'url': url}, {'title':  title + ' [COLOR pink]...(tvshowzonline)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
-    except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry tvshowzonline is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://watchfullepisode.com/?s=' + query
