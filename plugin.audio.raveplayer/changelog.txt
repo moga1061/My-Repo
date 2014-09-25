@@ -5,6 +5,10 @@
 [COLOR blue]and for making your own folders use Super Favourites you can get it from 
 Spoyser REPO or the XBMC REPO[/COLOR]
 
+[B]Version 1.5.5[/B]
+- added
+* kool london to top of list
+
 [B]Version 1.5.4[/B]
 - added
 * slipmatt radio

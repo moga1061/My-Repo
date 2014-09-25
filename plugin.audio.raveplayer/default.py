@@ -943,6 +943,15 @@ def RadioMenu():
         addon_handle = int(sys.argv[1]) 
         xbmcplugin.setContent(addon_handle, 'audio')
 
+
+        url = 'http://uk1-pn.mixstream.net/8698.m3u'
+        li = xbmcgui.ListItem('[COLOR lightseagreen][B]Kool London[/B][/COLOR] [COLOR lime](((Live)))[/COLOR]  (Old skool, Jungle, Drum & Bass + more) [COLOR gold]*****[/COLOR]', thumbnailImage= 'http://s30.postimg.org/5r870dash/icon.png')
+        li.setProperty('fanart_image', 'http://koollondon.com/images/stories/kool-timetable-september-2014.png')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        addon.add_directory({'mode': 'RadioMenu', '': '', '': '',
+                             '': '', '': ''}, {'title':  ''}, img = 'http://www.systemslibrarian.co.za/images/Broken%20links.jpg', fanart = 'http://s30.postimg.org/elc1pa6qp/fanart.jpg')
+
         url = 'http://192.99.11.97:8000'
         li = xbmcgui.ListItem('[COLOR blue][B]Rave Tape Radio[/B][/COLOR] [COLOR lime] (((LIVE))) [/COLOR]  (Oldskool TapePacks 24/7))', thumbnailImage= 'http://d1i6vahw24eb07.cloudfront.net/s182965d.png')
         li.setProperty('fanart_image', 'http://s12.postimg.org/rkd8gen7h/fanart.jpg')
@@ -1018,11 +1027,6 @@ def RadioMenu():
 
         addon.add_directory({'mode': 'RadioMenu', '': '', '': '',
                              '': '', '': ''}, {'title':  ''}, img = 'http://www.systemslibrarian.co.za/images/Broken%20links.jpg', fanart = 'http://s30.postimg.org/elc1pa6qp/fanart.jpg')
-
-        url = 'http://uk1-pn.mixstream.net/8698.m3u'
-        li = xbmcgui.ListItem('[COLOR lightseagreen][B]Kool London[/B][/COLOR] [COLOR lime](((Live)))[/COLOR]  (Jungle, Drum & Bass + more)', thumbnailImage= 'http://s30.postimg.org/5r870dash/icon.png')
-        li.setProperty('fanart_image', 'http://koollondon.com/images/stories/kool-timetable-march-2014.png')
-        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
         url = 'http://78.129.228.187:8034/listen.pls'
         li = xbmcgui.ListItem('[COLOR lightseagreen][B]Rude fm [/B][/COLOR] [COLOR lime](((Live)))[/COLOR]  (Drum & Bass)', thumbnailImage= 'http://surroundsoundrecordings.co.uk/wp-content/uploads/2011/09/rudelogo.jpg')

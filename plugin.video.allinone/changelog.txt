@@ -1,3 +1,8 @@
+[B]Version 5.0.0[/B]
+- fixed :
+- wrestling rulez 
+- searches : removed sites that have been taken down 
+
 [B]Version 4.1.6[/B]
 - fix
 

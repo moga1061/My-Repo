@@ -1,0 +1,87 @@
+[B]Version 1.2.9[/B]
+- code clean up
+
+[B]Version 1.2.8[/B]
+- removed www.wrzko.eu site got taken down
+
+[B]Version 1.2.7[/B]
+- fixed irweb-dl.com
+
+[B]Version 1.2.6[/B]
+- small fix
+
+[B]Version 1.2.5[/B]
+- added filetube to search
+
+[B]Version 1.2.4[/B]
+- clean up and fixes
+
+[B]Version 1.2.2[/B]
+- clean up and fixes
+
+[B]Version 1.2.1[/B]
+- more index searches added
+- more sites added to search
+- some new art work for searches
+
+[B]Version 1.2.0[/B]
+- new help vids
+
+[B]Version 1.1.9[/B]
+- more work on the search
+
+B]Version 1.1.8[/B]
+- tv show index search
+
+[B]Version 1.1.7[/B]
+- small fix
+
+[B]Version 1.1.6[/B]
+- new box office index search
+
+[B]Version 1.1.5[/B]
+- fixes and addno clean up
+
+[B]Version 1.1.4[/B]
+- fixes 
+
+[B]Version 1.1.2[/B]
+- fixes 
+
+[B]Version 1.1.1[/B]
+- fixes to searches
+
+[B]Version 1.1.0[/B]
+- Mega search (BETA)
+- Release search (BETA)
+- added dx-tv.com
+- updated icon
+- fixes and code clean up
+
+[B]Version 1.0.7[/B]
+- added binflix more 1080p
+
+[B]Version 1.0.6[/B]
+- small fixes
+* rls tv fixed
+
+[B]Version 1.0.5[/B]
+- added 
+* irweb-dl 1080p tv shows and movies
+
+[B]Version 1.0.4[/B]
+- added 
+* Rls1Click
+
+[B]Version 1.0.2[/B]
+- added 
+* TheYids news
+* movie4download
+
+[B]Version 1.0.1[/B]
+- clean code
+
+[B]Version 1.0.0[/B]
+- Full Release of [COLOR dodgerblue][B]HUB[/B][/COLOR] v-1.0.0
+
+

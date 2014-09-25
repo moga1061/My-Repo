@@ -55,7 +55,7 @@
 	<addon
         id="plugin.audio.koollondon"
         name="kool London"
-        version="0.0.7"
+        version="0.0.8"
         provider-name="@TheYid009">
 		<requires>
 			<import addon="xbmc.python"             	version="2.1.0"/>
@@ -81,7 +81,7 @@
 	<addon
         id="plugin.audio.raveplayer"
         name="Rave player"
-        version="1.5.4"
+        version="1.5.5"
         provider-name="@TheYid009">
 		<requires>
 			<import addon="xbmc.python"             	version="2.1.0"/>
@@ -203,7 +203,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.allinone" version="4.1.6" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.allinone" version="5.0.0" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -325,7 +325,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.theyidrh" version="1.2.8" name="Release [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.theyidrh" version="1.2.9" name="Release [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
