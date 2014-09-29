@@ -15,7 +15,7 @@ BASE_URL1 = 'http://adultbay.org/'
 BASE_URL2 = 'http://www.hornywhores.net/'
 BASE_URL3 = 'http://www.naughtyblog.org/'
 BASE_URL4 = 'http://pornorips.com/'
-BASE_URL5 = 'http://scenelog.eu/'
+BASE_URL5 = 'http://scnlog.eu/'
 BASE_URL6 = 'http://pornreleasez.com/'
 BASE_URL7 = 'http://naked-sluts.us/'
 BASE_URL8 = 'http://webwarez.it/'
@@ -79,7 +79,7 @@ def GetTitles2(section, url, startPage= '1', numOfPages= '1'): # hornywhores
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
-                match = re.compile('<h3.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
+                match = re.compile('<h2 id=".+?"><a href="(.+?)" rel="bookmark" title=".+?">(.+?)</a></h2>\s*?<small>.+?<br />.+?</small>\s*?<div class="entry">\s*?<p><a href=".+?"><img src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.aob/?mode=Search3&query=%s)' %(name.strip())
@@ -424,7 +424,7 @@ def PlayVideo(url, listitem):
 def PlayVideo2(url, listitem):
         addon_handle = int(sys.argv[1])
         xbmcplugin.setContent(addon_handle, 'video')
-        li = xbmcgui.ListItem('[COLOR dodgerblue][B]PLAY STREAM[/B][/COLOR]  >> ', iconImage='https://lh5.googleusercontent.com/-p2h0tx7Trgs/Uzu-3kxzKuI/AAAAAAAAOsU/sVJKqxSMY-4/s319/watch2.jpg', thumbnailImage= 'http://s29.postimg.org/8z8jd5x5j/logo1.png')
+        li = xbmcgui.ListItem('[COLOR dodgerblue][B]LOAD STREAM LIST[/B][/COLOR]  >> ', iconImage='https://lh5.googleusercontent.com/-p2h0tx7Trgs/Uzu-3kxzKuI/AAAAAAAAOsU/sVJKqxSMY-4/s319/watch2.jpg', thumbnailImage= 'http://s29.postimg.org/8z8jd5x5j/logo1.png')
         li.setProperty('fanart_image', '')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
         xbmcplugin.endOfDirectory(addon_handle)
@@ -710,7 +710,7 @@ def Search3(query):
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        match = re.compile('<h3.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
+        match = re.compile('<h2 id=".+?"><a href="(.+?)" rel="bookmark" title=".+?">(.+?)</a></h2>\s*?<small>.+?<br />.+?</small>\s*?<div class="entry">\s*?<p><a href=".+?"><img src="(.+?)"', re.DOTALL).findall(html)
         for url, title, img in match:
                 addon.add_directory({'mode': 'GetLinks2', 'url': url}, {'title':  title + ' - ' + '[COLOR pink]hornywhores[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
     except:

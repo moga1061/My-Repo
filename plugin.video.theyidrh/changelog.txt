@@ -1,3 +1,9 @@
+[B]Version 1.4.0[/B]
+- code clean up
+- fixed scnlog.eu
+- fixed irweb-dl.com tv
+- removed sites not working
+
 [B]Version 1.2.9[/B]
 - code clean up
 
