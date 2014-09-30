@@ -1,3 +1,11 @@
+[B]Version 5.0.1[/B]
+- added 
+- undergroundflix to tv shows & movies 
+- Central Radio UK to Radio 
+- code clean up 
+- removed sites not working 
+
+
 [B]Version 5.0.0[/B]
 - fixed :
 - wrestling rulez 
