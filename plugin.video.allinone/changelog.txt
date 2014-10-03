@@ -1,3 +1,6 @@
+[B]Version 5.0.2[/B]
+- code clean up 
+
 [B]Version 5.0.1[/B]
 - added 
 - undergroundflix to tv shows & movies 
