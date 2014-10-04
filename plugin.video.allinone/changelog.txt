@@ -1,3 +1,10 @@
+[B]Version 5.0.4[/B]
+- removed watch the tapes
+- added AwesomeDL
+- added radio back to main screen
+- added pure music 247 to radio
+- fixed uwatchfree.net
+
 [B]Version 5.0.2[/B]
 - code clean up 
 
