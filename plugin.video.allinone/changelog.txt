@@ -1,3 +1,6 @@
+[B]Version 5.0.5[/B]
+- small fix
+
 [B]Version 5.0.4[/B]
 - removed watch the tapes
 - added AwesomeDL

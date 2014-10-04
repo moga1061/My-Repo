@@ -804,7 +804,7 @@ def GetTitles2a(query):
         html = net.http_GET(pageUrl).content                     
         match = re.compile('img-preview spec-border.+?src=".+?src=(.+?)&amp;.+?".+?href="(.+?)".+?>.+?<.+?',re.DOTALL).findall(html)
         for img, query in match:
-                addon.add_directory({'mode': 'Search12', 'query': query.replace('http://www.flixanity.is/show/', '').replace('-', ' ') + ' s'}, {'title':  query.replace('http://www.flixanity.com/show/', '').replace('-', ' ')}, img= img, fanart=FanartPath + 'fanart4.png')
+                addon.add_directory({'mode': 'Search12', 'query': query.replace('http://www.flixanity.is/show/', '').replace('-', ' ') + ' s'}, {'title':  query.replace('http://www.flixanity.is/show/', '').replace('-', ' ')}, img= img, fanart=FanartPath + 'fanart4.png')
         setView('tvshows', 'tvshows-view')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
