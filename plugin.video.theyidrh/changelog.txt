@@ -1,3 +1,6 @@
+[B]Version 1.4.1[/B]
+- code clean up & fixes
+
 [B]Version 1.4.0[/B]
 - code clean up
 - fixed scnlog.eu
