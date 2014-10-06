@@ -1,3 +1,8 @@
+[B]Version 1.4.2[/B]
+- added new site
+- icons clean out
+- some small fixes
+
 [B]Version 1.4.1[/B]
 - code clean up & fixes
 
