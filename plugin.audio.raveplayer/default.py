@@ -106,7 +106,7 @@ def GetLinks3(url):
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
         content = html                                          
-        match = re.compile('<li class=".+?"><a href="(.+?)" title=".+?">(.+?)</a>').findall(content)
+        match = re.compile('<li class="cat-item cat-item-.+?"><a href="(.+?)" >(.+?)</a>').findall(content)
         for url, name in match:
                 addon.add_directory({'mode': 'GetLinks3a', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://fc09.deviantart.net/fs25/f/2008/111/a/8/Cassette_tape_by_Quick_Stop.png', fanart = 'http://24.media.tumblr.com/tumblr_md33y3uDzM1qkcj9ro4_1280.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -257,9 +257,9 @@ def GetLinks11(url):
         listitem = GetMediaInfo(html)
         CLEAN(html)
         content = html
-        match = re.compile('<li class=".+?"><a href="(.+?)" title=".+?">(.+?)</a>').findall(content)
+        match = re.compile('<li class="cat-item cat-item-.+?"><a href="(.+?)" >(.+?)</a>').findall(content)
         for url, name in match:
-                addon.add_directory({'mode': 'GetLinks11a', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://urbanlegendkampala.com/wp-content/uploads/2013/11/Mixtape-Image.jpg', fanart = 'https://chronicle-vitae-production.s3.amazonaws.com/uploads/user_article/photo/133/full_11112013-mixtapes.gif')
+                addon.add_directory({'mode': 'GetLinks11a', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://bonuscut.files.wordpress.com/2013/08/mixtape_cassette-13651.jpg', fanart = 'https://chronicle-vitae-production.s3.amazonaws.com/uploads/user_article/photo/133/full_11112013-mixtapes.gif')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def GetLinks11a(url):                                            
@@ -270,7 +270,7 @@ def GetLinks11a(url):
         content = html
         match = re.compile('<h2><a href="(.+?)" rel="bookmark" title=".+?">(.+?)</a></h2>').findall(content)
         for url, name in match:
-                addon.add_directory({'mode': 'GetLinks11b', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://urbanlegendkampala.com/wp-content/uploads/2013/11/Mixtape-Image.jpg', fanart = 'http://img.wallpaperstock.net:81/vintage-cassette-retro-player-wallpapers_36465_1920x1080.jpg')
+                addon.add_directory({'mode': 'GetLinks11b', 'url': url, 'listitem': listitem}, {'title':  name.strip()}, img = 'http://bonuscut.files.wordpress.com/2013/08/mixtape_cassette-13651.jpg', fanart = 'http://img.wallpaperstock.net:81/vintage-cassette-retro-player-wallpapers_36465_1920x1080.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def GetLinks11b(url):                                          
@@ -985,6 +985,16 @@ def RadioMenu():
         addon.add_directory({'mode': 'RadioMenu', '': '', '': '',
                              '': '', '': ''}, {'title':  ''}, img = 'http://www.systemslibrarian.co.za/images/Broken%20links.jpg', fanart = 'http://s30.postimg.org/elc1pa6qp/fanart.jpg')
 
+        url = 'http://webstreamer.co.uk:41940/;'
+        li = xbmcgui.ListItem('[COLOR mediumaquamarine][B]Pure Music 247[/B][/COLOR] [COLOR lime](((Live)))[/COLOR]  (House + much more)', iconImage='http://puremusic247.com/images/dj-Copyedittest.gif', thumbnailImage= 'http://puremusic247.com/images/dj-Copyedittest.gif')
+        li.setProperty('fanart_image', 'http://djautograph.com/wp-content/uploads/2013/10/House_Music_by_Labelrx.png')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        url = 'http://50.7.184.106:8631/listen.pls'
+        li = xbmcgui.ListItem('[COLOR mediumaquamarine][B]Central Radio UK[/B][/COLOR] [COLOR lime](((Live)))[/COLOR] (Dance + much more)', iconImage='http://s13.postimg.org/jcdhx5pqf/image.png', thumbnailImage= 'http://s13.postimg.org/jcdhx5pqf/image.png')
+        li.setProperty('fanart_image', 'http://www.mrwallpaper.com/wallpapers/Music-equipment.jpg')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
         url = 'http://server2.unitystreams.com:8008'
         li = xbmcgui.ListItem('[COLOR mediumaquamarine][B]Play Back uk Radio [/B][/COLOR] [COLOR lime](((Live)))[/COLOR]   (House & oldskool Garage)', thumbnailImage= 'https://pbs.twimg.com/media/Bm5ZdVRIEAA9bSI.jpg')
         li.setProperty('fanart_image', 'http://www.playbackuk.com/downloads/playbackukcom_3DPicture.jpg')
@@ -1024,6 +1034,7 @@ def RadioMenu():
         li = xbmcgui.ListItem('[COLOR mediumaquamarine][B]Flex fm [/B][/COLOR] [COLOR lime](((Live)))[/COLOR]  (House + more)', thumbnailImage= 'http://images-mix.netdna-ssl.com/w/300/h/300/q/85/upload/images/extaudio/69a90686-6d2f-4fbe-9a61-b7f90c955cc7.jpg')
         li.setProperty('fanart_image', 'http://photos-h.ak.fbcdn.net/hphotos-ak-frc3/t1.0-0/c13.0.935.623/s720x720/428247_523439234355303_19226475_n.jpg')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
 
         addon.add_directory({'mode': 'RadioMenu', '': '', '': '',
                              '': '', '': ''}, {'title':  ''}, img = 'http://www.systemslibrarian.co.za/images/Broken%20links.jpg', fanart = 'http://s30.postimg.org/elc1pa6qp/fanart.jpg')
