@@ -1,3 +1,6 @@
+[B]Version 5.0.6[/B]
+- Flixanity has changed its name to Cartoon HD
+
 [B]Version 5.0.5[/B]
 - small fix
 

@@ -16,7 +16,7 @@ BASE_URL1 = 'http://awesomedl.ru/'
 BASE_URL3 = 'http://viooz.pw/'
 BASE_URL4 = 'http://ultra-vid.com/'###
 BASE_URL10 = 'http://www.myvideolinks.eu/'
-BASE_URL12 = 'http://www.flixanity.is/'
+BASE_URL12 = 'http://www.cartoonhd.is/'
 BASE_URL14 = 'http://www.channelcut.me/'
 BASE_URL15 = 'http://primeflicks.me/'
 BASE_URL20 = 'http://world4ufree.com/'
@@ -185,7 +185,7 @@ def GetTitles10(section, url, startPage= '1', numOfPages= '1'):
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#---------------------------------------------------------------------------- flixanity movie 1 ----------------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------- flixanity movie 1 cartoonhd----------------------------------------------------------------------------------------#
 
 def GetTitles12(section, url, startPage= '1', numOfPages= '1'): 
     try:
@@ -293,7 +293,7 @@ def GetTitles27a(section, url, startPage= '1', numOfPages= '1'): #1st
                         html = net.http_GET(pageUrl).content
                 match = re.compile('img-preview spec-border.+?src=".+?src=(.+?)&amp;.+?".+?href="(.+?)".+?>.+?<.+?', re.DOTALL).findall(html)
                 for img, movieUrl in match:
-                        addon.add_directory({'mode': 'GetTitles27', 'section': section, 'url': movieUrl}, {'title':  movieUrl.replace('http://www.flixanity.is/show/', '').replace('-', ' ')}, img= img, fanart=FanartPath + 'fanart.png')
+                        addon.add_directory({'mode': 'GetTitles27', 'section': section, 'url': movieUrl}, {'title':  movieUrl.replace('http://www.cartoonhd.is/show/', '').replace('-', ' ')}, img= img, fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')  
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
@@ -804,7 +804,7 @@ def GetTitles2a(query):
         html = net.http_GET(pageUrl).content                     
         match = re.compile('img-preview spec-border.+?src=".+?src=(.+?)&amp;.+?".+?href="(.+?)".+?>.+?<.+?',re.DOTALL).findall(html)
         for img, query in match:
-                addon.add_directory({'mode': 'Search12', 'query': query.replace('http://www.flixanity.is/show/', '').replace('-', ' ') + ' s'}, {'title':  query.replace('http://www.flixanity.is/show/', '').replace('-', ' ')}, img= img, fanart=FanartPath + 'fanart4.png')
+                addon.add_directory({'mode': 'Search12', 'query': query.replace('http://www.cartoonhd.is/show/', '').replace('-', ' ') + ' s'}, {'title':  query.replace('http://www.cartoonhd.is/show/', '').replace('-', ' ')}, img= img, fanart=FanartPath + 'fanart4.png')
         setView('tvshows', 'tvshows-view')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
@@ -1528,7 +1528,7 @@ def TvMenu():       #tv
         addon.add_directory({'mode': 'TsuMenu'}, {'title':  '[COLOR orange][B]Full Seasons[/B][/COLOR] [COLOR darkorange](shows4u) [/COLOR]>>'}, img=IconPath + 's4u1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'Hq4Menu'}, {'title':  '[COLOR orange][B]Full Seasons[/B][/COLOR] [COLOR royalblue](TV HQ) [/COLOR]>>'}, img=IconPath + 'tvhq.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'PuttvMenu'}, {'title':  '[COLOR orange][B]Full Seasons[/B][/COLOR] [COLOR teal](Prime Flicks) [/COLOR]>>'}, img=IconPath + 'fm1.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'TzmMenu'}, {'title':  '[COLOR orange][B]Full Seasons[/B][/COLOR] [COLOR plum](flixanity) [/COLOR]>>'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'TzmMenu'}, {'title':  '[COLOR orange][B]Full Seasons[/B][/COLOR] [COLOR plum](flixanity) [/COLOR]>>'}, img=IconPath + 'fl2.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes list[/B][/COLOR] [COLOR tomato](ChannelCut) [/COLOR]>>'}, img=IconPath + 'cc.png', fanart=FanartPath + 'fanart.png')
         #addon.add_directory({'mode': 'GetTitles4', 'section': 'ALL', 'url': BASE_URL4 + '/category/tv',
