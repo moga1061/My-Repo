@@ -1,3 +1,8 @@
+[B]Version 5.0.7[/B]
+- added 
+* Flixanity/Cartoon HD movies (not very good but will do for now)
+* watchwrestling (in sports)
+
 [B]Version 5.0.6[/B]
 - Flixanity has changed its name to Cartoon HD
 
