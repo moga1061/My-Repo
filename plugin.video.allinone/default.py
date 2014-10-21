@@ -24,7 +24,7 @@ BASE_URL21 = 'http://movies2k.eu/'
 BASE_URL23 = 'http://300mbmovies4u.com/'
 BASE_URL25 = 'http://www.rapgrid.com/'
 BASE_URL29 = 'http://shows4u.info/'
-BASE_URL30 = 'http://www.tupeliculashd.com/'
+BASE_URL30 = ''
 BASE_URL32 = 'http://www.tvhq.info/'
 BASE_URL35 = 'https://raw.githubusercontent.com/TheYid/yidpics/master'
 BASE_URL38 = 'http://www.movierulz.com/'
@@ -546,52 +546,6 @@ def GetTitles28a(section, url, startPage= '1', numOfPages= '1'): #1st
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#------------------------------------------------------------------ tupeliculashd -----------------------------------------------------------------------------------------------------#
-
-def GetTitles30(section, url, startPage= '1', numOfPages= '1'): #1st
-        pageUrl = url
-        html = net.http_GET(pageUrl).content
-        match = re.compile("<a dir='ltr' href='(.+?)'>(.+?)</a>",re.DOTALL).findall(html)
-        for movieUrl, name in match:
-                addon.add_directory({'mode': 'GetTitles30a', 'section': section, 'url': movieUrl}, {'title': name.strip()},img= 'http://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Flag_of_Spain.svg/750px-Flag_of_Spain.svg.png', fanart=FanartPath + 'fanart.png') 
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
-def GetTitles30a(section, url, startPage= '1', numOfPages= '1'): #2nd
-        pageUrl = url
-        html = net.http_GET(pageUrl).content
-        match = re.compile("<h2 class='post-title entry-title'>\s*?<a href='(.+?)'>(.+?)</a>",re.DOTALL).findall(html)
-        for movieUrl, name in match:
-                addon.add_directory({'mode': 'GetTitles30b', 'section': section, 'url': movieUrl}, {'title': name.strip()},img= 'http://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Flag_of_Spain.svg/750px-Flag_of_Spain.svg.png', fanart=FanartPath + 'fanart.png') 
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
-def GetTitles30b(section, url, startPage= '1', numOfPages= '1'): #3rd
-        pageUrl = url
-        html = net.http_GET(pageUrl).content
-        match = re.compile('<iframe src="http://api.video.mail.ru(.+?)" width=".+?" height=".+?"',re.DOTALL).findall(html)
-        match1 = re.compile('<iframe src="http://vk.com/(.+?)" width=".+?" height=".+?"',re.DOTALL).findall(html)
-        for movieUrl in match:
-                addon.add_directory({'mode': 'GetTitles30c', 'section': section, 'url': 'http://api.video.mail.ru' + movieUrl}, {'title': 'video.mail.ru >>'},img= 'http://www.seo.com/wp-content/uploads/2009/07/one-way-link-building.jpg', fanart=FanartPath + 'fanart.png') 
-        for movieUrl in match1:
-                addon.add_directory({'mode': 'GetTitles30d', 'section': section, 'url': 'http://vk.com/' + movieUrl}, {'title': 'vk.com >>'},img= 'http://www.seo.com/wp-content/uploads/2009/07/one-way-link-building.jpg', fanart=FanartPath + 'fanart.png') 
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
-def GetTitles30c(section, url, startPage= '1', numOfPages= '1'): #4th
-        pageUrl = url
-        html = net.http_GET(pageUrl).content
-        match = re.compile('videoPresets = {"sd":".+?","md":"(.+?)"}',re.DOTALL).findall(html)
-        for movieUrl in match:
-                addon.add_directory({'mode': 'PlayVideo1', 'section': section, 'url': movieUrl}, {'title': 'Load video.mail.ru Link >>'},img= 'http://langestore.vn.ua/img/cms/vzlom_my_mail_ru_big.png', fanart=FanartPath + 'fanart.png') 
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
-def GetTitles30d(section, url, startPage= '1', numOfPages= '1'): #5th
-        pageUrl = url
-        html = net.http_GET(pageUrl).content
-        match = re.compile('"url360":"(.+?)?extra=',re.DOTALL).findall(html)
-        for movieUrl in match:
-                url = url.replace('\/','/')
-                addon.add_directory({'mode': 'PlayVideo1', 'section': section, 'url': movieUrl}, {'title': 'Load vk.com Link >>'},img= 'http://www.enkisa.com/wp-content/uploads/2012/05/vk.com_logo1.jpg', fanart=FanartPath + 'fanart.png') 
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
 #------------------------------------------------------------------ TVHQ Categories movies -----------------------------------------------------------------------------------------------------#
 
 def Categoriestvhq(url):  #movie-tags
@@ -1045,12 +999,12 @@ def GetLinks12(section, url):
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
         content = html
-        match = re.compile('<p style=".+?"><a href="(.+?)"').findall(content)
+        match = re.compile('<a href="(.+?)" target="_blank">(.+?)</a>').findall(content)
         listitem = GetMediaInfo(content)
-        for url in match:
+        for url, name in match:
                 host = GetDomain(url)
                 if urlresolver.HostedMediaFile(url= url):
-                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host + ' ' + name }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #------------------------------------------------------------------------------ wrestling ------------------------------------------------------------------------------------#
@@ -1328,7 +1282,24 @@ def RadioMenu():   #radio
 
 def SportMenu():   #sport
         addon.add_directory({'mode': 'GetTitles39a', 'section': 'ALL', 'url': BASE_URL39 + '/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest Wrestling/MMA[/B] [/COLOR]: [COLOR greenyellow]Index Search[/COLOR]'}, img=IconPath + 'wma.png', fanart=FanartPath + 'fanart.png')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest Wrestling/MMA[/B] [/COLOR]: [COLOR greenyellow]Index Search[/COLOR]  [COLOR blue](release sites)[/COLOR]'}, img=IconPath + 'wma.png', fanart=FanartPath + 'fanart.png')
+
+        addon.add_directory({'mode': 'GetTitles42', 'section': 'ALL', 'url': BASE_URL42 + '/home/wwe/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest WWE[/B][/COLOR]  [COLOR gold](watchwrestling.ch) [/COLOR] >>'}, img=IconPath + 'ww.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles42', 'section': 'ALL', 'url': BASE_URL42 + '/home/wwenetwork/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest WWE Network[/B][/COLOR]  [COLOR gold](watchwrestling.ch) [/COLOR] >>'}, img=IconPath + 'ww.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles42', 'section': 'ALL', 'url': BASE_URL42 + '/home/tna/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest TNA[/B][/COLOR]  [COLOR gold](watchwrestling.ch) [/COLOR] >>'}, img=IconPath + 'ww.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles42', 'section': 'ALL', 'url': BASE_URL42 + '/home/roh/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest ROH[/B][/COLOR]  [COLOR gold](watchwrestling.ch) [/COLOR] >>'}, img=IconPath + 'ww.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles42', 'section': 'ALL', 'url': BASE_URL42 + '/home/other-sports/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest MMA[/B][/COLOR]  [COLOR gold](watchwrestling.ch) [/COLOR] >>'}, img=IconPath + 'ww.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles42', 'section': 'ALL', 'url': BASE_URL42 + '/home/archives/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]WatchWrestling Archives[/B][/COLOR]  [COLOR gold](watchwrestling.ch) [/COLOR] >>'}, img=IconPath + 'ww.png', fanart=FanartPath + 'fanart.png')
+
+        addon.add_directory({'mode': 'GetTitles31', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/wwf-wwe',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]wwf-wwe [/B][/COLOR]  [COLOR plum](flixanity) [/COLOR] >>'}, img=IconPath + 'fl1.png', fanart=FanartPath + 'fanart.png')
+
         addon.add_directory({'mode': 'GetTitles39', 'section': 'ALL', 'url': BASE_URL39 + 'category/weeklies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest WWE[/B][/COLOR]  [COLOR darkred](Wrestling Rulez) [/COLOR] >>'}, img=IconPath + 'wr1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles39', 'section': 'ALL', 'url': BASE_URL39 + '/category/tna-wrestling/',
@@ -1341,20 +1312,6 @@ def SportMenu():   #sport
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest WWE shows[/B][/COLOR]  [COLOR darkred](Wrestling Rulez) [/COLOR] >>'}, img=IconPath + 'wr1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles39', 'section': 'ALL', 'url': BASE_URL39 + '/category/pay-per-views/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest PPV[/B][/COLOR]  [COLOR darkred](Wrestling Rulez) [/COLOR] >>'}, img=IconPath + 'wr1.png', fanart=FanartPath + 'fanart.png')
-
-        addon.add_directory({'mode': 'GetTitles31', 'section': 'ALL', 'url': BASE_URL12 + '/movie-tags/wwf-wwe',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]wwf-wwe [/B][/COLOR]  [COLOR plum](flixanity) [/COLOR] >>'}, img=IconPath + 'fl1.png', fanart=FanartPath + 'fanart.png')
-
-        addon.add_directory({'mode': 'GetTitles42', 'section': 'ALL', 'url': BASE_URL42 + '/home/wwe/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest WWE[/B][/COLOR]  [COLOR gold](watchwrestling.ch) [/COLOR] >>'}, img=IconPath + 'ww.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles42', 'section': 'ALL', 'url': BASE_URL42 + '/home/wwenetwork/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest WWE Network[/B][/COLOR]  [COLOR gold](watchwrestling.ch) [/COLOR] >>'}, img=IconPath + 'ww.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles42', 'section': 'ALL', 'url': BASE_URL42 + '/home/tna/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest TNA[/B][/COLOR]  [COLOR gold](watchwrestling.ch) [/COLOR] >>'}, img=IconPath + 'ww.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles42', 'section': 'ALL', 'url': BASE_URL42 + '/home/roh/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest ROH[/B][/COLOR]  [COLOR gold](watchwrestling.ch) [/COLOR] >>'}, img=IconPath + 'ww.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles42', 'section': 'ALL', 'url': BASE_URL42 + '/home/other-sports/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest MMA[/B][/COLOR]  [COLOR gold](watchwrestling.ch) [/COLOR] >>'}, img=IconPath + 'ww.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #----------------------movies ------------------------movies ---------------------------movies --------------------------movies -------------------------------movies -------#
@@ -1368,8 +1325,6 @@ def MovieMenu():   #movies
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR chocolate](undergroundflix) [/COLOR]>>'}, img=IconPath + 'uf.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles10', 'section': 'ALL', 'url': BASE_URL10 + '/category/movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR khaki](myvideolinks.eu) [/COLOR]>>'}, img=IconPath + 'mvl1.png', fanart=FanartPath + 'fanart.png')
-        #addon.add_directory({'mode': 'GetTitles1', 'section': 'ALL', 'url': BASE_URL1 + '/',
-                             #'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR salmon](WTT) [/COLOR]>>'}, img=IconPath + 'wtt.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'HqMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR royalblue](TV HQ) [/COLOR]>>'}, img=IconPath + 'tvhq.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'ZmMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR plum](flixanity) [/COLOR]>>'}, img=IconPath + 'fl1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'PutMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR teal](Prime Flicks) [/COLOR]>>'}, img=IconPath + 'fm1.png', fanart=FanartPath + 'fanart.png')
@@ -1500,8 +1455,6 @@ def RgMenu():  #HD zone
 #---------------------------------------------------------------------- inter zone movies -------------------------------------------------------------------------------------------------#
 
 def WtMenu():   #world4ufree #m2k
-        addon.add_directory({'mode': 'GetTitles30', 'section': 'ALL', 'url': BASE_URL30 + '/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Spanish movies[/B][/COLOR] [COLOR blue](tupeliculashd) [/COLOR]>>'}, img= 'http://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Flag_of_Spain.svg/750px-Flag_of_Spain.svg.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'Categoriesuwf' },  {'title':  '[COLOR cornflowerblue][B]Movie Genre[/B][/COLOR] [COLOR seagreen](uwatchfree) [/COLOR]>>'}, img=IconPath + 'uw3.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles3', 'section': 'ALL', 'url': BASE_URL3 + '/category/bollywood',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Bollywood [/B][/COLOR] [COLOR lightslategray](ViooZ) [/COLOR] >>'}, img=IconPath + 'vu1.png', fanart=FanartPath + 'fanart.png')
@@ -1624,8 +1577,6 @@ def TvMenu():       #tv
         addon.add_directory({'mode': 'TzmMenu'}, {'title':  '[COLOR orange][B]Full Seasons[/B][/COLOR] [COLOR plum](flixanity) [/COLOR]>>'}, img=IconPath + 'fl2.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes list[/B][/COLOR] [COLOR tomato](ChannelCut) [/COLOR]>>'}, img=IconPath + 'cc.png', fanart=FanartPath + 'fanart.png')
-        #addon.add_directory({'mode': 'GetTitles4', 'section': 'ALL', 'url': BASE_URL4 + '/category/tv',
-                             #'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR floralwhite](Ultra-Vid) [/COLOR]>>'}, img=IconPath + 'uv1.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #----------------------------------------------------------------------flixanitytv-------------------------------------------------------------------------------------------#
@@ -2539,16 +2490,6 @@ elif mode == 'GetTitles28':
 	GetTitles28(section, url, startPage, numOfPages)
 elif mode == 'GetTitles28a': 
 	GetTitles28a(section, url, startPage, numOfPages)
-elif mode == 'GetTitles30': 
-	GetTitles30(section, url, startPage, numOfPages)
-elif mode == 'GetTitles30a': 
-	GetTitles30a(section, url, startPage, numOfPages)
-elif mode == 'GetTitles30b': 
-	GetTitles30b(section, url, startPage, numOfPages)
-elif mode == 'GetTitles30c': 
-	GetTitles30c(section, url, startPage, numOfPages)
-elif mode == 'GetTitles30d': 
-	GetTitles30d(section, url, startPage, numOfPages)
 elif mode == 'GetTitles31': 
 	GetTitles31(section, url, startPage, numOfPages)
 elif mode == 'GetTitles31a': 

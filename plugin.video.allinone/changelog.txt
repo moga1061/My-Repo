@@ -1,3 +1,11 @@
+[B]Version 5.0.9[/B]
+- added 
+* watchwrestling archives & moved to top of list
+- fixed 
+* wrestlingrulez now showing all parts & hosts
+- addon clean up
+
+
 [B]Version 5.0.8[/B]
 [COLOR cornflowerblue]- fixed [/COLOR]
 * MyVideoLinks.eu 
