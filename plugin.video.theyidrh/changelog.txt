@@ -1,3 +1,9 @@
+[B]Version 1.4.4[/B]
+- fixed 
+* scnrls
+- added
+* new fanart
+
 [B]Version 1.4.2[/B]
 - added new site
 - icons clean out
