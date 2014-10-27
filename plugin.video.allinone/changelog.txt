@@ -1,3 +1,6 @@
+[B]Version 5.1.5[/B]
+- added fullxtreme.net in movies good for 1080p
+
 [B]Version 5.1.4[/B]
 - added more sites to search & index search
 
