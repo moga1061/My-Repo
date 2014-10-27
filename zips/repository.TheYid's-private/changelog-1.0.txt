@@ -1,5 +1,2 @@
-[B]Version 1.1[/B]
-- Backup repo
-
 [B]Version 1.0[/B]
 - Initial version

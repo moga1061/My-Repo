@@ -1,8 +1,0 @@
-[B]Version 1.2[/B]
-- fix backup
-
-[B]Version 1.1[/B]
-- backup
-
-[B]Version 1.0[/B]
-- Initial version
