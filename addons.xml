@@ -203,7 +203,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.allinone" version="5.1.1" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.allinone" version="5.1.2" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -308,7 +308,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.theyidrh" version="1.4.5" name="Release [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.theyidrh" version="1.4.6" name="Release [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -334,6 +334,19 @@
 	<extension point="xbmc.addon.metadata">
 		<summary>Install TheYid's repo and Addons</summary>
 		<description>install addons from tcz009 AKA TheYid .......For OFFICIAL Support please Visit www.tvaddons.ag or follow me on Twitter @TheYid009 If you enjoy my addons and would like to donate please goto http://tinyurl.com/TheYidsREPO and thanks for the support</description>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.YourRepo" name="TheYid" version="1.1" provider-name="[COLOR blue][B]TheYid009[/B][/COLOR] [B][I]TheYid's [COLOR blue]Backup[/COLOR] REPO[/B][/I]">
+	<extension point="xbmc.addon.repository" name="[B][I]TheYid's [COLOR blue]Backup[/COLOR] REPO[/B][/I]">
+		<info compressed="false">https://bitbucket.org/tcz009/private-repo/raw/master/addons.xml</info>
+		<checksum>https://bitbucket.org/tcz009/private-repo/raw/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://bitbucket.org/tcz009/private-repo/raw/master/zips</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>[B][I]TheYid's [COLOR blue]Backup[/COLOR] REPO[/B][/I]</summary>
+		<description>[B][I]TheYid's [COLOR blue]Backup[/COLOR] REPO[/B][/I]</description>
 		<platform>all</platform>
 	</extension>
 </addon>
