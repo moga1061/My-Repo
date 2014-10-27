@@ -1,3 +1,6 @@
+[B]Version 5.1.4[/B]
+- added more sites to search & index search
+
 [B]Version 5.1.2[/B]
 - code clean up & fixes
 
