@@ -1,5 +1,9 @@
+[B]Version 1.4.8[/B]
+- added moviedetector in movie search great for 1080p and removed fullxtreme.net to many rar
+
 [B]Version 1.4.7[/B]
 - added fullxtreme.net in movie search great for 1080p
+
 
 [B]Version 1.4.6[/B]
 - fixes 
