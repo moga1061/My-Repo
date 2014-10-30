@@ -861,7 +861,6 @@ def HelpMenu():
 
 def RaMenu(): 
         addon.add_directory({'mode': 'GetLinks15', 'url': BASE_URL15 + '/vids.txt'}, {'title':  '[COLOR deeppink][B]***Rave player Specials*** [/COLOR] (Pirate Radio History videos)[/B]'}, img = 'https://blog52.files.wordpress.com/2008/04/lpfm.jpg', fanart = 'http://non-fiction.eu/wp-content/uploads/2013/04/pirate_radio_2.jpg')
-        addon.add_directory({'mode': 'GetLinks15', 'url': BASE_URL15 + '/radioshows.txt'}, {'title':  '[COLOR gold][B]Oldskool Radio Specials [/COLOR] (The Lost Tapes)[/B]'}, img = 'http://s12.postimg.org/3szbuobot/icon.png', fanart = 'http://4.bp.blogspot.com/_8V97VYqI3Po/S7Md-Sd5OcI/AAAAAAAABGk/haepgezjFqw/s1600/24897_410278471302_133985331302_5619646_2569052_n.jpg')
         addon.add_directory({'mode': 'ArMenu'}, {'title':  '[COLOR thistle][B]The Pirate Archive [/COLOR](All Genres, 1988 to present day)[/B]'}, img = 'https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-ash2/t1.0-9/528664_327210837349374_53918821_n.jpg', fanart = 'http://oi60.tinypic.com/30a8c3n.jpg')
         addon.add_directory({'mode': 'GetLinks', 'url': BASE_URL + '/'}, {'title':  '[COLOR green][B]One In The Jungle [/COLOR](BBC Radio 1)[/B]'}, img = 'http://images-mix.netdna-ssl.com/w/318/h/318/q/90/upload/images/extaudio/6d90c82e-aa53-4d69-85a7-bf3504baa5ae.png', fanart = 'http://4.bp.blogspot.com/-ByJompomPtM/Tzb9-SOCseI/AAAAAAAAAMU/-Zc6FiSMM18/s1600/photo.jpg')
         addon.add_directory({'mode': 'GetLinks9a', 'url': BASE_URL9 + '/'}, {'title':  '[COLOR green][B]mikus Musik [/COLOR](All Genres)[/B]'}, img = 'http://3.bp.blogspot.com/-iDTTgsZBiBA/TwHRQBfrEKI/AAAAAAAAATs/8lTy5Va4_is/s1600/MIKUS.gif', fanart = 'http://s23.postimg.org/4sn8qcp8b/fanart.jpg')
@@ -870,6 +869,7 @@ def RaMenu():
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 def ArMenu(): 
+        addon.add_directory({'mode': 'GetLinks15', 'url': BASE_URL15 + '/radioshows.txt'}, {'title':  '[COLOR gold][B]Oldskool Radio Specials [/COLOR] (The Lost Tapes)[/B]'}, img = 'http://s12.postimg.org/3szbuobot/icon.png', fanart = 'http://4.bp.blogspot.com/_8V97VYqI3Po/S7Md-Sd5OcI/AAAAAAAABGk/haepgezjFqw/s1600/24897_410278471302_133985331302_5619646_2569052_n.jpg')
         addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + 'girls-fm-london/'}, {'title':  '[COLOR green][B]Girls FM - London [/COLOR] (oldskool dj sets)[/B]'}, img = 'http://www.subulahanews.com/wp-content/uploads/2013/09/fm-logo-red.png', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
         #addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + '/premier-fm-essex/'}, {'title':  '[COLOR green][B]Premier FM - essex [/COLOR] (oldskool dj sets)[/B]'}, img = 'http://www.thepiratearchive.net/wordpress/wp-content/uploads/2014/02/StationLogo-300x42.jpg', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
         #addon.add_directory({'mode': 'GetLinks31', 'url': BASE_URL31 + 'kool-fm-birmingham/'}, {'title':  '[COLOR green][B]Kool FM - birmingham (A)[/COLOR] (oldskool dj sets)[/B]'}, img = 'http://koolfm.org.uk/koolfmlogo.gif', fanart = 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
@@ -898,6 +898,24 @@ def ArMenu():
         xbmcplugin.setContent(addon_handle, 'audio')
         url = 'https://archive.org/download/repoman008_gmail_Pink/kool.m3u'
         li = xbmcgui.ListItem('[COLOR green][B]Kool FM - birmingham (A) [/COLOR] (oldskool dj sets)[/B]', iconImage='http://koolfm.org.uk/assets/images/koolfm.png', thumbnailImage='http://koolfm.org.uk/assets/images/koolfm.png')
+        li.setProperty('fanart_image', 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        xbmcplugin.setContent(addon_handle, 'audio')
+        url = 'https://archive.org/download/repoman008_gmail_Pink/koollondon.m3u'
+        li = xbmcgui.ListItem('[COLOR green][B]Kool fm london [/COLOR] (oldskool dj sets)[/B]', iconImage='http://s0.hulkshare.com/song_images/original/1/b/a/1ba96478934405ef5a9a2528947804ec.jpg?dd=1388552400', thumbnailImage='http://s0.hulkshare.com/song_images/original/1/b/a/1ba96478934405ef5a9a2528947804ec.jpg?dd=1388552400')
+        li.setProperty('fanart_image', 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        xbmcplugin.setContent(addon_handle, 'audio')
+        url = 'https://archive.org/download/repoman008_gmail_Pink/rush.m3u'
+        li = xbmcgui.ListItem('[COLOR green][B]Weekend Rush [/COLOR] (oldskool dj sets)[/B]', iconImage='http://hackneyhistory.files.wordpress.com/2013/01/piratees.jpg', thumbnailImage='http://hackneyhistory.files.wordpress.com/2013/01/piratees.jpg')
+        li.setProperty('fanart_image', 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+
+        xbmcplugin.setContent(addon_handle, 'audio')
+        url = 'https://archive.org/download/repoman008_gmail_Pink/magic.m3u'
+        li = xbmcgui.ListItem('[COLOR green][B]Pure Magic 90.2 FM [/COLOR] (oldskool dj sets)[/B]', iconImage='https://raw.githubusercontent.com/TheYid/yidpics/master/icons/IMG_5390.JPG', thumbnailImage='https://raw.githubusercontent.com/TheYid/yidpics/master/icons/IMG_5390.JPG')
         li.setProperty('fanart_image', 'http://0.static.wix.com/media/4d8300_9f96d543caf80add07ad8627398e2a29.jpg_1024')
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 

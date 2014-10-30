@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.YourRepo" name="TheYid" version="1.5" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid's REPO 2[/B][/I]">
+<addon id="repository.YourRepo" name="TheYid" version="1.0" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid's REPO 2[/B][/I]">
 	<extension point="xbmc.addon.repository" name="[B][I]TheYid's REPO 2[/B][/I]">
 		<info compressed="false">https://bitbucket.org/tcz009/private-repo/raw/master/addons.xml</info>
 		<checksum>https://bitbucket.org/tcz009/private-repo/raw/master/addons.xml.md5</checksum>
