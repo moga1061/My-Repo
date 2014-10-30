@@ -1,3 +1,6 @@
+[B]Version 5.1.7[/B]
+- fixed myvideolinks.eu tv shows
+
 [B]Version 5.1.6[/B]
 - added moviedetector in movie search great for 1080p and removed fullxtreme.net to many rar
 

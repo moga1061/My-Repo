@@ -1,0 +1,20 @@
+[B]Version 1.0.9[/B]
+- Fixed tv shows
+
+[B]Version 1.0.8[/B]
+- Fixed 
+
+[B]Version 1.0.7[/B]
+- Fixed addon changes to the site
+
+[B]Version 1.0.5b[/B]
+- Fixed
+
+[B]Version 1.0.4b[/B]
+- Fixed
+
+[B]Version 1.0.2b[/B]
+- Fixed
+
+[B]Version 1.0.0[/B]
+- Full release of My Video Links [COLOR gold]eu[/COLOR] plugin

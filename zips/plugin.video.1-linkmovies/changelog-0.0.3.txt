@@ -1,8 +1,0 @@
-[B]Version 0.0.1[/B]
-- Initial version of 1-linkmovies
-
-[B]Version 0.0.2[/B]
-- Initial version of 1-linkmovies
-
-[B]Version 0.0.3[/B]
-- clean up
