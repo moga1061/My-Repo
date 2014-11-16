@@ -18,7 +18,7 @@ BASE_URL4 = 'http://ultra-vid.com/'
 BASE_URL10 = 'http://movies.myvideolinks.eu/'
 BASE_URL10a = 'http://tv.myvideolinks.eu/'
 BASE_URL12 = 'http://www.cartoonhd.is/'
-BASE_URL14 = 'http://www.channelcut.me/'
+BASE_URL14 = 'http://www.clicknwatchonline.com/'
 BASE_URL15 = 'http://primeflicks.me/'
 BASE_URL20 = 'http://world4ufree.com/'
 BASE_URL21 = 'http://movies2k.eu/'
@@ -1350,6 +1350,8 @@ def MovieMenu():   #movies
         addon.add_directory({'mode': 'GetSearchQuery11'},  {'title':  '[COLOR khaki][B]M[/COLOR][COLOR blue]E[/COLOR][COLOR salmon]G[/COLOR][COLOR darkseagreen]A[/COLOR][/B] [COLOR blue][B]E[/B][/COLOR]ntertainment [COLOR blue][B]HUB[/B][/COLOR] : [COLOR green]Search[/COLOR] (movies)'}, img=IconPath + 'mes.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR blue](OCW) [/COLOR]>>'}, img=IconPath + 'ocw.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL14 + '/category/movies/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR darkturquoise](CnW) [/COLOR]>>'}, img=IconPath + 'cnw.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles41', 'section': 'ALL', 'url': BASE_URL41 + '/Movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR chocolate](undergroundflix) [/COLOR]>>'}, img=IconPath + 'uf.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles10', 'section': 'ALL', 'url': BASE_URL10 + '/category/movies/',
@@ -1596,6 +1598,8 @@ def TvMenu():       #tv
         addon.add_directory({'mode': 'GetTitles2a', 'url': BASE_URL30 + '/tv-shows/date'}, {'title':  '[COLOR darkorange][B]Latest Episodes[/B] [/COLOR]: [COLOR greenyellow]Index Search[/COLOR]'}, img=IconPath + 'intvs.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL + '/category/tv-shows/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR blue](OCW) [/COLOR]>>'}, img=IconPath + 'ocw.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL14 + '/category/tv-shows/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes list[/B][/COLOR] [COLOR darkturquoise](CnW) [/COLOR]>>'}, img=IconPath + 'cnw.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles41', 'section': 'ALL', 'url': BASE_URL41 + '/TV-Shows/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR chocolate](undergroundflix) [/COLOR]>>'}, img=IconPath + 'uf.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles1', 'section': 'ALL', 'url': BASE_URL1 + '/',
@@ -1606,8 +1610,6 @@ def TvMenu():       #tv
         addon.add_directory({'mode': 'Hq4Menu'}, {'title':  '[COLOR orange][B]Full Seasons[/B][/COLOR] [COLOR royalblue](TV HQ) [/COLOR]>>'}, img=IconPath + 'tvhq.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'PuttvMenu'}, {'title':  '[COLOR orange][B]Full Seasons[/B][/COLOR] [COLOR teal](Prime Flicks) [/COLOR]>>'}, img=IconPath + 'fm1.png', fanart=FanartPath + 'fanart.png')
         #addon.add_directory({'mode': 'TzmMenu'}, {'title':  '[COLOR orange][B]Full Seasons[/B][/COLOR] [COLOR plum](CartoonHD & flixanity) [/COLOR]>>'}, img=IconPath + 'fl2.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles14', 'section': 'ALL', 'url': BASE_URL14 + '/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes list[/B][/COLOR] [COLOR tomato](ChannelCut) [/COLOR]>>'}, img=IconPath + 'cc.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetSearchQuery12'},  {'title':  '[COLOR khaki][B]M[/COLOR][COLOR blue]E[/COLOR][COLOR salmon]G[/COLOR][COLOR darkseagreen]A[/COLOR][/B] [COLOR blue][B]E[/B][/COLOR]ntertainment [COLOR blue][B]HUB[/B][/COLOR] : [COLOR green]Search[/COLOR] (tv episodes)'}, img=IconPath + 'mes.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -2355,6 +2357,17 @@ def Search11(query):
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry moviedetector is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+    try:
+        url = 'http://clicknwatchonline.com/?s=' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('<h2 class="title"><a href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
+        for url, title, img in match:
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR darkturquoise]...(CnW)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry clicknwatchonline is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ##------------------------------------------------------------- mega tv search-------------------------------------------------------------------------------------------##
 
@@ -2459,6 +2472,17 @@ def Search12(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR powderblue]...(watchfullepisode)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry watchfullepisode is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+    try:
+        url = 'http://clicknwatchonline.com/?s=' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('<h2 class="title"><a href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
+        for url, title, img in match:
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR darkturquoise]...(CnW)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry clicknwatchonline is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ##.replace('/', ' ')## \s*? ##
