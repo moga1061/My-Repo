@@ -1,3 +1,6 @@
+[B]Version 1.4.9[/B]
+- removed OCW from searches
+
 [B]Version 1.4.8[/B]
 - added moviedetector in movie search great for 1080p and removed fullxtreme.net to many rar
 
