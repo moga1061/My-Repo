@@ -5,6 +5,9 @@
 [COLOR blue]and for making your own folders use Super Favourites you can get it from 
 Spoyser REPO or the XBMC REPO[/COLOR]
 
+[B]Version 1.6.4[/B]
+- Kodi Helix 14 ready all thanks go out to Poegloom for the fix 
+
 [B]Version 1.6.2[/B]
 - added
 * Pure Magic 90.2 fm to The Pirate Archive

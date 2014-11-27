@@ -15,7 +15,7 @@ BASE_URL = 'http://oneclickwatch.org/'
 BASE_URL1 = 'http://awesomedl.ru/'
 BASE_URL3 = 'http://viooz.pw/'
 BASE_URL4 = 'http://ultra-vid.com/'
-BASE_URL10 = 'http://movies.myvideolinks.eu/'
+BASE_URL10 = 'http://myvideolinks.xyz/'
 BASE_URL10a = 'http://tv.myvideolinks.eu/'
 BASE_URL12 = 'http://www.cartoonhd.is/'
 BASE_URL14 = 'http://www.clicknwatchonline.com/'
@@ -2270,7 +2270,7 @@ def Search11(query):
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry clicknwatchonline is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
-        url = 'http://movies.myvideolinks.eu/index.php?s=' + query
+        url = 'http://myvideolinks.xyz/index.php?s=' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content

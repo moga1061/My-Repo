@@ -1,3 +1,6 @@
+[B]Version 1.5.0[/B]
+- Kodi Helix 14 ready all thanks go out to Poegloom for the fix 
+
 [B]Version 1.4.9[/B]
 - removed OCW from searches
 
