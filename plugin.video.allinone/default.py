@@ -32,9 +32,10 @@ BASE_URL38 = 'http://www.movierulz.com/'
 BASE_URL39 = 'http://wrestlingrulez.net/'
 BASE_URL40 = 'http://www.uwatchfree.net/'
 BASE_URL40a = 'http://www.uwatchfree.net/genres/'
-BASE_URL41 = 'http://undergroundflix.com/'
+BASE_URL41 = 'http://watchfullepisode.com/'
 BASE_URL42 = 'http://watchwrestling.ch/'
 BASE_URL43 = 'http://www.moviedetector.com/'
+BASE_URL44 = 'http://pullvideos.tv/'
 
 #### PATHS ##########
 AddonPath = addon.get_path()
@@ -351,7 +352,7 @@ def GetTitles14(section, url, startPage= '1', numOfPages= '1'):
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-#----------------------------------------------------------------------------- undergroundflix ---------------------------------------------------------------------------------#
+#----------------------------------------------------------------------------- watchfullepisode ---------------------------------------------------------------------------------#
 
 def GetTitles41(section, url, startPage= '1', numOfPages= '1'): 
     try:
@@ -366,10 +367,32 @@ def GetTitles41(section, url, startPage= '1', numOfPages= '1'):
                 if ( page != start):
                         pageUrl = url + '/page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content                     
-                match = re.compile('<h4><a href="(.+?)" title="(.+?)">.+?</a></h4>', re.DOTALL).findall(html)
-                for movieUrl, name in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img=IconPath + 'uf.png', fanart=FanartPath + 'fanart.png')
+                match = re.compile('<div class="galleryitem" id=".+?">\s*?<a href="(.+?)" rel="bookmark" title=".+?">\s*?<img alt="(.+?)" src="(.+?)" />', re.DOTALL).findall(html)
+                for movieUrl, name, img in match:
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')
                 addon.add_directory({'mode': 'GetTitles41', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')        
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#----------------------------------------------------------------------------- pullvideos ---------------------------------------------------------------------------------#
+
+def GetTitles44(section, url, startPage= '1', numOfPages= '1'): 
+    try:
+        pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + '/page/' + startPage + '/'
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        start = int(startPage)
+        end = start + int(numOfPages)
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + '/page/' + str(page) + '/'
+                        html = net.http_GET(pageUrl).content                     
+                match = re.compile('<h3><li><a href="(.+?)" rel="bookmark">(.+?)</a></li></h3>', re.DOTALL).findall(html)
+                for movieUrl, name in match:
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= 'ptv.png', fanart=FanartPath + 'fanart.png')        
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -1380,8 +1403,6 @@ def MovieMenu():   #movies
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR blue](OCW) [/COLOR]>>'}, img=IconPath + 'ocw.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL14 + '/category/movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR darkturquoise](CnW) [/COLOR]>>'}, img=IconPath + 'cnw.png', fanart=FanartPath + 'fanart.png')
-        #addon.add_directory({'mode': 'GetTitles41', 'section': 'ALL', 'url': BASE_URL41 + '/Movies/',
-        #                     'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR chocolate](undergroundflix) [/COLOR]>>'}, img=IconPath + 'uf.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles10', 'section': 'ALL', 'url': BASE_URL10 + '/category/movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Latest Movies[/B][/COLOR] [COLOR khaki](myvideolinks.eu) [/COLOR]>>'}, img=IconPath + 'mvl1.png', fanart=FanartPath + 'fanart.png')
         #addon.add_directory({'mode': 'GetTitles43', 'section': 'ALL', 'url': BASE_URL43 + '/category/1080p/',
@@ -1389,7 +1410,7 @@ def MovieMenu():   #movies
         addon.add_directory({'mode': 'GetTitles20', 'section': 'ALL', 'url': BASE_URL20 + '/category/hollywood/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Latest Movies[/B][/COLOR][COLOR darkorchid](World4UFree) [/COLOR]>>'}, img=IconPath + 'w4u.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'HqMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR royalblue](TV HQ) [/COLOR]>>'}, img=IconPath + 'tvhq.png', fanart=FanartPath + 'fanart.png')
-        #addon.add_directory({'mode': 'ZmMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR plum](flixanity) [/COLOR]>>'}, img=IconPath + 'fl1.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'ZmMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR plum](flixanity) [/COLOR]>>'}, img=IconPath + 'fl1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'PutMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR teal](Prime Flicks) [/COLOR]>>'}, img=IconPath + 'fm1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'MovMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR lightslategray](ViooZ) [/COLOR]>>'}, img=IconPath + 'vu1.png', fanart=FanartPath + 'fanart.png')
         #addon.add_directory({'mode': 'UvMenu'}, {'title':  '[COLOR deepskyblue][B]Movie Genre[/B][/COLOR] [COLOR floralwhite](Ultra-Vid) [/COLOR]>>'}, img=IconPath + 'uv1.png', fanart=FanartPath + 'fanart.png')
@@ -1497,8 +1518,8 @@ def PutMenu():          # primeflicks
 #------------------------------------------------------------------------- HD zone movies -------------------------------------------------------------------------------------------------#
 
 def RgMenu():  #HD zone
-        addon.add_directory({'mode': 'GetTitles10', 'section': 'ALL', 'url': BASE_URL10 + '/category/movies/yify/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Movies by Yify[/B][/COLOR] [COLOR khaki](myvideolinks.eu) [/COLOR]>>'}, img=IconPath + 'mvl1.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles10', 'section': 'ALL', 'url': BASE_URL10 + '/category/movies/bdrip/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]Movies by bdrip[/B][/COLOR] [COLOR khaki](myvideolinks.eu) [/COLOR]>>'}, img=IconPath + 'mvl1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles10', 'section': 'ALL', 'url': BASE_URL10 + '/category/movies/3-d-movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR cornflowerblue][B]3D Movies[/B][/COLOR] [COLOR khaki](myvideolinks.eu) [/COLOR]>>'}, img=IconPath + 'mvl1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles10', 'section': 'ALL', 'url': BASE_URL10 + '/category/movies/bluray/',
@@ -1628,16 +1649,18 @@ def TvMenu():       #tv
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR blue](OCW) [/COLOR]>>'}, img=IconPath + 'ocw.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles', 'section': 'ALL', 'url': BASE_URL14 + '/category/tv-shows/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR darkorange][B]Latest Episodes list[/B][/COLOR] [COLOR darkturquoise](CnW) [/COLOR]>>'}, img=IconPath + 'cnw.png', fanart=FanartPath + 'fanart.png')
-        #addon.add_directory({'mode': 'GetTitles41', 'section': 'ALL', 'url': BASE_URL41 + '/TV-Shows/',
-        #                     'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR chocolate](undergroundflix) [/COLOR]>>'}, img=IconPath + 'uf.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles41', 'section': 'ALL', 'url': BASE_URL41 + '/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR chocolate](WatchFullEpisode) [/COLOR]>>'}, img=IconPath + 'wfe.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles1', 'section': 'ALL', 'url': BASE_URL1 + '/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR salmon](ADL) [/COLOR]>>'}, img=IconPath + 'adl.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles10a', 'section': 'ALL', 'url': BASE_URL10a + '/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR khaki](MyVideoLinks) [/COLOR]>>'}, img=IconPath + 'mvl1.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles44', 'section': 'ALL', 'url': BASE_URL44 + 'shows-movies-releases/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR goldenrod](HD) [/COLOR][COLOR darkorange][B]Latest Episodes[/B][/COLOR] [COLOR green](pullvideos) [/COLOR]>>'}, img=IconPath + 'ptv.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'TsuMenu'}, {'title':  '[COLOR orange][B]Full Seasons[/B][/COLOR] [COLOR darkorange](shows4u) [/COLOR]>>'}, img=IconPath + 's4u1.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'Hq4Menu'}, {'title':  '[COLOR orange][B]Full Seasons[/B][/COLOR] [COLOR royalblue](TV HQ) [/COLOR]>>'}, img=IconPath + 'tvhq.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'PuttvMenu'}, {'title':  '[COLOR orange][B]Full Seasons[/B][/COLOR] [COLOR teal](Prime Flicks) [/COLOR]>>'}, img=IconPath + 'fm1.png', fanart=FanartPath + 'fanart.png')
-        #addon.add_directory({'mode': 'TzmMenu'}, {'title':  '[COLOR orange][B]Full Seasons[/B][/COLOR] [COLOR plum](CartoonHD & flixanity) [/COLOR]>>'}, img=IconPath + 'fl2.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'TzmMenu'}, {'title':  '[COLOR orange][B]Full Seasons[/B][/COLOR] [COLOR plum](CartoonHD) [/COLOR]>>'}, img=IconPath + 'fl2.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetSearchQuery12'},  {'title':  '[COLOR khaki][B]M[/COLOR][COLOR blue]E[/COLOR][COLOR salmon]G[/COLOR][COLOR darkseagreen]A[/COLOR][/B] [COLOR blue][B]E[/B][/COLOR]ntertainment [COLOR blue][B]HUB[/B][/COLOR] : [COLOR green]Search[/COLOR] (tv episodes)'}, img=IconPath + 'mes.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
@@ -1646,16 +1669,16 @@ def TvMenu():       #tv
 def TzmMenu():  #flixanitytv
         addon.add_directory({'mode': 'GetTitles27a', 'section': 'ALL', 'url': BASE_URL12 + '/tv-shows/date',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orange][B]Latest added[/B][/COLOR] >> (cartoonHD)'}, img=IconPath + 'fl2.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles27a', 'section': 'ALL', 'url': BASE_URL30 + '/tv-shows/date',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orange][B]Latest added[/B][/COLOR] >> (flixanity)'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        #addon.add_directory({'mode': 'GetTitles27a', 'section': 'ALL', 'url': BASE_URL30 + '/tv-shows/date',
+                             #'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orange][B]Latest added[/B][/COLOR] >> (flixanity)'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles27a', 'section': 'ALL', 'url': BASE_URL12 + '/tv-shows/imdb_rating',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orange][B]Top IMDB[/B][/COLOR] >> (cartoonHD)'}, img=IconPath + 'fl2.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles27a', 'section': 'ALL', 'url': BASE_URL30 + '/tv-shows/imdb_rating',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orange][B]Top IMDB[/B][/COLOR] >> (flixanity)'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        #addon.add_directory({'mode': 'GetTitles27a', 'section': 'ALL', 'url': BASE_URL30 + '/tv-shows/imdb_rating',
+                             #'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orange][B]Top IMDB[/B][/COLOR] >> (flixanity)'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles27a', 'section': 'ALL', 'url': BASE_URL12 + '/tv-shows/abc',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orange][B]ABC[/B][/COLOR] >> (cartoonHD)'}, img=IconPath + 'fl2.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles27a', 'section': 'ALL', 'url': BASE_URL30 + '/tv-shows/abc',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orange][B]ABC[/B][/COLOR] >> (flixanity)'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
+        #addon.add_directory({'mode': 'GetTitles27a', 'section': 'ALL', 'url': BASE_URL30 + '/tv-shows/abc',
+                             #'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR orange][B]ABC[/B][/COLOR] >> (flixanity)'}, img=IconPath + 'fl.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'Tzm1Menu'}, {'title':  '[COLOR orange][B]Tv Show Genre[/B][/COLOR] [COLOR peru](Top IMDB) [/COLOR]>> (cartoonHD)'}, img=IconPath + 'fl2.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'Tzm3Menu'}, {'title':  '[COLOR orange][B]Tv Show Genre[/B][/COLOR] [COLOR peru](ABC) [/COLOR]>> (cartoonHD)'}, img=IconPath + 'fl2.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'Tzm2Menu'}, {'title':  '[COLOR orange][B]Tv Show Genre[/B][/COLOR] [COLOR peru](Newest) [/COLOR]>> (cartoonHD)'}, img=IconPath + 'fl2.png', fanart=FanartPath + 'fanart.png')
@@ -2605,6 +2628,8 @@ elif mode == 'GetTitles42':
 	GetTitles42(section, url, startPage, numOfPages)
 elif mode == 'GetTitles43': 
 	GetTitles43(section, url, startPage, numOfPages)
+elif mode == 'GetTitles44': 
+	GetTitles44(section, url, startPage, numOfPages)
 elif mode == 'Categories':
         Categories(url)
 elif mode == 'Categories1':
