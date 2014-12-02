@@ -1,3 +1,6 @@
+[B]Version 0.6.4[/B]
+- Kodi Helix 14 ready all thanks go out to Poegloom for the fix
+
 [B]Version 0.6.2[/B]
 - test fix
 
