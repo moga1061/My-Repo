@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.video.aob" version="2.2.0" name="Adult's Only [COLOR deeppink][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.aob" version="2.2.1" name="Adult's Only [COLOR deeppink][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
-        <import addon="script.module.t0mm0.common" version="2.1.1"/>
+        <import addon="script.module.TheYid.common" version="0.1.1"/>
         <import addon="script.module.urlresolver"  version="2.0.9"/>
         <import addon="script.module.simplejson" version="3.3.0"/>
     </requires>

@@ -3,6 +3,7 @@ import re, string, sys, os
 import urlresolver
 from TheYid.common.addon import Addon
 from TheYid.common.net import Net
+from htmlentitydefs import name2codepoint as n2cp
 import HTMLParser
 
 addon_id = 'plugin.video.aob'
@@ -10,7 +11,7 @@ plugin = xbmcaddon.Addon(id=addon_id)
 DB = os.path.join(xbmc.translatePath("special://database"), 'aob.db')
 net = Net()
 addon = Addon('plugin.video.aob', sys.argv)
-BASE_URL = ''
+
 BASE_URL1 = 'http://adultbay.org/'
 BASE_URL2 = 'http://www.hornywhores.net/'
 BASE_URL3 = 'http://www.naughtyblog.org/'
@@ -464,25 +465,6 @@ def MainMenu():    #homescreen
 
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR] - [COLOR pink]real-debird & alldebird login[/COLOR]'}, img=IconPath + 'rset.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'help'}, {'title':  '[COLOR red]FOR HELP PLEASE GOTO...[/COLOR] [COLOR blue][B][I]www.xbmchub.com[/B][/I][/COLOR]'}, img=IconPath + 'help2.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR hotpink][B]News & Help  >[/B][/COLOR] >'}, img=IconPath + 'hn.png', fanart=FanartPath + 'fanart.png')
-        dialog = xbmcgui.Dialog()
-        if dialog.yesno("Adult's Only [COLOR deeppink][B]HUB[/B][/COLOR]","                         [COLOR red]XXX[/COLOR] [COLOR pink][B]OVER 18's/ 21's ONLY !!![/B][/COLOR] [COLOR red]XXX[/COLOR]" , "       [COLOR pink]You will need a debrid premium account for this addon[/COLOR]" , '        [COLOR lime][B]ARE YOU OVER 18/21 & HAVE DEBRID ACCOUNT ??[/COLOR][/B]','[COLOR red]NO & EXIT[/COLOR]','[COLOR lime]YES[/COLOR]'):
-                exit
-        else:
-                exit()
-        xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
-#-----------------------help---------------------------------------help-----------------------------help--------------------------help-------------------------------help-------#
-
-def HelpMenu(): 
-        addon.add_directory({'mode': 'Help'}, {'title':  '[COLOR hotpink][B]A[/B][/COLOR]dult [COLOR hotpink][B]HUB[/B][/COLOR] : [COLOR lime]News >[/COLOR] >'}, img=IconPath + 'hn.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'GetTitles37', 'url': BASE_URL35 + '/help.txt'}, {'title':  '[COLOR deeppink]How to videos >[/COLOR] >'}, img=IconPath + 'hn.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings >[/COLOR] >'}, img=IconPath + 'rset.png', fanart=FanartPath + 'fanart.png')  
-        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[B][COLOR gold]If you like this addon[/COLOR][/B]'}, img=IconPath + 'theyid.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[B][COLOR gold]Please install Entertainment HUB from TheYids REPO[/COLOR][/B]'}, img= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/icon.png', fanart= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
-        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[B][COLOR gold]& if you like rave music install Rave player from TheYids REPO[/COLOR][/B]'}, img= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.audio.raveplayer/icon.png', fanart= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.audio.raveplayer/fanart.jpg')
-        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[B][COLOR blue]System/Add-ons/Get Add-ons/TheYids REPO[/COLOR][/B]'}, img= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/repository.TheYid/icon.png', fanart= 'https://raw.githubusercontent.com/TheYid/My-Repo/master/plugin.video.allinone/fanart.jpg')
-        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[B][COLOR aqua]@TheYid009[/COLOR][/B] - [B][COLOR gold]Add me on twitter for all the latest news & updates..[/COLOR][/B]'}, img=IconPath + 'theyid.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ###########################################################################################################
@@ -887,8 +869,5 @@ elif mode == 'GetSearchQuery3':
 	GetSearchQuery3()
 elif mode == 'Search3':
 	Search3(query)
-elif mode == 'Help':
-    import helpbox
-    helpbox.HelpBox()
 
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
