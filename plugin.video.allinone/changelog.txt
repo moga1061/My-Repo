@@ -1,5 +1,12 @@
-[B]Version 6.0.1[/B]
-- streaming section back by popular demand but still not being updated 
+[B]Version 6.0.2[/B]
+- added watchseriesus to tv search
+- added episodes-tv to tv shows
+- removed WatchFullEpisodes
+- fixed V-vid links not working in myvideolinks
+- fixed watchwrestling
+
+[B]Version 6.0.1[/B]watchseriesus
+- streaming section back by popular demand but still not being updated
 
 [B]Version 6.0.0[/B]
 - Added pullVideos, WatchFullEpisodes, cartoonHD, to tv shows. flixanity to movies
