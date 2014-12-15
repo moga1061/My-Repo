@@ -1,4 +1,7 @@
-[B]Version 1.5.1[/B]
+[B]Version 1.5.4[/B]
+- added 2ddl.link to search
+
+[B]Version 1.5.1[/B]2ddl.link
 - Release1click is back
 
 [B]Version 1.5.0[/B]
