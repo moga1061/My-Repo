@@ -1,3 +1,6 @@
+[B]Version 6.0.4[/B]
+- temp fix for myvideolinks changes to the site
+
 [B]Version 6.0.2[/B]
 - added watchseriesus to tv search
 - added episodes-tv to tv shows
