@@ -1,3 +1,6 @@
+[B]Version 6.1.0[/B]
+- kids space section added to main menu (more to come)
+
 [B]Version 6.0.5[/B]
 - re-added WatchFullEpisodes to tv section and search
 - added OnTopRadio to radio section 
