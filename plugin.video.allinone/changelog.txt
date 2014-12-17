@@ -1,5 +1,15 @@
+[B]Version 6.1.1[/B]
+- more stuff added to kids space section 
+- added monster high movies
+- barbie movies 
+- princsee movies
+- family movies 
+
 [B]Version 6.1.0[/B]
 - kids space section added to main menu (more to come)
+- latest kids movies
+- disney movies
+- disney channel movies
 
 [B]Version 6.0.5[/B]
 - re-added WatchFullEpisodes to tv section and search
