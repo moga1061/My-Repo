@@ -1,3 +1,9 @@
+[B]Version 6.1.2[/B]
+- more stuff added to kids space section 
+- Classic family movies
+- Big movie list
+- some new icons
+
 [B]Version 6.1.1[/B]
 - more stuff added to kids space section 
 - added monster high movies
