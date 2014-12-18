@@ -1,3 +1,6 @@
+[B]Version 6.1.4[/B]
+- updated Entertainment HUB News in News and help
+
 [B]Version 6.1.2[/B]
 - more stuff added to kids space section 
 - Classic family movies
