@@ -926,11 +926,12 @@ def GetTitles47(section, url, startPage= '1', numOfPages= '1'):
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content                       
                 match = re.compile('<a href="(.+?)">(.+?)</a><br>', re.DOTALL).findall(html)
-                for movieUrl, name in match:
+                match1 = re.compile("<li><a href='(.+?)'>Watch (.+?)</a></li>", re.DOTALL).findall(html)
+                for movieUrl, name in match + match1:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.allinone/?mode=Search11&query=%s)' %(name.strip().replace('/', ' '))
         		cm.append(('[COLOR blue][B]E[/B][/COLOR]ntertainment [COLOR green]Search[/COLOR]', runstring))
-                        addon.add_directory({'mode': 'GetLinks15', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= 'https://fbexternal-a.akamaihd.net/safe_image.php?d=AQCv4b7W0RSZ0Mp4&w=484&h=253&url=http%3A%2F%2F3.bp.blogspot.com%2F_zFLpQGuslK8%2FTI-CpJEBmYI%2FAAAAAAAAACo%2FTn8LPmwvLwc%2Fs1600%2Fe8e1a185-1239-2c1e-07e7-6f83217340af-ontv_fb_TheProudFamily_16.jpg&cfs=1', fanart= 'http://hatterkep.eu/wallpapers/16/img-4606.jpg')     
+                        addon.add_directory({'mode': 'GetLinks15', 'section': section, 'url': movieUrl}, {'title':  name.strip().replace('Full Movie ', '').replace('Online For', '').replace('Online', '').replace('Free...', '').replace('f...', '')}, contextmenu_items= cm, img= 'https://fbexternal-a.akamaihd.net/safe_image.php?d=AQCv4b7W0RSZ0Mp4&w=484&h=253&url=http%3A%2F%2F3.bp.blogspot.com%2F_zFLpQGuslK8%2FTI-CpJEBmYI%2FAAAAAAAAACo%2FTn8LPmwvLwc%2Fs1600%2Fe8e1a185-1239-2c1e-07e7-6f83217340af-ontv_fb_TheProudFamily_16.jpg&cfs=1', fanart= 'http://hatterkep.eu/wallpapers/16/img-4606.jpg')     
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -1647,16 +1648,16 @@ def RadioMenu():   #radio
 #----------------------------kids------------------------------kids----------------------kids---------------------------kids------------------------------kids--------#
 
 def KidsMenu():   #kids
+        addon.add_directory({'mode': 'GetTitles10b', 'section': 'ALL', 'url': BASE_URL10 + '/tag/animation/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest Animation Movies[/B][/COLOR] [COLOR khaki](myvideolinks) [/COLOR]>>'}, img=IconPath + 'mvl.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
         addon.add_directory({'mode': 'GetTitles4c', 'section': 'ALL', 'url': BASE_URL4 + 'category/family',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest family Movies[/B][/COLOR] [COLOR red](onlinefreecinema) [/COLOR] >>'}, img=IconPath + '3om.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
         addon.add_directory({'mode': 'GetTitles38', 'section': 'ALL', 'url': BASE_URL38 + '/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR deepskyblue][B]Latest kids Movies[/B][/COLOR] [COLOR red](kidsmovies) [/COLOR]>>'}, img=IconPath + 'km.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
-        addon.add_directory({'mode': 'GetTitles47a', 'section': 'ALL', 'url': BASE_URL47 + '/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR tan][B]Classic family Movies[/B][/COLOR] [COLOR lime](watchkidsmoviesonline) [/COLOR] >>'}, img= 'http://womenpla.net/wp-content/uploads/2013/12/Movies_Image.jpg', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR deepskyblue][B]Latest kids Movies[/B][/COLOR] [COLOR rosybrown](kidsmovies) [/COLOR]>>'}, img=IconPath + 'km.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
         addon.add_directory({'mode': 'GetTitles38c', 'section': 'ALL', 'url': BASE_URL38 + 'list-of-disney-movies',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR deepskyblue][B]Disney Movies[/B][/COLOR] [COLOR red](kidsmovies) [/COLOR]>>'}, img=IconPath + 'km1.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR deepskyblue][B]Disney Movies[/B][/COLOR] [COLOR rosybrown](kidsmovies) [/COLOR]>>'}, img=IconPath + 'km1.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
         addon.add_directory({'mode': 'GetTitles38c', 'section': 'ALL', 'url': BASE_URL38 + '/list-of-disney-channel-movies',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR deepskyblue][B]Disney Channel Movies[/B][/COLOR] [COLOR red](kidsmovies) [/COLOR]>>'}, img=IconPath + 'km2.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR deepskyblue][B]Disney Channel Movies[/B][/COLOR] [COLOR rosybrown](kidsmovies) [/COLOR]>>'}, img=IconPath + 'km2.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
         addon.add_directory({'mode': 'GetTitles46', 'section': 'ALL', 'url': BASE_URL46 + '/list-of-all-monster-high-movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR mediumorchid][B]Monster High Movies[/B][/COLOR] [COLOR cyan](monsterhighonline) [/COLOR]>>'}, img= 'http://www.monsterhighonline.net/wp-content/uploads/2013/11/Monster-High-wallpaperhd.es_-800x600-300x189.jpg', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
         addon.add_directory({'mode': 'GetTitles43', 'section': 'ALL', 'url': BASE_URL43 + '/barbie-movies/list-of-all-barbie-movies.html',
@@ -1665,8 +1666,13 @@ def KidsMenu():   #kids
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR pink][B]Princess Movies[/B][/COLOR] [COLOR linen](princessmovies) [/COLOR]>>'}, img= 'http://4.bp.blogspot.com/-cBJIB9ar888/U9VN0mOHDVI/AAAAAAAACQc/NdxAU2XbgVE/s1600/disneyprincess.jpg', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
         addon.add_directory({'mode': 'GetTitles47', 'section': 'ALL', 'url': BASE_URL47 + '/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR tan][B]Big Movies List[/B][/COLOR] [COLOR lime](watchkidsmoviesonline) [/COLOR] >>'}, img= 'https://fbexternal-a.akamaihd.net/safe_image.php?d=AQCv4b7W0RSZ0Mp4&w=484&h=253&url=http%3A%2F%2F3.bp.blogspot.com%2F_zFLpQGuslK8%2FTI-CpJEBmYI%2FAAAAAAAAACo%2FTn8LPmwvLwc%2Fs1600%2Fe8e1a185-1239-2c1e-07e7-6f83217340af-ontv_fb_TheProudFamily_16.jpg&cfs=1', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
-        addon.add_directory({'mode': 'GetTitles10b', 'section': 'ALL', 'url': BASE_URL10 + '/tag/animation/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest Animation Movies[/B][/COLOR] [COLOR khaki](myvideolinks) [/COLOR]>>'}, img=IconPath + 'mvl.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+        addon.add_directory({'mode': 'GetTitles47a', 'section': 'ALL', 'url': BASE_URL47 + '/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR tan][B]Classic family Movies[/B][/COLOR] [COLOR lime](watchkidsmoviesonline) [/COLOR] >>'}, img= 'http://womenpla.net/wp-content/uploads/2013/12/Movies_Image.jpg', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+        addon.add_directory({'mode': 'GetTitles47a', 'section': 'ALL', 'url': BASE_URL47 + '/search?updated-max=2014-07-31T06:48:00-07:00&max-results=5000',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR tan][B]More Classic family Movies[/B][/COLOR] [COLOR lime](watchkidsmoviesonline) [/COLOR] >>'}, img= 'http://i1.examiner.co.uk/whats-on/family-kids-news/article7337092.ece/alternates/s615/80s-family.jpg', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+        addon.add_directory({'mode': 'GetTitles47', 'section': 'ALL', 'url': BASE_URL47 + '/search?updated-max=2014-07-31T06:48:00-07:00&max-results=5000',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR tan][B]Even More Classic family Movies[/B][/COLOR] [COLOR lime](watchkidsmoviesonline) [/COLOR] >>'}, img= 'http://cdn.startsatsixty.com.au/wp-content/uploads/2013/11/Movies-for-the-Grandkids.jpg', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+        addon.add_directory({'mode': 'GetSearchQuery14'},  {'title':  '[COLOR tan][B]Classic Movie[/B][/COLOR] : [COLOR green]Search[/COLOR]'}, img=IconPath + 'searches.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #----------------------------sport------------------------------sport----------------------sport---------------------------sport------------------------------sport--------#
@@ -2609,6 +2615,31 @@ def Search9(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title}, img= img, fanart=FanartPath + 'fanart.png')
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+
+##----------------------------------------------------------- claccic movie search ------------------------------------------------------------------------------------------##
+
+def GetSearchQuery14():
+	last_search = addon.load_data('search')
+	if not last_search: last_search = ''
+	keyboard = xbmc.Keyboard()
+        keyboard.setHeading('[COLOR green]Search [/COLOR]')
+	keyboard.setDefault(last_search)
+	keyboard.doModal()
+	if (keyboard.isConfirmed()):
+                query = keyboard.getText()
+                addon.save_data('search',query)
+                Search14(query)
+	else:
+                return
+def Search14(query):
+        url = 'http://watchkidsmoviesonline.blogspot.co.uk/search?q='+query 
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile("<h3>\s*?<a href='(.+?)' rel='bookmark' title='.+?'>Watch (.+?) Full Movie Online For Free Without Download</a>", re.DOTALL).findall(html)
+        for url, title in match:
+                addon.add_directory({'mode': 'GetLinks15', 'url': url}, {'title':  title}, img= 'http://media-cache-ak0.pinimg.com/236x/6c/48/09/6c4809592ef55c4d631c5b8aa4dd3ce7.jpg', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/minions-despicable-me-kids-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
+	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 ##------------------------------------------------------------- mega movie search-------------------------------------------------------------------------------------------##
 
 def GetSearchQuery11():
@@ -3012,6 +3043,10 @@ elif mode == 'GetSearchQuery12':
 	GetSearchQuery12()
 elif mode == 'Search12':
 	Search12(query)
+elif mode == 'GetSearchQuery14':
+	GetSearchQuery14()
+elif mode == 'Search14':
+	Search14(query)
 elif mode == 'PlayVideo':
 	PlayVideo(url, listitem)
 elif mode == 'PlayVideo1':
