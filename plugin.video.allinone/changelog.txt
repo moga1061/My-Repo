@@ -1,3 +1,7 @@
+[B]Version 6.1.5[/B]
+- code clean up
+- added myvideolinks latest animaion movies to kids space
+
 [B]Version 6.1.4[/B]
 - updated Entertainment HUB News in News and help
 
