@@ -1,0 +1,49 @@
+[B]Version 2.0.6[/B]
+- fixed for changes to the site
+
+[B]Version 2.0.5[/B]
+- Temp fix for changes to the site
+
+[B]Version 2.0.4[/B]
+- fixed movies search
+
+[B]Version 2.0.2[/B]
+- fixed movies by genre now they all work
+- new description in addon information
+
+[B]Version 2.0.1[/B]
+- name change from eu to xyz 
+
+[B]Version 2.0.0[/B]
+- some new art work added
+- movies by genre added
+
+[B]Version 1.1.2[/B]
+- fixed tv shows 
+
+[B]Version 1.1.1[/B]
+- Kodi Helix 14 ready all thanks go out to Poegloom for the fix 
+
+[B]Version 1.1.0[/B]
+- Fixed movies
+
+[B]Version 1.0.9[/B]
+- Fixed tv shows
+
+[B]Version 1.0.8[/B]
+- Fixed 
+
+[B]Version 1.0.7[/B]
+- Fixed addon changes to the site
+
+[B]Version 1.0.5b[/B]
+- Fixed
+
+[B]Version 1.0.4b[/B]
+- Fixed
+
+[B]Version 1.0.2b[/B]
+- Fixed
+
+[B]Version 1.0.0[/B]
+- Full release of My Video Links [COLOR gold]eu[/COLOR] plugin

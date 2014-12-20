@@ -1,3 +1,6 @@
+[B]Version 2.0.6[/B]
+- fixed for changes to the site
+
 [B]Version 2.0.5[/B]
 - Temp fix for changes to the site
 
