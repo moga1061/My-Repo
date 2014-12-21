@@ -1,3 +1,6 @@
+[B]Version 1.5.6[/B]
+- New index search
+
 [B]Version 1.5.5[/B]
 - code clean up
 - check in news and help, this addon has been out 1 year and is still going strong 
