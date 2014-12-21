@@ -1,3 +1,6 @@
+[B]Version 1.5.7[/B]
+- small fix
+
 [B]Version 1.5.6[/B]
 - New index search
 

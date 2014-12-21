@@ -652,7 +652,7 @@ def GetTitles32(query):
         html = net.http_GET(pageUrl).content                     
         match = re.compile('<img name="replace-image" rel=".+?" id=".+?" class=".+?" src=".+?" data-src="(.+?)" alt="(.+?)"/>',re.DOTALL).findall(html)
         for img, query in match:
-                addon.add_directory({'mode': 'Search11', 'query': query}, {'title':  query}, img= img, fanart=FanartPath + 'fanart3.png')
+                addon.add_directory({'mode': 'Search10', 'query': query}, {'title':  query}, img= img, fanart=FanartPath + 'fanart3.png')
         setView('tvshows', 'tvshows-view')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
