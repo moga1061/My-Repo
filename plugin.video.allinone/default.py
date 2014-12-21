@@ -42,6 +42,7 @@ BASE_URL46 = 'http://www.monsterhighonline.net/'
 BASE_URL47 = 'http://watchkidsmoviesonline.blogspot.co.uk/'
 BASE_URL48 = 'http://stream.myvideolinks.xyz/'
 
+
 #### PATHS ##########
 AddonPath = addon.get_path()
 IconPath = AddonPath + "/icons/"
@@ -1004,7 +1005,7 @@ def GetLinks15c(section, url):
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
         content = html
-        match = re.compile('"key":".+?","url":"(.+?)"').findall(content)
+        match = re.compile('"url":"(.+?)","seekSchema"').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
                 addon.add_directory({'mode': 'PlayVideo1', 'url': url, 'listitem': listitem}, {'title': 'Load stream'}, img=IconPath + 'play.png', fanart= 'http://hatterkep.eu/wallpapers/16/img-4606.jpg')
@@ -2658,7 +2659,7 @@ def Search9(query):
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
-##----------------------------------------------------------- claccic movie search ------------------------------------------------------------------------------------------##
+##----------------------------------------------------------- classic movie search ------------------------------------------------------------------------------------------##
 
 def GetSearchQuery14():
 	last_search = addon.load_data('search')
@@ -2674,14 +2675,51 @@ def GetSearchQuery14():
 	else:
                 return
 def Search14(query):
-        url = 'http://watchkidsmoviesonline.blogspot.co.uk/search?q='+query 
+    try:
+        url = 'http://disneyfullmoviesonline.blogspot.co.uk/search?q='+query 
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
         match = re.compile("<h3>\s*?<a href='(.+?)' rel='bookmark' title='.+?'>Watch (.+?) Full Movie Online For Free Without Download</a>", re.DOTALL).findall(html)
         for url, title in match:
                 addon.add_directory({'mode': 'GetLinks15', 'url': url}, {'title':  title}, img= 'http://media-cache-ak0.pinimg.com/236x/6c/48/09/6c4809592ef55c4d631c5b8aa4dd3ce7.jpg', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/minions-despicable-me-kids-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
-	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry disneyfullmoviesonline is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+    try:
+        url = 'http://watchdisneymoviesforfree.blogspot.co.uk/search?q=' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile("<h3>\s*?<a href='(.+?)' rel='bookmark' title='.+?'>Watch (.+?) Online For Free Full Movie English Stream</a>", re.DOTALL).findall(html)
+        for url, title in match:
+                addon.add_directory({'mode': 'GetLinks15', 'url': url}, {'title':  title}, img= 'http://media-cache-ak0.pinimg.com/236x/6c/48/09/6c4809592ef55c4d631c5b8aa4dd3ce7.jpg', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/minions-despicable-me-kids-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry watchdisneymoviesforfree is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+    try:
+        url = 'http://disneyfullmovie.blogspot.co.uk/search?q=' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile("<h3>\s*?<a href='(.+?)' rel='bookmark' title='.+?'>Watch (.+?) Full Movie Online Free No Download</a>", re.DOTALL).findall(html)
+        for url, title in match:
+                addon.add_directory({'mode': 'GetLinks15', 'url': url}, {'title':  title}, img= 'http://media-cache-ak0.pinimg.com/236x/6c/48/09/6c4809592ef55c4d631c5b8aa4dd3ce7.jpg', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/minions-despicable-me-kids-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry disneyfullmovie is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+    try:
+        url = 'http://www.kidsmovies.tv/?s=' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('<h2 class="title front-view-title">\s*?<a href="(.+?)" title="(.+?)" rel="bookmark">.+?</a>', re.DOTALL).findall(html)
+        for url, title in match:
+                addon.add_directory({'mode': 'GetTitles38a', 'url': url}, {'title':  title + ' [COLOR blue]...(kidsmovies)[/COLOR]'}, img= 'http://media-cache-ak0.pinimg.com/236x/6c/48/09/6c4809592ef55c4d631c5b8aa4dd3ce7.jpg', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/minions-despicable-me-kids-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry kidsmovies is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 ##------------------------------------------------------------- mega movie search-------------------------------------------------------------------------------------------##
 
 def GetSearchQuery11():
@@ -2725,9 +2763,9 @@ def Search11(query):
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        match = re.compile('<h4><a href="(.+?)" rel="bookmark" title="(.+?)">.+?</a></h4>', re.DOTALL).findall(html)
-        for url, title in match:
-                addon.add_directory({'mode': 'GetLinks7', 'url': url}, {'title':  title + ' [COLOR gold]...(MVL)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
+        match = re.compile('<div class="archive">\s*?<a href="(.+?)" rel="bookmark" title=".+?"> <img src="(.+?)" title="(.+?)" class="alignleft" alt=".+?" /></a>', re.DOTALL).findall(html)
+        for url, img, title in match:
+                addon.add_directory({'mode': 'GetLinks7', 'url': url}, {'title':  title + ' [COLOR gold]...(MVL)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry myvideolinks is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -2752,17 +2790,6 @@ def Search11(query):
                 addon.add_directory({'mode': 'GetLinks10', 'url': movieUrl}, {'title':  title + ' [COLOR firebrick]...(rlssource)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry rlssource is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-    try:
-        url = 'http://www.moviedetector.com/?s=' + query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        match = re.compile('<h2 class="title"><a href="(.+?)" title=".+?">(.+?)</a></h2>', re.DOTALL).findall(html)
-        for movieUrl, title in match:
-                addon.add_directory({'mode': 'GetLinks', 'url': movieUrl}, {'title':  title + ' [COLOR chocolate]...(moviedetector)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
-    except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry moviedetector is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://moviesall4u.com/?s='+query 
@@ -2807,6 +2834,50 @@ def Search11(query):
                 addon.add_directory({'mode': 'GetLinks1', 'url': url}, {'title':  title + ' [COLOR tan]...(playmoviez)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry playmoviez is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+    try:
+        url = 'http://disneyfullmoviesonline.blogspot.co.uk/search?q='+query 
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile("<h3>\s*?<a href='(.+?)' rel='bookmark' title='.+?'>Watch (.+?) Full Movie Online For Free Without Download</a>", re.DOTALL).findall(html)
+        for url, title in match:
+                addon.add_directory({'mode': 'GetLinks15', 'url': url}, {'title':  title + ' [COLOR red]...(watchkidsmoviesonline)[/COLOR]'}, img= 'http://media-cache-ak0.pinimg.com/236x/6c/48/09/6c4809592ef55c4d631c5b8aa4dd3ce7.jpg', fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry watchkidsmoviesonline is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+    try:
+        url = 'http://watchdisneymoviesforfree.blogspot.co.uk/search?q=' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile("<h3>\s*?<a href='(.+?)' rel='bookmark' title='.+?'>Watch (.+?) Online For Free Full Movie English Stream</a>", re.DOTALL).findall(html)
+        for url, title in match:
+                addon.add_directory({'mode': 'GetLinks15', 'url': url}, {'title':  title + ' [COLOR red]...(watchdisneymoviesforfree)[/COLOR]'}, img= 'http://media-cache-ak0.pinimg.com/236x/6c/48/09/6c4809592ef55c4d631c5b8aa4dd3ce7.jpg', fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry watchdisneymoviesforfree is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+    try:
+        url = 'http://disneyfullmovie.blogspot.co.uk/search?q=' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile("<h3>\s*?<a href='(.+?)' rel='bookmark' title='.+?'>Watch (.+?) Full Movie Online Free No Download</a>", re.DOTALL).findall(html)
+        for url, title in match:
+                addon.add_directory({'mode': 'GetLinks15', 'url': url}, {'title':  title + ' [COLOR red]...(disneyfullmovie)[/COLOR]'}, img= 'http://media-cache-ak0.pinimg.com/236x/6c/48/09/6c4809592ef55c4d631c5b8aa4dd3ce7.jpg', fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry disneyfullmovie is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+    try:
+        url = 'http://www.kidsmovies.tv/?s=' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('<h2 class="title front-view-title">\s*?<a href="(.+?)" title="(.+?)" rel="bookmark">.+?</a>', re.DOTALL).findall(html)
+        for url, title in match:
+                addon.add_directory({'mode': 'GetTitles38a', 'url': url}, {'title':  title + ' [COLOR tan]...(kidsmovies)[/COLOR]'}, img= 'http://media-cache-ak0.pinimg.com/236x/6c/48/09/6c4809592ef55c4d631c5b8aa4dd3ce7.jpg', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/minions-despicable-me-kids-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry kidsmovies is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 

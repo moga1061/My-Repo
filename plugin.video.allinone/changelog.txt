@@ -1,3 +1,7 @@
+[B]Version 7.0.5[/B]
+- some fixes 
+- if movie has no links or links are broken please use context menu [COLOR blue][B]E[/B][/COLOR]ntertainment [COLOR green]Search[/COLOR]
+
 [B]Version 7.0.4[/B]
 - fixed myvideovinks
 - added XYZ to movies with Direct Links
