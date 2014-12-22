@@ -1,3 +1,6 @@
+[B]Version 7.0.7[/B]
+- small fixes and seeing if i can make the kids search better
+
 [B]Version 7.0.6[/B]
 - New index search
 
