@@ -1,3 +1,8 @@
+[B]Version 1.5.9[/B]
+- code clean up
+- fixed rlstv
+- added tvshows-hdtv index search
+
 [B]Version 1.5.8[/B]
 - more 1080p tv show links in search
 - added 2ddl to tv shows
