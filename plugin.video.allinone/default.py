@@ -15,8 +15,9 @@ BASE_URL = 'http://oneclickwatch.org/'
 BASE_URL1 = 'http://awesomedl.ru/'
 BASE_URL3 = 'http://viooz.pw/'
 BASE_URL4 = 'http://www.onlinefreecinema.me/'
-BASE_URL10 = 'http://myvideolinks.xyz/'
+#BASE_URL10 = 'http://myvideolinks.xyz/'
 #BASE_URL10 = 'http://movies.myvideolinks.eu/'
+BASE_URL10 = 'http://movies.myvideolinks.xyz/'
 BASE_URL10a = 'http://tv.myvideolinks.eu/'
 BASE_URL12 = 'http://www.cartoonhd.is/'
 BASE_URL14 = 'http://www.clicknwatchonline.com/'
@@ -250,7 +251,7 @@ def GetTitles10b(section, url, startPage= '1', numOfPages= '1'): # Get Movie Tit
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content                      
-                match = re.compile('<div class="archive">\s*?<a href="(.+?)" rel="bookmark" title=".+?"> <img src="(.+?)" title="(.+?)" class="alignleft" alt=".+?" /></a>', re.DOTALL).findall(html)
+                match = re.compile('archive.+?href="(.+?)" rel="bookmark" title=".+?"> <img src="(.+?)" title="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, img, name in match:
                         addon.add_directory({'mode': 'GetLinks7', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')      
                 addon.add_directory({'mode': 'GetTitles10b', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
@@ -273,7 +274,7 @@ def GetTitles10a(section, url, startPage= '1', numOfPages= '1'):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content                        
-                match = re.compile('<div class="thumb">\s*?<a href="(.+?)" rel="bookmark" title=".+?"> <img src="(.+?)" title="(.+?)" alt=".+?"/></a>', re.DOTALL).findall(html)
+                match = re.compile('<div class=".+?">\s*?<a href="(.+?)" rel="bookmark" title=".+?"> <img src="(.+?)" title="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, img, name in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.allinone/?mode=Search11&query=%s)' %(name.strip())
@@ -1168,7 +1169,7 @@ def GetTitles48a(url):
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
         content = html
-        match = re.compile('<embed type="video/divx" src="(.+?)" pluginspage=".+?"  autoplay=".+?" bufferingMode=".+?" allowContextMenu=".+?"  height=".+?" width=".+?"  /></EMBED></object></p>').findall(content)
+        match = re.compile('<source src="(.+?)" type=".+?">').findall(content)
         listitem = GetMediaInfo(content)
         for url in match:
                 addon.add_directory({'mode': 'PlayVideo1', 'url': url, 'listitem': listitem}, {'title':  'Load Stream'}, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
@@ -1719,33 +1720,33 @@ def RadioMenu():   #radio
 
 def KidsMenu():   #kids
         addon.add_directory({'mode': 'GetTitles10b', 'section': 'ALL', 'url': BASE_URL10 + '/tag/animation/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest Animation Movies[/B][/COLOR] [COLOR khaki](myvideolinks) [/COLOR]>>'}, img=IconPath + 'mvl.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest Animation Movies[/B][/COLOR] [COLOR khaki](myvideolinks) [/COLOR]>>'}, img=IconPath + 'mvl.png', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/the-book-of-life-2014-movie-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
         addon.add_directory({'mode': 'GetTitles4c', 'section': 'ALL', 'url': BASE_URL4 + 'category/family',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest family Movies[/B][/COLOR] [COLOR red](onlinefreecinema) [/COLOR] >>'}, img=IconPath + '3om.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest family Movies[/B][/COLOR] [COLOR red](onlinefreecinema) [/COLOR] >>'}, img=IconPath + '3om.png', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/the-book-of-life-2014-movie-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
         addon.add_directory({'mode': 'GetTitles38', 'section': 'ALL', 'url': BASE_URL38 + '/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR deepskyblue][B]Latest kids Movies[/B][/COLOR] [COLOR rosybrown](kidsmovies) [/COLOR]>>'}, img=IconPath + 'km.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR deepskyblue][B]Latest kids Movies[/B][/COLOR] [COLOR rosybrown](kidsmovies) [/COLOR]>>'}, img=IconPath + 'km.png', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/the-book-of-life-2014-movie-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
         addon.add_directory({'mode': 'GetTitles38c', 'section': 'ALL', 'url': BASE_URL38 + 'list-of-disney-movies',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR deepskyblue][B]Disney Movies[/B][/COLOR] [COLOR rosybrown](kidsmovies) [/COLOR]>>'}, img=IconPath + 'km1.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR deepskyblue][B]Disney Movies[/B][/COLOR] [COLOR rosybrown](kidsmovies) [/COLOR]>>'}, img=IconPath + 'km1.png', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/the-book-of-life-2014-movie-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
         addon.add_directory({'mode': 'GetTitles38c', 'section': 'ALL', 'url': BASE_URL38 + '/list-of-disney-channel-movies',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR deepskyblue][B]Disney Channel Movies[/B][/COLOR] [COLOR rosybrown](kidsmovies) [/COLOR]>>'}, img=IconPath + 'km2.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR deepskyblue][B]Disney Channel Movies[/B][/COLOR] [COLOR rosybrown](kidsmovies) [/COLOR]>>'}, img=IconPath + 'km2.png', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/the-book-of-life-2014-movie-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
         addon.add_directory({'mode': 'GetTitles46', 'section': 'ALL', 'url': BASE_URL46 + '/list-of-all-monster-high-movies/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR mediumorchid][B]Monster High Movies[/B][/COLOR] [COLOR cyan](monsterhighonline) [/COLOR]>>'}, img= 'http://www.monsterhighonline.net/wp-content/uploads/2013/11/Monster-High-wallpaperhd.es_-800x600-300x189.jpg', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR mediumorchid][B]Monster High Movies[/B][/COLOR] [COLOR cyan](monsterhighonline) [/COLOR]>>'}, img= 'http://www.monsterhighonline.net/wp-content/uploads/2013/11/Monster-High-wallpaperhd.es_-800x600-300x189.jpg', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/the-book-of-life-2014-movie-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
         addon.add_directory({'mode': 'GetTitles43', 'section': 'ALL', 'url': BASE_URL43 + '/barbie-movies/list-of-all-barbie-movies.html',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR pink][B]Barbie Movies[/B][/COLOR] [COLOR linen](princessmovies) [/COLOR]>>'}, img= 'http://cs410331.vk.me/v410331994/7c07/6zxFZQwo2j0.jpg', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR pink][B]Barbie Movies[/B][/COLOR] [COLOR linen](princessmovies) [/COLOR]>>'}, img= 'http://cs410331.vk.me/v410331994/7c07/6zxFZQwo2j0.jpg', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/the-book-of-life-2014-movie-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
         addon.add_directory({'mode': 'GetTitles43', 'section': 'ALL', 'url': BASE_URL43 + '/disney-princess/list-of-all-disney-princess-movies.html',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR pink][B]Princess Movies[/B][/COLOR] [COLOR linen](princessmovies) [/COLOR]>>'}, img= 'http://4.bp.blogspot.com/-cBJIB9ar888/U9VN0mOHDVI/AAAAAAAACQc/NdxAU2XbgVE/s1600/disneyprincess.jpg', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR pink][B]Princess Movies[/B][/COLOR] [COLOR linen](princessmovies) [/COLOR]>>'}, img= 'http://4.bp.blogspot.com/-cBJIB9ar888/U9VN0mOHDVI/AAAAAAAACQc/NdxAU2XbgVE/s1600/disneyprincess.jpg', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/the-book-of-life-2014-movie-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
         addon.add_directory({'mode': 'GetTitles47', 'section': 'ALL', 'url': BASE_URL47 + '/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR tan][B]Big Movies List[/B][/COLOR] [COLOR lime](watchkidsmoviesonline) [/COLOR] >>'}, img= 'https://fbexternal-a.akamaihd.net/safe_image.php?d=AQCv4b7W0RSZ0Mp4&w=484&h=253&url=http%3A%2F%2F3.bp.blogspot.com%2F_zFLpQGuslK8%2FTI-CpJEBmYI%2FAAAAAAAAACo%2FTn8LPmwvLwc%2Fs1600%2Fe8e1a185-1239-2c1e-07e7-6f83217340af-ontv_fb_TheProudFamily_16.jpg&cfs=1', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR tan][B]Big Movies List[/B][/COLOR] [COLOR lime](watchkidsmoviesonline) [/COLOR] >>'}, img= 'https://fbexternal-a.akamaihd.net/safe_image.php?d=AQCv4b7W0RSZ0Mp4&w=484&h=253&url=http%3A%2F%2F3.bp.blogspot.com%2F_zFLpQGuslK8%2FTI-CpJEBmYI%2FAAAAAAAAACo%2FTn8LPmwvLwc%2Fs1600%2Fe8e1a185-1239-2c1e-07e7-6f83217340af-ontv_fb_TheProudFamily_16.jpg&cfs=1', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/the-book-of-life-2014-movie-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
         addon.add_directory({'mode': 'GetTitles47a', 'section': 'ALL', 'url': BASE_URL47 + '/',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR tan][B]Classic family Movies[/B][/COLOR] [COLOR lime](watchkidsmoviesonline) [/COLOR] >>'}, img= 'http://womenpla.net/wp-content/uploads/2013/12/Movies_Image.jpg', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR tan][B]Classic family Movies[/B][/COLOR] [COLOR lime](watchkidsmoviesonline) [/COLOR] >>'}, img= 'http://womenpla.net/wp-content/uploads/2013/12/Movies_Image.jpg', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/the-book-of-life-2014-movie-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
         addon.add_directory({'mode': 'GetTitles47a', 'section': 'ALL', 'url': BASE_URL47 + '/search?updated-max=2014-07-31T06:48:00-07:00&max-results=5000',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR tan][B]More Classic family Movies[/B][/COLOR] [COLOR lime](watchkidsmoviesonline) [/COLOR] >>'}, img= 'http://i1.examiner.co.uk/whats-on/family-kids-news/article7337092.ece/alternates/s615/80s-family.jpg', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR tan][B]More Classic family Movies[/B][/COLOR] [COLOR lime](watchkidsmoviesonline) [/COLOR] >>'}, img= 'http://i1.examiner.co.uk/whats-on/family-kids-news/article7337092.ece/alternates/s615/80s-family.jpg', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/the-book-of-life-2014-movie-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
         addon.add_directory({'mode': 'GetTitles47b', 'section': 'ALL', 'url': BASE_URL47 + '/search?updated-max=2014-07-20T20:42:00-07:00&max-results=500&start=50&by-date=false',
-                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR tan][B]Even More Classic family Movies[/B][/COLOR] [COLOR lime](watchkidsmoviesonline) [/COLOR] >>'}, img= 'http://cdn.startsatsixty.com.au/wp-content/uploads/2013/11/Movies-for-the-Grandkids.jpg', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
-        addon.add_directory({'mode': 'GetSearchQuery14'},  {'title':  '[COLOR tan][B]Classic Movie[/B][/COLOR] : [COLOR green]Search[/COLOR]'}, img=IconPath + 'searches.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
-        addon.add_directory({'mode': 'GetSearchQuery5'},  {'title':  '[COLOR royalblue][B]TV HQ[/B][/COLOR] : (movie) [COLOR green]Search[/COLOR]'}, img=IconPath + 'searches.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
-        addon.add_directory({'mode': 'GetSearchQuery9'},  {'title':  '[COLOR royalblue][B]PrimeFlicks[/B][/COLOR] : (movie) [COLOR green]Search[/COLOR]'}, img=IconPath + 'searches.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
-        addon.add_directory({'mode': 'GetSearchQuery11'},  {'title':  '[COLOR khaki][B]M[/COLOR][COLOR blue]E[/COLOR][COLOR salmon]G[/COLOR][COLOR darkseagreen]A[/COLOR][/B] [COLOR blue][B]E[/B][/COLOR]ntertainment [COLOR blue][B]HUB[/B][/COLOR] : [COLOR green]Search[/COLOR] (movies)'}, img=IconPath + 'mes.png', fanart= 'http://wallpapermine.com/wp-content/uploads/2013/12/christmas-95a.jpg')
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR tan][B]Even More Classic family Movies[/B][/COLOR] [COLOR lime](watchkidsmoviesonline) [/COLOR] >>'}, img= 'http://cdn.startsatsixty.com.au/wp-content/uploads/2013/11/Movies-for-the-Grandkids.jpg', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/the-book-of-life-2014-movie-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
+        addon.add_directory({'mode': 'GetSearchQuery14'},  {'title':  '[COLOR tan][B]Classic Movie[/B][/COLOR] : [COLOR green]Search[/COLOR]'}, img=IconPath + 'searches.png', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/the-book-of-life-2014-movie-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
+        addon.add_directory({'mode': 'GetSearchQuery5'},  {'title':  '[COLOR royalblue][B]TV HQ[/B][/COLOR] : (movie) [COLOR green]Search[/COLOR]'}, img=IconPath + 'searches.png', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/the-book-of-life-2014-movie-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
+        addon.add_directory({'mode': 'GetSearchQuery9'},  {'title':  '[COLOR royalblue][B]PrimeFlicks[/B][/COLOR] : (movie) [COLOR green]Search[/COLOR]'}, img=IconPath + 'searches.png', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/the-book-of-life-2014-movie-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
+        addon.add_directory({'mode': 'GetSearchQuery11'},  {'title':  '[COLOR khaki][B]M[/COLOR][COLOR blue]E[/COLOR][COLOR salmon]G[/COLOR][COLOR darkseagreen]A[/COLOR][/B] [COLOR blue][B]E[/B][/COLOR]ntertainment [COLOR blue][B]HUB[/B][/COLOR] : [COLOR green]Search[/COLOR] (movies)'}, img=IconPath + 'mes.png', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/the-book-of-life-2014-movie-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #----------------------------sport------------------------------sport----------------------sport---------------------------sport------------------------------sport--------#
@@ -2790,11 +2791,11 @@ def Search11(query):
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry clicknwatchonline is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
-        url = 'http://myvideolinks.xyz/?s=' + query
+        url = 'http://movies.myvideolinks.xyz/?s=' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        match = re.compile('<div class="archive">\s*?<a href="(.+?)" rel="bookmark" title=".+?"> <img src="(.+?)" title="(.+?)" class="alignleft" alt=".+?" /></a>', re.DOTALL).findall(html)
+        match = re.compile('<div class="archive">\s*?<a href="(.+?)" rel="bookmark" title=".+?"> <img src="(.+?)" title="(.+?)"', re.DOTALL).findall(html)
         for url, img, title in match:
                 addon.add_directory({'mode': 'GetLinks7', 'url': url}, {'title':  title + ' [COLOR gold]...(MVL)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
     except:
@@ -2926,14 +2927,14 @@ def Search12(query):
         for url, title, img in match:
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR salmon]...(ADL)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
     except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry watchthetapes is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry awesomedl is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://tv.myvideolinks.eu/?s=' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        match = re.compile('<div class="thumb">\s*?<a href="(.+?)" rel="bookmark" title=".+?"> <img src="(.+?)" title="(.+?)" alt=".+?"/></a>', re.DOTALL).findall(html)
+        match = re.compile('<div class=".+?">\s*?<a href="(.+?)" rel="bookmark" title=".+?"> <img src="(.+?)" title="(.+?)"', re.DOTALL).findall(html)
         for url, img, title in match:
                 addon.add_directory({'mode': 'GetLinks7', 'url': url}, {'title':  title + ' [COLOR gold]...(MVL)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
     except:
