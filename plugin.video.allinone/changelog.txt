@@ -1,3 +1,7 @@
+[B]Version 7.0.9[/B]
+- added movie900 to tv and movies site can be slow
+- added moviedetector to movie search and index search great for 1080p 
+
 [B]Version 7.0.8[/B]
 - fixed .xyz
 - fixed myvideolinks
