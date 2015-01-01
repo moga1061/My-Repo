@@ -44,6 +44,7 @@ BASE_URL47 = 'http://watchkidsmoviesonline.blogspot.co.uk/'
 BASE_URL48 = 'http://stream.myvideolinks.xyz/'
 BASE_URL49 = 'http://www.moviefone.com/'
 BASE_URL50 = 'http://movie900.com/'
+BASE_URL51 = 'http://futbik.com/'
 
 
 #### PATHS ##########
@@ -1201,6 +1202,28 @@ def GetTitles50(section, url, startPage= '1', numOfPages= '1'):
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+#------------------------------------------------------------------------------- futbik ------------------------------------------------------------------------------#
+
+def GetTitles51(section, url, startPage= '1', numOfPages= '1'):
+    try:
+        pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + 'page/' + startPage + '/'
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        start = int(startPage)
+        end = start + int(numOfPages)
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + 'page/' + str(page) + '/'
+                        html = net.http_GET(pageUrl).content                       
+                match = re.compile('<li class="post-link">\s*?<a href="(.+?)"><img class="img_mini" src="(.+?)" alt="(.+?)" /> <span class="post-date">(.+?)</span>(.+?)</a>\s*?</li>', re.DOTALL).findall(html)
+                for movieUrl, img, name, date, team in match:
+                        addon.add_directory({'mode': 'GetLinks1', 'section': section, 'url': movieUrl}, {'title':  name.strip().replace('</li>', ' ').replace('</span>', ' ').replace('</a>', ' ').replace('</b>', ' ').replace('<b>', ' ') + ' - ' + date.replace('</li>', ' ').replace('</span>', ' ').replace('</a>', ' ').replace('</b>', ' ').replace('<b>', ' ') + team.replace('</li>', ' ').replace('</span>', ' ').replace('</a>', ' ').replace('</b>', ' ').replace('<b>', ' ')}, img= img, fanart=FanartPath + 'fanart.png')    
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 
 ##################################### index ################################ index ############################################### index ############################################
 
@@ -1780,6 +1803,10 @@ def KidsMenu():   #kids
 def SportMenu():   #sport
         addon.add_directory({'mode': 'GetTitles39a', 'section': 'ALL', 'url': BASE_URL39 + '/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest Wrestling/MMA[/B] [/COLOR]: [COLOR greenyellow]Index Search[/COLOR]  [COLOR blue](release sites)[/COLOR]'}, img=IconPath + 'wma.png', fanart=FanartPath + 'fanart.png')
+
+        addon.add_directory({'mode': 'GetTitles51', 'section': 'ALL', 'url': BASE_URL51 + '/',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR blue][B]Latest Football Highlights[/B][/COLOR]  [COLOR lime](futbik) [/COLOR] >>'}, img=IconPath + 'fb1.png', fanart=FanartPath + 'fanart.png')
+
         addon.add_directory({'mode': 'GetTitles42', 'section': 'ALL', 'url': BASE_URL42 + '/wwe/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest WWE[/B][/COLOR]  [COLOR gold](watchwrestling.ch) [/COLOR] >>'}, img=IconPath + 'ww.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'GetTitles42', 'section': 'ALL', 'url': BASE_URL42 + '/wwenetwork/',
@@ -3166,6 +3193,8 @@ elif mode == 'GetTitles49':
 	GetTitles49(query)
 elif mode == 'GetTitles50': 
 	GetTitles50(section, url, startPage, numOfPages)
+elif mode == 'GetTitles51': 
+	GetTitles51(section, url, startPage, numOfPages)
 elif mode == 'Categories':
         Categories(url)
 elif mode == 'Categories1':
