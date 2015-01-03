@@ -1219,7 +1219,7 @@ def GetTitles51(section, url, startPage= '1', numOfPages= '1'):
                         html = net.http_GET(pageUrl).content                       
                 match = re.compile('<li class="post-link">\s*?<a href="(.+?)"><img class="img_mini" src="(.+?)" alt="(.+?)" /> <span class="post-date">(.+?)</span>(.+?)</a>\s*?</li>', re.DOTALL).findall(html)
                 for movieUrl, img, name, date, team in match:
-                        addon.add_directory({'mode': 'GetLinks1', 'section': section, 'url': movieUrl}, {'title':  name.strip().replace('</li>', ' ').replace('</span>', ' ').replace('</a>', ' ').replace('</b>', ' ').replace('<b>', ' ') + ' - ' + date.replace('</li>', ' ').replace('</span>', ' ').replace('</a>', ' ').replace('</b>', ' ').replace('<b>', ' ') + team.replace('</li>', ' ').replace('</span>', ' ').replace('</a>', ' ').replace('</b>', ' ').replace('<b>', ' ')}, img= img, fanart=FanartPath + 'fanart.png')    
+                        addon.add_directory({'mode': 'GetLinks1b', 'section': section, 'url': movieUrl}, {'title':  name.strip().replace('</li>', ' ').replace('</span>', ' ').replace('</a>', ' ').replace('</b>', ' ').replace('<b>', ' ') + ' - ' + date.replace('</li>', ' ').replace('</span>', ' ').replace('</a>', ' ').replace('</b>', ' ').replace('<b>', ' ') + team.replace('</li>', ' ').replace('</span>', ' ').replace('</a>', ' ').replace('</b>', ' ').replace('<b>', ' ')}, img= img, fanart=FanartPath + 'fanart.png')    
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -1362,6 +1362,33 @@ def GetLinks1a(section, url):
                         host = host.replace('embed.','')
                         host = host.replace('gdata','')
                         addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#------------------------------------------------------------------------------ futbik ---------------------------------------------------------------------------------#
+
+def GetLinks1b(section, url):
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        content = html
+        match = re.compile('src="(.+?)"').findall(content)
+        match1 = re.compile('src="//rutube.ru/play/embed/(.+?)"').findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match1:
+                addon.add_directory({'mode': 'GetLinks1c', 'url': 'http://rutube.ru/play/embed/' + url, 'listitem': listitem}, {'title':  'RuTube'}, img= 'http://3.bp.blogspot.com/-jlcs_aOb66M/T8aXQdhT7LI/AAAAAAAAGCA/cAtoeavbkyI/s1600/Rutube+logo.png', fanart=FanartPath + 'fanart.png')
+        for url in match:
+                host = GetDomain(url)
+                if urlresolver.HostedMediaFile(url= url):
+                        addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  host }, img=IconPath + 'play.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+def GetLinks1c(section, url):                                            
+        html = net.http_GET(url).content
+        listitem = GetMediaInfo(html)
+        content = html
+        match = re.compile('"m3u8": "(.+?)"}').findall(content)
+        listitem = GetMediaInfo(content)
+        for url in match:
+                addon.add_directory({'mode': 'PlayVideo1', 'url': url, 'listitem': listitem}, {'title':  'load stream'}, img= 'http://3.bp.blogspot.com/-jlcs_aOb66M/T8aXQdhT7LI/AAAAAAAAGCA/cAtoeavbkyI/s1600/Rutube+logo.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -2826,17 +2853,6 @@ def GetSearchQuery11():
                 return
 def Search11(query):
     try:
-        url = 'http://oneclickwatch.org/?s=' + query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        match = re.compile('<h2 class="title"><a href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
-        for url, title, img in match:
-                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR blue]...(OCW)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
-    except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry OneClickWatch is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-    try:
         url = 'http://clicknwatchonline.com/?s=' + query
         url = url.replace(' ', '+')
         print url
@@ -2946,6 +2962,17 @@ def Search11(query):
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry movie900 is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+    try:
+        url = 'http://oneclickwatch.org/?s=' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('<h2 class="title"><a href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
+        for url, title, img in match:
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR blue]...(OCW)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry OneClickWatch is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
 ##------------------------------------------------------------- mega tv search-------------------------------------------------------------------------------------------##
@@ -2964,17 +2991,6 @@ def GetSearchQuery12():
 	else:
                 return
 def Search12(query):
-    try:
-        url = 'http://oneclickwatch.org/?s=' + query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        match = re.compile('<h2 class="title"><a href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
-        for url, title, img in match:
-                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR blue]...(OCW)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
-    except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry OneClickWatch is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://clicknwatchonline.com/?s=' + query
         url = url.replace(' ', '+')
@@ -3051,6 +3067,17 @@ def Search12(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR maroon]...(movie900)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry movie900 is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+    try:
+        url = 'http://oneclickwatch.org/?s=' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('<h2 class="title"><a href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
+        for url, title, img in match:
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR blue]...(OCW)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry OneClickWatch is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -3209,6 +3236,10 @@ elif mode == 'GetLinks1':
 	GetLinks1(section, url)
 elif mode == 'GetLinks1a':
 	GetLinks1a(section, url)
+elif mode == 'GetLinks1b':
+	GetLinks1b(section, url)
+elif mode == 'GetLinks1c':
+	GetLinks1c(section, url)
 elif mode == 'GetLinks5':
 	GetLinks5(section, url)
 elif mode == 'GetLinks7':

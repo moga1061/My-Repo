@@ -1,3 +1,7 @@
+[B]Version 7.1.1[/B]
+- Rutube links added to futbik football
+- oneclickwatch moved to bottom of search temp fix
+
 [B]Version 7.1.0[/B]
 - football Goals and Highlights in sport (still working on)
 - 1/1/15 happy new year from TheYids REPO
