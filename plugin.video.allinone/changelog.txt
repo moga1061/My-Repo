@@ -1,3 +1,6 @@
+[B]Version 7.1.2[/B]
+- fixed youtube links in futbik football
+
 [B]Version 7.1.1[/B]
 - Rutube links added to futbik football
 - oneclickwatch moved to bottom of search temp fix
