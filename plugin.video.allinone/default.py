@@ -15,9 +15,9 @@ BASE_URL = 'http://oneclickwatch.org/'
 BASE_URL1 = 'http://awesomedl.ru/'
 BASE_URL3 = 'http://viooz.pw/'
 BASE_URL4 = 'http://www.onlinefreecinema.me/'
-#BASE_URL10 = 'http://myvideolinks.xyz/'
+BASE_URL10 = 'http://myvideolinks.xyz/'
 #BASE_URL10 = 'http://movies.myvideolinks.eu/'
-BASE_URL10 = 'http://movies.myvideolinks.xyz/'
+#BASE_URL10 = 'http://movies.myvideolinks.xyz/'
 BASE_URL10a = 'http://tv.myvideolinks.eu/'
 BASE_URL12 = 'http://www.cartoonhd.is/'
 BASE_URL14 = 'http://www.clicknwatchonline.com/'
@@ -275,7 +275,7 @@ def GetTitles10a(section, url, startPage= '1', numOfPages= '1'):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content                        
-                match = re.compile('<div class="entry">\s*?<a href="(.+?)" rel="bookmark" title=".+?"> <img src="(.+?)" title="(.+?)" alt=".+?"/></a>\s*?<p><strong>.+?</strong>.+?<br/>.+?</p>\s*?</div>\s*?<div class="postmetadata">', re.DOTALL).findall(html)
+                match = re.compile('<div class=".+?">\s*?<a href="(.+?)" rel="bookmark" title=".+?"> <img src="(.+?)" title="(.+?)" alt=".+?"/></a>', re.DOTALL).findall(html)
                 for movieUrl, img, name in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.allinone/?mode=Search11&query=%s)' %(name.strip())
@@ -1374,11 +1374,14 @@ def GetLinks1b(section, url):
         match1 = re.compile('src="//rutube.ru/play/embed/(.+?)"').findall(content)
         match2 = re.compile('src="//www.youtube.com(.+?)"').findall(content)
         match4 = re.compile('src="(.+?)"').findall(content)
+        match5 = re.compile('data-publisher-id="(.+?)" data-video-id="(.+?)"></script>').findall(content)
         listitem = GetMediaInfo(content)
         for url in match1:
                 addon.add_directory({'mode': 'GetLinks1c', 'url': 'http://rutube.ru/play/embed/' + url, 'listitem': listitem}, {'title':  'RuTube'}, img= 'http://3.bp.blogspot.com/-jlcs_aOb66M/T8aXQdhT7LI/AAAAAAAAGCA/cAtoeavbkyI/s1600/Rutube+logo.png', fanart=FanartPath + 'fanart.png')
         for url in match2:
                 addon.add_directory({'mode': 'GetLinks1d', 'url': 'https://www.youtube.com/' + url, 'listitem': listitem}, {'title':  'YouTube'}, img= 'http://www.ontariosdoctors.com/wp-content/uploads/2014/02/youtubelogo.jpg', fanart=FanartPath + 'fanart.png')
+        for url, url1 in match5:
+                addon.add_directory({'mode': 'PlayVideo1', 'url': 'http://cdn.phoenix.intergi.com/' + url + '/videos/' + url1 + '/video-sd.mp4?hosting_id=' + url, 'listitem': listitem}, {'title':  'PlayWire'}, img= 'http://www.thevideoink.com/wp-content/uploads/2014/04/playwire-sponsor-logo-large.png', fanart=FanartPath + 'fanart.png')
         for url in match:
                 host = GetDomain(url)
                 if urlresolver.HostedMediaFile(url= url):
@@ -2884,18 +2887,18 @@ def Search11(query):
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        match = re.compile('<h2 class="title"><a href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
+        match = re.compile('<h2 class="title"><a\s*?href="(.+?)" title=".+?">(.+?)</a></h2><div.+?src="(.+?)"', re.DOTALL).findall(html)
         for url, title, img in match:
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR darkturquoise]...(CnW)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry clicknwatchonline is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
-        url = 'http://movies.myvideolinks.xyz/?s=' + query
+        url = 'http://myvideolinks.xyz/?s=' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        match = re.compile('<div class="archive">\s*?<a href="(.+?)" rel="bookmark" title=".+?"> <img src="(.+?)" title="(.+?)"', re.DOTALL).findall(html)
+        match = re.compile('<div class=".+?">\s*?<a href="(.+?)" rel="bookmark" title=".+?"> <img src="(.+?)" title="(.+?)"', re.DOTALL).findall(html)
         for url, img, title in match:
                 addon.add_directory({'mode': 'GetLinks7', 'url': url}, {'title':  title + ' [COLOR gold]...(MVL)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
     except:
@@ -3024,7 +3027,7 @@ def Search12(query):
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        match = re.compile('<h2 class="title"><a href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
+        match = re.compile('<h2 class="title"><a\s*?href="(.+?)" title=".+?">(.+?)</a></h2><div.+?src="(.+?)"', re.DOTALL).findall(html)
         for url, title, img in match:
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR darkturquoise]...(CnW)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
     except:
