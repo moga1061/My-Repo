@@ -1,3 +1,6 @@
+[B]Version 2.1.0[/B]
+- fixed for changes to the site in tv shows and movies
+
 [B]Version 2.0.9[/B]
 - fixed for changes to the site in movies and tv shows
 - they keep changing the urls

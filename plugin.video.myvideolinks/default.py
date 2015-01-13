@@ -8,10 +8,10 @@ from TheYid.common.net import Net
 addon_id = 'plugin.video.myvideolinks'
 plugin = xbmcaddon.Addon(id=addon_id)
 DB = os.path.join(xbmc.translatePath("special://database"), 'myvideolinks.db')
-BASE_URL = 'http://myvideolinks.xyz/'
+#BASE_URL = 'http://myvideolinks.xyz/'
 BASE_URL1 = 'http://tv.myvideolinks.eu/'
 #BASE_URL = 'http://movies.myvideolinks.eu/'
-#BASE_URL = 'http://movies.myvideolinks.xyz/'
+BASE_URL = 'http://movies.myvideolinks.xyz/'
 net = Net()
 addon = Addon('plugin.video.myvideolinks', sys.argv)
 
@@ -92,8 +92,8 @@ def GetTitles1(section, url, startPage= '1', numOfPages= '1'): # Get tv Titles
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content                      
-                match = re.compile('<div class=".+?">\s*?<a href="(.+?)" rel="bookmark" title=".+?"> <img src="(.+?)" title="(.+?)" alt=".+?"/></a>', re.DOTALL).findall(html)
-                for movieUrl, img, name in match:
+                match = re.compile('rel="bookmark" title=".+?">\s*?<img src="(.+?)"  title="(.+?)" class="alignleft" alt=".+?" /></a>\s*?<h4><a href="(.+?)" rel="bookmark"', re.DOTALL).findall(html)
+                for img, name, movieUrl in match:
                         addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')      
                 addon.add_directory({'mode': 'GetTitles1', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')        

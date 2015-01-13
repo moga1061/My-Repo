@@ -187,7 +187,7 @@
 		</extension>
 	</addon>
 
-<addon id="plugin.video.allinone" version="7.1.4" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="@TheYid009">
+<addon id="plugin.video.allinone" version="7.1.5" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="@TheYid009">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -226,7 +226,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.myvideolinks" version="2.0.9" name="MyVideoLinks" provider-name="@TheYid009">
+<addon id="plugin.video.myvideolinks" version="2.1.0" name="MyVideoLinks" provider-name="@TheYid009">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -280,7 +280,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.theyidrh" version="1.5.9" name="Release [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
+<addon id="plugin.video.theyidrh" version="1.6.0" name="Release [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="[COLOR blue][B]tcz009[/B][/COLOR] [B][I]TheYid REPO[/B][/I]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -292,9 +292,9 @@
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary>Release [B][I][COLOR dodgerblue]HUB[/COLOR][/B][/I]</summary>
-        <description>Stream Tv shows movies and music. Release [B][I][COLOR dodgerblue]HUB[/COLOR][/B][/I] has 16+ scene release sites all in one addon.... rls-center, sceper, scene source, wrzko, ReleaseBB, DDlvalley + many more in this [COLOR lime][B]SUPER ADDON[/B][/COLOR] [COLOR red][B][I]YOU will need a real-debrid or a alldebrid account[/B][/I][/COLOR]</description>
+        <description>Stream Tv shows movies Release [B][I][COLOR dodgerblue]HUB[/COLOR][/B][/I] has 16+ scene release sites all in one addon.... rls-center, sceper, scene source, 2ddl, ReleaseBB, DDlvalley + many more in this [COLOR lime][B]SUPER ADDON[/B][/COLOR] [COLOR red][B][I]YOU will need a real-debrid premium account to get the best hosts links[/B][/I][/COLOR]</description>
         <platform>all</platform>
-        <disclaimer lang="en">[COLOR red][B][I]for more info or help on this addon and TheYid repo please goto XBMCHUB.com[/B][/I][/COLOR]</disclaimer>
+        <disclaimer lang="en">[COLOR red][B][I]for more info or help on this addon and TheYid repo please go to tvaddons.ag[/B][/I][/COLOR]</disclaimer>
     </extension>
 </addon>
 
