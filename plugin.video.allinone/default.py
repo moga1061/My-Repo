@@ -11,7 +11,7 @@ plugin = xbmcaddon.Addon(id=addon_id)
 net = Net()
 addon = Addon('plugin.video.allinone', sys.argv)
 DB = os.path.join(xbmc.translatePath("special://database"), 'allinone.db')
-BASE_URL = 'http://oneclickwatch.org/'
+BASE_URL = 'http://oneclickwatch.ws/'
 BASE_URL1 = 'http://awesomedl.ru/'
 BASE_URL3 = 'http://viooz.pw/'
 BASE_URL4 = 'http://www.onlinefreecinema.me/'
@@ -2843,7 +2843,7 @@ def GetSearchQuery11():
                 return
 def Search11(query):
     try:
-        url = 'http://oneclickwatch.org/?s=' + query
+        url = 'http://oneclickwatch.ws/?s=' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
@@ -2897,17 +2897,17 @@ def Search11(query):
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry rlssource is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-    try:
-        url = 'http://moviesall4u.com/?s='+query 
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        match = re.compile('<h2 class="entry-title"><a href="(.+?)" title=".+?" rel="bookmark">(.+?)</a></h2>', re.DOTALL).findall(html)
-        for url, title in match:
-                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR lime]...(moviesall4u)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
-    except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry moviesall4u is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+    #try:
+    #    url = 'http://moviesall4u.com/?s='+query 
+    #    url = url.replace(' ', '+')
+    #    print url
+    #    html = net.http_GET(url).content
+    #    match = re.compile('<h2 class="entry-title"><a href="(.+?)" title=".+?" rel="bookmark">(.+?)</a></h2>', re.DOTALL).findall(html)
+    #    for url, title in match:
+    #            addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR lime]...(moviesall4u)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
+    #except:
+    #    xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry moviesall4u is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+    #   	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://world4ufree.com/?s='+query 
         url = url.replace(' ', '+')
@@ -2930,28 +2930,28 @@ def Search11(query):
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry moviedetector is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-    try:
-        url = 'http://playmoviez.net/?s='+query 
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        match = re.compile('<div class="thumb">\s*?<a class="clip-link" data-id=".+?" title=".+?" href="(.+?)">\s*?<span class="clip">\s*?<img src="(.+?)" alt="(.+?)" /><span', re.DOTALL).findall(html)
-        for url, img, title in match:
-                addon.add_directory({'mode': 'GetLinks1', 'url': url}, {'title':  title + ' [COLOR tan]...(playmoviez)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
-    except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry playmoviez is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-    try:
-        url = 'http://moviesovie.in/movies.php?moviename_year='+query 
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        match = re.compile('<div class="movie__images">\s*?<a href="(.+?)">\s*?<img alt="(.+?)  torrent, direct links " src="(.+?)" style=".+?">', re.DOTALL).findall(html)
-        for url, title, img in match:
-                addon.add_directory({'mode': 'GetLinks', 'url': 'http://moviesovie.in/' + url}, {'title':  title + ' [COLOR maroon]...(moviesovie)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
-    except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry moviesovie is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+   # try:
+   #     url = 'http://playmoviez.net/?s='+query 
+   #     url = url.replace(' ', '+')
+   #     print url
+   #     html = net.http_GET(url).content
+   #     match = re.compile('<div class="thumb">\s*?<a class="clip-link" data-id=".+?" title=".+?" href="(.+?)">\s*?<span class="clip">\s*?<img src="(.+?)" alt="(.+?)" /><span', re.DOTALL).findall(html)
+   #     for url, img, title in match:
+   #             addon.add_directory({'mode': 'GetLinks1', 'url': url}, {'title':  title + ' [COLOR tan]...(playmoviez)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
+   # except:
+   #     xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry playmoviez is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+   #    	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+   # try:
+   #     url = 'http://moviesovie.in/movies.php?moviename_year='+query 
+   #     url = url.replace(' ', '+')
+   #     print url
+   #     html = net.http_GET(url).content
+   #     match = re.compile('<div class="movie__images">\s*?<a href="(.+?)">\s*?<img alt="(.+?)  torrent, direct links " src="(.+?)" style=".+?">', re.DOTALL).findall(html)
+   #     for url, title, img in match:
+   #             addon.add_directory({'mode': 'GetLinks', 'url': 'http://moviesovie.in/' + url}, {'title':  title + ' [COLOR maroon]...(moviesovie)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
+   # except:
+   #     xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry moviesovie is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+   #    	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://movie900.com/?s='+query 
         url = url.replace(' ', '+')
@@ -2983,7 +2983,7 @@ def GetSearchQuery12():
                 return
 def Search12(query):
     try:
-        url = 'http://oneclickwatch.org/?s=' + query
+        url = 'http://oneclickwatch.ws/?s=' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
