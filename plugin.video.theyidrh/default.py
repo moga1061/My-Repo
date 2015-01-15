@@ -1635,17 +1635,6 @@ def Search11(query):
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry DXTV search is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
-        url = 'http://shawnrebecca.com/?s=' + query
-        url = url.replace(' ', '+')
-        print url
-        html = net.http_GET(url).content
-        match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?', re.DOTALL).findall(html)
-        for movieUrl, title in match:
-                addon.add_directory({'mode': 'GetLinks3', 'url': movieUrl}, {'title':  title + ' [COLOR orange](Fight-BB)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
-    except:
-        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry FIGHT BB search is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-    try:
         url = 'http://uploaded-free-download.biz/?s=' + query
         url = url.replace(' ', '+')
         print url
