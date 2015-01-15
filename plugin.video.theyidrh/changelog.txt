@@ -1,3 +1,8 @@
+[B]Version 1.6.4[/B]
+- search will continue if a site in the list is down
+- fixed 300mbmovies4u
+- added 300mblinks site
+
 [B]Version 1.6.2[/B]
 - small fix
 

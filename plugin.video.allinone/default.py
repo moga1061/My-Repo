@@ -534,8 +534,8 @@ def GetTitles23(section, url, startPage= '1', numOfPages= '1'):
                 if ( page != start):
                         pageUrl = url + 'page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content
-                match = re.compile('<div class="cover"><a href="(.+?)".+?.+?<img src="(.+?)".+?alt="(.+?)"', re.DOTALL).findall(html)
-                for movieUrl, img, name in match:
+                match = re.compile('class="cover"><a\s*?href="(.+?)" title="(.+?)"><img\s*?src="(.+?)" alt=".+?" class=".+?" width=".+?" height=".+?" /></a></div><div', re.DOTALL).findall(html)
+                for movieUrl, name, img in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.allinone/?mode=Search11&query=%s)' %(name.strip())
         		cm.append(('[COLOR blue][B]E[/B][/COLOR]ntertainment [COLOR green]Search[/COLOR]', runstring))
@@ -2679,7 +2679,6 @@ def Search14(query):
                 addon.add_directory({'mode': 'GetLinks15', 'url': url}, {'title':  title + ' [COLOR red]...(disneyfullmoviesonline)[/COLOR]'}, img= 'http://media-cache-ak0.pinimg.com/236x/6c/48/09/6c4809592ef55c4d631c5b8aa4dd3ce7.jpg', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/minions-despicable-me-kids-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry disneyfullmoviesonline is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://watchdisneymoviesforfree.blogspot.co.uk/search?q=' + query
         url = url.replace(' ', '+')
@@ -2690,7 +2689,6 @@ def Search14(query):
                 addon.add_directory({'mode': 'GetLinks15', 'url': url}, {'title':  title + ' [COLOR blue]...(watchdisneymoviesforfree)[/COLOR]'}, img= 'http://media-cache-ak0.pinimg.com/236x/6c/48/09/6c4809592ef55c4d631c5b8aa4dd3ce7.jpg', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/minions-despicable-me-kids-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry watchdisneymoviesforfree is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://disneyfullmovie.blogspot.co.uk/search?q=' + query
         url = url.replace(' ', '+')
@@ -2701,7 +2699,6 @@ def Search14(query):
                 addon.add_directory({'mode': 'GetLinks15', 'url': url}, {'title':  title + ' [COLOR gold]...(disneyfullmovie)[/COLOR]'}, img= 'http://media-cache-ak0.pinimg.com/236x/6c/48/09/6c4809592ef55c4d631c5b8aa4dd3ce7.jpg', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/minions-despicable-me-kids-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry disneyfullmovie is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://primeflicks.me/index.php?menu=search&query='+query 
         url = url.replace(' ', '+')
@@ -2712,7 +2709,6 @@ def Search14(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR lime]...(primeflicks)[/COLOR]'}, img= img, fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/minions-despicable-me-kids-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry primeflicks is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://www.tvhq.info/index.php?menu=search&query='+query
         url = url.replace(' ', '+')
@@ -2723,7 +2719,6 @@ def Search14(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR tan]...(tvhq)[/COLOR]'}, img= img, fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/minions-despicable-me-kids-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry primeflicks is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://www.kidsmovies.tv/?s=' + query
         url = url.replace(' ', '+')
@@ -2762,7 +2757,6 @@ def Search11(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR blue]...(OCW)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry OneClickWatch is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://clicknwatchonline.com/?s=' + query
         url = url.replace(' ', '+')
@@ -2773,7 +2767,6 @@ def Search11(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR darkturquoise]...(CnW)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry clicknwatchonline is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://movies.myvideolinks.eu/?s=' + query
         url = url.replace(' ', '+')
@@ -2784,18 +2777,16 @@ def Search11(query):
                 addon.add_directory({'mode': 'GetLinks7', 'url': url}, {'title':  title + ' [COLOR gold]...(MVL)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry myvideolinks is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://300mbmovies4u.com/?s=' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        match = re.compile('<div class="cover"><a href="(.+?)".+?.+?<img src="(.+?)".+?alt="(.+?)"', re.DOTALL).findall(html)
-        for url, img, title in match:
+        match = re.compile('class="cover"><a\s*?href="(.+?)" title="(.+?)"><img\s*?src="(.+?)" alt=".+?" class=".+?" width=".+?" height=".+?" /></a></div><div', re.DOTALL).findall(html)
+        for url, title, img in match:
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR crimson]...(300mb movies4u)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry 300mbmovies4u is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://rlssource.net/?s=' + query
         url = url.replace(' ', '+')
@@ -2806,7 +2797,6 @@ def Search11(query):
                 addon.add_directory({'mode': 'GetLinks10', 'url': movieUrl}, {'title':  title + ' [COLOR firebrick]...(rlssource)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry rlssource is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://world4ufree.com/?s='+query 
         url = url.replace(' ', '+')
@@ -2817,7 +2807,6 @@ def Search11(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR blue]...(world4ufree)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry world4ufree is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://www.moviedetector.com/?s='+query 
         url = url.replace(' ', '+')
@@ -2828,7 +2817,6 @@ def Search11(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR thistle]...(moviedetector)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry moviedetector is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://movie900.com/?s='+query 
         url = url.replace(' ', '+')
@@ -2839,6 +2827,16 @@ def Search11(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR maroon]...(movie900)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry movie900 is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+    try:
+        url = 'http://izidl.com/?s=' + query 
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('<h2 class="title">\s*?<a href="(.+?)" title="(.+?)" rel="bookmark">.+?</a>').findall(html)
+        for url, title in match:
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR yellow]...(izidl)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry izidl is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
@@ -2869,7 +2867,6 @@ def Search12(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR blue]...(OCW)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry OneClickWatch is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://clicknwatchonline.com/?s=' + query
         url = url.replace(' ', '+')
@@ -2880,7 +2877,6 @@ def Search12(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR darkturquoise]...(CnW)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry clicknwatchonline is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://awesomedl.ru/?s=' + query 
         url = url.replace(' ', '+')
@@ -2891,7 +2887,6 @@ def Search12(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR salmon]...(ADL)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry awesomedl is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://tv.myvideolinks.eu/?s=' + query
         url = url.replace(' ', '+')
@@ -2902,7 +2897,6 @@ def Search12(query):
                 addon.add_directory({'mode': 'GetLinks7', 'url': url}, {'title':  title + ' [COLOR gold]...(MVL)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry myvideolinks is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://rlssource.net/?s=' + query
         url = url.replace(' ', '+')
@@ -2913,7 +2907,6 @@ def Search12(query):
                 addon.add_directory({'mode': 'GetLinks10', 'url': movieUrl}, {'title':  title + ' [COLOR firebrick]...(rlssource)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry rlssource is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://watchfullepisode.com/?s=' + query
         url = url.replace(' ', '+')
@@ -2924,7 +2917,6 @@ def Search12(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR powderblue]...(watchfullepisode)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry watchfullepisode is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://watchseriesus.tv/?s=' + query
         url = url.replace(' ', '+')
@@ -2935,7 +2927,6 @@ def Search12(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR green]...(watchseriesus)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry watchseriesus is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
     try:
         url = 'http://movie900.com/?s='+query 
         url = url.replace(' ', '+')
@@ -2946,6 +2937,26 @@ def Search12(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR maroon]...(movie900)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry movie900 is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+    try:
+        url = 'http://300mbmovies4u.com/?s=' + query
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('class="cover"><a\s*?href="(.+?)" title="(.+?)"><img\s*?src="(.+?)" alt=".+?" class=".+?" width=".+?" height=".+?" /></a></div><div', re.DOTALL).findall(html)
+        for url, title, img in match:
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR crimson]...(300mb movies4u)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry 300mbmovies4u is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+    try:
+        url = 'http://izidl.com/?s=' + query 
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('<h2 class="title">\s*?<a href="(.+?)" title="(.+?)" rel="bookmark">.+?</a>').findall(html)
+        for url, title in match:
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR yellow]...(izidl)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry izidl is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
