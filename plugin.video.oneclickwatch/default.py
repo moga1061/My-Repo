@@ -11,7 +11,7 @@ import HTMLParser
 addon_id = 'plugin.video.oneclickwatch'
 plugin = xbmcaddon.Addon(id=addon_id)
 DB = os.path.join(xbmc.translatePath("special://database"), 'oneclickwatch.db')
-BASE_URL = 'http://oneclickwatch.org/'
+BASE_URL = 'http://oneclickwatch.ws/'
 net = Net()
 addon = Addon('plugin.video.oneclickwatch', sys.argv)
 
@@ -54,7 +54,7 @@ def GetTitles(section, url, startPage= '1', numOfPages= '1'): # Get Movie & tv s
                         response.close()
                 match = re.compile('<h2.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
-                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png') 
+                        addon.add_directory({'mode': 'GetLinks', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img.replace('//', 'http://'), fanart=FanartPath + 'fanart.png') 
                 addon.add_directory({'mode': 'GetTitles', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'next.png', fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site mite be down [/B][/COLOR],[COLOR blue][B]Please report to @theYid009[/B][/COLOR],7000,"")")
@@ -145,7 +145,7 @@ def GetSearchQuery():
 	else:
                 return  
 def Search(query):
-        url = 'http://www.google.com/search?q=site:oneclickwatch.org ' + query
+        url = 'http://www.google.com/search?q=site:oneclickwatch.ws ' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
