@@ -10,8 +10,8 @@ plugin = xbmcaddon.Addon(id=addon_id)
 DB = os.path.join(xbmc.translatePath("special://database"), 'myvideolinks.db')
 #BASE_URL = 'http://myvideolinks.xyz/'
 BASE_URL1 = 'http://tv.myvideolinks.eu/'
-#BASE_URL = 'http://movies.myvideolinks.eu/'
-BASE_URL = 'http://movies.myvideolinks.xyz/'
+BASE_URL = 'http://movies.myvideolinks.eu/'
+#BASE_URL = 'http://movies.myvideolinks.xyz/'
 net = Net()
 addon = Addon('plugin.video.myvideolinks', sys.argv)
 
@@ -297,7 +297,7 @@ def GetSearchQuery9():
 	else:
                 return
 def Search9(query):
-        url = 'http://myvideolinks.xyz/?s=' + query
+        url = 'http://movies.myvideolinks.eu/?s=' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
@@ -328,7 +328,7 @@ def Search(query):
         match = re.compile('<h3 class="r"><a href="(.+?)".+?onmousedown=".+?">(.+?)</a>').findall(html)
         for url, title in match:
                 title = title.replace('<b>...</b>', '').replace('<em>', '').replace('</em>', '')
-                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title})
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title}, img ='newmovies.png', fanart=FanartPath + 'fanart.png')
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 
