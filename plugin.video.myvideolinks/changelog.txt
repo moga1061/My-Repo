@@ -1,3 +1,6 @@
+[B]Version 2.1.4[/B]
+- now with change url in settings
+
 [B]Version 2.1.2[/B]
 - fixed search 
 - changed url

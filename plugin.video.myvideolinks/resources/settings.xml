@@ -1,8 +1,15 @@
 <settings>
-   <category label="URL Settings">
-	 <setting id="custurl" type="text" label="myvideolinks movies Url" default="http://movies.myvideolinks.xyz" visible="true"/>
+	<category label="URL Settings">
+        <setting id="custurl" type="labelenum" label="Domain"
+                 values="http://movies.myvideolinks.eu/|http://movies.myvideolinks.xyz/|http://myvideolinks.xyz/"
+                 default="http://movies.myvideolinks.eu/"/>
+        <setting id="enableDomain" 	type="bool" label="Enable Custom Domain" default="false" visible="true"/>
+        <setting id="customDomain" 	type="text" label="Custom Domain" default="http://movies.myvideolinks.eu/" enable="!eq(-1,false)" />
       </category>
-   <category label="Auto-View">
+      <category label="Resolver Settings">
+		<setting label="Resolver Settings" type="action" action="Addon.OpenSettings(script.module.urlresolver)" enable="System.HasAddon(script.module.urlresolver)"/>
+       </category>
+   <category label="Auto-View  Settings">
    	<setting id="auto-view" type="bool" label="Enable Automatic View" default="true"/>
    	<setting id="tvshows-view" type="number" label="Movie View" default="500" enable="!eq(-2,false)"/>
    	<setting id="default-view" type="number" label="Default View" default="50" enable="!eq(-3,false)"/>

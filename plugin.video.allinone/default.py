@@ -16,7 +16,7 @@ BASE_URL1 = 'http://awesomedl.ru/'
 BASE_URL3 = 'http://viooz.pw/'
 BASE_URL4 = ''
 #BASE_URL10 = 'http://myvideolinks.xyz/'
-BASE_URL10 = 'http://movies.myvideolinks.eu/'
+#BASE_URL10 = 'http://movies.myvideolinks.eu/'
 #BASE_URL10 = 'http://movies.myvideolinks.xyz/'
 BASE_URL10a = 'http://tv.myvideolinks.eu/'
 BASE_URL12 = 'http://www.cartoonhd.is/'
@@ -45,6 +45,10 @@ BASE_URL48 = 'http://stream.myvideolinks.xyz/'
 BASE_URL49 = 'http://www.moviefone.com/'
 BASE_URL50 = 'http://movie900.com/'
 BASE_URL51 = 'http://futbik.com/'
+
+BASE_URL10 = addon.get_setting('custurl')
+if not BASE_URL10.endswith("/"):
+    BASE_URL10 = BASE_URL10 + "/"
 
 
 #### PATHS ##########

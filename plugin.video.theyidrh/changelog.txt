@@ -1,3 +1,9 @@
+[B]Version 1.6.5[/B]
+- scene source url changer in settings
+- added discovery360.net
+- added music
+- added israbox to music
+
 [B]Version 1.6.4[/B]
 - search will continue if a site in the list is down
 - fixed 300mbmovies4u

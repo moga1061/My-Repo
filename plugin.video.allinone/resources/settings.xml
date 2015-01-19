@@ -1,4 +1,9 @@
 <settings>
+	<category label="URL Settings">
+        <setting id="custurl" type="labelenum" label="Domain"
+                 values="http://movies.myvideolinks.eu/|http://movies.myvideolinks.xyz/|http://myvideolinks.xyz/"
+                 default="http://movies.myvideolinks.eu/"/>
+      </category>
 
 	<category label="30000">
 		<setting label="Resolver Settings" type="action" action="Addon.OpenSettings(script.module.urlresolver)" enable="System.HasAddon(script.module.urlresolver)"/>
