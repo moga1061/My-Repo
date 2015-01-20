@@ -3,8 +3,6 @@
         <setting id="custurl" type="labelenum" label="Domain"
                  values="http://scenesource.unblock.cz/|http://www.scenesource.me/|http://www.scnsrc.me/"
                  default="http://www.scnsrc.me/"/>
-        <setting id="enableDomain" 	type="bool" label="Enable Custom Domain" default="false" visible="true"/>
-        <setting id="customDomain" 	type="text" label="Custom Domain" default="http://www.scnsrc.me/" enable="!eq(-1,false)" />
       </category>
       <category label="Resolver Settings">
 		<setting label="Resolver Settings" type="action" action="Addon.OpenSettings(script.module.urlresolver)" enable="System.HasAddon(script.module.urlresolver)"/>

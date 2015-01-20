@@ -1359,7 +1359,6 @@ def Search10(query):
                 addon.add_directory({'mode': 'GetLinks1', 'url': movieUrl}, {'title':  title + ' [COLOR red](Rls-TV)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry RLSTV search is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
-
     try:
         url = 'http://2ddl.link/?s=' + query 
         url = url.replace(' ', '+')
@@ -1380,6 +1379,16 @@ def Search10(query):
                 addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR red]...(izidl)[/COLOR]'}, img= 'https://raw.githubusercontent.com/TheYid/yidpics/8333f2912d71cc7ddd71a7cee9714dfe263ee543/icons/nopic.png', fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry izidl is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
+    try:
+        url = 'http://www.freshwap.me/?do=search&subaction=search&story=' + query 
+        url = url.replace(' ', '+')
+        print url
+        html = net.http_GET(url).content
+        match = re.compile('<div class="information">\s*?<div class=".+?"><a href="(.+?)" >(.+?)</a></div>\s*?<div class=".+?">.+?<a href=".+?">.+?</a>.+?</div>\s*?</div>\s*?<div id=.+?><div style=".+?"><img class="decoded" src="(.+?)"').findall(html)
+        for url, title, img in match:
+                addon.add_directory({'mode': 'GetLinks', 'url': url}, {'title':  title + ' [COLOR red]...(freshwap)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry freshwap is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 

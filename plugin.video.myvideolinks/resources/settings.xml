@@ -3,8 +3,6 @@
         <setting id="custurl" type="labelenum" label="Domain"
                  values="http://movies.myvideolinks.eu/|http://movies.myvideolinks.xyz/|http://myvideolinks.xyz/"
                  default="http://movies.myvideolinks.eu/"/>
-        <setting id="enableDomain" 	type="bool" label="Enable Custom Domain" default="false" visible="true"/>
-        <setting id="customDomain" 	type="text" label="Custom Domain" default="http://movies.myvideolinks.eu/" enable="!eq(-1,false)" />
       </category>
       <category label="Resolver Settings">
 		<setting label="Resolver Settings" type="action" action="Addon.OpenSettings(script.module.urlresolver)" enable="System.HasAddon(script.module.urlresolver)"/>

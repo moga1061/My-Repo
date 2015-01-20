@@ -1,3 +1,6 @@
+[B]Version 2.1.5[/B]
+- small fixes
+
 [B]Version 2.1.4[/B]
 - now with change url in settings
 
