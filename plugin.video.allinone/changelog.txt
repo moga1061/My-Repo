@@ -1,3 +1,8 @@
+[B]Version 7.2.2[/B]
+- small fixes
+- fixed watchwrestling
+- added todays hugefiles links to tv shows
+
 [B]Version 7.2.1[/B]
 - myvideolinks url changer in settings
 
