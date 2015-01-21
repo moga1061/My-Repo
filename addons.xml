@@ -187,7 +187,7 @@
 		</extension>
 	</addon>
 
-<addon id="plugin.video.allinone" version="7.2.2" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="@TheYid009">
+<addon id="plugin.video.allinone" version="7.2.3" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="@TheYid009">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -244,7 +244,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.oneclickwatch" version="0.6.5" name="One Click Watch" provider-name="[COLOR blue][B]@TheYid009[/B][/COLOR]">
+<addon id="plugin.video.oneclickwatch" version="0.6.6" name="One Click Watch" provider-name="[COLOR blue][B]@TheYid009[/B][/COLOR]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>

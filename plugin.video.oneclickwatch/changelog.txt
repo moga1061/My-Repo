@@ -1,3 +1,9 @@
+[B]Version 0.6.6[/B]
+- fixed img no showing up
+
+[B]Version 0.6.5[/B]
+- fixed img no showing up
+
 [B]Version 0.6.4[/B]
 - Kodi Helix 14 ready all thanks go out to Poegloom for the fix
 
