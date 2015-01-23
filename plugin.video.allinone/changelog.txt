@@ -1,3 +1,7 @@
+[B]Version 7.2.5[/B]
+- myvideolinks url changer in settings
+- small fixes
+
 [B]Version 7.2.4[/B]
 - added new url for myvideolinks
 

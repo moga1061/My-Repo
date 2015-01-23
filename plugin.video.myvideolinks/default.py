@@ -8,10 +8,7 @@ from TheYid.common.net import Net
 addon_id = 'plugin.video.myvideolinks'
 plugin = xbmcaddon.Addon(id=addon_id)
 DB = os.path.join(xbmc.translatePath("special://database"), 'myvideolinks.db')
-#BASE_URL = 'http://myvideolinks.xyz/'
 BASE_URL1 = 'http://tv.myvideolinks.eu/'
-#BASE_URL = 'http://movies.myvideolinks.eu/'
-#BASE_URL = 'http://movies.myvideolinks.xyz/'
 net = Net()
 addon = Addon('plugin.video.myvideolinks', sys.argv)
 
@@ -215,7 +212,7 @@ def MainMenu():    #homescreen
         addon.add_directory({'mode': 'GetSearchQuery'},  {'title':  '[COLOR green]Movie Search[/COLOR]  (backup)'}, img=IconPath + 'searchse.png', fanart=FanartPath + 'fanart.png')
 
         addon.add_directory({'mode': 'ResolverSettings'}, {'title':  '[COLOR red]Resolver Settings[/COLOR]'}, img=IconPath + 'resolvere.png', fanart=FanartPath + 'fanart.png')
-        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR pink][B]PLEASE CLICK HERE FOR INFO ON TheYids REPO[/B][/COLOR] >>'}, img=IconPath + 'helps1.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR pink][B]PLEASE CLICK HERE FOR INFO ON TheYids REPO[/B][/COLOR] >>'}, img=IconPath + 'helps3.png', fanart=FanartPath + 'fanart.png')
         addon.add_directory({'mode': 'HelpMenu'}, {'title':  '[COLOR gold][B]FOLLOW ME ON TWITTER [/B][/COLOR] [COLOR aqua][B][I]@TheYid009 [/B][/I][/COLOR] '}, img=IconPath + 'theyid.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 

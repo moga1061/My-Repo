@@ -1,8 +1,14 @@
 <settings>
 	<category label="URL Settings">
-        <setting id="custurl" type="labelenum" label="Domain"
-                 values="http://movies.myvideolinks.eu/|http://movies.myvideolinks.xyz/|http://myvideolinks.xyz/|http://site.myvideolinks.xyz/"
-                 default="http://movies.myvideolinks.eu/"/>
+        <setting id="custurl" 	type="text" label="[B][COLOR red]Set custom Domain[/COLOR] :[/B]" default="http://site.myvideolinks.xyz/" enable="!eq(-1,false)" />
+
+        <setting id="cust7" 	type="text" label=" " default="[COLOR blue]Try these urls in set custom Domain[/COLOR]" />
+        <setting id="cust" 	       type="text" label=" " default="[COLOR blue]http://myvideolinks.eu/[/COLOR]" />
+        <setting id="cust1" 	type="text" label=" " default="[COLOR blue]http://myvideolinks.xyz/[/COLOR]" />
+        <setting id="cust2" 	type="text" label=" " default="[COLOR blue]http://movies.myvideolinks.eu/[/COLOR]" />
+        <setting id="cust3" 	type="text" label=" " default="[COLOR blue]http://movies.myvideolinks.xyz/[/COLOR]" />
+        <setting id="cust4" 	type="text" label=" " default="[COLOR blue]http://site.myvideolinks.xyz/[/COLOR]" />
+        <setting id="cust6" 	type="text" label=" " default="[COLOR blue]or check site for new url or ask @TheYid009 on twitter[/COLOR]" />
       </category>
       <category label="Resolver Settings">
 		<setting label="Resolver Settings" type="action" action="Addon.OpenSettings(script.module.urlresolver)" enable="System.HasAddon(script.module.urlresolver)"/>

@@ -1,3 +1,13 @@
+[B]MVL URL'S [/B]
+http://myvideolinks.eu/
+http://myvideolinks.xyz/
+http://movies.myvideolinks.eu/
+http://movies.myvideolinks.xyz/
+http://site.myvideolinks.xyz/
+
+[B]Version 2.1.8[/B]
+- now with change url in settings
+
 [B]Version 2.1.7[/B]
 - fixed search
 
