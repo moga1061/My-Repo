@@ -1,3 +1,6 @@
+[B]Version 7.2.4[/B]
+- added new url for myvideolinks
+
 [B]Version 7.2.3[/B]
 - small fix to OCW art
 

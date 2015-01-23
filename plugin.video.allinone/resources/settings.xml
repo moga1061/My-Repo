@@ -1,7 +1,7 @@
 <settings>
 	<category label="URL Settings">
         <setting id="custurl" type="labelenum" label="Domain"
-                 values="http://movies.myvideolinks.eu/|http://movies.myvideolinks.xyz/|http://myvideolinks.xyz/"
+                 values="http://movies.myvideolinks.eu/|http://movies.myvideolinks.xyz/|http://myvideolinks.xyz/|http://site.myvideolinks.xyz/"
                  default="http://movies.myvideolinks.eu/"/>
       </category>
 

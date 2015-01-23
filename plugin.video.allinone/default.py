@@ -2836,7 +2836,7 @@ def Search11(query):
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry clicknwatchonline is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
     try:
-        url = 'http://movies.myvideolinks.eu/?s=' + query
+        url = BASE_URL10 + '/?s=' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
