@@ -301,7 +301,7 @@ def GetSearchQuery9():
 	else:
                 return
 def Search9(query):
-        url = 'http://movies.myvideolinks.eu/?s=' + query
+        url = BASE_URL + '/?s=' + query
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
