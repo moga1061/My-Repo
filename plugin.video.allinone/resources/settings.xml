@@ -1,6 +1,6 @@
 <settings>
 	<category label="URL Settings">
-        <setting id="custurl" 	type="text" label="[B][COLOR red]Set custom Domain for MVL[/COLOR] :[/B]" default="http://site.myvideolinks.xyz/" enable="!eq(-1,false)" />
+        <setting id="custurl" 	type="text" label="[B][COLOR red]Set custom Domain for MVL[/COLOR] :[/B]" default="http://movies.myvideolinks.xyz/" enable="!eq(-1,false)" />
 
         <setting id="cust7" 	type="text" label=" " default="[COLOR blue]Try these urls in set custom Domain[/COLOR]" />
         <setting id="cust" 	       type="text" label=" " default="[COLOR blue]http://myvideolinks.eu/[/COLOR]" />
