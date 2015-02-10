@@ -280,21 +280,20 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.sportsmania" name="SportsMania" version="2.2.1" provider-name="SportsMania">
+<addon id="plugin.video.sportsmania" version="2.2.4" name="SportsMania" provider-name="SportsMania">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
 	 <import addon="script.module.t0mm0.common" version="1.1.0"/>
 	 <import addon="script.module.beautifulsoup"/>
     </requires>
-    <extension point="xbmc.python.pluginsource"
-               library="default.py">
+    <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
-    <summary lang="en"></summary>
-    <description lang="en"></description>
-    <platform>all</platform>
-  </extension>
+        <summary lang="en">SportsMania</summary>
+        <description lang="en">SportsMania</description>
+        <platform>all</platform>
+   </extension>
 </addon>
 
 <addon id="plugin.video.theyidrh" version="1.6.7" name="Release [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="@TheYid009">

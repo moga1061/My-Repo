@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
 	<category label="Sports Mania">
 		<setting id="snusername" type="text" label="Sports Mania Username" default="" visible="true"/>

@@ -1,6 +1,4 @@
-[B]Version 2.2.4[/B]
--Release
-
 [B]Version 1.0.0[/B]
+
 -Intial release
 
