@@ -1,8 +1,0 @@
-[B]Version 2.2.1[/B]
-
--Release
-
-[B]Version 1.0.0[/B]
-
--Intial release
-
