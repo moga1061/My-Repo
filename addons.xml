@@ -283,15 +283,15 @@
 <addon id="plugin.video.sportsmania" name="SportsMania" version="2.2.1" provider-name="SportsMania">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
-	<import addon="script.module.t0mm0.common" version="1.1.0"/>
-	<import addon="script.module.beautifulsoup"/>
+	 <import addon="script.module.t0mm0.common" version="1.1.0"/>
+	 <import addon="script.module.beautifulsoup"/>
     </requires>
     <extension point="xbmc.python.pluginsource"
                library="default.py">
         <provides>video</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
-    <summary lang="en">premium streams provided by SportsMania a account is needed</summary>
+    <summary lang="en"></summary>
     <description lang="en"></description>
     <platform>all</platform>
   </extension>
