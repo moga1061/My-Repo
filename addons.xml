@@ -282,7 +282,7 @@
 
 <addon id="plugin.video.sportsmania"
        name="SportsMania"
-       version="2.2.0"
+       version="2.2.1"
        provider-name="SportsMania">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
