@@ -38,10 +38,10 @@ def GetLinks2(url):
         html = net.http_GET(url).content
         listitem = GetMediaInfo(html)
         content = html
-        match = re.compile(' data-air_day="(.+?)">\s*?<div class="left w8-16">\s*?<h3 class="darkgrey headline px14 mb8">\s*?<a class="darkgrey" href=".+?">(.+?)</a>\s*?</h3>\s*?<div class="listen icon">\s*?<a href="(.+?)" class=".+?">.+?</a>').findall(content)
+        match = re.compile('<div class="listen icon">\s*?<a href="(.+?)" class=".+?"').findall(content)
         listitem = GetMediaInfo(content)
-        for name, host, url in match:
-                addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title':  name.strip() + ' [COLOR blue]~[/COLOR] ' + host}, img = 'http://2.bp.blogspot.com/-0enPTd9lXMY/TePPr-IU1xI/AAAAAAAABoo/ZL8QxQSk96w/s400/RINSE.png', fanart = 'http://welikemusic.info/wp-content/uploads/2013/06/amit-dj-krust-rinse-fm-podcast-13-02-2013.jpg')
+        for url in match:
+                addon.add_directory({'mode': 'PlayVideo', 'url': url, 'listitem': listitem}, {'title': url }, img = 'http://2.bp.blogspot.com/-0enPTd9lXMY/TePPr-IU1xI/AAAAAAAABoo/ZL8QxQSk96w/s400/RINSE.png', fanart = 'http://welikemusic.info/wp-content/uploads/2013/06/amit-dj-krust-rinse-fm-podcast-13-02-2013.jpg')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 ##\s*?##
