@@ -1,3 +1,11 @@
+[B]Version 7.2.7[/B]
+- fixed 
+- myvideolinks check settings to change urls
+- oneclickwatch art not showing
+- 300mbmovies4u
+- index searchs 
+- watchwrestling
+
 [B]Version 7.2.6[/B]
 - fixed watch wrestling
 - added watch wrestling search

@@ -1,3 +1,8 @@
+[B]Version 1.6.8[/B]
+- fixed
+- 300mbmovies4u
+- index search
+
 [B]Version 1.6.7[/B]
 - small fixes
 

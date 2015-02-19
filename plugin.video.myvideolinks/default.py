@@ -8,13 +8,16 @@ from TheYid.common.net import Net
 addon_id = 'plugin.video.myvideolinks'
 plugin = xbmcaddon.Addon(id=addon_id)
 DB = os.path.join(xbmc.translatePath("special://database"), 'myvideolinks.db')
-BASE_URL1 = 'http://tv.myvideolinks.eu/'
 net = Net()
 addon = Addon('plugin.video.myvideolinks', sys.argv)
 
 BASE_URL = addon.get_setting('custurl')
 if not BASE_URL.endswith("/"):
     BASE_URL = BASE_URL + "/"
+
+BASE_URL1 = addon.get_setting('custurl1')
+if not BASE_URL1.endswith("/"):
+    BASE_URL1 = BASE_URL + "/"
 
 ###### PATHS ##########
 AddonPath = addon.get_path()

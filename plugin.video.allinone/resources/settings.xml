@@ -1,6 +1,7 @@
 <settings>
 	<category label="URL Settings">
-        <setting id="custurl" 	type="text" label="[B][COLOR red]Set custom Domain for MVL[/COLOR] :[/B]" default="http://movies.myvideolinks.xyz/" enable="!eq(-1,false)" />
+        <setting id="custurl" 	type="text" label="[B][COLOR red]Set custom Domain for MVL movies[/COLOR] :[/B]" default="http://movies.myvideolinks.xyz/" enable="!eq(-1,false)" />
+        <setting id="custurl1" 	type="text" label="[B][COLOR red]Set custom Domain for MVL tv shows[/COLOR] :[/B]" default="http://site.myvideolinks.xyz/" enable="!eq(-1,false)" />
 
         <setting id="cust7" 	type="text" label=" " default="[COLOR blue]Try these urls in set custom Domain[/COLOR]" />
         <setting id="cust" 	       type="text" label=" " default="[COLOR blue]http://myvideolinks.eu/[/COLOR]" />
@@ -8,6 +9,7 @@
         <setting id="cust2" 	type="text" label=" " default="[COLOR blue]http://movies.myvideolinks.eu/[/COLOR]" />
         <setting id="cust3" 	type="text" label=" " default="[COLOR blue]http://movies.myvideolinks.xyz/[/COLOR]" />
         <setting id="cust4" 	type="text" label=" " default="[COLOR blue]http://site.myvideolinks.xyz/[/COLOR]" />
+        <setting id="cust5" 	type="text" label=" " default="[COLOR blue]http://tv.myvideolinks.eu/[/COLOR]" />
         <setting id="cust6" 	type="text" label=" " default="[COLOR blue]or check site for new url or ask @TheYid009 on twitter[/COLOR]" />
       </category>
 
