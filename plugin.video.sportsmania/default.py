@@ -1,5 +1,4 @@
-import xbmc, xbmcgui, xbmcaddon, xbmcplugin, urllib, re, string, os, time, json,urllib2,cookielib,md5,random
-from t0mm0.common.net import Net as net
+import xbmc, xbmcgui, xbmcaddon, xbmcplugin, urllib, re, string, os, time, json, urllib2, cookielib, md5, mknet
 
 addon_id 	= 'plugin.video.sportsmania'
 art 		= xbmc.translatePath(os.path.join('special://home/addons/' + addon_id + '/resources/art/'))
@@ -10,15 +9,15 @@ datapath 	= xbmc.translatePath(selfAddon.getAddonInfo('profile'))
 fanart          = xbmc.translatePath(os.path.join('special://home/addons/' + addon_id , 'fanart.jpg'))
 icon            = xbmc.translatePath(os.path.join('special://home/addons/' + addon_id, 'icon.png'))
 cookie_file     = os.path.join(os.path.join(datapath,''), 'snhdcookie.lwp')
+net             = mknet.Net()
 
 def setCookie(srDomain):
     import hashlib
     m = hashlib.md5()
     m.update(passw)
-    net().http_GET('http://sportsmania.eu/view.php?pg=navigation')
-    net().http_POST('http://sportsmania.eu/login.php?do=login',{'vb_login_username':user,'vb_login_password':passw,'vb_login_md5password':m.hexdigest(),'vb_login_md5password_utf':m.hexdigest(),'do':'login','securitytoken':'guest','url':'http://sportsmania.eu//view.php?pg=navigation','s':''})
-    net().save_cookies(cookie_file)
-    net().set_cookies(cookie_file)
+    net.http_POST('http://sportsmania.eu/login.php?do=login/?COLLCC=1',{'vb_login_username':user,'vb_login_password':passw,'vb_login_md5password':m.hexdigest(),'vb_login_md5password_utf':m.hexdigest(),'do':'login','securitytoken':'guest','url':'http://sportsmania.eu//view.php?pg=navigation','s':''})
+    net.save_cookies(cookie_file)
+    net.set_cookies(cookie_file)
 
 if user == '' or passw == '':
     dialog = xbmcgui.Dialog()
@@ -36,15 +35,15 @@ if user == '' or passw == '':
                 selfAddon.setSetting('snpassword',password)	
 def MainMenu():
     setCookie('http://sportsmania.eu/view.php?pg=navigation')
-    net().set_cookies(cookie_file)
-    response = net().http_GET('http://sportsmania.eu/forum.php')
+    net.set_cookies(cookie_file)
+    response = net.http_GET('http://sportsmania.eu/forum.php')
     if '<li class="welcomelink">Welcome, <a href="member.php?' in response.content:
         addDir('[COLOR cyan]----Calendar----[/COLOR]','url',3,icon,fanart)
         addLink('','url','mode',icon,fanart)
         addDir('[COLOR greenyellow]Free[/COLOR] Streams','channels',1,icon,fanart)
         setCookie('http://sportsmania.eu/view.php?pg=navigation')
-        net().set_cookies(cookie_file)
-        response = net().http_GET('http://sportsmania.eu/view.php?pg=navigation')
+        net.set_cookies(cookie_file)
+        response = net.http_GET('http://sportsmania.eu/view.php?pg=navigation')
         if '>ACTIVE<'in response.content:
             addDir('[COLOR red]Elite[/COLOR] Streams','channels',1,icon,fanart)
             addDir('[COLOR red]Elite[/COLOR] VOD','vod_channels',1,icon,fanart)
@@ -62,9 +61,9 @@ def refresh():
     xbmc.executebuiltin('Container.Refresh')
 
 def StreamMenu(name,url):
-    net().set_cookies(cookie_file)
+    net.set_cookies(cookie_file)
     channelurl='http://sportsmania.eu/apis/channels.php'
-    response = net().http_GET(channelurl)
+    response = net.http_GET(channelurl)
     link=json.loads(response.content)
     data=link [url]
     for field in data:
@@ -86,7 +85,6 @@ def StreamMenu(name,url):
         else:addLink(namestring,channel_url,2,icon,fanart)
     xbmc.executebuiltin('Container.SetViewMode(51)')
 
-
 def PlayStream(url):
     ok=True
     liz=xbmcgui.ListItem(name, iconImage=icon,thumbnailImage=icon); liz.setInfo( type="Video", infoLabels={ "Title": name } )
@@ -98,8 +96,8 @@ def PlayStream(url):
         pass
 
 def schedule(url):
-    net().set_cookies(cookie_file)
-    response = net().http_GET('http://sportsmania.eu/calendar.php?c=1&do=displayweek')
+    net.set_cookies(cookie_file)
+    response = net.http_GET('http://sportsmania.eu/calendar.php?c=1&do=displayweek')
     link = response.content
     link=link.replace('\r','').replace('\n','').replace('\t','').replace('&nbsp;','').replace('  ','')
     month=re.findall('<h2 class="blockhead">([^<]+?)</h2>',link)
@@ -135,7 +133,7 @@ def showText(heading, text):
 def twitter():
         text = ''
         twit = 'https://script.google.com/macros/s/AKfycbyBcUa5TlEQudk6Y_0o0ZubnmhGL_-b7Up8kQt11xgVwz3ErTo/exec?560774536678088704'
-        response = net().http_GET(twit)
+        response = net.http_GET(twit)
         link = response.content
         link = link.replace('/n','')
         link = link.encode('ascii', 'ignore').decode('ascii').decode('ascii').replace('&#39;','\'').replace('&#xA0;','').replace('&#x2026;','').replace('amp;','')
