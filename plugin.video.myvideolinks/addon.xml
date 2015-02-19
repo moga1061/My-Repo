@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.video.myvideolinks" version="2.1.9" name="MyVideoLinks" provider-name="@TheYid009">
+<addon id="plugin.video.myvideolinks" version="2.2.0" name="MyVideoLinks" provider-name="@TheYid009">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -10,7 +10,7 @@
         <provides>video</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
-        <summary>Stream Films from MyVideoLinks, please check url in settings</summary>
+        <summary>Stream Films from MyVideoLinks, please check url in settings and site</summary>
         <description>Stream a wide selection of movies and tv shows from MyVideoLinks great 3D 1080p mp4 and mkv old and new movies... Hosts supported are movreel 180upload mightyuploads hugefiles vidbull and a Direct Link to V-vids if you have a real-debrid account you also get turbobit and secureupload hosts</description>
         <platform>all</platform>
         <disclaimer lang="en">[COLOR red][B][I]for more info or help on this addon and TheYid repo please go to www.tvaddons.ag [/B][/I][/COLOR]</disclaimer>

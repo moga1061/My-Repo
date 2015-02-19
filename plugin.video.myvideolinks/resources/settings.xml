@@ -1,15 +1,16 @@
 <settings>
 	<category label="URL Settings">
-        <setting id="custurl" 	type="text" label="[B][COLOR red]Set custom Domain movies[/COLOR] :[/B]" default="http://movies.myvideolinks.xyz/" enable="!eq(-1,false)" />
+        <setting id="custurl" 	type="text" label="[B][COLOR red]Set custom Domain movies[/COLOR] :[/B]" default="http://myvideolinks.uk.to/" enable="!eq(-1,false)" />
         <setting id="custurl1" 	type="text" label="[B][COLOR red]Set custom Domain tv shows[/COLOR] :[/B]" default="http://site.myvideolinks.xyz/" enable="!eq(-1,false)" />
 
         <setting id="cust7" 	type="text" label=" " default="[COLOR blue]Try these urls in set custom Domain[/COLOR]" />
-        <setting id="cust" 	       type="text" label=" " default="[COLOR blue]http://myvideolinks.eu/[/COLOR]" />
-        <setting id="cust1" 	type="text" label=" " default="[COLOR blue]http://myvideolinks.xyz/[/COLOR]" />
-        <setting id="cust2" 	type="text" label=" " default="[COLOR blue]http://movies.myvideolinks.eu/[/COLOR]" />
-        <setting id="cust3" 	type="text" label=" " default="[COLOR blue]http://movies.myvideolinks.xyz/[/COLOR]" />
-        <setting id="cust4" 	type="text" label=" " default="[COLOR blue]http://site.myvideolinks.xyz/[/COLOR]" />
-        <setting id="cust5" 	type="text" label=" " default="[COLOR blue]http://tv.myvideolinks.eu/[/COLOR]" />
+        <setting id="cust" 	       type="text" label="Main check for new URLs " default="[COLOR blue]http://myvideolinks.eu/[/COLOR]" />
+        <setting id="cust8" 	type="text" label="Movies " default="[COLOR blue]http://myvideolinks.uk.to/[/COLOR]" />
+        <setting id="cust1" 	type="text" label="Tv & Movies " default="[COLOR blue]http://myvideolinks.xyz/[/COLOR]" />
+        <setting id="cust2" 	type="text" label="Movies " default="[COLOR blue]http://movies.myvideolinks.eu/[/COLOR]" />
+        <setting id="cust3" 	type="text" label="Movies " default="[COLOR blue]http://movies.myvideolinks.xyz/[/COLOR]" />
+        <setting id="cust4" 	type="text" label="Tv & Movies " default="[COLOR blue]http://site.myvideolinks.xyz/[/COLOR]" />
+        <setting id="cust5" 	type="text" label="Tv " default="[COLOR blue]http://tv.myvideolinks.eu/[/COLOR]" />
         <setting id="cust6" 	type="text" label=" " default="[COLOR blue]or check site for new url or ask @TheYid009 on twitter[/COLOR]" />
       </category>
       <category label="Resolver Settings">

@@ -1,3 +1,6 @@
+[B]Version 7.2.8[/B]
+- New URL for MVL added 
+
 [B]Version 7.2.7[/B]
 - fixed 
 - myvideolinks check settings to change urls
