@@ -1,3 +1,11 @@
+[B]Version 7.4.0[/B]
+- Removed
+- myvideolinks
+- xyz
+
+- Added
+- links site
+
 [B]Version 7.2.9[/B]
 - Fixed
 - TVHQ movies & tv
