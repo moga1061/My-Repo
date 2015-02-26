@@ -1,3 +1,7 @@
+[B]Version 7.4.1[/B]
+- small fixes
+- added moviz4u in International Zone
+
 [B]Version 7.4.0[/B]
 - Removed
 - myvideolinks
