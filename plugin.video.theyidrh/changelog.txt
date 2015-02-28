@@ -1,3 +1,7 @@
+[B]Version 1.6.9[/B]
+- fixed rlsbb search
+- removed 300mblinks
+
 [B]Version 1.6.8[/B]
 - fixed
 - 300mbmovies4u
