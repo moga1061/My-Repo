@@ -1,3 +1,8 @@
+[B]Version 1.7.0[/B]
+- new site in search ReleaseFree
+- added uptwo to tv shows
+- added 0dayreleases to tv shows & movies
+
 [B]Version 1.6.9[/B]
 - fixed rlsbb search
 - removed 300mblinks
