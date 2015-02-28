@@ -1,3 +1,6 @@
+[B]Version 7.4.2[/B]
+- small fixes to links
+
 [B]Version 7.4.1[/B]
 - small fixes
 - added moviz4u in International Zone
