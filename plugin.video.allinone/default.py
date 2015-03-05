@@ -156,8 +156,8 @@ def GetTitles10(section, url, startPage= '1', numOfPages= '1'):
                 if ( page != start):
                         pageUrl = url + '/page/' + str(page) + '/'
                         html = net.http_GET(pageUrl).content                      
-                match = re.compile('<div class="habangbuhay">\s*?<a href="(.+?)" rel=".+?" title=".+?"> <img src="(.+?)"  title="(.+?)" class=".+?" alt=".+?" /></a>', re.DOTALL).findall(html)
-                for movieUrl, img, name in match:
+                match = re.compile('<div class="post-content">\s*?<a href="(.+?)" title="(.+?)"><img src="(.+?)" alt=".+?"', re.DOTALL).findall(html)
+                for movieUrl, name, img in match:
                         addon.add_directory({'mode': 'GetLinks7', 'section': section, 'url': movieUrl}, {'title':  name.strip()}, img= img, fanart=FanartPath + 'fanart.png')      
                 addon.add_directory({'mode': 'GetTitles10', 'url': url, 'startPage': str(end), 'numOfPages': numOfPages}, {'title': '[COLOR blue][B][I]Next page...[/B][/I][/COLOR]'}, img=IconPath + 'nextpage1.png', fanart=FanartPath + 'fanart.png')
         setView('tvshows', 'tvshows-view')        
@@ -1587,7 +1587,7 @@ def RadioMenu():   #radio
 #----------------------------kids------------------------------kids----------------------kids---------------------------kids------------------------------kids--------#
 
 def KidsMenu():   #kids
-        addon.add_directory({'mode': 'GetTitles10a', 'section': 'ALL', 'url': BASE_URL10a + '/tag/family-movies/',
+        addon.add_directory({'mode': 'GetTitles10a', 'section': 'ALL', 'url': BASE_URL10 + '/tag/family-movies/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR cornflowerblue][B]Latest Animation Movies[/B][/COLOR] [COLOR orangered](links) [/COLOR]>>'}, img=IconPath + 'links1.png', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/the-book-of-life-2014-movie-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
         addon.add_directory({'mode': 'GetTitles38', 'section': 'ALL', 'url': BASE_URL38 + '/',
                              'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR deepskyblue][B]Latest kids Movies[/B][/COLOR] [COLOR rosybrown](kidsmovies) [/COLOR]>>'}, img=IconPath + 'km.png', fanart= 'http://mrhdwallpapers.com/wp-content/uploads/2014/09/the-book-of-life-2014-movie-1920x1080-Widescreen-High-Resolution-1080p-HD-Desktop-Wallpaper.jpg')
@@ -2438,8 +2438,8 @@ def Search11(query):
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        match = re.compile('<div class="habangbuhay">\s*?<a href="(.+?)" rel="bookmark" title=".+?"> <img src="(.+?)" title="(.+?)" class=".+?" alt=".+?" /></a>', re.DOTALL).findall(html)
-        for url, img, title in match:
+        match = re.compile('<div class="post-content">\s*?<a href="(.+?)" title="(.+?)"><img src="(.+?)" alt=".+?"', re.DOTALL).findall(html)
+        for url, title, img in match:
                 addon.add_directory({'mode': 'GetLinks7', 'url': url}, {'title':  title + ' [COLOR orangered]...(links)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry myvideolinks is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")
@@ -2558,8 +2558,8 @@ def Search12(query):
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        match = re.compile('<div class="habangbuhay">\s*?<a href="(.+?)" rel="bookmark" title=".+?"> <img src="(.+?)" title="(.+?)" class=".+?" alt=".+?" /></a>', re.DOTALL).findall(html)
-        for url, img, title in match:
+        match = re.compile('<div class="post-content">\s*?<a href="(.+?)" title="(.+?)"><img src="(.+?)" alt=".+?"', re.DOTALL).findall(html)
+        for url, title, img in match:
                 addon.add_directory({'mode': 'GetLinks7', 'url': url}, {'title':  title + ' [COLOR orangered]...(links)[/COLOR]'}, img=img, fanart=FanartPath + 'fanart.png')
     except:
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry myvideolinks is down [/B][/COLOR],[COLOR blue][B]Please try later[/B][/COLOR],7000,"")")

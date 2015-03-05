@@ -1,3 +1,6 @@
+[B]Version 1.7.1[/B]
+- fixed Dx-tv
+
 [B]Version 1.7.0[/B]
 - new site in search ReleaseFree
 - added uptwo to tv shows

@@ -1,3 +1,6 @@
+[B]Version 7.4.5[/B]
+- fixed links
+
 [B]Version 7.4.4[/B]
 - added release free site in search
 

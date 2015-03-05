@@ -511,7 +511,7 @@ def GetTitles24(section, url, startPage= '1', numOfPages= '1'):
                 if ( page != start):
                         pageUrl = url + '?paged=' + startPage + ''
                         html = net.http_GET(pageUrl).content                         
-                match = re.compile('<h2 class="entry-title"><a href="(.+?)" title=".+?" rel="bookmark">(.+?)</a></h2>\s*?</header><!--.+?-->\s*?<div class=".+?">.+?</div><!--.+?-->\s*?<div class=".+?"><a href=".+?" title=".+?" rel="bookmark">.+?</a></div>\s*?<div class=".+?"><img width=".+?" height=".+?" src="(.+?)"', re.DOTALL).findall(html)
+                match = re.compile('entry-title.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
                 for movieUrl, name, img in match:
                         cm  = []
                         runstring = 'XBMC.Container.Update(plugin://plugin.video.theyidrh/?mode=Search11&query=%s)' %(name.strip())
@@ -1589,7 +1589,7 @@ def Search11(query):
         url = url.replace(' ', '+')
         print url
         html = net.http_GET(url).content
-        match = re.compile('entry-title.+?href="(.+?)">(.+?)<.+?src="(.+?)"', re.DOTALL).findall(html)
+        match = re.compile('entry-title.+?href="(.+?)".+?>(.+?)<.+?src="(.+?)".+?', re.DOTALL).findall(html)
         for movieUrl, title, img in match:
                 title = title.replace('.', ' ')
                 addon.add_directory({'mode': 'GetLinks', 'url': movieUrl}, {'title':  title + ' [COLOR chartreuse](DX-TV)[/COLOR]'}, img= img, fanart=FanartPath + 'fanart.png')
