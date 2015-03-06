@@ -1,3 +1,7 @@
+[B]Version 7.4.7[/B]
+- added oneclickwatch backup search in searches
+- small fixes
+
 [B]Version 7.4.5[/B]
 - fixed links
 
