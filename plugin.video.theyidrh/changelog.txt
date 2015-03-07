@@ -1,3 +1,9 @@
+[B]Version 1.7.4[/B]
+- testing new tv index search
+
+[B]Version 1.7.2[/B]
+- addon clean up
+
 [B]Version 1.7.1[/B]
 - fixed Dx-tv
 

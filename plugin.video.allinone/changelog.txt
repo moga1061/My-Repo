@@ -1,5 +1,6 @@
-[B]Version 7.4.8[/B]
-- Fixed OneClickWatch Cat. but not search 
+[B]Version 7.5.0[/B]
+- testing new index search
+- testing UpTostream links
 
 [B]Version 7.4.7[/B]
 - added oneclickwatch backup search in searches
