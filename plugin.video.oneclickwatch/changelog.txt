@@ -1,3 +1,6 @@
+[B]Version 0.6.8[/B]
+- fixed changes to the site
+
 [B]Version 0.6.7[/B]
 - fixed img no showing up
 
