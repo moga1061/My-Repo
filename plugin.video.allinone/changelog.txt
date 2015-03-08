@@ -1,3 +1,7 @@
+[B]Version 7.5.1[/B]
+- oneclickwatch gone for now 
+- to many addons scrapling their site has messed it up for everyone
+
 [B]Version 7.5.0[/B]
 - testing new index search
 - testing UpTostream links
