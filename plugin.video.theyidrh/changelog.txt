@@ -1,3 +1,6 @@
+[B]Version 1.7.5[/B]
+- 
+
 [B]Version 1.7.4[/B]
 - testing new tv index search
 

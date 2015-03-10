@@ -187,7 +187,7 @@
 		</extension>
 	</addon>
 
-<addon id="plugin.video.allinone" version="7.5.4" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="@TheYid009">
+<addon id="plugin.video.allinone" version="7.5.5" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="@TheYid009">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -245,7 +245,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.oneclickwatch" version="0.6.9" name="One Click Watch" provider-name="[COLOR blue][B]@TheYid009[/B][/COLOR]">
+<addon id="plugin.video.oneclickwatch" version="0.7.0" name="One Click Watch" provider-name="[COLOR blue][B]@TheYid009[/B][/COLOR]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -260,7 +260,6 @@
         <description>Play a wide selection of scene release movies and Tv shows from One Click Watch best hosts are putlocker vidto allmyvideos billionuploads vidbull 180upload movreel vidxden vidbux</description>
         <platform>all</platform>
         <disclaimer lang="en">[COLOR red][B][I]SAY NO TO ADVERTISING IN ADDONS please come to XBMCHUB.com and show your support thanks from @TheYid009 [/B][/I][/COLOR]</disclaimer>
-        <broken>mite be back soon</broken>
     </extension>
 </addon>
 
@@ -303,7 +302,7 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.theyidrh" version="1.7.4" name="Release [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="@TheYid009">
+<addon id="plugin.video.theyidrh" version="1.7.5" name="Release [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="@TheYid009">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
