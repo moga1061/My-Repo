@@ -1,3 +1,6 @@
+[B]Version 0.7.1[/B]
+- fixed tv shows and movies
+
 [B]Version 0.7.0[/B]
 - oneclickwatch back for now 
 

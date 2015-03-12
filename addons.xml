@@ -187,7 +187,7 @@
 		</extension>
 	</addon>
 
-<addon id="plugin.video.allinone" version="7.5.5" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="@TheYid009">
+<addon id="plugin.video.allinone" version="7.5.6" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="@TheYid009">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -199,7 +199,7 @@
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary>All in one [COLOR lime]SUPER ADDON[/COLOR] for all you movies tv shows sports and music lovers free on demand streaming 720p 1080p HD SD MP4 MKV AVI AND NOW with 1000s 0f live streams</summary>
-        <description>Play a wide selection of scene release movies and Tv shows from releasefree ClickNWatchOnline 300MbMovies4u Links and loads more in this [COLOR lime]SUPER ADDON[/COLOR] 1000's and 1000's of movies and tv shows all free.... best hosts are vidlocker hugefiles vidto billionuploads vidbull 180upload movreel vidxden vidbux and many many more...NOW WITH RADIO STREAMING</description>
+        <description>Play a wide selection of scene release movies and Tv shows from OCW releasefree ClickNWatchOnline 300MbMovies4u Links and loads more in this [COLOR lime]SUPER ADDON[/COLOR] 1000's and 1000's of movies and tv shows all free.... best hosts are vidlocker hugefiles vidto billionuploads vidbull 180upload movreel vidxden vidbux and many many more...NOW WITH RADIO STREAMING</description>
         <platform>all</platform>
 	 <website>http://www.tvaddons.ag/</website>
         <forum>http://www.tvaddons.ag/forums/forums/146-THEYID-REPO</forum>
@@ -245,7 +245,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.oneclickwatch" version="0.7.0" name="One Click Watch" provider-name="[COLOR blue][B]@TheYid009[/B][/COLOR]">
+<addon id="plugin.video.oneclickwatch" version="0.7.1" name="One Click Watch" provider-name="[COLOR blue][B]@TheYid009[/B][/COLOR]">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
@@ -259,7 +259,7 @@
         <summary>One Click Watch [COLOR blue][B]THE ORIGINAL[/B][/COLOR] for all scene releases lovers free on demand streaming</summary>
         <description>Play a wide selection of scene release movies and Tv shows from One Click Watch best hosts are putlocker vidto allmyvideos billionuploads vidbull 180upload movreel vidxden vidbux</description>
         <platform>all</platform>
-        <disclaimer lang="en">[COLOR red][B][I]SAY NO TO ADVERTISING IN ADDONS please come to XBMCHUB.com and show your support thanks from @TheYid009 [/B][/I][/COLOR]</disclaimer>
+        <disclaimer lang="en">[COLOR red][B][I]please come to www.tvaddons.ag and show your support thanks from @TheYid009 [/B][/I][/COLOR]</disclaimer>
     </extension>
 </addon>
 
