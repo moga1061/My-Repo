@@ -1,3 +1,6 @@
+[B]Version 7.6.1[/B]
+- fixed Links search
+
 [B]Version 7.6.0[/B]
 - fixed Links search
 
