@@ -1,0 +1,14 @@
+[B]Version 0.0.9[/B]
+- fixed fanart
+
+[B]Version 0.0.8[/B]
+- clean up
+
+[B]Version 0.0.7[/B]
+- added listen again stream
+
+[B]Version 0.0.6[/B]
+- more info
+
+[B]Version 0.0.5[/B]
+- Initial version of koollondon

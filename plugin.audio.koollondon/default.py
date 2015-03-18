@@ -12,7 +12,7 @@ addon_handle = int(sys.argv[1])
 xbmcplugin.setContent(addon_handle, 'audio')
 url = 'http://uk1-pn.webcast-server.net:8698'
 li = xbmcgui.ListItem('[COLOR dodgerblue][B]Kool London  [/B][/COLOR] [COLOR red][B][I](Live)[/B][/I][/COLOR]  [COLOR yellow][B] >>[/B][/COLOR] >>    [COLOR lime](Stream 1)[/COLOR]', iconImage='http://s30.postimg.org/5r870dash/icon.png', thumbnailImage= 'http://s30.postimg.org/5r870dash/icon.png')
-li.setProperty('fanart_image', 'http://koollondon.com/images/stories/kool-timetable-september-2014.png')
+li.setProperty('fanart_image', 'http://koollondon.com/images/stories/kool-timetable-jan-2015.png')
 xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 
 xbmcplugin.setContent(addon_handle, 'audio')

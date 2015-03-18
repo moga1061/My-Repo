@@ -1,3 +1,7 @@
+[B]Version 7.6.2[/B]
+- fixed Links tv shows
+- removed releasefree
+
 [B]Version 7.6.1[/B]
 - fixed Links search
 

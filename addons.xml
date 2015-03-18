@@ -55,7 +55,7 @@
 	<addon
         id="plugin.audio.koollondon"
         name="kool London"
-        version="0.0.8"
+        version="0.0.9"
         provider-name="@TheYid009">
 		<requires>
 			<import addon="xbmc.python"             	version="2.1.0"/>
@@ -81,7 +81,7 @@
 	<addon
         id="plugin.audio.raveplayer"
         name="Rave player"
-        version="1.6.4"
+        version="1.6.5"
         provider-name="@TheYid009">
 		<requires>
 			<import addon="xbmc.python"             	version="2.1.0"/>
@@ -187,7 +187,7 @@
 		</extension>
 	</addon>
 
-<addon id="plugin.video.allinone" version="7.6.1" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="@TheYid009">
+<addon id="plugin.video.allinone" version="7.6.2" name="Entertainment [COLOR dodgerblue][B]HUB[/B][/COLOR]" provider-name="@TheYid009">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="script.module.TheYid.common" version="0.1.1"/>
