@@ -27,7 +27,7 @@ BASE_URL16 = 'http://tv-release.net/'
 BASE_URL20 = 'http://0dayreleases.net/'
 BASE_URL21 = 'http://www.moviefone.com/'
 BASE_URL22 = 'http://rlsblog.se/'
-BASE_URL23 = ''
+BASE_URL23 = 'http://freesharelink.com/'
 BASE_URL24 = 'http://dx-tv.com/'
 BASE_URL25 = 'http://www.flixanity.com/'
 BASE_URL25b = 'http://www.cartoonhd.is/'
@@ -620,6 +620,31 @@ def GetTitles22(section, url, startPage= '1', numOfPages= '1'):
         xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
        	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+#---------------------------------------------------------------------------- freesharelink ----------------------------------------------------------------------------------------------------#
+
+def GetTitles35(section, url, startPage= '1', numOfPages= '1'): 
+    try:
+        pageUrl = url
+        if int(startPage)> 1:
+                pageUrl = url + 'page/' + startPage + '/'
+        print pageUrl
+        html = net.http_GET(pageUrl).content
+        start = int(startPage)
+        end = start + int(numOfPages)
+        for page in range( start, end):
+                if ( page != start):
+                        pageUrl = url + 'page/' + str(page) + '/'
+                        html = net.http_GET(pageUrl).content                    
+                match = re.compile('<span class=" subject_new" id=".+?"><a href="(.+?)">(.+?)</a></span></span>', re.DOTALL).findall(html)
+                for movieUrl, name in match:
+                        cm  = []
+                        runstring = 'XBMC.Container.Update(plugin://plugin.video.theyidrh/?mode=Search11&query=%s)' %(name.strip())
+        		cm.append(('[COLOR blue]R[/COLOR]elease Search', runstring))
+                        addon.add_directory({'mode': 'GetLinks5', 'section': section, 'url': 'http://freesharelink.com/' + movieUrl}, {'title':  name.strip()}, contextmenu_items= cm, img= 'http://www.wrestlingmatlight.com/wp-content/uploads/2013/01/osksadoqckgrqwj3.jpg', fanart=FanartPath + 'fanart.png')      
+    except:
+        xbmc.executebuiltin("XBMC.Notification([COLOR red][B]Sorry site is down [/B][/COLOR],[COLOR blue][B]Please try a different site[/B][/COLOR],7000,"")")
+       	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 
 ###################################### index ################################## index ################################################# index ##########################################
 
@@ -918,8 +943,11 @@ def GetLinks5(section, url):
         listitem = GetMediaInfo(html)
         content = html
         match = re.compile('<span style="color: #008000;"><strong>(.+?)<').findall(content)
+        match1 = re.compile('(http://u.+?)<').findall(content)
+        match2 = re.compile('(http://rapidgator.net/file/.+?)<').findall(content)
+        match3 = re.compile('(https://www.secureupload.eu/.+?)<').findall(content)
         listitem = GetMediaInfo(content)
-        for url in match:
+        for url in match + match1 + match2 + match3:
                 host = GetDomain(url)
 
                 if 'Unknown' in host:
@@ -1219,6 +1247,46 @@ def Menu6():
         addon.add_directory({'mode': 'menu8'}, {'title': '[COLOR lightyellow][B]Football Full Matches[/B] [/COLOR]>>'}, img=IconPath + 'fullsport.png', fanart=FanartPath + 'fanart.png')
         #addon.add_directory({'mode': 'GetTitles24', 'section': 'ALL', 'url': BASE_URL24 + '/',
                              #'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest Wrestling/MMA/Boxing[/B] [COLOR chartreuse](DX-TV)[/COLOR] >>'}, img=IconPath + 'dx.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'menu15'}, {'title': '[COLOR lemonchiffon][B]Latest Wrestling/MMA/Boxing[/B] [/COLOR] [COLOR pink](freesharelink)[/COLOR] >>'}, img=IconPath + 'fsl.png', fanart=FanartPath + 'fanart.png')
+        xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+#----------------------------------------------------------------------------------- freesharelink ---------------------------------------------------------------------------------------------#
+
+def Menu15():
+        addon.add_directory({'mode': 'GetTitles35', 'section': 'ALL', 'url': BASE_URL23 + '/forumdisplay.php?fid=44',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest[/B] WWE PPV Pay Pay-Per-Views [/COLOR] >>'}, img=IconPath + 'fsl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles35', 'section': 'ALL', 'url': BASE_URL23 + '/forumdisplay.php?fid=35',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest[/B] WWE RAW [/COLOR] >>'}, img=IconPath + 'fsl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles35', 'section': 'ALL', 'url': BASE_URL23 + '/forumdisplay.php?fid=36',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest[/B] WWE Smackdown [/COLOR] >>'}, img=IconPath + 'fsl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles35', 'section': 'ALL', 'url': BASE_URL23 + '/forumdisplay.php?fid=37',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest[/B] WWE NXT [/COLOR] >>'}, img=IconPath + 'fsl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles35', 'section': 'ALL', 'url': BASE_URL23 + '/forumdisplay.php?fid=38',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest[/B] WWE Main Event [/COLOR] >>'}, img=IconPath + 'fsl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles35', 'section': 'ALL', 'url': BASE_URL23 + '/forumdisplay.php?fid=40',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest[/B] WWE Vintage Collection [/COLOR] >>'}, img=IconPath + 'fsl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles35', 'section': 'ALL', 'url': BASE_URL23 + '/forumdisplay.php?fid=62',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest[/B] WWE Network Shows [/COLOR] >>'}, img=IconPath + 'fsl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles35', 'section': 'ALL', 'url': BASE_URL23 + '/forumdisplay.php?fid=49',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest[/B] ROH wrestling [/COLOR] >>'}, img=IconPath + 'fsl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles35', 'section': 'ALL', 'url': BASE_URL23 + '/forumdisplay.php?fid=61',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest[/B] TNA PPV Pay-Per-View [/COLOR] >>'}, img=IconPath + 'fsl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles35', 'section': 'ALL', 'url': BASE_URL23 + '/forumdisplay.php?fid=47',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest[/B] TNA impact wrestling [/COLOR] >>'}, img=IconPath + 'fsl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles35', 'section': 'ALL', 'url': BASE_URL23 + '/forumdisplay.php?fid=50',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest[/B] Indy wrestling [/COLOR] >>'}, img=IconPath + 'fsl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles35', 'section': 'ALL', 'url': BASE_URL23 + '/forumdisplay.php?fid=60',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest[/B] Puro & Lucha [/COLOR] >>'}, img=IconPath + 'fsl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles35', 'section': 'ALL', 'url': BASE_URL23 + '/forumdisplay.php?fid=64',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest[/B] Wrestling Documentaries [/COLOR] >>'}, img=IconPath + 'fsl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles35', 'section': 'ALL', 'url': BASE_URL23 + '/forumdisplay.php?fid=59',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest[/B] Shoot Interviews [/COLOR] >>'}, img=IconPath + 'fsl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles35', 'section': 'ALL', 'url': BASE_URL23 + '/forumdisplay.php?fid=52',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest[/B] UFC Weekly PPV [/COLOR] >>'}, img=IconPath + 'fsl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles35', 'section': 'ALL', 'url': BASE_URL23 + '/forumdisplay.php?fid=53',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest[/B] Other MMA Shows & PPV [/COLOR] >>'}, img=IconPath + 'fsl.png', fanart=FanartPath + 'fanart.png')
+        addon.add_directory({'mode': 'GetTitles35', 'section': 'ALL', 'url': BASE_URL23 + '/forumdisplay.php?fid=55',
+                             'startPage': '1', 'numOfPages': '1'}, {'title':  '[COLOR lemonchiffon][B]Latest[/B] Boxing Events PPV Showtime [/COLOR] >>'}, img=IconPath + 'fsl.png', fanart=FanartPath + 'fanart.png')
         xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 #----------------------------------------------------------------------------------- fullmatch ---------------------------------------------------------------------------------------------#
@@ -1759,6 +1827,8 @@ elif mode == 'GetTitles33':
 	GetTitles33(section, url, startPage, numOfPages)
 elif mode == 'GetTitles34': 
 	GetTitles34(query)
+elif mode == 'GetTitles35': 
+	GetTitles35(section, url, startPage, numOfPages)
 elif mode == 'GetTitles41': 
 	GetTitles41(query, startPage, numOfPages)
 elif mode == 'GetLinks':
@@ -1825,6 +1895,8 @@ if mode == 'menu13':
        Menu13()
 if mode == 'menu14':
        Menu14()
+if mode == 'menu15':
+       Menu15()
 elif mode == 'Help':
     import helpbox
     helpbox.HelpBox()

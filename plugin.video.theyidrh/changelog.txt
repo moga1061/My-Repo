@@ -1,3 +1,6 @@
+[B]Version 1.7.7[/B]
+- added freesharelink in sport for all the latest Wrestling MMA & Boxing
+
 [B]Version 1.7.6[/B]
 - fixed Rlsblog
 - removed DXTV in sports
