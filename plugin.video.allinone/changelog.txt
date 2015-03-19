@@ -1,3 +1,8 @@
+[B]Version 7.6.4[/B]
+- fixed wachswrestling
+- fixed links tv shows
+- added releasefree back
+
 [B]Version 7.6.2[/B]
 - fixed Links tv shows
 - removed releasefree

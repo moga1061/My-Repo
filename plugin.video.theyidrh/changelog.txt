@@ -1,3 +1,8 @@
+[B]Version 1.7.6[/B]
+- fixed Rlsblog
+- removed DXTV in sports
+- added uptwo to sports search
+
 [B]Version 1.7.5[/B]
 - 
 
